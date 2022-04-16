@@ -39,7 +39,7 @@ const Form = () => {
     setIsLoading(true);
     setMessage("");
     setError("");
-    fetch("http://localhost:4000/sms/send", {
+    fetch("https://sms-sender-server.herokuapp.com/sms/send", {
       method: "POST",
       headers: {
         "content-type": "application/json",
