@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./Form.css";
+import "./Form.scss";
 import { Alert } from "react-bootstrap";
 
 const Form = () => {
