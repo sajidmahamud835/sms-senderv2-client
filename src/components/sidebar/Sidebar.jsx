@@ -51,7 +51,7 @@ export default function Sidebar() {
             </Link>
             <Link to="/products" className="link">
               <li className="sidebarListItem">
-                <Storefront className="sidebarIcon" />
+                <DynamicFeed className="sidebarIcon" />
                 All Campaigns
               </li>
             </Link>
@@ -66,28 +66,44 @@ export default function Sidebar() {
           </ul>
         </div>
         <div className="sidebarMenu">
-          <h3 className="sidebarTitle">Notifications</h3>
+          <h3 className="sidebarTitle">User</h3>
           <ul className="sidebarList">
+            <Link to="/profile" className="link">
+              <li className="sidebarListItem">
+                <PermIdentity className="sidebarIcon" />
+                My Profile
+              </li>
+            </Link>
+            <Link to="/myCampaigns" className="link">
+              <li className="sidebarListItem">
+                <DynamicFeed className="sidebarIcon" />
+                My Campaigns
+              </li>
+            </Link>
             <li className="sidebarListItem">
-              <MailOutline className="sidebarIcon" />
-              Mail
+              <AttachMoney className="sidebarIcon" />
+              My Subscription
             </li>
             <li className="sidebarListItem">
-              <DynamicFeed className="sidebarIcon" />
-              Feedback
+              <BarChart className="sidebarIcon" />
+              My Reports
             </li>
           </ul>
         </div>
         <div className="sidebarMenu">
-          <h3 className="sidebarTitle">Staff</h3>
+          <h3 className="sidebarTitle">Website</h3>
           <ul className="sidebarList">
             <li className="sidebarListItem">
               <WorkOutline className="sidebarIcon" />
-              Manage
+              Manage API
             </li>
             <li className="sidebarListItem">
               <Timeline className="sidebarIcon" />
-              Analytics
+              API Analytics
+            </li>
+            <li className="sidebarListItem">
+              <Report className="sidebarIcon" />
+              Website Settings
             </li>
             <li className="sidebarListItem">
               <Report className="sidebarIcon" />

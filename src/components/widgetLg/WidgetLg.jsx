@@ -6,12 +6,13 @@ export default function WidgetLg() {
   };
   return (
     <div className="widgetLg">
-      <h3 className="widgetLgTitle">Latest transactions</h3>
+      <h3 className="widgetLgTitle">Review Latest Campaigns</h3>
       <table className="widgetLgTable">
         <tr className="widgetLgTr">
-          <th className="widgetLgTh">Customer</th>
+          <th className="widgetLgTh">Campaign</th>
+          <th className="widgetLgTh">User</th>
           <th className="widgetLgTh">Date</th>
-          <th className="widgetLgTh">Amount</th>
+          <th className="widgetLgTh">Contacts</th>
           <th className="widgetLgTh">Status</th>
         </tr>
         <tr className="widgetLgTr">
@@ -23,8 +24,11 @@ export default function WidgetLg() {
             />
             <span className="widgetLgName">Susan Carol</span>
           </td>
+          <td className="widgetLgCampaign">
+            Test01
+          </td>
           <td className="widgetLgDate">2 Jun 2021</td>
-          <td className="widgetLgAmount">$122.00</td>
+          <td className="widgetLgAmount">1000</td>
           <td className="widgetLgStatus">
             <Button type="Approved" />
           </td>
@@ -38,8 +42,11 @@ export default function WidgetLg() {
             />
             <span className="widgetLgName">Susan Carol</span>
           </td>
+          <td className="widgetLgCampaign">
+            Test02
+          </td>
           <td className="widgetLgDate">2 Jun 2021</td>
-          <td className="widgetLgAmount">$122.00</td>
+          <td className="widgetLgAmount">1000</td>
           <td className="widgetLgStatus">
             <Button type="Declined" />
           </td>
@@ -53,8 +60,11 @@ export default function WidgetLg() {
             />
             <span className="widgetLgName">Susan Carol</span>
           </td>
+          <td className="widgetLgCampaign">
+            Test03
+          </td>
           <td className="widgetLgDate">2 Jun 2021</td>
-          <td className="widgetLgAmount">$122.00</td>
+          <td className="widgetLgAmount">1000</td>
           <td className="widgetLgStatus">
             <Button type="Pending" />
           </td>
@@ -68,8 +78,11 @@ export default function WidgetLg() {
             />
             <span className="widgetLgName">Susan Carol</span>
           </td>
+          <td className="widgetLgCampaign">
+            Test05
+          </td>
           <td className="widgetLgDate">2 Jun 2021</td>
-          <td className="widgetLgAmount">$122.00</td>
+          <td className="widgetLgAmount">1000</td>
           <td className="widgetLgStatus">
             <Button type="Approved" />
           </td>

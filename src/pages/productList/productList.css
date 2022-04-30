@@ -1,21 +1,21 @@
-.productList{
+.campaignList {
     flex: 4;
 }
 
-.productListItem{
+.campaignListItem {
     display: flex;
     align-items: center;
 }
 
-.productListImg {
+.campaignListImg {
     width: 32px;
     height: 32px;
     border-radius: 50%;
     object-fit: cover;
     margin-right: 10px;
-  }
+}
 
-.productListEdit{
+.campaignListEdit {
     border: none;
     border-radius: 10px;
     padding: 5px 10px;
@@ -25,7 +25,7 @@
     margin-right: 20px;
 }
 
-.productListDelete{
+.campaignListDelete {
     color: red;
     cursor: pointer;
 }

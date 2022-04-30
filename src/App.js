@@ -42,6 +42,9 @@ function App() {
           <Route path="/sms">
             <Sms />
           </Route>
+          <Route path="*">
+            <Home />
+          </Route>
         </Switch>
       </div>
     </Router>

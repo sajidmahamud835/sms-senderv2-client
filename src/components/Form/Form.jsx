@@ -63,7 +63,7 @@ const Form = () => {
 
   return (
     <div className="form">
-      <div className="mx-auto mt-5" style={{ width: "500px" }}>
+      <div className="mx-auto mt-5 p-3 shadow-sm rounded" style={{ width: "500px" }}>
         <div className="mx-4">
           {isLoading && <h4 className="text-center">Sending...</h4>}
           {message && (
