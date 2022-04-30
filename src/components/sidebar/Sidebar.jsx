@@ -12,6 +12,7 @@ import {
   ChatBubbleOutline,
   WorkOutline,
   Report,
+  Settings
 } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 
@@ -80,6 +81,19 @@ export default function Sidebar() {
                 My Campaigns
               </li>
             </Link>
+            <Link to="/myCampaigns" className="link">
+              <li className="sidebarListItem">
+                <MailOutline className="sidebarIcon" />
+                Message Templates
+              </li>
+            </Link>
+            <Link to="/myCampaigns" className="link">
+              <li className="sidebarListItem">
+                <PermIdentity className="sidebarIcon" />
+                My Contacts
+              </li>
+            </Link>
+
             <li className="sidebarListItem">
               <AttachMoney className="sidebarIcon" />
               My Subscription
@@ -102,7 +116,7 @@ export default function Sidebar() {
               API Analytics
             </li>
             <li className="sidebarListItem">
-              <Report className="sidebarIcon" />
+              <Settings className="sidebarIcon" />
               Website Settings
             </li>
             <li className="sidebarListItem">
