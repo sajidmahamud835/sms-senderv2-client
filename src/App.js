@@ -1,40 +1,51 @@
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-} from "react-router-dom";
+import Sidebar from "./components/sidebar/Sidebar";
+import Topbar from "./components/topbar/Topbar";
+import "./App.css";
 import Home from "./pages/home/Home";
-import List from "./pages/list/List";
-import Login from "./pages/login/Login";
-import New from "./pages/new/New";
-import Single from "./pages/single/Single";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import UserList from "./pages/userList/UserList";
+import User from "./pages/user/User";
+import NewUser from "./pages/newUser/NewUser";
+import ProductList from "./pages/productList/ProductList";
+import Product from "./pages/product/Product";
+import NewProduct from "./pages/newProduct/NewProduct";
 import Sms from "./pages/sms/Sms";
 
-const App = () => {
+function App() {
   return (
-    <div>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/">
-            <Route index element={<Home />} />
-            <Route path="login" element={<Login />} />
-            <Route path="sms" element={<Sms />} />
-            <Route path="users">
-              <Route index element={<List />} />
-              <Route path=":userId" element={<Single />} />
-              <Route path="new" element={<New />} />
-            </Route>
-            <Route path="campaigns">
-              <Route index element={<List />} />
-              <Route path=":campaignId" element={<Single />} />
-              <Route path="new" element={<New />} />
-            </Route>
+    <Router>
+      <Topbar />
+      <div className="container">
+        <Sidebar />
+        <Switch>
+          <Route exact path="/">
+            <Home />
           </Route>
-        </Routes>
-      </BrowserRouter>
-
-    </div >
+          <Route path="/users">
+            <UserList />
+          </Route>
+          <Route path="/user/:userId">
+            <User />
+          </Route>
+          <Route path="/newUser">
+            <NewUser />
+          </Route>
+          <Route path="/products">
+            <ProductList />
+          </Route>
+          <Route path="/product/:productId">
+            <Product />
+          </Route>
+          <Route path="/newproduct">
+            <NewProduct />
+          </Route>
+          <Route path="/sms">
+            <Sms />
+          </Route>
+        </Switch>
+      </div>
+    </Router>
   );
-};
+}
 
 export default App;
