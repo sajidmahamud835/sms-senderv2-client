@@ -2,9 +2,9 @@ import "./new.scss";
 
 const New = () => {
     return (
-        <div>
-
-        </div>
+        <section id="new">
+            <h2>New</h2>
+        </section>
     );
 };
 

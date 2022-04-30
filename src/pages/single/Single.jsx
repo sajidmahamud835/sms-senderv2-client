@@ -2,9 +2,9 @@ import "./single.scss";
 
 const Single = () => {
     return (
-        <div>
-
-        </div>
+        <section>
+            <h2>Single</h2>
+        </section>
     );
 };
 

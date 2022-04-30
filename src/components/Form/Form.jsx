@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./Form.scss";
+import "./form.scss";
 import { Alert } from "react-bootstrap";
 
 const Form = () => {
@@ -62,7 +62,7 @@ const Form = () => {
   };
 
   return (
-    <div>
+    <div id="form">
       <div className="mx-auto mt-5" style={{ width: "500px" }}>
         <div className="mx-4">
           {isLoading && <h4 className="text-center">Sending...</h4>}

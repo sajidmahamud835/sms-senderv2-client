@@ -2,9 +2,9 @@ import "./list.scss";
 
 const List = () => {
     return (
-        <div>
-
-        </div>
+        <section id="list">
+            <h2>List</h2>
+        </section>
     );
 };
 

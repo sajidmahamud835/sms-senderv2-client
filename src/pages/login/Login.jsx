@@ -2,9 +2,9 @@ import "./login.scss";
 
 const Login = () => {
     return (
-        <div>
-
-        </div>
+        <section id="login">
+            <h2>Login</h2>
+        </section>
     );
 };
 
