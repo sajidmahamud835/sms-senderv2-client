@@ -1,8 +1,6 @@
-import Sidebar from "./components/sidebar/Sidebar";
-import Topbar from "./components/topbar/Topbar";
 import "./App.css";
 import Home from "./pages/home/Home";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import UserList from "./pages/userList/UserList";
 import User from "./pages/user/User";
 import NewUser from "./pages/newUser/NewUser";
@@ -10,44 +8,28 @@ import ProductList from "./pages/productList/ProductList";
 import Product from "./pages/product/Product";
 import NewProduct from "./pages/newProduct/NewProduct";
 import Sms from "./pages/sms/Sms";
+import Login from "./pages/auth/login/Login";
+import Main from "./pages/main/Main";
 
 function App() {
   return (
-    <Router>
-      <Topbar />
-      <div className="container">
-        <Sidebar />
-        <Switch>
-          <Route exact path="/">
-            <Home />
-          </Route>
-          <Route path="/users">
-            <UserList />
-          </Route>
-          <Route path="/user/:userId">
-            <User />
-          </Route>
-          <Route path="/newUser">
-            <NewUser />
-          </Route>
-          <Route path="/products">
-            <ProductList />
-          </Route>
-          <Route path="/product/:productId">
-            <Product />
-          </Route>
-          <Route path="/newproduct">
-            <NewProduct />
-          </Route>
-          <Route path="/sms">
-            <Sms />
-          </Route>
-          <Route path="*">
-            <Home />
-          </Route>
-        </Switch>
-      </div>
-    </Router>
+
+    <Routes>
+      <Route path="/login" element={<Login />}></Route>
+      <Route path="" element={<Main />}>
+        <Route index element={<Home />} />
+        <Route path="/users" element={<UserList />}></Route>
+        <Route path="/user/:userId" element={<User />}></Route>
+        <Route path="/newUser" element={<NewUser />}></Route>
+        <Route path="/products" element={<ProductList />}></Route>
+        <Route path="/product/:productId" element={<Product />}></Route>
+        <Route path="/newproduct" element={<NewProduct />}></Route>
+        <Route path="/sms" element={<Sms />}></Route>
+        <Route path="*" element={<Home />}>
+        </Route>
+      </Route>
+    </Routes>
+
   );
 }
 
