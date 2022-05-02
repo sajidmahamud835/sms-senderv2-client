@@ -25,7 +25,7 @@ export default function FeaturedInfo() {
         <span className="featuredSub">Compared to last month</span>
       </div>
       <div className="featuredItem">
-        <span className="featuredTitle">Twilio Cost</span>
+        <span className="featuredTitle">Twilio API Cost</span>
         <div className="featuredMoneyContainer">
           <span className="featuredMoney">$225</span>
           <span className="featuredMoneyRate">

@@ -2,9 +2,7 @@ import "./sidebar.css";
 import {
   LineStyle,
   Timeline,
-  TrendingUp,
   PermIdentity,
-  Storefront,
   AttachMoney,
   BarChart,
   MailOutline,
@@ -21,7 +19,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 
 export default function Sidebar() {
   const auth = getAuth(FirebaseApp);
-  const [user, loading, error] = useAuthState(auth);
+  const [user] = useAuthState(auth);
 
   return (
     <div className="sidebar">
@@ -38,7 +36,7 @@ export default function Sidebar() {
             <Link to="/sms" className="link">
               <li className="sidebarListItem">
                 <ChatBubbleOutline className="sidebarIcon" />
-                Send Bulk Message
+                Send Quick Message
               </li>
             </Link>
           </ul>
@@ -53,7 +51,7 @@ export default function Sidebar() {
                   All Users
                 </li>
               </Link>
-              <Link to="/products" className="link">
+              <Link to="/campaigns" className="link">
                 <li className="sidebarListItem">
                   <DynamicFeed className="sidebarIcon" />
                   All Campaigns

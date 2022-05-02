@@ -1,15 +1,15 @@
-.product {
+.campaign {
   flex: 4;
   padding: 20px;
 }
 
-.productTitleContainer {
+.campaignTitleContainer {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.productAddButton {
+.campaignAddButton {
   width: 80px;
   border: none;
   padding: 5px;
@@ -20,23 +20,23 @@
   cursor: pointer;
 }
 
-.productTop {
+.campaignTop {
   display: flex;
 }
 
-.productTopLeft,
-.productTopRight {
+.campaignTopLeft,
+.campaignTopRight {
   flex: 1;
 }
 
-.productTopRight {
+.campaignTopRight {
   padding: 20px;
   margin: 20px;
   -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
   box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
 }
 
-.productInfoImg {
+.campaignInfoImg {
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -44,63 +44,63 @@
   margin-right: 20px;
 }
 
-.productInfoTop {
+.campaignInfoTop {
   display: flex;
   align-items: center;
 }
 
-.productName {
+.campaignName {
   font-weight: 600;
 }
 
-.productInfoBottom {
+.campaignInfoBottom {
   margin-top: 10px;
 }
 
-.productInfoItem {
+.campaignInfoItem {
   width: 150px;
   display: flex;
   justify-content: space-between;
 }
 
-.productInfoValue {
+.campaignInfoValue {
   font-weight: 300;
 }
 
-.productBottom {
+.campaignBottom {
   padding: 20px;
   margin: 20px;
   -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
   box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
 }
 
-.productForm {
+.campaignForm {
   display: flex;
   justify-content: space-between;
 }
 
-.productFormLeft {
+.campaignFormLeft {
   display: flex;
   flex-direction: column;
 }
 
-.productFormLeft > label {
+.campaignFormLeft>label {
   margin-bottom: 10px;
   color: gray;
 }
 
-.productFormLeft > input {
+.campaignFormLeft>input {
   margin-bottom: 10px;
   border: none;
   padding: 5px;
   border-bottom: 1px solid gray;
 }
 
-.productFormLeft >select{
+.campaignFormLeft>select {
   margin-bottom: 10px;
 }
 
-.productUploadImg{
+.campaignUploadImg {
   width: 100px;
   height: 100px;
   border-radius: 10px;
@@ -108,23 +108,23 @@
   margin-right: 20px;
 }
 
-.productFormRight{
+.campaignFormRight {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
 }
 
-.productUpload{
+.campaignUpload {
   display: flex;
   align-items: center;
 }
 
-.productButton{
+.campaignButton {
   border: none;
   padding: 5px;
   border-radius: 5px;
   background-color: darkblue;
-  color:white;
+  color: white;
   font-weight: 600;
   cursor: pointer;
 }

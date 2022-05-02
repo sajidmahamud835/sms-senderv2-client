@@ -63,7 +63,7 @@ const Sms = () => {
 
     return (
         <section className="sms m-3 p-3 shadow rounded">
-            <h1 className="text-center mt-5 text-primary">Send Bulk Message</h1>
+            <h1 className="text-center mt-5 text-primary">Send Quick Message</h1>
             <div className="mx-auto mt-5 p-3 shadow-sm rounded" style={{ width: "500px" }}>
                 <div className="mx-4">
                     {isLoading && <h4 className="text-center">Sending...</h4>}

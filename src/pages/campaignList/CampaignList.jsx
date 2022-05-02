@@ -1,4 +1,4 @@
-import "./productList.css";
+import "./campaignList.css";
 import { DataGrid } from "@material-ui/data-grid";
 import { DeleteOutline } from "@material-ui/icons";
 import { campaignRows } from "../../dummyData";
