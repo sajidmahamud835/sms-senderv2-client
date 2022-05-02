@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./sms.css";
+import { Link } from "react-router-dom";
 import { Alert } from "react-bootstrap";
 
 const Sms = () => {
@@ -62,9 +63,14 @@ const Sms = () => {
     };
 
     return (
-        <section className="sms m-3 p-3 shadow rounded">
-            <h1 className="text-center mt-5 text-primary">Send Quick Message</h1>
-            <div className="mx-auto mt-5 p-3 shadow-sm rounded" style={{ width: "500px" }}>
+        <section className="sms m-3 p-3">
+            <div className="userListTitleContainer">
+                <h1 className="userTitle">Send Quick Message</h1>
+                <Link to="/newUser">
+                    <button className="userAddButton">Create</button>
+                </Link>
+            </div>
+            <div className="" style={{ width: "500px" }}>
                 <div className="mx-4">
                     {isLoading && <h4 className="text-center">Sending...</h4>}
                     {message && (

@@ -68,6 +68,12 @@ export default function UserList() {
 
   return (
     <div className="userList">
+      <div className="userListTitleContainer">
+        <h1 className="userTitle">Manage Users</h1>
+        <Link to="/newUser">
+          <button className="userAddButton">Create</button>
+        </Link>
+      </div>
       <DataGrid
         rows={data}
         disableSelectionOnClick
