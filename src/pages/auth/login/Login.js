@@ -34,8 +34,6 @@ const Login = () => {
         <LoadingSpinner />;
     }
 
-    // BigB0ss135@#
-
     const handleSignup = (event) => {
         event.preventDefault();
         const form = event.currentTarget;
