@@ -43,7 +43,7 @@ export default function UserList() {
     },
     {
       field: "transaction",
-      headerName: "Transaction Volume",
+      headerName: "SMS Credits",
       width: 160,
     },
     {

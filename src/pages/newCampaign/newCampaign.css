@@ -1,33 +1,33 @@
-.newProduct {
+.newCampaign {
   flex: 4;
 }
 
-.addProductForm {
+.addCampaignForm {
   margin-top: 10px;
 }
 
-.addProductItem {
+.addCampaignItem {
   width: 250px;
   display: flex;
   flex-direction: column;
   margin-bottom: 10px;
 }
 
-.addProductItem > label {
+.addCampaignItem>label {
   color: gray;
   font-weight: 600;
   margin-bottom: 10px;
 }
 
-.addProductItem > input {
+.addCampaignItem>input {
   padding: 10px;
 }
 
-.addProductItem > select {
+.addCampaignItem>select {
   padding: 10px;
 }
 
-.addProductButton {
+.addCampaignButton {
   margin-top: 10px;
   padding: 7px 10px;
   border: none;
