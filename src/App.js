@@ -17,7 +17,7 @@ function App() {
     <Routes>
       <Route path="/login" element={<Login />}></Route>
       <Route path="" element={<Main />}>
-        <Route index element={<Home />} />
+        <Route path="" element={<Home />} />
         <Route path="/users" element={<UserList />}></Route>
         <Route path="/user/:userId" element={<User />}></Route>
         <Route path="/newUser" element={<NewUser />}></Route>

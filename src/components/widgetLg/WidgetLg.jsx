@@ -9,8 +9,8 @@ export default function WidgetLg() {
       <h3 className="widgetLgTitle">Review Latest Campaigns</h3>
       <table className="widgetLgTable">
         <tr className="widgetLgTr">
-          <th className="widgetLgTh">Campaign</th>
           <th className="widgetLgTh">User</th>
+          <th className="widgetLgTh">Campaign</th>
           <th className="widgetLgTh">Date</th>
           <th className="widgetLgTh">Contacts</th>
           <th className="widgetLgTh">Status</th>
