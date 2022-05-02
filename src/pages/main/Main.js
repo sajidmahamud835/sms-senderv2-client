@@ -25,14 +25,17 @@ const Main = () => {
                 console.log(user.email);
             }
         }
-    });
+    }, [loading, user, navigate]);
     return (
         <div>
-            <Topbar />
-            <div className="container">
-                <Sidebar />
-                <Outlet />
-            </div>
+            {user &&
+                <section>
+                    <Topbar />
+                    <div className="container">
+                        <Sidebar />
+                        <Outlet />
+                    </div>
+                </section>}
         </div>
     );
 };

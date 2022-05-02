@@ -32,7 +32,7 @@ export default function Topbar() {
           <div class="dropdown">
             <img src="https://media-exp1.licdn.com/dms/image/sync/C5627AQHDoC7cGiF_FQ/articleshare-shrink_480/0/1650973331366?e=2147483647&v=beta&t=dzC8F2yHDQMMfWhCXgE0Pa5V86uta_ULCFF5KKklq1M" alt="" className="topAvatar" id="profileMenu" data-bs-toggle="dropdown" aria-expanded="false" />
             <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-              <li><span className="dropdown-item">Hello, {user.email} </span></li>
+              {user && <li><span className="dropdown-item">Hello, {user.email} </span></li>}
               <li>
                 <hr />
               </li>
