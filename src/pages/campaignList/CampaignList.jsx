@@ -67,6 +67,12 @@ export default function CampaignList() {
 
   return (
     <div className="campaignList">
+      <div className="campaignTitleContainer">
+        <h1 className="campaignTitle">Manage Campaigns</h1>
+        <Link to="/newcampaign">
+          <button className="campaignAddButton">Create</button>
+        </Link>
+      </div>
       <DataGrid
         rows={data}
         disableSelectionOnClick

@@ -77,7 +77,7 @@ export default function Sidebar() {
               </li>
             </ul>
           </div>}
-        {!user.email === "sajidmahamud835@gmail.com" &&
+        {user.email !== "sajidmahamud835@gmail.com" &&
           <div className="sidebarMenu">
             <h3 className="sidebarTitle">User</h3>
             <ul className="sidebarList">
