@@ -9,7 +9,6 @@ import {
   DynamicFeed,
   ChatBubbleOutline,
   WorkOutline,
-  Report,
   Settings
 } from "@material-ui/icons";
 import { Link } from "react-router-dom";
@@ -59,22 +58,22 @@ export default function Sidebar() {
               <Link to="/users" className="link">
                 <li onClick={(e) => makeActive('users')} id="users" className="sidebarListItem">
                   <PermIdentity className="sidebarIcon" />
-                  All Users
+                  Manage Users
                 </li>
               </Link>
               <Link to="/campaigns" className="link">
                 <li onClick={(e) => makeActive('campaigns')} id="campaigns" className="sidebarListItem">
                   <DynamicFeed className="sidebarIcon" />
-                  All Campaigns
+                  Manage Campaigns
                 </li>
               </Link>
               <li onClick={(e) => makeActive('subscription')} id="subscription" className="sidebarListItem">
                 <AttachMoney className="sidebarIcon" />
-                Subscription Plans
+                Manage Subscriptions
               </li>
               <li onClick={(e) => makeActive('reports')} id="reports" className="sidebarListItem">
                 <BarChart className="sidebarIcon" />
-                User Reports
+                Reports
               </li>
             </ul>
           </div>}
