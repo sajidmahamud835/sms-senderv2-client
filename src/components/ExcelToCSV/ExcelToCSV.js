@@ -13,26 +13,27 @@ const ExcelToCSV = () => {
     const csvFileToArray = string => {
         const csvHeader = string.slice(0, string.indexOf("\n")).split(",");
         const csvRows = string.slice(string.indexOf("\n") + 1).split("\n");
-        console.log(csvRows);
+        // console.log(csvRows);
         const array = csvRows.map(i => {
             const values = i.split(",");
-            console.log(values);
+            // console.log(values);
             const obj = csvHeader.reduce((object, header, index) => {
                 object[header] = values[index];
                 // I need to add index but here is no option to get add index
-                let x = Math.random();
-                object["id"] = x;
+                // let x = Math.random();
+                // object["id"] = x;
                 return object;
             }, {});
-            console.log(obj);
             return obj;
         });
 
         const function4Chacking = (e) => {
+            console.log(e.name);
             if (e.number === '') {
                 console.log('a number is not available');
             }
             else {
+                console.log(array);
                 setArray(array);
             }
         }
@@ -54,7 +55,7 @@ const ExcelToCSV = () => {
     const columns = [
         { field: 'id', headerName: 'ID', width: 100 },
         {
-            field: 'personName',
+            field: 'name',
             headerName: 'Name',
             width: 150,
             editable: true,
