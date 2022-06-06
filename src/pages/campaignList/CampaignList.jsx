@@ -1,3 +1,4 @@
+import React from 'react';
 import "./campaignList.css";
 import { DataGrid } from "@material-ui/data-grid";
 import { DeleteOutline } from "@material-ui/icons";
@@ -5,7 +6,8 @@ import { campaignRows } from "../../dummyData";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 
-export default function CampaignList() {
+
+const CampaignList = () => {
   const [data, setData] = useState(campaignRows);
 
   const handleDelete = (id) => {
@@ -69,7 +71,7 @@ export default function CampaignList() {
     <div className="campaignList">
       <div className="campaignTitleContainer">
         <h1 className="campaignTitle">Manage Campaigns</h1>
-        <Link to="/newcampaign">
+        <Link to="/new-campaign">
           <button className="campaignAddButton">Create</button>
         </Link>
       </div>
@@ -82,4 +84,6 @@ export default function CampaignList() {
       />
     </div>
   );
-}
+};
+
+export default CampaignList;

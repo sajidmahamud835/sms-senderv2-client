@@ -4,11 +4,11 @@ import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { getAuth } from "firebase/auth";
 import FirebaseApp from "../../firebase/FirebaseApp";
 import { Alert } from "react-bootstrap";
+import React from 'react';
 
-export default function NewUser() {
+const NewUser = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [userProfile, setUserProfile] = useState({});
   const auth = getAuth(FirebaseApp);
   const [
     createUserWithEmailAndPassword,
@@ -89,4 +89,7 @@ export default function NewUser() {
       </form>
     </div>
   );
-}
+};
+
+export default NewUser;
+

@@ -1,3 +1,4 @@
+import React from 'react';
 import "./sidebar.css";
 import {
   LineStyle,
@@ -17,7 +18,7 @@ import FirebaseApp from "../../firebase/FirebaseApp";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useEffect, useState } from "react";
 
-export default function Sidebar() {
+const Sidebar = () => {
   const auth = getAuth(FirebaseApp);
   const [user] = useAuthState(auth);
   const [active, setActive] = useState('dashboard');
@@ -145,4 +146,6 @@ export default function Sidebar() {
       </div>
     </div>
   );
-}
+};
+
+export default Sidebar; 

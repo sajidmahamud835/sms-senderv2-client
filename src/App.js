@@ -12,7 +12,7 @@ import Main from "./pages/main/Main";
 import CampaignList from "./pages/campaignList/CampaignList";
 
 function App() {
-  return ( 
+  return (
     <Routes>
       <Route path="/login" element={<Login />}></Route>
       <Route path="" element={<Main />}>
@@ -22,7 +22,7 @@ function App() {
         <Route path="/newUser" element={<NewUser />}></Route>
         <Route path="/campaigns" element={<CampaignList />}></Route>
         <Route path="/campaign/:campaignId" element={<Campaign />}></Route>
-        <Route path="/newcampaign" element={<NewCampaign />}></Route>
+        <Route path="/new-campaign" element={<NewCampaign />}></Route>
         <Route path="/sms" element={<Sms />}></Route>
         <Route path="*" element={<Home />}>
         </Route>

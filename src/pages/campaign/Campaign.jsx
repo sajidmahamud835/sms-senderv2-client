@@ -1,15 +1,15 @@
+import React from 'react';
 import { Link } from "react-router-dom";
 import "./campaign.css";
 import Chart from "../../components/chart/Chart"
 import { campaignData } from "../../dummyData"
 import { Publish } from "@material-ui/icons";
-
-export default function Campaign() {
+const Campaign = () => {
     return (
         <div className="campaign">
             <div className="campaignTitleContainer">
                 <h1 className="campaignTitle">Campaign</h1>
-                <Link to="/newcampaign">
+                <Link to="/new-campaign">
                     <button className="campaignAddButton">Create</button>
                 </Link>
             </div>
@@ -72,4 +72,7 @@ export default function Campaign() {
             </div>
         </div>
     );
-}
+};
+
+export default Campaign;
+

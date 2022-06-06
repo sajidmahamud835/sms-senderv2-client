@@ -4,7 +4,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import Sidebar from '../../components/sidebar/Sidebar';
-import Topbar from '../../components/topbar/Topbar';
+import TopBar from '../../components/topBar/TopBar';
 import FirebaseApp from '../../firebase/FirebaseApp';
 
 
@@ -30,7 +30,7 @@ const Main = () => {
         <div>
             {user &&
                 <section>
-                    <Topbar />
+                    <TopBar />
                     <div className="container">
                         <Sidebar />
                         <Outlet />
