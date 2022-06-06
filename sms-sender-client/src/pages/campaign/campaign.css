@@ -1,0 +1,130 @@
+.campaign {
+  flex: 4;
+  padding: 20px;
+}
+
+.campaignTitleContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.campaignAddButton {
+  width: 80px;
+  border: none;
+  padding: 5px;
+  background-color: teal;
+  color: white;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.campaignTop {
+  display: flex;
+}
+
+.campaignTopLeft,
+.campaignTopRight {
+  flex: 1;
+}
+
+.campaignTopRight {
+  padding: 20px;
+  margin: 20px;
+  -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+}
+
+.campaignInfoImg {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 20px;
+}
+
+.campaignInfoTop {
+  display: flex;
+  align-items: center;
+}
+
+.campaignName {
+  font-weight: 600;
+}
+
+.campaignInfoBottom {
+  margin-top: 10px;
+}
+
+.campaignInfoItem {
+  width: 150px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.campaignInfoValue {
+  font-weight: 300;
+}
+
+.campaignBottom {
+  padding: 20px;
+  margin: 20px;
+  -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+}
+
+.campaignForm {
+  display: flex;
+  justify-content: space-between;
+}
+
+.campaignFormLeft {
+  display: flex;
+  flex-direction: column;
+}
+
+.campaignFormLeft>label {
+  margin-bottom: 10px;
+  color: gray;
+}
+
+.campaignFormLeft>input {
+  margin-bottom: 10px;
+  border: none;
+  padding: 5px;
+  border-bottom: 1px solid gray;
+}
+
+.campaignFormLeft>select {
+  margin-bottom: 10px;
+}
+
+.campaignUploadImg {
+  width: 100px;
+  height: 100px;
+  border-radius: 10px;
+  object-fit: cover;
+  margin-right: 20px;
+}
+
+.campaignFormRight {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.campaignUpload {
+  display: flex;
+  align-items: center;
+}
+
+.campaignButton {
+  border: none;
+  padding: 5px;
+  border-radius: 5px;
+  background-color: darkblue;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}
