@@ -12,8 +12,7 @@ import Main from "./pages/main/Main";
 import CampaignList from "./pages/campaignList/CampaignList";
 
 function App() {
-  return (
-
+  return ( 
     <Routes>
       <Route path="/login" element={<Login />}></Route>
       <Route path="" element={<Main />}>
