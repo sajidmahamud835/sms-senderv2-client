@@ -16,7 +16,7 @@ const Sms = () => {
         message: "",
     });
     const [myNumbers, setMyNumbers] = useState([
-        "+19034204596"
+        "+19034204596", "+19785813348"
     ])
 
     // console.log(messageIds);
@@ -40,7 +40,7 @@ const Sms = () => {
         setIsLoading(true);
         setMessage("");
         setError("");
-        fetch("https://sms-sender-server.herokuapp.com/sms/send", {
+        fetch("http://localhost:4000/sms/send", {
             method: "POST",
             headers: {
                 "content-type": "application/json",

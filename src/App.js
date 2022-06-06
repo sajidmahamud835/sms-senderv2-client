@@ -10,6 +10,7 @@ import Sms from "./pages/sms/Sms";
 import Login from "./pages/auth/login/Login";
 import Main from "./pages/main/Main";
 import CampaignList from "./pages/campaignList/CampaignList";
+import ExcelToCSV from "./components/ExcelToCSV/ExcelToCSV";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
       <Route path="" element={<Main />}>
         <Route path="" element={<Home />} />
         <Route path="/users" element={<UserList />}></Route>
+        <Route path="/excel-to-csv" element={<ExcelToCSV />}></Route>
         <Route path="/user/:userId" element={<User />}></Route>
         <Route path="/newUser" element={<NewUser />}></Route>
         <Route path="/campaigns" element={<CampaignList />}></Route>

@@ -74,6 +74,9 @@ const UserList = () => {
         <Link to="/newUser">
           <button className="userAddButton">Create</button>
         </Link>
+        <Link to="/excel-to-csv">
+          <button className="userAddButton">Upload Excel</button>
+        </Link>
       </div>
       <DataGrid
         rows={data}
