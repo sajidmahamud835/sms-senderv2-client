@@ -9,6 +9,7 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import { Avatar, MenuItem } from '@mui/material';
 import Menu from '@mui/material/Menu';
+import UseFirebase from '../../Hooks/UseFirebase';
 
 const TopBar = () => {
 
@@ -36,7 +37,8 @@ const TopBar = () => {
     const logout = () => {
         signOut(auth);
     };
-    const [user, loading, error] = useAuthState(auth);
+    // const [user, loading, error] = useAuthState(auth);
+    const { user } = UseFirebase()
     let navigate = useNavigate();
     const goToProfile = () => {
         navigate('/profile')

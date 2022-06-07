@@ -18,10 +18,12 @@ import { getAuth } from "firebase/auth";
 import FirebaseApp from "../../firebase/FirebaseApp";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useEffect, useState } from "react";
+import UseFirebase from '../../Hooks/UseFirebase';
 
 const Sidebar = () => {
   const auth = getAuth(FirebaseApp);
-  const [user] = useAuthState(auth);
+  // const [user] = useAuthState(auth);
+  const {user} = UseFirebase()
   const [active, setActive] = useState('dashboard');
 
   useEffect(() => {

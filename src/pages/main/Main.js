@@ -1,16 +1,17 @@
-import { getAuth } from 'firebase/auth';
+// import { getAuth } from 'firebase/auth';
 import React, { useEffect } from 'react';
-import { useAuthState } from 'react-firebase-hooks/auth';
+// import { useAuthState } from 'react-firebase-hooks/auth';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import Sidebar from '../../components/sidebar/Sidebar';
+import Sidebar from '../../components/sidebar/Sidebar'; 
 import TopBar from '../../components/topBar/TopBar';
-import FirebaseApp from '../../firebase/FirebaseApp';
+// import FirebaseApp from '../../firebase/FirebaseApp';
+import UseFirebase from '../../Hooks/UseFirebase';
 
 
 const Main = () => {
-    const auth = getAuth(FirebaseApp);
-    const [user, loading, error] = useAuthState(auth);
+    // const auth = getAuth(FirebaseApp);
+    const {user, loading, error} = UseFirebase(); 
     let navigate = useNavigate();
 
     useEffect(() => {
