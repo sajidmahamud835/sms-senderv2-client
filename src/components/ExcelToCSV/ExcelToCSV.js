@@ -1,13 +1,21 @@
 import React, { useState } from 'react';
 import { DataGrid } from "@material-ui/data-grid";
 const ExcelToCSV = () => {
-    const [file, setFile] = useState();
     const [array, setArray] = useState([]);
 
     const fileReader = new FileReader();
 
     const handleOnChange = (e) => {
-        setFile(e.target.files[0]);
+        ;
+        const file = e.target.files[0];
+        if (file) {
+            fileReader.onload = function (event) {
+                const text = event.target.result;
+                csvFileToArray(text);
+            };
+
+            fileReader.readAsText(file);
+        }
     };
 
     const csvFileToArray = string => {
@@ -39,19 +47,6 @@ const ExcelToCSV = () => {
         }
         const chacking = array.map(ar => function4Chacking(ar))
     };
-
-    const handleOnSubmit = (e) => {
-        e.preventDefault();
-
-        if (file) {
-            fileReader.onload = function (event) {
-                const text = event.target.result;
-                csvFileToArray(text);
-            };
-
-            fileReader.readAsText(file);
-        }
-    };
     const columns = [
         { field: 'id', headerName: 'ID', width: 100 },
         {
@@ -79,14 +74,6 @@ const ExcelToCSV = () => {
                     accept={".csv"}
                     onChange={handleOnChange}
                 />
-
-                <button
-                    onClick={(e) => {
-                        handleOnSubmit(e);
-                    }}
-                >
-                    IMPORT CSV
-                </button>
             </form>
 
             <br />
