@@ -16,6 +16,7 @@ const UseFirebase = () => {
             .finally(() => { setLoading(false) });
     }
     const registerByEmailPass = (email, password, name) => {
+        console.log(email, password, name)
         createUserWithEmailAndPassword(auth, email, password)
             .then((result) => {
                 console.log(result);
@@ -34,14 +35,14 @@ const UseFirebase = () => {
 
     const logInEmailPassword = (email, password) => {
         console.log(email, password)
-        signInWithEmailAndPassword(auth, email, password)
-            .then((result) => {
-                setUser(result.user);
-                setError("")
-            })
-            .catch((error) => {
-                setError(error.code);
-            });
+        // signInWithEmailAndPassword(auth, email, password)
+        //     .then((result) => {
+        //         setUser(result.user);
+        //         setError("")
+        //     })
+        //     .catch((error) => {
+        //         setError(error.code);
+        //     });
     }
     const logOut = () => {
         setLoading(true);
@@ -64,7 +65,8 @@ const UseFirebase = () => {
             setLoading(false);
         });
         return () => unsubscribe;
-    }, [])
+    }, [auth])
+    console.log(user.displayName)
     return { handleGoogleSignIn, user, error, logOut, loading, registerByEmailPass, logInEmailPassword }
 };
 

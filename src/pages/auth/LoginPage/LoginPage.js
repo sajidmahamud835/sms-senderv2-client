@@ -5,7 +5,7 @@ import UseFirebase from '../../../Hooks/UseFirebase';
 import './LoginPage.css'
 
 const LoginPage = () => {
-    const { handleGoogleSignIn, logInEmailPassword, error } = UseFirebase();
+    const { handleGoogleSignIn, logInEmailPassword, registerByEmailPass, error } = UseFirebase();
     const [name, setName] = useState();
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
@@ -24,18 +24,6 @@ const LoginPage = () => {
     const handlePass = (e) => {
         setPassword(e.target.value);
     }
-    const handleReg = () => {
-        console.log(name, email, password)
-        // logInEmailPassword(name,email, password)
-    }
-
-
-    const handleLogIn = () => {
-        console.log(email, password)
-        logInEmailPassword(email, password)
-    }
-
-
     const showRegBtn = () => {
         setLogBtn(false)
         setRegBtn(true)
@@ -50,6 +38,18 @@ const LoginPage = () => {
                 navigate(redirect_uri);
             })
 
+    }
+
+
+
+
+    const handleReg = () => {
+        console.log(email, password, name,)
+        registerByEmailPass(email, password, name,)
+    }
+    const handleLogIn = () => {
+        console.log(email, password)
+        logInEmailPassword(email, password)
     }
     const text = 'auth/wrong-password'
     return (
