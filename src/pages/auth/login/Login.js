@@ -8,6 +8,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import LoadingSpinner from '../../../components/loadingSpinner/LoadingSpinner';
 import FirebaseApp from '../../../firebase/FirebaseApp';
+import UseFirebase from '../../../Hooks/UseFirebase';
 
 
 const auth = getAuth(FirebaseApp);
@@ -17,12 +18,12 @@ const Login = () => {
     const emailRef = useRef('');
     const passwordRef = useRef('');
     const [errorText, setErrorText] = useState('');
-    const [
-        signInWithEmailAndPassword,
+    const {
+        logInEmailPassword,
         user,
         loading,
         signInError,
-    ] = useSignInWithEmailAndPassword(auth);
+    } = UseFirebase();
     let navigate = useNavigate();
     let location = useLocation();
     let from = location.state?.from?.pathname || "/";
@@ -47,7 +48,7 @@ const Login = () => {
         setValidated(true);
         setErrorText('');
 
-        signInWithEmailAndPassword(email, password);
+        logInEmailPassword(email, password);
     };
     if (user) {
         toast("Logged In");

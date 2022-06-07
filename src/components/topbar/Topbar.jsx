@@ -1,9 +1,6 @@
 import React from 'react';
 import './topBar.css'
-import { NotificationsNone, Language, Settings } from "@material-ui/icons";
-import { getAuth, signOut } from "firebase/auth";
-import FirebaseApp from "../../firebase/FirebaseApp";
-import { useAuthState } from "react-firebase-hooks/auth";
+import { NotificationsNone, Settings } from "@material-ui/icons";
 import { Link, useNavigate } from "react-router-dom";
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -12,9 +9,7 @@ import Menu from '@mui/material/Menu';
 import UseFirebase from '../../Hooks/UseFirebase';
 
 const TopBar = () => {
-
-
-
+    const { user, logOut } = UseFirebase()
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
@@ -33,12 +28,14 @@ const TopBar = () => {
 
 
 
-    const auth = getAuth(FirebaseApp);
     const logout = () => {
-        signOut(auth);
+        logOut();
+    };
+    const goForLogIn = () => {
+        navigate('/login')
     };
     // const [user, loading, error] = useAuthState(auth);
-    const { user } = UseFirebase()
+
     let navigate = useNavigate();
     const goToProfile = () => {
         navigate('/profile')
@@ -100,7 +97,7 @@ const TopBar = () => {
                                     <MenuItem onClick={goToProfile}>Profile</MenuItem>
                                     <MenuItem onClick={logout}>Logout</MenuItem>
                                 </Menu>
-                            </div> : <Button style={{ color: 'white' }}  >Login</Button>
+                            </div> : <Button onClick={goForLogIn} style={{ color: 'white' }}  >Login</Button>
                             // onClick={goToLogIn}
                         }
 

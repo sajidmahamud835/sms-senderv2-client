@@ -13,16 +13,11 @@ import {
   Settings,
 } from "@material-ui/icons";
 import UploadFileIcon from '@mui/icons-material/UploadFile';
-import { Link } from "react-router-dom";
-import { getAuth } from "firebase/auth";
-import FirebaseApp from "../../firebase/FirebaseApp";
-import { useAuthState } from "react-firebase-hooks/auth";
+import { Link } from "react-router-dom"; 
 import { useEffect, useState } from "react";
 import UseFirebase from '../../Hooks/UseFirebase';
 
-const Sidebar = () => {
-  const auth = getAuth(FirebaseApp);
-  // const [user] = useAuthState(auth);
+const Sidebar = () => { 
   const {user} = UseFirebase()
   const [active, setActive] = useState('dashboard');
 

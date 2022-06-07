@@ -5,28 +5,18 @@ import { getAuth } from "firebase/auth";
 import FirebaseApp from "../../firebase/FirebaseApp";
 import { Alert } from "react-bootstrap";
 import React from 'react';
+import UseFirebase from "../../Hooks/UseFirebase";
 
 const NewUser = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const auth = getAuth(FirebaseApp);
-  const [
-    createUserWithEmailAndPassword,
-    user,
-    loading,
-    error,
-  ] = useCreateUserWithEmailAndPassword(auth);
-
-  const createUser = (e, email, password) => {
-    e.preventDefault();
-    createUserWithEmailAndPassword(email, password);
-  }
+  const { user, error } = UseFirebase()
   return (
     <div className="newUser">
       <h1 className="newUserTitle">New User</h1>
       <div className="" style={{ width: "800px" }}>
         <div className="mt-2">
-          {loading && <h4 className="text-center">Sending...</h4>}
+          {/* {loading && <h4 className="text-center">Sending...</h4>} */}
           {user && (
             <Alert variant="success">
               <h5 className="text-center">User successfully created.</h5>
@@ -84,7 +74,7 @@ const NewUser = () => {
         </div>
         <div>
           <span className="d-block mt-3">After creating the user, you will be logged as the new user.</span>
-          <button onClick={(e) => createUser(e, email, password)} className="newUserButton">Create New User</button>
+          {/* <button onClick={(e) => createUser(e, email, password)} className="newUserButton">Create New User</button> */}
         </div>
       </form>
     </div>

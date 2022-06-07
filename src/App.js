@@ -19,14 +19,17 @@ import MyTemplates from "./pages/GeneralUserPages/MyTemplates/MyTemplates";
 import MyContacts from "./pages/GeneralUserPages/MyContacts/MyContacts";
 import MySubscription from "./pages/GeneralUserPages/MySubscription/MySubscription";
 import MyReports from "./pages/GeneralUserPages/MyReports/MyReports";
-import LoginPage from "./pages/auth/LoginPage/LoginPage"; 
+import LoginPage from "./pages/auth/LoginPage/LoginPage";
+import PrivateRoute from "./PrivateRoute/PrivateRoute/PrivateRoute";
 
 function App() {
   return (
     <Routes>
-      <Route path="/login" element={<Login />}></Route>
-      <Route path="/login2" element={<LoginPage />}></Route> 
-      <Route path="" element={<Main />}>
+      {/* Should I delete it */}
+      <Route path="/loginfsdfsdf" element={<Login />}></Route>
+
+      <Route path="/login" element={<LoginPage />}></Route>
+      <Route path="" element={ <Main /> }>
         <Route path="" element={<Home />} />
         <Route path="/users" element={<UserList />}></Route>
         <Route path="/sms" element={<Sms />}></Route>
@@ -45,11 +48,7 @@ function App() {
         <Route path="/myContacts" element={<MyContacts />}></Route>
         <Route path="/mySubscription" element={<MySubscription />}></Route>
         <Route path="/myReports" element={<MyReports />}></Route>
-
-
-
-        <Route path="*" element={<Home />}>
-        </Route>
+        <Route path="*" element={<Home />}></Route>
       </Route>
     </Routes>
 

@@ -1,43 +1,50 @@
-// import { getAuth } from 'firebase/auth';
 import React, { useEffect } from 'react';
-// import { useAuthState } from 'react-firebase-hooks/auth';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import Sidebar from '../../components/sidebar/Sidebar'; 
+import Sidebar from '../../components/sidebar/Sidebar';
 import TopBar from '../../components/topBar/TopBar';
-// import FirebaseApp from '../../firebase/FirebaseApp';
 import UseFirebase from '../../Hooks/UseFirebase';
 
 
 const Main = () => {
-    // const auth = getAuth(FirebaseApp);
-    const {user, loading, error} = UseFirebase(); 
-    let navigate = useNavigate();
 
-    useEffect(() => {
-        if (loading) {
-            console.log('Page is loading')
-        } else {
-            if (!user) {
-                toast("Please login!");
-                navigate("/login", { replace: true });
-            } else {
-                console.log('Logged in')
-                console.log(user.email);
-            }
-        }
-    }, [loading, user, navigate]);
+    // const { user, loading, error } = UseFirebase();
+    // let navigate = useNavigate();
+
+    // useEffect(() => {
+    //     if (loading) {
+    //         console.log('Page is loading')
+    //     } else {
+    //         if (!user) {
+    //             toast("Please login!");
+    //             navigate("/login", { replace: true });
+    //         } else {
+    //             console.log('Logged in')
+    //             console.log(user?.email);
+    //         }
+    //     }
+    // }, [loading, user, navigate]);
+    // console.log(user)
     return (
         <div>
-            {user &&
-                <section>
-                    <TopBar />
-                    <div className="container">
-                        <Sidebar />
-                        <Outlet />
-                    </div>
-                </section>}
+            <section>
+                <TopBar />
+                <div className="container">
+                    <Sidebar />
+                    <Outlet />
+                </div>
+            </section>
         </div>
+        // <div>
+        //     {user &&
+        //         <section>
+        //             <TopBar />
+        //             <div className="container">
+        //                 <Sidebar />
+        //                 <Outlet />
+        //             </div>
+        //         </section>}
+        // </div>
     );
 };
 

@@ -1,11 +1,13 @@
 import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import initializeAuthentication from "../firebase/FirebaseInit";
 
 initializeAuthentication()
 
 
 const UseFirebase = () => {
+    let navigate = useNavigate();
     const [user, setUser] = useState({})
     const [error, setError] = useState("")
     const [loading, setLoading] = useState(true);
@@ -19,10 +21,13 @@ const UseFirebase = () => {
         console.log(email, password, name)
         createUserWithEmailAndPassword(auth, email, password)
             .then((result) => {
+                navigate('/dashboard')
                 console.log(result);
                 setUser(result.user);
                 updateProfile(auth.currentUser, { displayName: name })
-                    .then(result => { })
+                    .then(result => {
+                        navigate('/dashboard')
+                    })
                 setUser(result.user)
                 setError("")
             })
@@ -35,14 +40,15 @@ const UseFirebase = () => {
 
     const logInEmailPassword = (email, password) => {
         console.log(email, password)
-        // signInWithEmailAndPassword(auth, email, password)
-        //     .then((result) => {
-        //         setUser(result.user);
-        //         setError("")
-        //     })
-        //     .catch((error) => {
-        //         setError(error.code);
-        //     });
+        signInWithEmailAndPassword(auth, email, password)
+            .then((result) => {
+                setUser(result.user);
+                navigate('/dashboard')
+                setError("")
+            })
+            .catch((error) => {
+                setError(error.code);
+            });
     }
     const logOut = () => {
         setLoading(true);

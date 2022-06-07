@@ -13,7 +13,7 @@ const LoginPage = () => {
     const [logBtn, setLogBtn] = useState(true);
     const location = useLocation();
     let navigate = useNavigate();
-    const redirect_uri = location.state?.from || '/home';
+    const redirect_uri = location.state?.from || '/sms';
 
     const handleName = (e) => {
         setName(e.target.value);
