@@ -73,10 +73,7 @@ const UserList = () => {
         <h1 className="userTitle">Manage Users</h1>
         <Link to="/newUser">
           <button className="userAddButton">Create</button>
-        </Link>
-        <Link to="/excel-to-csv">
-          <button className="userAddButton">Upload Excel</button>
-        </Link>
+        </Link> 
       </div>
       <DataGrid
         rows={data}

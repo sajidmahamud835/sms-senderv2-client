@@ -14,6 +14,11 @@ import ExcelToCSV from "./components/ExcelToCSV/ExcelToCSV";
 import ManageSubscriptions from "./pages/ManageSubscriptions/ManageSubscriptions";
 import Reports from "./pages/Reports/Reports";
 import Profile from "./pages/Profile/Profile";
+import MyCampaigns from "./pages/GeneralUserPages/MyCampaigns/MyCampaigns";
+import MyTemplates from "./pages/GeneralUserPages/MyTemplates/MyTemplates";
+import MyContacts from "./pages/GeneralUserPages/MyContacts/MyContacts";
+import MySubscription from "./pages/GeneralUserPages/MySubscription/MySubscription";
+import MyReports from "./pages/GeneralUserPages/MyReports/MyReports";
 
 function App() {
   return (
@@ -33,11 +38,11 @@ function App() {
         <Route path="/reports" element={<Reports />}></Route>
         {/* This Route For General User */}
         <Route path="/profile" element={<Profile />}></Route>
-        <Route path="/myCampaigns" element={<Profile />}></Route>
-        <Route path="/myTemplates" element={<Profile />}></Route>
-        <Route path="/myContacts" element={<Profile />}></Route>
-        <Route path="/mySubscription" element={<Profile />}></Route>
-        <Route path="/myReports" element={<Profile />}></Route>
+        <Route path="/myCampaigns" element={<MyCampaigns />}></Route>
+        <Route path="/myTemplates" element={<MyTemplates />}></Route>
+        <Route path="/myContacts" element={<MyContacts />}></Route>
+        <Route path="/mySubscription" element={<MySubscription />}></Route>
+        <Route path="/myReports" element={<MyReports />}></Route>
 
 
 
