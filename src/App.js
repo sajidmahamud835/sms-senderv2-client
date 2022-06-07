@@ -29,7 +29,7 @@ function App() {
       <Route path="/loginfsdfsdf" element={<Login />}></Route>
 
       <Route path="/login" element={<LoginPage />}></Route>
-      <Route path="" element={ <Main /> }>
+      <Route path="" element={<PrivateRoute><Main /></PrivateRoute>}>
         <Route path="" element={<Home />} />
         <Route path="/users" element={<UserList />}></Route>
         <Route path="/sms" element={<Sms />}></Route>
