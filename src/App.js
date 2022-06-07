@@ -19,11 +19,13 @@ import MyTemplates from "./pages/GeneralUserPages/MyTemplates/MyTemplates";
 import MyContacts from "./pages/GeneralUserPages/MyContacts/MyContacts";
 import MySubscription from "./pages/GeneralUserPages/MySubscription/MySubscription";
 import MyReports from "./pages/GeneralUserPages/MyReports/MyReports";
+import LoginPage from "./pages/auth/LoginPage/LoginPage"; 
 
 function App() {
   return (
     <Routes>
       <Route path="/login" element={<Login />}></Route>
+      <Route path="/login2" element={<LoginPage />}></Route> 
       <Route path="" element={<Main />}>
         <Route path="" element={<Home />} />
         <Route path="/users" element={<UserList />}></Route>
