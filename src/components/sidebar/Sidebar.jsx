@@ -10,8 +10,9 @@ import {
   DynamicFeed,
   ChatBubbleOutline,
   WorkOutline,
-  Settings
+  Settings,
 } from "@material-ui/icons";
+import UploadFileIcon from '@mui/icons-material/UploadFile';
 import { Link } from "react-router-dom";
 import { getAuth } from "firebase/auth";
 import FirebaseApp from "../../firebase/FirebaseApp";
@@ -72,6 +73,12 @@ const Sidebar = () => {
                 <li onClick={(e) => makeActive('subscription')} id="subscription" className="sidebarListItem">
                   <AttachMoney className="sidebarIcon" />
                   Manage Subscriptions
+                </li>
+              </Link>
+              <Link to="/excel-to-csv" className="link">
+                <li onClick={(e) => makeActive('reports')} id="reports" className="sidebarListItem">
+                  <UploadFileIcon className="sidebarIcon" />
+                  Upload List
                 </li>
               </Link>
               <Link to="/reports" className="link">

@@ -33,6 +33,11 @@ function App() {
         <Route path="/reports" element={<Reports />}></Route>
         {/* This Route For General User */}
         <Route path="/profile" element={<Profile />}></Route>
+        <Route path="/myCampaigns" element={<Profile />}></Route>
+        <Route path="/myTemplates" element={<Profile />}></Route>
+        <Route path="/myContacts" element={<Profile />}></Route>
+        <Route path="/mySubscription" element={<Profile />}></Route>
+        <Route path="/myReports" element={<Profile />}></Route>
 
 
 
