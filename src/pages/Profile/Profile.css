@@ -1,0 +1,30 @@
+.user {
+    flex: 4;
+    padding: 20px;
+}
+
+.userTitleContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.profileContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.detailsContainer {
+    margin-top: 40px;
+}
+
+.detailsHeadings {
+    font-weight: bolder;
+    padding: 10px;
+}
+
+.details {
+    font-weight: bold;
+    padding: 15px;
+}

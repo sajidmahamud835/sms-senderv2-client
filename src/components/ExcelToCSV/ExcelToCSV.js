@@ -1,74 +1,81 @@
 import React, { useState, useMemo } from 'react';
 import { DataGrid } from "@material-ui/data-grid";
-import { useDropzone } from 'react-dropzone'
-const baseStyle = {
-    flex: 1,
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    padding: '20px',
-    borderWidth: 2,
-    borderRadius: 2,
-    borderColor: '#eeeeee',
-    borderStyle: 'dashed',
-    backgroundColor: '#fafafa',
-    color: '#bdbdbd',
-    outline: 'none',
-    transition: 'border .24s ease-in-out'
-};
+// import { useDropzone } from 'react-dropzone'
 
-const focusedStyle = {
-    borderColor: '#2196f3'
-};
+// Drop box Style Start
 
-const acceptStyle = {
-    borderColor: '#00e676'
-};
 
-const rejectStyle = {
-    borderColor: '#ff1744'
-};
+// const baseStyle = {
+//     flex: 1,
+//     display: 'flex',
+//     flexDirection: 'column',
+//     alignItems: 'center',
+//     padding: '20px',
+//     borderWidth: 2,
+//     borderRadius: 2,
+//     borderColor: '#eeeeee',
+//     borderStyle: 'dashed',
+//     backgroundColor: '#fafafa',
+//     color: '#bdbdbd',
+//     outline: 'none',
+//     transition: 'border .24s ease-in-out'
+// };
+
+// const focusedStyle = {
+//     borderColor: '#2196f3'
+// };
+
+// const acceptStyle = {
+//     borderColor: '#00e676'
+// };
+
+// const rejectStyle = {
+//     borderColor: '#ff1744'
+// };
+
+// Drop box Style End
 
 const ExcelToCSV = () => { 
 
-    
+
     // Code for Drop Box Start
 
-    const {
-        getRootProps,
-        getInputProps,
-        isFocused,
-        isDragAccept,
-        isDragReject,
-        acceptedFiles
-    } = useDropzone({
-        accept: 'text/csv',
-        // onDrop: (acceptedFiles) => (
-        //     setFiles(
-        //         acceptedFiles.map(file => Object.assign(file, {
-        //             preview: URL.createObjectURL(file)
-        //         }))
-        //     )
 
-        // )
-    });
 
-    const style = useMemo(() => ({
-        ...baseStyle,
-        ...(isFocused ? focusedStyle : {}),
-        ...(isDragAccept ? acceptStyle : {}),
-        ...(isDragReject ? rejectStyle : {})
-    }), [
-        isFocused,
-        isDragAccept,
-        isDragReject
-    ]);
 
-    const files = acceptedFiles.map(file => (
-        <li key={file.name}>
-            {file.name} - {file.size} bytes
-        </li>
-    ));
+
+    // const {
+    //     getRootProps,
+    //     getInputProps,
+    //     isFocused,
+    //     isDragAccept,
+    //     isDragReject,
+    //     acceptedFiles
+    // } = useDropzone({
+    //     accept: 'text/csv'
+    // });
+
+    // const style = useMemo(() => ({
+    //     ...baseStyle,
+    //     ...(isFocused ? focusedStyle : {}),
+    //     ...(isDragAccept ? acceptStyle : {}),
+    //     ...(isDragReject ? rejectStyle : {})
+    // }), [
+    //     isFocused,
+    //     isDragAccept,
+    //     isDragReject
+    // ]);
+
+    // const files = acceptedFiles.map(file => (
+    //     <li key={file.name}>
+    //         {file.name} - {file.size} bytes
+    //     </li>
+    // ));
+
+
+
+
+
     // Code for Drop Box End
 
 
@@ -79,13 +86,8 @@ const ExcelToCSV = () => {
     const fileReader = new FileReader();
 
 
-    const handleOnChange = (e) => {
-        ;
-        // const file = e.target.files[0];
-        // console.log(file);
-        const file = acceptedFiles;
-        console.log(file);
-        // console.log(file?.files[0]);
+    const handleOnChange = (e) => { 
+        const file = e.target.files[0];  
         if (file) {
             fileReader.onload = function (event) {
                 const text = event.target.result;
@@ -144,17 +146,23 @@ const ExcelToCSV = () => {
     const headerKeys = Object.keys(Object.assign({}, ...array));
     return (
         <div style={{ textAlign: "center" }} className="newCampaign">
-            <div className="container">
+
+            {/* Drop Box Code Start here*/}
+
+
+            {/* <div className="container">
                 <div {...getRootProps({ style })}>
                     <input {...getInputProps()} />
                     <p>Drag 'n' drop some files here, or click to select files</p>
                 </div>
             </div>
-
             <aside>
                 <h4>Files</h4>
                 <ul>{files}</ul>
-            </aside>
+            </aside> */}
+
+
+            {/* Drop Box Code End */}
             <h1>Upload Your excel File </h1>
             <form>
                 <input

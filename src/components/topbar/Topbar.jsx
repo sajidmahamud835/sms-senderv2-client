@@ -5,13 +5,42 @@ import { getAuth, signOut } from "firebase/auth";
 import FirebaseApp from "../../firebase/FirebaseApp";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Link, useNavigate } from "react-router-dom";
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import { Avatar, MenuItem } from '@mui/material';
+import Menu from '@mui/material/Menu';
+
 const TopBar = () => {
+
+
+
+    const [anchorEl, setAnchorEl] = React.useState(null);
+    const open = Boolean(anchorEl);
+    const handleClick = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
+
+    function stringAvatar(name) {
+        return {
+            children: `${name?.split(' ')[0][0]}${name?.split(' ')[1][0]}`,
+        };
+    }
+
+
+
+
     const auth = getAuth(FirebaseApp);
     const logout = () => {
         signOut(auth);
     };
     const [user, loading, error] = useAuthState(auth);
     let navigate = useNavigate();
+    const goToProfile = () => {
+        navigate('/profile')
+    }
     return (
         <div className="topbar">
             <nav className="topbarWrapper">
@@ -32,7 +61,51 @@ const TopBar = () => {
                     <div onClick={() => navigate("/settings", { replace: true })} className="topbarIconContainer">
                         <Settings />
                     </div>
-                    <div class="dropdown">
+
+
+                    <Box sx={{ flexGrow: 0 }}>
+                        {
+                            user.email ? <div
+                                style={{
+                                    display: "flex",
+                                    justifyContent: "space-around",
+                                    alignItems: "center"
+                                }}
+                            >
+                                <Button
+                                    id="basic-button"
+                                    aria-controls={open ? 'basic-menu' : undefined}
+                                    aria-haspopup="true"
+                                    aria-expanded={open ? 'true' : undefined}
+                                    onClick={handleClick}
+                                >
+                                    {
+                                        user.photoURL ? (<img src={user.photoURL} style={{ borderRadius: "50%", width: "50%" }} alt="User" />)
+                                            :
+                                            (<Avatar style={{ color: 'black' }} {...stringAvatar('Samusl Alam')} />)
+                                    }
+
+                                </Button>
+                                <Menu
+                                    id="basic-menu"
+                                    anchorEl={anchorEl}
+                                    open={open}
+                                    onClose={handleClose}
+                                    MenuListProps={{
+                                        'aria-labelledby': 'basic-button',
+                                    }}
+                                >
+                                    <MenuItem onClick={goToProfile}>Profile</MenuItem>
+                                    <MenuItem onClick={logout}>Logout</MenuItem>
+                                </Menu>
+                            </div> : <Button style={{ color: 'white' }}  >Login</Button>
+                            // onClick={goToLogIn}
+                        }
+
+                    </Box>
+
+
+                    {/* <div class="dropdown">
                         <img src="https://media-exp1.licdn.com/dms/image/sync/C5627AQHDoC7cGiF_FQ/articleshare-shrink_480/0/1650973331366?e=2147483647&v=beta&t=dzC8F2yHDQMMfWhCXgE0Pa5V86uta_ULCFF5KKklq1M" alt="" className="topAvatar" id="profileMenu" data-bs-toggle="dropdown" aria-expanded="false" />
                         <ul class="dropdown-menu" aria-labelledby="profileMenu">
                             {user && <li><span className="dropdown-item">Hello, {user.email} </span></li>}
@@ -42,7 +115,7 @@ const TopBar = () => {
                             <li><button class="dropdown-item" type="button">Profile</button></li>
                             <li><button onClick={logout} class="dropdown-item" type="button">Logout</button></li>
                         </ul>
-                    </div>
+                    </div> */}
                 </div>
             </nav>
         </div>

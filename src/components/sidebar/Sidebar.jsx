@@ -68,14 +68,18 @@ const Sidebar = () => {
                   Manage Campaigns
                 </li>
               </Link>
-              <li onClick={(e) => makeActive('subscription')} id="subscription" className="sidebarListItem">
-                <AttachMoney className="sidebarIcon" />
-                Manage Subscriptions
-              </li>
-              <li onClick={(e) => makeActive('reports')} id="reports" className="sidebarListItem">
-                <BarChart className="sidebarIcon" />
-                Reports
-              </li>
+              <Link to="/manage-subscriptions" className="link">
+                <li onClick={(e) => makeActive('subscription')} id="subscription" className="sidebarListItem">
+                  <AttachMoney className="sidebarIcon" />
+                  Manage Subscriptions
+                </li>
+              </Link>
+              <Link to="/reports" className="link">
+                <li onClick={(e) => makeActive('reports')} id="reports" className="sidebarListItem">
+                  <BarChart className="sidebarIcon" />
+                  Reports
+                </li>
+              </Link>
             </ul>
           </div>}
         {user.email !== "sajidmahamud835@gmail.com" &&
