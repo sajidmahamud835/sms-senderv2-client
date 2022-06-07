@@ -52,7 +52,7 @@ const Sidebar = () => {
             </Link>
           </ul>
         </div>
-        {user.email === "sajidmahamud835@gmail.com" &&
+        {user?.email === "sajidmahamud835@gmail.com" &&
           <div className="sidebarMenu">
             <h3 className="sidebarTitle">Admin</h3>
             <ul className="sidebarList">
