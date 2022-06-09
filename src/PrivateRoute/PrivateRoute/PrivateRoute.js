@@ -7,7 +7,10 @@ const PrivateRoute = ({ children, ...rest }) => {
     const { user, loading } = UseFirebase();
     console.log(user)
     let location = useLocation();
-    if (loading) { return <CircularProgress /> }
+    if (loading) {
+        return <div style={{ display: "flex", justifyContent: 'center' }}><div>
+            <CircularProgress /></div></div>
+    }
     if (user.email) {
         return children;
     }

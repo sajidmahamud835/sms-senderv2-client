@@ -8,7 +8,9 @@ initializeAuthentication()
 
 const UseFirebase = () => {
     let navigate = useNavigate();
-    const [user, setUser] = useState({})
+    const [user, setUser] = useState(false)
+    const [admin, setAdmin] = useState(false)
+    const [isAdminLoading, setAdminIsLoading] = useState(true);
     const [error, setError] = useState("")
     const [loading, setLoading] = useState(true);
     const auth = getAuth();
@@ -72,8 +74,24 @@ const UseFirebase = () => {
         });
         return () => unsubscribe;
     }, [auth])
-    console.log(user.displayName)
-    return { handleGoogleSignIn, user, error, logOut, loading, registerByEmailPass, logInEmailPassword }
+
+
+
+
+
+    useEffect(() => {
+        setAdminIsLoading(true)
+        if (user?.email === 'sajidmahamud835@gmail.com' || user?.email === 'admin@admin.com' || user?.email === 'contactsamsulalam@gmail.com') {
+            setAdminIsLoading(false)
+            setAdmin(true)
+
+        }
+
+    }, [user?.email])
+
+
+    console.log(user?.displayName, 'ADmin ?', admin)
+    return { handleGoogleSignIn, user, admin, error, logOut, loading, registerByEmailPass, logInEmailPassword }
 };
 
 export default UseFirebase;

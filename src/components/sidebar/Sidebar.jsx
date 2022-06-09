@@ -13,12 +13,12 @@ import {
   Settings,
 } from "@material-ui/icons";
 import UploadFileIcon from '@mui/icons-material/UploadFile';
-import { Link } from "react-router-dom"; 
+import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import UseFirebase from '../../Hooks/UseFirebase';
 
-const Sidebar = () => { 
-  const {user} = UseFirebase()
+const Sidebar = () => {
+  const { user, admin } = UseFirebase()
   const [active, setActive] = useState('dashboard');
 
   useEffect(() => {
@@ -50,7 +50,7 @@ const Sidebar = () => {
             </Link>
           </ul>
         </div>
-        {user?.email === "sajidmahamud835@gmail.com" &&
+        {admin &&
           <div className="sidebarMenu">
             <h3 className="sidebarTitle">Admin</h3>
             <ul className="sidebarList">
@@ -86,7 +86,7 @@ const Sidebar = () => {
               </Link>
             </ul>
           </div>}
-        {user.email !== "sajidmahamud835@gmail.com" &&
+        {admin === false &&
           <div className="sidebarMenu">
             <h3 className="sidebarTitle">User</h3>
             <ul className="sidebarList">

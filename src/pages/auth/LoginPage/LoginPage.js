@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useLocation } from 'react-router';
 import { useNavigate } from "react-router-dom";
+import SmsIcon from '@mui/icons-material/Sms';
 import UseFirebase from '../../../Hooks/UseFirebase';
 import './LoginPage.css'
 
@@ -71,6 +72,7 @@ const LoginPage = () => {
 
                     <div className="right">
                         <span className="loginwith">New here<br />just Sign up</span>
+                        <SmsIcon style={{ fontSize: '100px', color: 'orangeRed'}} />
 
                         {
                             logBtn && (<button className="social-signin bg-dark facebook" onClick={showRegBtn}> Sign Up with Email</button>)
@@ -78,13 +80,12 @@ const LoginPage = () => {
                         {
                             regBtn && (<button className="social-signin bg-dark facebook" onClick={showLogBtn}>  LOG In </button>)
                         }
-                        <button className="social-signin google" onClick={googleSignIn}>Log in with Google+</button>
                     </div>
                     <div className="or">OR</div>
                 </div>
             </div>
 
-        </div>
+        </div >
     );
 };
 

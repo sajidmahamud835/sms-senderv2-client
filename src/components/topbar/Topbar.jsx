@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './topBar.css'
 import { NotificationsNone, Settings } from "@material-ui/icons";
 import { Link, useNavigate } from "react-router-dom";
@@ -11,6 +11,7 @@ import UseFirebase from '../../Hooks/UseFirebase';
 const TopBar = () => {
     const { user, logOut } = UseFirebase()
     const [anchorEl, setAnchorEl] = React.useState(null);
+    // const [userName, setUserName] = React.useState("Admin")
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -40,6 +41,12 @@ const TopBar = () => {
     const goToProfile = () => {
         navigate('/profile')
     }
+
+
+    // useEffect(() => {
+    //     setUserName(user.displayName)
+    // }, [user])
+    console.log(user.displayName);
     return (
         <div className="topbar">
             <nav className="topbarWrapper">
@@ -54,7 +61,7 @@ const TopBar = () => {
                         </div>
                         <ul class="dropdown-menu" aria-labelledby="NotificationsMenu">
                             {/* <li><span class="dropdown-item">We have no notification for you today.</span></li> */}
-                            <li><Link to="/myProfile" class="dropdown-item" type="button">Welcome to our webiste. Please update your profile to enjoy all our features.</Link></li>
+                            <li><Link to="/myProfile" class="dropdown-item" type="button">Welcome to our website. Please update your profile to enjoy all our features.</Link></li>
                         </ul>
                     </div>
                     <div onClick={() => navigate("/settings", { replace: true })} className="topbarIconContainer">
@@ -81,7 +88,7 @@ const TopBar = () => {
                                     {
                                         user.photoURL ? (<img src={user.photoURL} style={{ borderRadius: "50%", width: "50%" }} alt="User" />)
                                             :
-                                            (<Avatar style={{ color: 'black' }} {...stringAvatar('Samusl Alam')} />)
+                                            (<Avatar style={{ color: 'black' }} {...stringAvatar("Samsul Alam")} />)
                                     }
 
                                 </Button>
@@ -94,8 +101,8 @@ const TopBar = () => {
                                         'aria-labelledby': 'basic-button',
                                     }}
                                 >
-                                    <MenuItem onClick={goToProfile}>Profile</MenuItem>
-                                    <MenuItem onClick={logout}>Logout</MenuItem>
+                                    <MenuItem style={{ display: 'block' }} onClick={goToProfile}>Profile</MenuItem>
+                                    <MenuItem style={{ display: 'block' }} onClick={logout}>Logout</MenuItem>
                                 </Menu>
                             </div> : <Button onClick={goForLogIn} style={{ color: 'white' }}  >Login</Button>
                             // onClick={goToLogIn}
