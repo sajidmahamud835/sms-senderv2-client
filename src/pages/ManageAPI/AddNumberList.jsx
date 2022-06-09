@@ -10,13 +10,13 @@ const AddNumberList = () => {
 	const [messageIds, setMessageIds] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
 	const [manageMobileData, setManageMobileData] = useState({
-		receiver: [],
+		twilioNumbers: [],
 	});
 
 	const receiverNumberCollect = (e) => {
 		const numberString = e.target.value;
 		const numbers = numberString.split("\n");
-		manageMobileData.receiver = [...numbers];
+		manageMobileData.twilioNumbers = [...numbers];
 	};
 
 	const handleSubmit = (e) => {
