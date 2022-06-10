@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Alert } from "react-bootstrap";
 
 const AddNumberList = () => {
@@ -24,7 +24,7 @@ const AddNumberList = () => {
 		setIsLoading(true);
 		setMessage("");
 		setError("");
-		fetch("http://localhost:4000/smsApi/number", {
+		fetch("http://localhost:4000/smsApi/numbers", {
 			method: "POST",
 			headers: {
 				"content-type": "application/json",
@@ -152,11 +152,13 @@ const AddNumberList = () => {
 									Close
 								</button>
 								<button type="submit" className="btn btn-primary">
-									Save changes
+									Add Numbers
 								</button>
 							</div>
 							<div className="mx-4">
-								{isLoading && <h4 className="text-center">Sending...</h4>}
+								{isLoading && (
+									<h6 className="text-center">Sending to database...</h6>
+								)}
 								{message && (
 									<Alert variant="success">
 										<h5 className="text-center">{message}</h5>

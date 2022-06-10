@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Alert } from "react-bootstrap";
+import swal from "sweetalert";
 import AddNumberList from "./AddNumberList";
 import "./ManageAPI.css";
+import ManageAPIList from "./ManageAPIList";
 
 const ManageAPI = () => {
 	const [isSingle, setIsSingle] = useState(true);
@@ -48,10 +50,12 @@ const ManageAPI = () => {
 				// console.log(data);
 				setIsLoading(false);
 				if (data.status === 200) {
+					swal("Good job!", "Data added successfully...", "success");
 					setMessage(data.message);
 					setMessageIds(data.messageIds);
 					setError("");
 				} else if (data.status === 400) {
+					swal("Error!", "Something is wrong...", "danger");
 					setMessage("");
 					setError(data.message);
 				}
@@ -105,17 +109,30 @@ const ManageAPI = () => {
 								required
 							/>
 						</div>
-					</div>
-					<div className="" style={{ textAlign: "right" }}>
-						<button type="submit" className="btn btn-primary">
-							Send Now
-						</button>
+						<div className="" style={{ textAlign: "right" }}>
+							<button type="submit" className="btn btn-primary">
+								Save
+							</button>
+						</div>
 					</div>
 				</form>
 			</div>
-			<div className="" style={{ width: "100%" }}>
+			<div className="mt-4">
+				<div
+					className="d-flex justify-content-between align-items-center"
+					style={{ width: "100%" }}
+				>
+					<div>
+						<h4 className="m-0 fw-bold">Twilio number</h4>
+					</div>
+					<div>
+						<AddNumberList /> {/* manageApiData={manageApiData} */}
+					</div>
+				</div>
+			</div>
+			<div className="mt-4">
 				<div>
-					<AddNumberList /> {/* manageApiData={manageApiData} */}
+					<ManageAPIList />
 				</div>
 			</div>
 		</section>
