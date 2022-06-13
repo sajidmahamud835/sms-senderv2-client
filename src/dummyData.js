@@ -117,3 +117,40 @@ export const campaignRows = [
     smssent: "232/1000",
   }
 ];
+export const SubscriptionsRows = [
+  {
+    id: 0,
+    name: "Subscriptions 1",
+    sold: 123,
+    status: "Active",
+    smssent: "997/1000",
+  },
+  {
+    id: 1,
+    name: "Subscriptions 2",
+    sold: 123,
+    status: "Completed",
+    smssent: "1000/1000",
+  },
+  {
+    id: 2,
+    name: "Subscriptions 3",
+    sold: 123,
+    status: "Posed",
+    smssent: "232/1000",
+  },
+  {
+    id: 4,
+    name: "Subscriptions 4",
+    sold: 123,
+    status: "Completed",
+    smssent: "1000/1000",
+  },
+  {
+    id: 5,
+    name: "Subscriptions 5",
+    sold: 123,
+    status: "Completed",
+    smssent: "1000/1000",
+  },
+];

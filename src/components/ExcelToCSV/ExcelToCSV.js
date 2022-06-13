@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { DataGrid } from "@material-ui/data-grid";
+import { useEffect } from 'react';
 // import { useDropzone } from 'react-dropzone'
 
 // Drop box Style Start
@@ -35,7 +36,7 @@ import { DataGrid } from "@material-ui/data-grid";
 
 // Drop box Style End
 
-const ExcelToCSV = () => { 
+const ExcelToCSV = () => {
 
 
     // Code for Drop Box Start
@@ -83,11 +84,12 @@ const ExcelToCSV = () => {
 
     // Code for convert csv to json 
     const [array, setArray] = useState([]);
+    const [csvFile, setCsvFile] = useState([]);
     const fileReader = new FileReader();
 
 
-    const handleOnChange = (e) => { 
-        const file = e.target.files[0];  
+    const handleOnChange = (e) => {
+        const file = e.target.files[0];
         if (file) {
             fileReader.onload = function (event) {
                 const text = event.target.result;
@@ -143,7 +145,26 @@ const ExcelToCSV = () => {
             editable: true,
         },
     ];
-    const headerKeys = Object.keys(Object.assign({}, ...array));
+    // const headerKeys = Object.keys(Object.assign({}, ...array));
+
+    useEffect(() => {
+        fetch("http://localhost:4000/csvList", {
+            method: "POST",
+            headers: {
+                "content-type": "application/json",
+            },
+            body: JSON.stringify(array),
+        })
+            .then((res) => res.json())
+    }, [array])
+
+    // console.log(array)
+    useEffect(() => {
+        fetch('http://localhost:4000/csvList')
+            .then(res => res.json())
+            .then(data => setCsvFile(data))
+    }, [])
+
     return (
         <div style={{ textAlign: "center" }} className="newCampaign">
 
@@ -177,7 +198,7 @@ const ExcelToCSV = () => {
 
 
             <DataGrid
-                rows={array}
+                rows={csvFile}
                 columns={columns}
                 pageSize={20}
                 rowsPerPageOptions={[25]}
