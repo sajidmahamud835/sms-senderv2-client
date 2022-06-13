@@ -22,6 +22,8 @@ import MyReports from "./pages/GeneralUserPages/MyReports/MyReports";
 import LoginPage from "./pages/auth/LoginPage/LoginPage";
 import PrivateRoute from "./PrivateRoute/PrivateRoute/PrivateRoute";
 import AdminRoute from "./PrivateRoute/AdminRoute/AdminRoute";
+import ManageAPI from "./pages/ManageAPI/ManageAPI";
+import ApiAnalytics from "./pages/ApiAnalytics/ApiAnalytics";
 
 function App() {
   return (
@@ -41,6 +43,8 @@ function App() {
         <Route path="/campaign/:campaignId" element={<Campaign />}></Route>
         <Route path="/new-campaign" element={<NewCampaign />}></Route>
         <Route path="/manage-subscriptions" element={<ManageSubscriptions />}></Route>
+        <Route path="/manageAPI" element={<ManageAPI />}></Route>
+        <Route path="/apiAnalytics" element={<ApiAnalytics />}></Route>
         <Route path="/reports" element={<Reports />}></Route>
         {/* This Route For General User */}
         <Route path="/profile" element={<Profile />}></Route>
