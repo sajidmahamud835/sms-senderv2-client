@@ -156,6 +156,10 @@ const ExcelToCSV = () => {
             body: JSON.stringify(array),
         })
             .then((res) => res.json())
+            .then(data => {
+                console.log(data);
+                console.log('data has gone')
+            })
     }, [array])
 
     // console.log(array)
