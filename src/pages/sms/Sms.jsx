@@ -63,7 +63,7 @@ const Sms = () => {
     };
 
     return (
-        <section className="sms m-3 p-3">
+        <section className="updateNumber m-3 p-3">
             <div className="userListTitleContainer">
                 <h1 className="userTitle">Send Quick Message</h1>
                 <Link to="/newUser">

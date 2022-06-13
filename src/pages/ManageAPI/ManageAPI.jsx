@@ -135,6 +135,13 @@ const ManageAPI = () => {
 					<ManageAPIList />
 				</div>
 			</div>
+			<div className="mt-5 text-center">
+				<div>
+					<a href="/manageAPI" className="btn btn-success">
+						Refresh Page
+					</a>
+				</div>
+			</div>
 		</section>
 	);
 };

@@ -5,12 +5,13 @@ import swal from "sweetalert";
 
 const ManageAPIList = () => {
 	const [mobileNumberData, setMobileNumberData] = useState([]);
+	const [dataUpdated, setDataUpdated] = useState(0);
+
 	useEffect(() => {
 		fetch(`http://localhost:4000/smsApi/numbers`)
 			.then((res) => res.json())
 			.then((data) => setMobileNumberData(data));
-	}, []);
-	console.log(mobileNumberData);
+	}, [dataUpdated]);
 
 	// delete a mobile number data
 	const handleDeleteData = (id) => {
@@ -36,6 +37,7 @@ const ManageAPIList = () => {
 								(data) => data._id !== id
 							);
 							setMobileNumberData(remainingMobileNumberData);
+							setDataUpdated(dataUpdated + 1);
 						}
 					});
 			} else {
@@ -78,7 +80,7 @@ const ManageAPIList = () => {
 								{mobileData.number}
 							</th>
 							<td className="text-end">
-								<button className="btn btn-info">
+								<button className="btn btn-primary">
 									<FiEdit />
 								</button>
 								<button

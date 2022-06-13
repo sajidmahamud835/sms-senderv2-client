@@ -53,7 +53,7 @@ const AddNumberList = () => {
 				type="button"
 				className="btn btn-primary"
 				data-bs-toggle="modal"
-				data-bs-target="#exampleModal"
+				data-bs-target="#addNumberModal"
 			>
 				Add Mobile Number
 			</button>
@@ -61,15 +61,15 @@ const AddNumberList = () => {
 			{/* Modal */}
 			<div
 				className="modal fade"
-				id="exampleModal"
+				id="addNumberModal"
 				tabIndex="-1"
-				aria-labelledby="exampleModalLabel"
+				aria-labelledby="addNumberModalLabel"
 				aria-hidden="true"
 			>
 				<div className="modal-dialog modal-dialog-centered">
 					<div className="modal-content">
 						<div className="modal-header">
-							<h5 className="modal-title" id="exampleModalLabel">
+							<h5 className="modal-title" id="addNumberModalLabel">
 								Add Mobile Number
 							</h5>
 							<button
