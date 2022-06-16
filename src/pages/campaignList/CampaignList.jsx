@@ -55,7 +55,7 @@ const CampaignList = () => {
         return (
           <div>
             <Link to={"/campaign/" + params.row.id}>
-              <button className="campaignListEdit">Edit</button>
+              <button className="campaignListEdit">Details</button>
             </Link>
             <DeleteOutline
               className="campaignListDelete"
