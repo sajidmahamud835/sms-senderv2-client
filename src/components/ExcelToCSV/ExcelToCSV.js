@@ -100,10 +100,14 @@ const ExcelToCSV = () => {
         }
     };
 
+
+
     const csvFileToArray = string => {
         const csvHeader = string.slice(0, string.indexOf("\n")).split(",");
-        const csvRows = string.slice(string.indexOf("\n") + 1).split("\n");
+        const csvRows = string.slice(string.indexOf("\n") + 1).split("\r\n");
+
         // console.log(csvRows);
+
         const array = csvRows.map(i => {
             const values = i.split(",");
             // console.log(values);
@@ -116,19 +120,27 @@ const ExcelToCSV = () => {
             }, {});
             return obj;
         });
+        console.log(array)
 
-        const function4Chacking = (e) => {
-            console.log(e.name);
-            if (e.number === '') {
-                console.log('a number is not available');
-            }
-            else {
-                console.log(array);
-                setArray(array);
-            }
-        }
-        const chacking = array.map(ar => function4Chacking(ar))
+
+
+
+
+
+
+        // const function4Chacking = (e) => {
+        //     console.log(e.name);
+        //     if (e.number === '') {
+        //         console.log('a number is not available');
+        //     }
+        //     else {
+        //         console.log(array);
+        //         setArray(array);
+        //     }
+        // }
+        // const chacking = array.map(ar => function4Chacking(ar))
     };
+
     const columns = [
         { field: 'id', headerName: 'ID', width: 100 },
         {
@@ -162,7 +174,7 @@ const ExcelToCSV = () => {
             })
     }, [array])
 
-    // console.log(array)
+    console.log(array)
     useEffect(() => {
         fetch('http://localhost:4000/csvList')
             .then(res => res.json())

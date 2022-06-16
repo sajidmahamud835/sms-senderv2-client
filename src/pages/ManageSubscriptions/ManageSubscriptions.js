@@ -41,8 +41,8 @@ const ManageSubscriptions = () => {
             width: 120,
         },
         {
-            field: "smssent",
-            headerName: "SMS Sent",
+            field: "limit",
+            headerName: "SMS limit",
             width: 160,
         },
         {
@@ -52,7 +52,7 @@ const ManageSubscriptions = () => {
             renderCell: (params) => {
                 return (
                     <div>
-                        <Link to={"/campaign/" + params.row.id}>
+                        <Link to={"/edit-subscriptions/" + params.row.id}>
                             <button className="campaignListEdit">Edit</button>
                         </Link>
                         <DeleteOutline
