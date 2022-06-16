@@ -1,17 +1,18 @@
 import { useEffect, useState } from "react";
-import { AiOutlineDelete } from "react-icons/ai";
-import { FiEdit } from "react-icons/fi";
 import swal from "sweetalert";
+import ManageAPISingleData from "../../components/ManageAPISingleData/ManageAPISingleData";
 
-const ManageAPIList = () => {
+const ManageAPIList = (props) => {
 	const [mobileNumberData, setMobileNumberData] = useState([]);
-	const [dataUpdated, setDataUpdated] = useState(0);
+	const { changedData, setChangedData } = props;
 
 	useEffect(() => {
 		fetch(`http://localhost:4000/smsApi/numbers`)
 			.then((res) => res.json())
 			.then((data) => setMobileNumberData(data));
-	}, [dataUpdated]);
+
+		console.log(changedData);
+	}, [changedData]);
 
 	// delete a mobile number data
 	const handleDeleteData = (id) => {
@@ -37,7 +38,6 @@ const ManageAPIList = () => {
 								(data) => data._id !== id
 							);
 							setMobileNumberData(remainingMobileNumberData);
-							setDataUpdated(dataUpdated + 1);
 						}
 					});
 			} else {
@@ -75,22 +75,15 @@ const ManageAPIList = () => {
 				</thead>
 				<tbody>
 					{mobileNumberData.map((mobileData) => (
-						<tr className="" key={mobileData._id}>
-							<th scope="row" className="fs-6 pt-3">
-								{mobileData.number}
-							</th>
-							<td className="text-end">
-								<button className="btn btn-primary">
-									<FiEdit />
-								</button>
-								<button
-									className="btn btn-danger ms-3"
-									onClick={() => handleDeleteData(mobileData._id)}
-								>
-									<AiOutlineDelete />
-								</button>
-							</td>
-						</tr>
+						<ManageAPISingleData
+							key={mobileData._id + mobileData.number}
+							mobileData={mobileData}
+							handleDeleteData={handleDeleteData}
+							mobileNumberData={mobileNumberData}
+							setMobileNumberData={setMobileNumberData}
+							changedData={changedData}
+							setChangedData={setChangedData}
+						/>
 					))}
 				</tbody>
 			</table>

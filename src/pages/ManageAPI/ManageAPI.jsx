@@ -15,6 +15,7 @@ const ManageAPI = () => {
 		accountSID: "",
 		authToken: "",
 	});
+	const [changedData, setChangedData] = useState([]);
 
 	// const receiverNumberCollect = (e) => {
 	// 	const numberString = e.target.value;
@@ -126,22 +127,29 @@ const ManageAPI = () => {
 						<h4 className="m-0 fw-bold">Twilio number</h4>
 					</div>
 					<div>
-						<AddNumberList /> {/* manageApiData={manageApiData} */}
+						<AddNumberList
+							changedData={changedData}
+							setChangedData={setChangedData}
+						/>
+						{/* manageApiData={manageApiData} */}
 					</div>
 				</div>
 			</div>
 			<div className="mt-4">
 				<div>
-					<ManageAPIList />
+					<ManageAPIList
+						changedData={changedData}
+						setChangedData={setChangedData}
+					/>
 				</div>
 			</div>
-			<div className="mt-5 text-center">
+			{/* <div className="mt-5 text-center">
 				<div>
 					<a href="/manageAPI" className="btn btn-success">
 						Refresh Page
 					</a>
 				</div>
-			</div>
+			</div> */}
 		</section>
 	);
 };

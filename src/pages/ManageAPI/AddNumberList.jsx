@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Alert } from "react-bootstrap";
 
-const AddNumberList = () => {
+const AddNumberList = (props) => {
 	// { manageApiData }
 
 	const [isSingle, setIsSingle] = useState(true);
@@ -12,6 +12,8 @@ const AddNumberList = () => {
 	const [manageMobileData, setManageMobileData] = useState({
 		twilioNumbers: [],
 	});
+
+	const { changedData, setChangedData } = props;
 
 	const receiverNumberCollect = (e) => {
 		const numberString = e.target.value;
@@ -33,7 +35,7 @@ const AddNumberList = () => {
 		})
 			.then((res) => res.json())
 			.then((data) => {
-				console.log(data);
+				setChangedData(data);
 				setIsLoading(false);
 				if (data.status === 200) {
 					setMessage(data.message);
