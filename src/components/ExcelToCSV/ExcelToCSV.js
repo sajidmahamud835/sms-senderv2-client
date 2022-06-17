@@ -2,40 +2,9 @@ import React, { useState, useMemo } from 'react';
 import { DataGrid } from "@material-ui/data-grid";
 import { useEffect } from 'react';
 import './ExcelToCSV.css'
-// import { useDropzone } from 'react-dropzone'
+import { useNavigate } from 'react-router-dom';
+import UseFirebase from '../../Hooks/UseFirebase';
 
-// Drop box Style Start
-
-
-// const baseStyle = {
-//     flex: 1,
-//     display: 'flex',
-//     flexDirection: 'column',
-//     alignItems: 'center',
-//     padding: '20px',
-//     borderWidth: 2,
-//     borderRadius: 2,
-//     borderColor: '#eeeeee',
-//     borderStyle: 'dashed',
-//     backgroundColor: '#fafafa',
-//     color: '#bdbdbd',
-//     outline: 'none',
-//     transition: 'border .24s ease-in-out'
-// };
-
-// const focusedStyle = {
-//     borderColor: '#2196f3'
-// };
-
-// const acceptStyle = {
-//     borderColor: '#00e676'
-// };
-
-// const rejectStyle = {
-//     borderColor: '#ff1744'
-// };
-
-// Drop box Style End
 // const columns = [
 //     { field: 'id', headerName: 'ID', width: 100 },
 //     {
@@ -53,46 +22,8 @@ import './ExcelToCSV.css'
 //     },
 // ];
 const ExcelToCSV = () => {
-
-    // Code for Drop Box Start
-
-    // const {
-    //     getRootProps,
-    //     getInputProps,
-    //     isFocused,
-    //     isDragAccept,
-    //     isDragReject,
-    //     acceptedFiles
-    // } = useDropzone({
-    //     accept: 'text/csv'
-    // });
-
-    // const style = useMemo(() => ({
-    //     ...baseStyle,
-    //     ...(isFocused ? focusedStyle : {}),
-    //     ...(isDragAccept ? acceptStyle : {}),
-    //     ...(isDragReject ? rejectStyle : {})
-    // }), [
-    //     isFocused,
-    //     isDragAccept,
-    //     isDragReject
-    // ]);
-
-    // const files = acceptedFiles.map(file => (
-    //     <li key={file.name}>
-    //         {file.name} - {file.size} bytes
-    //     </li>
-    // ));
-
-
-
-
-
-    // Code for Drop Box End
-
-
-
-
+    const navigate = useNavigate()
+    const { user } = UseFirebase()
     // Code for convert csv to json 
     const [array, setArray] = useState([]);
     const [listName, setListName] = useState('');
@@ -102,6 +33,7 @@ const ExcelToCSV = () => {
 
     const handleOnChange = (e) => {
         const file = e.target.files[0];
+        // console.log(file);
         if (file) {
             fileReader.onload = function (event) {
                 const text = event.target.result;
@@ -142,7 +74,11 @@ const ExcelToCSV = () => {
     }
     const NewListMake = (e) => {
         e.preventDefault()
-        console.log({ listName, listText, array });
+        const email = user.email
+        console.log({ listName, email, listText, array });
+    }
+    const GoTOAllLIst = () => {
+        navigate('/all-lists')
     }
 
 
@@ -187,24 +123,16 @@ const ExcelToCSV = () => {
             {/* Drop Box Code Start here*/}
 
 
-            {/* <div className="container">
-                <div {...getRootProps({ style })}>
-                    <input {...getInputProps()} />
-                    <p>Drag 'n' drop some files here, or click to select files</p>
-                </div>
-            </div>
-            <aside>
-                <h4>Files</h4>
-                <ul>{files}</ul>
-            </aside> */}
-
-
             {/* Drop Box Code End */}
-            <div className='d-flex flex-column align-items-center'  >
+            <div className='d-flex justify-content-between'>
                 <h1>Upload Your excel File </h1>
+                <button onClick={GoTOAllLIst} className="allListBtn">All List</button>
+            </div>
+            <div className='d-flex flex-column align-items-center'  >
+
 
                 <form onSubmit={NewListMake}>
-                    <div className='d-flex  '>
+                    <div className='d-flex mt-5 '>
                         <label className='me-5'>Name :</label>
                         <input required onBlur={ListName} type="text" placeholder='List name' />
                     </div>
@@ -222,7 +150,7 @@ const ExcelToCSV = () => {
                             onChange={handleOnChange}
                         />
                     </div>
-                    <div className='text-center'> 
+                    <div className='text-center'>
                         <button type='submit' className="makeListBtn m-5">Create</button>
                     </div>
                 </form>
