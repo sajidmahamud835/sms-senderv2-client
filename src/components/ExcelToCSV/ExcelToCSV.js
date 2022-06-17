@@ -36,15 +36,25 @@ import './ExcelToCSV.css'
 // };
 
 // Drop box Style End
-
+// const columns = [
+//     { field: 'id', headerName: 'ID', width: 100 },
+//     {
+//         field: 'name',
+//         headerName: 'Name',
+//         width: 150,
+//         editable: true,
+//     },
+//     {
+//         field: 'number',
+//         headerName: 'Number',
+//         type: 'number',
+//         width: 200,
+//         editable: true,
+//     },
+// ];
 const ExcelToCSV = () => {
 
-
     // Code for Drop Box Start
-
-
-
-
 
     // const {
     //     getRootProps,
@@ -85,7 +95,8 @@ const ExcelToCSV = () => {
 
     // Code for convert csv to json 
     const [array, setArray] = useState([]);
-    const [csvFile, setCsvFile] = useState([]);
+    const [listName, setListName] = useState('');
+    const [listText, setListText] = useState('');
     const fileReader = new FileReader();
 
 
@@ -121,25 +132,19 @@ const ExcelToCSV = () => {
             }, {});
             return obj;
         });
-        console.log(array)
+        setArray(array)
     };
+    const ListName = (e) => {
+        setListName(e.target.value)
+    }
+    const ListText = (e) => {
+        setListText(e.target.value)
+    }
+    const NewListMake = (e) => {
+        e.preventDefault()
+        console.log({ listName, listText, array });
+    }
 
-    const columns = [
-        { field: 'id', headerName: 'ID', width: 100 },
-        {
-            field: 'name',
-            headerName: 'Name',
-            width: 150,
-            editable: true,
-        },
-        {
-            field: 'number',
-            headerName: 'Number',
-            type: 'number',
-            width: 200,
-            editable: true,
-        },
-    ];
 
     // const listData = {
     //     _id:'dashdjashaa23124',
@@ -154,30 +159,30 @@ const ExcelToCSV = () => {
 
 
 
-    useEffect(() => {
-        fetch("http://localhost:4000/csvList", {
-            method: "POST",
-            headers: {
-                "content-type": "application/json",
-            },
-            body: JSON.stringify(array),
-        })
-            .then((res) => res.json())
-            .then(data => {
-                console.log(data);
-                console.log('data has gone')
-            })
-    }, [array])
+    // useEffect(() => {
+    //     fetch("http://localhost:4000/csvList", {
+    //         method: "POST",
+    //         headers: {
+    //             "content-type": "application/json",
+    //         },
+    //         body: JSON.stringify(array),
+    //     })
+    //         .then((res) => res.json())
+    //         .then(data => {
+    //             console.log(data);
+    //             console.log('data has gone')
+    //         })
+    // }, [array])
 
-    console.log(array)
-    useEffect(() => {
-        fetch('http://localhost:4000/csvList')
-            .then(res => res.json())
-            .then(data => setCsvFile(data))
-    }, [])
+    // console.log(array)
+    // useEffect(() => {
+    //     fetch('http://localhost:4000/csvList')
+    //         .then(res => res.json())
+    //         .then(data => setCsvFile(data))
+    // }, [])
 
     return (
-        <div className='excelToCSVContainer'>
+        <div className="excelToCSVContainer">
 
             {/* Drop Box Code Start here*/}
 
@@ -195,28 +200,33 @@ const ExcelToCSV = () => {
 
 
             {/* Drop Box Code End */}
-            <h1 >Upload Your excel File </h1>
+            <div className='d-flex flex-column align-items-center'  >
+                <h1>Upload Your excel File </h1>
 
-            <form>
-                <div className='d-flex  '>
-                    <label className='me-5'>Name :</label>
-                    <input type="text" placeholder='List name' />
-                </div>
-                <div className='d-flex  '>
-                    <label className='me-5'>Description :</label>
-                    <textarea name="listDescription" cols="50" rows="5"></textarea>
-                </div>
-                <div className='d-flex flex-row m-5'>
-                    <h6 className='me-5'>Upload File (CSV) :</h6>
-                    <input
-                        type={"file"}
-                        id={"csvFileInput"}
-                        accept={".csv"}
-                        onChange={handleOnChange}
-                    />
-                </div>
-
-            </form>
+                <form onSubmit={NewListMake}>
+                    <div className='d-flex  '>
+                        <label className='me-5'>Name :</label>
+                        <input required onBlur={ListName} type="text" placeholder='List name' />
+                    </div>
+                    <div className='d-flex  '>
+                        <label className='me-5'>Description :</label>
+                        <textarea onBlur={ListText} name="listDescription" cols="50" rows="5"></textarea>
+                    </div>
+                    <div className='d-flex flex-row mt-5'>
+                        <h6 className='me-5'>Upload File (CSV) :</h6>
+                        <input
+                            required
+                            type={"file"}
+                            id={"csvFileInput"}
+                            accept={".csv"}
+                            onChange={handleOnChange}
+                        />
+                    </div>
+                    <div className='text-center'> 
+                        <button type='submit' className="makeListBtn m-5">Create</button>
+                    </div>
+                </form>
+            </div>
 
             <br />
 
