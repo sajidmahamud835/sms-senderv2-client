@@ -155,3 +155,41 @@ export const SubscriptionsRows = [
     limit: 1000,
   },
 ];
+
+export const AllListRows = [
+  {
+    id: 0,
+    name: "List 1",
+    number: 123,
+    Ref: 'Field',
+    campaign: "false"
+  },
+  {
+    id: 1,
+    name: "List 2",
+    number: 123,
+    Ref: 'home',
+    campaign: "true"
+  },
+  {
+    id: 2,
+    name: "List 3",
+    number: 123,
+    Ref: 'Sales',
+    campaign: "true"
+  },
+  {
+    id: 4,
+    name: "List 4",
+    number: 123,
+    Ref: 'Field',
+    campaign: "true"
+  },
+  {
+    id: 5,
+    name: "List 5",
+    number: 123,
+    Ref: 'Field',
+    campaign: "true"
+  },
+];

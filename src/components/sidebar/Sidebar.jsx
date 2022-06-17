@@ -12,7 +12,7 @@ import {
   WorkOutline,
   Settings,
 } from "@material-ui/icons";
-import UploadFileIcon from '@mui/icons-material/UploadFile';
+import ViewListIcon from '@mui/icons-material/ViewList';
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import UseFirebase from '../../Hooks/UseFirebase';
@@ -72,10 +72,10 @@ const Sidebar = () => {
                   Manage Subscriptions
                 </li>
               </Link>
-              <Link to="/excel-to-csv" className="link">
+              <Link to="/all-lists" className="link">
                 <li onClick={(e) => makeActive('reports')} id="reports" className="sidebarListItem">
-                  <UploadFileIcon className="sidebarIcon" />
-                  Upload List
+                  <ViewListIcon className="sidebarIcon" />
+                  Uploaded List
                 </li>
               </Link>
               <Link to="/reports" className="link">

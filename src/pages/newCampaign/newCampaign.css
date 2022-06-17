@@ -1,9 +1,28 @@
 .newCampaign {
   flex: 4;
+  display: flex;
+  justify-content: center;
+  ;
 }
 
+ 
+
+.inputContainer {
+  display: flex;
+  flex-direction: row;
+}
+
+.addCampaignButton {}
+
+/* .newCampaign {
+  flex: 4;
+  display: flex;
+  justify-content: center;
+  ;
+}
+ 
 .addCampaignForm {
-  margin-top: 10px;
+  margin-top: 100px;
 }
 
 .addCampaignItem {
@@ -38,4 +57,4 @@
   color: white;
   font-weight: 600;
   cursor: pointer;
-}
+} */

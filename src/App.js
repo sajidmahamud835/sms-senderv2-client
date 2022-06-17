@@ -25,6 +25,8 @@ import AdminRoute from "./PrivateRoute/AdminRoute/AdminRoute";
 import ManageAPI from "./pages/ManageAPI/ManageAPI";
 import ApiAnalytics from "./pages/ApiAnalytics/ApiAnalytics";
 import EditSubscriptions from "./pages/EditSubscriptions/EditSubscriptions";
+import AllList from "./pages/AllList/AllList";
+import EditAllList from "./components/EditAllList/EditAllList";
 
 function App() {
   return (
@@ -38,6 +40,8 @@ function App() {
         <Route path="/users" element={<UserList />}></Route>
         <Route path="/sms" element={<Sms />}></Route>
         <Route path="/excel-to-csv" element={<ExcelToCSV />}></Route>
+        <Route path="/all-lists" element={<AllList />}></Route>
+        <Route path="/edit-all-lists/:Id" element={<EditAllList />}></Route>
         <Route path="/user/:userId" element={<User />}></Route>
         <Route path="/newUser" element={<NewUser />}></Route>
         <Route path="/campaigns" element={<CampaignList />}></Route>

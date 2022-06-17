@@ -121,24 +121,6 @@ const ExcelToCSV = () => {
             return obj;
         });
         console.log(array)
-
-
-
-
-
-
-
-        // const function4Chacking = (e) => {
-        //     console.log(e.name);
-        //     if (e.number === '') {
-        //         console.log('a number is not available');
-        //     }
-        //     else {
-        //         console.log(array);
-        //         setArray(array);
-        //     }
-        // }
-        // const chacking = array.map(ar => function4Chacking(ar))
     };
 
     const columns = [
@@ -157,7 +139,19 @@ const ExcelToCSV = () => {
             editable: true,
         },
     ];
-    // const headerKeys = Object.keys(Object.assign({}, ...array));
+    
+    // const listData = {
+    //     _id:'dashdjashaa23124',
+    //     listName: 'listName',
+    //     description: "description",
+
+    // }
+    // const updatedListData = {
+    //     ...listData,
+    //     listNumbers: array
+    // }
+
+
 
     useEffect(() => {
         fetch("http://localhost:4000/csvList", {
@@ -201,26 +195,39 @@ const ExcelToCSV = () => {
 
             {/* Drop Box Code End */}
             <h1>Upload Your excel File </h1>
+
             <form>
-                <input
-                    type={"file"}
-                    id={"csvFileInput"}
-                    accept={".csv"}
-                    onChange={handleOnChange}
-                />
+                <div className='d-flex  '>
+                    <label className='me-5'>Name :</label>
+                    <input type="text" placeholder='List name' />
+                </div>
+                <div className='d-flex  '>
+                    <label className='me-5'>Description :</label>
+                    <textarea name="listDescription" cols="50" rows="5"></textarea>
+                </div>
+                <div className='d-flex flex-row m-5'>
+                    <h6 className='me-5'>Upload File (CSV) :</h6>
+                    <input
+                        type={"file"}
+                        id={"csvFileInput"}
+                        accept={".csv"}
+                        onChange={handleOnChange}
+                    />
+                </div>
+
             </form>
 
             <br />
 
 
-            <DataGrid
+            {/* <DataGrid
                 rows={csvFile}
                 columns={columns}
                 pageSize={20}
                 rowsPerPageOptions={[25]}
                 checkboxSelection
                 disableSelectionOnClick
-            />
+            /> */}
         </div>
     );
 };

@@ -58,11 +58,11 @@ const NewUser = () => {
           <label>Gender</label>
           <div className="newUserGender">
             <input type="radio" name="gender" id="male" value="male" disabled />
-            <label for="male">Male</label>
+            <label htmlFor="male">Male</label>
             <input type="radio" name="gender" id="female" value="female" disabled />
-            <label for="female">Female</label>
+            <label htmlFor="female">Female</label>
             <input type="radio" name="gender" id="other" value="other" disabled />
-            <label for="other">Other</label>
+            <label htmlFor="other">Other</label>
           </div>
         </div>
         <div className="newUserItem">

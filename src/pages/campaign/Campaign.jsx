@@ -54,6 +54,8 @@ const Campaign = () => {
                     </div>
                 </div>
             </div>
+            <button className="addCampaignButton m-5">Stop</button>
+            <button className="addCampaignButton m-5">Pause</button>
         </div>
     );
 };
