@@ -72,10 +72,10 @@ const Sidebar = () => {
                   Manage Subscriptions
                 </li>
               </Link>
-              <Link to="/all-lists" className="link">
+              <Link to="/excel-to-csv" className="link">
                 <li onClick={(e) => makeActive('reports')} id="reports" className="sidebarListItem">
                   <ViewListIcon className="sidebarIcon" />
-                  Uploaded List
+                  Upload List
                 </li>
               </Link>
               <Link to="/reports" className="link">

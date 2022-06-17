@@ -1,6 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { DataGrid } from "@material-ui/data-grid";
 import { useEffect } from 'react';
+import './ExcelToCSV.css'
 // import { useDropzone } from 'react-dropzone'
 
 // Drop box Style Start
@@ -139,7 +140,7 @@ const ExcelToCSV = () => {
             editable: true,
         },
     ];
-    
+
     // const listData = {
     //     _id:'dashdjashaa23124',
     //     listName: 'listName',
@@ -176,7 +177,7 @@ const ExcelToCSV = () => {
     }, [])
 
     return (
-        <div style={{ textAlign: "center" }} className="newCampaign">
+        <div className='excelToCSVContainer'>
 
             {/* Drop Box Code Start here*/}
 
@@ -194,7 +195,7 @@ const ExcelToCSV = () => {
 
 
             {/* Drop Box Code End */}
-            <h1>Upload Your excel File </h1>
+            <h1 >Upload Your excel File </h1>
 
             <form>
                 <div className='d-flex  '>
