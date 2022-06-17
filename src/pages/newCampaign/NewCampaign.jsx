@@ -10,6 +10,7 @@ const NewCampaign = () => {
   const [endTime, setEndTime] = useState()
   const [startDate, setStartDate] = useState()
   const [endDate, setEndDate] = useState()
+  const [status, setStatus] = useState()
   const [number, setNumber] = useState()
   const [myNumbers, setMyNumbers] = useState([
     "+19034204596", "+19785813348"
@@ -36,12 +37,40 @@ const NewCampaign = () => {
   const EndDate = (e) => {
     setEndDate(e.target.value);
   }
-  const saveDraft = (e) => {
+  const SavedDraft = (e) => {
+    setStatus('SavedDraft')
+  }
+  const ScheduleCampaign = (e) => {
+    setStatus('ScheduleCampaign')
+  }
+  const fromSubmit = (e) => {
     e.preventDefault();
     const DraftData = {
-      nameInputData, number, optionInputData, campaignMsg, startTimeInput, endTime, startDate, endDate
+      nameInputData,
+      number,
+      optionInputData,
+      campaignMsg,
+      startTimeInput,
+      endTime,
+      startDate,
+      endDate,
+      status,
     }
+
+
+
+
+
+
+
+
     console.log(DraftData);
+
+
+
+
+
+
 
   }
   const handleSender = (e) => {
@@ -49,15 +78,15 @@ const NewCampaign = () => {
   };
   return (
     <div className="newCampaign">
-      <form className="addCampaignForm">
+      <form onSubmit={fromSubmit} className="addCampaignForm">
         <h1 >Create A Campaign</h1>
-        <div className="addCampaignItem">
+        <div className="addCampaignItem d-flex justify-content-between align-items-center my-3">
           <label htmlFor="lists">Name :</label>
-          <input onBlur={campaignName} type="text" placeholder="Campaign Name" />
+          <input required onBlur={campaignName} type="text" placeholder="Campaign Name" />
         </div>
 
         <div className="d-flex justify-content-between align-items-center my-3">
-          <label htmlhtmlFor="receiver" className="w-50">From:</label>
+          <label htmlFor="receiver" className="w-50">From:</label>
           <select
             id="receiver"
             className="ms-3 ps-2 form-control w-full"
@@ -86,27 +115,27 @@ const NewCampaign = () => {
         </div>
         <div className="inputContainer d-flex justify-content-between align-items-center my-3">
           <div>
-            <label  >Start Time</label>
-            <input onBlur={StartTime} type="time" name="startTime" />
+            <label className="px-3">Start Time</label>
+            <input required onBlur={StartTime} type="time" name="startTime" />
           </div>
           <div>
-            <label >End Time</label>
-            <input onBlur={EndTime} type="time" name="endTime" />
+            <label className="px-3" >End Time</label>
+            <input required onBlur={EndTime} type="time" name="endTime" />
           </div>
 
         </div>
         <div className="inputContainer d-flex justify-content-between align-items-center my-3">
           <div  >
-            <label  >Start Date</label>
-            <input onBlur={StartDate} type="date" name="starDate" />
+            <label className="px-3" >Start Date</label>
+            <input required onBlur={StartDate} type="date" name="starDate" />
           </div>
           <div >
-            <label >End Date</label>
-            <input onBlur={EndDate} type="date" name="endDate" />
+            <label className="px-3" >End Date</label>
+            <input required onBlur={EndDate} type="date" name="endDate" />
           </div>
         </div>
-        <button onClick={saveDraft} className="addCampaignButton m-5">Save as Draft</button>
-        <button className="addCampaignButton m-5">Schedule Campaign</button>
+        <button type="submit" onClick={SavedDraft} className="addCampaignButton m-5">Save as Draft</button>
+        <button type="submit" onClick={ScheduleCampaign} className="addCampaignButton m-5">Schedule Campaign</button>
       </form >
     </div >
   );

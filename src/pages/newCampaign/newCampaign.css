@@ -5,49 +5,6 @@
   ;
 }
 
- 
-
-.inputContainer {
-  display: flex;
-  flex-direction: row;
-}
-
-.addCampaignButton {}
-
-/* .newCampaign {
-  flex: 4;
-  display: flex;
-  justify-content: center;
-  ;
-}
- 
-.addCampaignForm {
-  margin-top: 100px;
-}
-
-.addCampaignItem {
-  width: 250px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  margin-bottom: 10px;
-  margin-top: 20px;
-}
-
-.addCampaignItem>label {
-  color: gray;
-  font-weight: 600;
-  margin-bottom: 10px;
-}
-
-.addCampaignItem>input {
-  padding: 10px;
-}
-
-.addCampaignItem>select {
-  padding: 10px;
-}
-
 .addCampaignButton {
   margin-top: 10px;
   padding: 7px 10px;
@@ -57,4 +14,5 @@
   color: white;
   font-weight: 600;
   cursor: pointer;
-} */
+}
+ 
