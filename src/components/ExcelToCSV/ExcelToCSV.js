@@ -1,9 +1,7 @@
-import React, { useState, useMemo } from 'react';
-import { DataGrid } from "@material-ui/data-grid";
-import { useEffect } from 'react';
-import './ExcelToCSV.css'
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import UseFirebase from '../../Hooks/UseFirebase';
+import './ExcelToCSV.css';
 
 // const columns = [
 //     { field: 'id', headerName: 'ID', width: 100 },
@@ -66,21 +64,37 @@ const ExcelToCSV = () => {
         });
         setArray(array)
     };
+
     const ListName = (e) => {
         setListName(e.target.value)
     }
+
     const ListText = (e) => {
         setListText(e.target.value)
     }
+
     const NewListMake = (e) => {
         e.preventDefault()
-        const email = user.email
-        console.log({ listName, email, listText, array });
+        const email = user.email;
+        const listData = { listName, email, listText, array };
+
+        const url = `http://localhost:4000/upload-excel-file`;
+        fetch(url, {
+            method: "POST",
+            headers: {
+                "content-type": "application/json",
+            },
+            body: JSON.stringify(listData)
+        })
+            .then(res=>res.json())
+            .then(data=> console.log(data, "data gone"))
     }
+
+
     const GoTOAllLIst = () => {
         navigate('/all-lists')
     }
-
+    
 
     // const listData = {
     //     _id:'dashdjashaa23124',
