@@ -12,6 +12,7 @@ const TopBar = () => {
     const { user, logOut } = UseFirebase()
     const [anchorEl, setAnchorEl] = React.useState(null);
     // const [userName, setUserName] = React.useState("Admin")
+    // open
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
