@@ -71,7 +71,7 @@ const EditAllList = () => {
             <Container className="d-block">
                 <h3 >Name :  <b>{listData?.listName}</b></h3>
                 <h5>Details :  <b>{listData?.listText}</b></h5>
-                {/* <h5>Total Number :  <b>{listData?.array.length}</b></h5> */}
+                <h5>Total Number :  <b>{rowData.length}</b></h5>
             </Container>
             <Container className="d-block">
                 <DataGrid
