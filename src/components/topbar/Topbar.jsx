@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
-import './topbar.css'
+import './TopBar.css'
 import { NotificationsNone, Settings } from "@material-ui/icons";
 import { Link, useNavigate } from "react-router-dom";
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import { Avatar, MenuItem } from '@mui/material';
-import Menu from '@mui/material/Menu';
+import Menu from '@mui/material/Menu';      
 import UseFirebase from '../../Hooks/UseFirebase';
 
 const TopBar = () => {
