@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import UseFirebase from '../../Hooks/UseFirebase';
 import './ExcelToCSV.css';
+import swal from 'sweetalert';
 
 // const columns = [
 //     { field: 'id', headerName: 'ID', width: 100 },
@@ -86,15 +87,42 @@ const ExcelToCSV = () => {
             },
             body: JSON.stringify(listData)
         })
-            .then(res=>res.json())
-            .then(data=> console.log(data, "data gone"))
+            .then(res => res.json())
+            .then(data => {
+
+                if (data?.insertedId) {
+                    swal({
+                        title: "Are you sure?",
+                        icon: "warning",
+                        buttons: true,
+                        dangerMode: true,
+                    })
+                        .then((willAdd) => {
+                            if (willAdd) {
+                                swal("List is added", {
+                                    icon: "success",
+                                });
+                                navigate('/all-lists')
+                            } else {
+                                swal("Your imaginary file is safe!");
+                            }
+                        });
+                }
+
+                // if (data?.insertedId) {
+                //     swal("Good job!", "You clicked the button!", "success");
+                //     navigate('/all-lists')
+
+
+                // }
+            })
     }
 
 
     const GoTOAllLIst = () => {
         navigate('/all-lists')
     }
-    
+
 
     // const listData = {
     //     _id:'dashdjashaa23124',

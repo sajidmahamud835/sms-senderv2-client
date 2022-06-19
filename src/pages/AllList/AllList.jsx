@@ -1,49 +1,94 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './AllList.css'
 import { DataGrid } from "@material-ui/data-grid";
 import { DeleteOutline } from "@material-ui/icons";
 import UploadFileIcon from '@mui/icons-material/UploadFile';
 import { Link } from 'react-router-dom';
-import { AllListRows } from '../../dummyData';
+import swal from 'sweetalert';
 const AllList = () => {
-    const [data, setData] = useState(AllListRows);
-    console.log(data)
+    const [allList, setAllList] = useState([]);
+    const [rowDatas, setRowDatas] = useState([]);
     const handleDelete = (id) => {
-        setData(data.filter((item) => item.id !== id));
+        if (id) {
+            swal({
+                title: "Are you sure?",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+                .then((willAdd) => {
+                    if (willAdd) {
+                        const url = `http://localhost:4000/delete-excel-file/${id}`
+                        fetch(url, {
+                            method: 'DELETE'
+                        })
+                            .then(res => res.json())
+                            .then(data => {
+                                if (data.deletedCount > 0) {
+                                    swal("List is Deleted", {
+                                        icon: "success",
+                                    });
+                                    setRowDatas(rowDatas.filter((item) => item._id !== id));
+
+                                }
+                            });
+                    } else {
+                        swal("Sorry Some Error occurs!");
+                    }
+                });
+        }
+
+
     };
+    useEffect(() => {
+        fetch('http://localhost:4000/upload-excel-file')
+            .then(res => res.json())
+            .then(data => setAllList(data))
+    }, [])
+
+    useEffect(() => {
+        let id = 0;
+        const araya = []
+        allList.map(list => {
+            const newList = { ...list, id: id }
+            id++;
+            araya.push(newList)
+            return 0
+        })
+        setRowDatas(araya);
+
+    }, [allList])
+
 
     const columns = [
-        // {
-        //   field: "id",
-        //   headerName: "ID",
-        //   width: 100
-        // },
         {
-            field: "name",
-            headerName: "Lists Name",
+            field: "id",
+            headerName: "ID",
+            width: 100
+        },
+        {
+            field: "listName",
+            headerName: "Name",
             width: 250,
             renderCell: (params) => {
                 return (
                     <div className="campaignListItem">
-                        {params.row.name}
+                        {params.row.listName}
                     </div>
                 );
             },
         },
         {
-            field: "number",
+            field: "array",
             headerName: "Total Number",
-            width: 200
-        },
-        {
-            field: "Ref",
-            headerName: "Reference",
-            width: 150,
-        },
-        {
-            field: "campaign",
-            headerName: "Campaign",
-            width: 160,
+            width: 200,
+            renderCell: (params) => {
+                return (
+                    <div className="campaignListItem">
+                        {params.row.array.length}
+                    </div>
+                );
+            },
         },
         {
             field: "action",
@@ -52,18 +97,30 @@ const AllList = () => {
             renderCell: (params) => {
                 return (
                     <div>
-                        <Link to={"/edit-all-lists/" + params.row.id}>
+                        <Link to={"/edit-all-lists/" + params.row._id}>
                             <button className="campaignListEdit">Edit</button>
                         </Link>
+                    </div>
+                );
+            },
+        },
+        {
+            field: "action Delete",
+            headerName: "Action",
+            width: 150,
+            renderCell: (params) => {
+                return (
+                    <div>
                         <DeleteOutline
                             className="campaignListDelete"
-                            onClick={() => handleDelete(params.row.id)}
+                            onClick={() => handleDelete(params.row._id)}
                         />
                     </div>
                 );
             },
         },
     ];
+    console.log(rowDatas)
     return (
         <div className=' allListContainer'>
             <div className="campaignTitleContainer">
@@ -73,13 +130,13 @@ const AllList = () => {
                 </Link>
             </div>
             <DataGrid
-                rows={data}
+                rows={rowDatas}
                 disableSelectionOnClick
                 columns={columns}
                 pageSize={8}
                 checkboxSelection
             />
-        </div>
+        </div >
     );
 };
 

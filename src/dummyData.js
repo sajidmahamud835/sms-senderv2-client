@@ -177,19 +177,5 @@ export const AllListRows = [
     number: 123,
     Ref: 'Sales',
     campaign: "true"
-  },
-  {
-    id: 4,
-    name: "List 4",
-    number: 123,
-    Ref: 'Field',
-    campaign: "true"
-  },
-  {
-    id: 5,
-    name: "List 5",
-    number: 123,
-    Ref: 'Field',
-    campaign: "true"
-  },
+  }
 ];
