@@ -4,15 +4,41 @@ import { DataGrid } from "@material-ui/data-grid";
 import { DeleteOutline } from "@material-ui/icons";
 import UploadFileIcon from '@mui/icons-material/UploadFile';
 import { Link } from 'react-router-dom';
-import { AllListRows } from '../../dummyData';
+import swal from 'sweetalert';
 const AllList = () => {
-    const [data, setData] = useState(AllListRows);
     const [allList, setAllList] = useState([]);
     const [rowDatas, setRowDatas] = useState([]);
-    // console.log(data)
-    console.log(allList)
     const handleDelete = (id) => {
-        setData(data.filter((item) => item.id !== id));
+        if (id) {
+            swal({
+                title: "Are you sure?",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+                .then((willAdd) => {
+                    if (willAdd) {
+                        const url = `http://localhost:4000/delete-excel-file/${id}`
+                        fetch(url, {
+                            method: 'DELETE'
+                        })
+                            .then(res => res.json())
+                            .then(data => {
+                                if (data.deletedCount > 0) {
+                                    swal("List is Deleted", {
+                                        icon: "success",
+                                    });
+                                    setRowDatas(rowDatas.filter((item) => item._id !== id));
+
+                                }
+                            });
+                    } else {
+                        swal("Sorry Some Error occurs!");
+                    }
+                });
+        }
+
+
     };
     useEffect(() => {
         fetch('http://localhost:4000/upload-excel-file')
@@ -24,13 +50,9 @@ const AllList = () => {
         let id = 0;
         const araya = []
         allList.map(list => {
-            // console.log(list) 
             const newList = { ...list, id: id }
             id++;
             araya.push(newList)
-
-
-            // setRowDatas([...rowDatas, newList]);
             return 0
         })
         setRowDatas(araya);
@@ -75,18 +97,30 @@ const AllList = () => {
             renderCell: (params) => {
                 return (
                     <div>
-                        <Link to={"/edit-all-lists/" + params.row.id}>
+                        <Link to={"/edit-all-lists/" + params.row._id}>
                             <button className="campaignListEdit">Edit</button>
                         </Link>
+                    </div>
+                );
+            },
+        },
+        {
+            field: "action Delete",
+            headerName: "Action",
+            width: 150,
+            renderCell: (params) => {
+                return (
+                    <div>
                         <DeleteOutline
                             className="campaignListDelete"
-                            onClick={() => handleDelete(params.row.id)}
+                            onClick={() => handleDelete(params.row._id)}
                         />
                     </div>
                 );
             },
         },
     ];
+    console.log(rowDatas)
     return (
         <div className=' allListContainer'>
             <div className="campaignTitleContainer">
