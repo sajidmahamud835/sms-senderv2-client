@@ -1,13 +1,18 @@
-import React, { useEffect, useState } from 'react';
-import './AllList.css'
 import { DataGrid } from "@material-ui/data-grid";
 import { DeleteOutline } from "@material-ui/icons";
 import UploadFileIcon from '@mui/icons-material/UploadFile';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import swal from 'sweetalert';
+import UseFirebase from "../../Hooks/UseFirebase";
+import './AllList.css';
+
 const AllList = () => {
     const [allList, setAllList] = useState([]);
     const [rowDatas, setRowDatas] = useState([]);
+    const { user } = UseFirebase();
+    console.log(user?.email)
+
     const handleDelete = (id) => {
         if (id) {
             swal({
@@ -41,7 +46,7 @@ const AllList = () => {
 
     };
     useEffect(() => {
-        fetch('http://localhost:4000/upload-excel-file')
+        fetch(`http://localhost:4000/upload-excel-file?email=${user?.email}`)
             .then(res => res.json())
             .then(data => setAllList(data))
     }, [])
