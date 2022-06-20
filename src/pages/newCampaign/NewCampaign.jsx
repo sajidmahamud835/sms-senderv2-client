@@ -4,7 +4,7 @@ import "./newCampaign.css";
 
 const NewCampaign = () => {
 	const { user } = UseFirebase();
-	const [nameInputData, setNameInputData] = useState();
+	const [name, setNameInputData] = useState();
 	const [optionInputData, setOptionInputData] = useState();
 	const [campaignMsg, setCampaignNote] = useState();
 	const [startTimeInput, setStartTime] = useState();
@@ -64,7 +64,7 @@ const NewCampaign = () => {
 	const fromSubmit = (e) => {
 		e.preventDefault();
 		const DraftData = {
-			nameInputData,
+			name,
 			number,
 			optionInputData,
 			campaignMsg,
@@ -97,7 +97,7 @@ const NewCampaign = () => {
 		<div className="newCampaign">
 			<form onSubmit={fromSubmit} className="addCampaignForm">
 				<h1>Create A Campaign</h1>
-				<div className="addCampaignItem d-flex justify-content-between align-items-center my-3">
+				<div className="addCampaignItem align-items-center my-3">
 					<label htmlFor="lists">Name :</label>
 					<input
 						required
@@ -108,7 +108,7 @@ const NewCampaign = () => {
 				</div>
 
 				<div className="d-flex justify-content-between align-items-center my-3">
-					<label htmlFor="receiver" className="w-50">
+					<label htmlFor="receiver" className="w-25">
 						From:
 					</label>
 					<select
@@ -123,9 +123,9 @@ const NewCampaign = () => {
 						))}
 					</select>
 				</div>
-				<div className="addCampaignItem d-flex justify-content-between align-items-center my-3">
+				<div className="addCampaignItem my-3">
 					<label htmlFor="lists">Contact List :</label>
-					<select name="lists" onBlur={OptionList} id="cars">
+					<select name="lists" onBlur={OptionList} id="cars" className="  mx-3">
 						{numberList.map((numberListData) => (
 							<option key={numberListData._id} value={numberListData._id}>
 								{numberListData.listName}
@@ -133,30 +133,31 @@ const NewCampaign = () => {
 						))}
 					</select>
 				</div>
-				<div className="addCampaignItem d-flex justify-content-between align-items-center my-3">
-					<label>Message</label>
+				<div className="addCampaignItem  my-3">
+					<label className="d-block py-3">Message :</label>
 					<textarea
+						rows="4" cols="50"
 						onBlur={campaignNote}
 						placeholder="Notes about campaign ....."
 					></textarea>
 				</div>
 				<div className="inputContainer d-flex justify-content-between align-items-center my-3">
 					<div>
-						<label className="px-3">Start Time</label>
+						<label className="pe-3">Start Time</label>
 						<input required onBlur={StartTime} type="time" name="startTime" />
 					</div>
 					<div>
-						<label className="px-3">End Time</label>
+						<label className="pe-3">End Time</label>
 						<input required onBlur={EndTime} type="time" name="endTime" />
 					</div>
 				</div>
 				<div className="inputContainer d-flex justify-content-between align-items-center my-3">
 					<div>
-						<label className="px-3">Start Date</label>
+						<label className="pe-3">Start Date</label>
 						<input required onBlur={StartDate} type="date" name="starDate" />
 					</div>
 					<div>
-						<label className="px-3">End Date</label>
+						<label className="pe-3">End Date</label>
 						<input required onBlur={EndDate} type="date" name="endDate" />
 					</div>
 				</div>

@@ -52,15 +52,15 @@ const AllList = () => {
     }, [user?.email])
 
     useEffect(() => {
-        let id = 0;
-        const araya = []
+        let id = 1;
+        const initialArray = []
         allList.map(list => {
             const newList = { ...list, id: id }
             id++;
-            araya.push(newList)
+            initialArray.push(newList)
             return 0
         })
-        setRowDatas(araya);
+        setRowDatas(initialArray);
 
     }, [allList])
 
