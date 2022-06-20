@@ -102,56 +102,13 @@ const ExcelToCSV = () => {
                             }
                         });
                 }
-
-                // if (data?.insertedId) {
-                //     swal("Good job!", "You clicked the button!", "success");
-                //     navigate('/all-lists')
-
-
-                // }
             })
     }
 
 
     const GoTOAllLIst = () => {
         navigate('/all-lists')
-    }
-
-
-    // const listData = {
-    //     _id:'dashdjashaa23124',
-    //     listName: 'listName',
-    //     description: "description",
-
-    // }
-    // const updatedListData = {
-    //     ...listData,
-    //     listNumbers: array
-    // }
-
-
-
-    // useEffect(() => {
-    //     fetch("http://localhost:4000/csvList", {
-    //         method: "POST",
-    //         headers: {
-    //             "content-type": "application/json",
-    //         },
-    //         body: JSON.stringify(array),
-    //     })
-    //         .then((res) => res.json())
-    //         .then(data => {
-    //             console.log(data);
-    //             console.log('data has gone')
-    //         })
-    // }, [array])
-
-    // console.log(array)
-    // useEffect(() => {
-    //     fetch('http://localhost:4000/csvList')
-    //         .then(res => res.json())
-    //         .then(data => setCsvFile(data))
-    // }, [])
+    } 
 
     return (
         <div className="excelToCSVContainer">

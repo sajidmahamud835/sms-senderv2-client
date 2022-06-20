@@ -120,7 +120,7 @@ const CampaignList = () => {
       renderCell: (params) => {
         return (
           <div>
-            <Link to={"/campaign/" + params.row.id}>
+            <Link to={"/campaign/" + params.row._id}>
               <button className="campaignListEdit">Details</button>
             </Link>
             <DeleteOutline

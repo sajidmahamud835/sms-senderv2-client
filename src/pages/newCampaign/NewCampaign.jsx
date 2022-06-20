@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import UseFirebase from "../../Hooks/UseFirebase";
 import "./newCampaign.css";
+import swal from 'sweetalert';
+import { useNavigate } from 'react-router-dom';
 
 const NewCampaign = () => {
 	const { user } = UseFirebase();
@@ -15,7 +17,7 @@ const NewCampaign = () => {
 	const [number, setNumber] = useState();
 	const [myNumbers, setMyNumbers] = useState(["+19034204596", "+19785813348"]);
 	const [numberList, setNumberList] = useState([]);
-
+	const navigate = useNavigate()
 	useEffect(() => {
 		const url = `http://localhost:4000/upload-excel-file?email=${user?.email}`;
 		fetch(url)
@@ -74,18 +76,36 @@ const NewCampaign = () => {
 			endDate,
 			status,
 		};
+		if (e) {
+			swal({
+				title: "Are you sure?",
+				icon: "warning",
+				buttons: true,
+				dangerMode: true,
+			})
+				.then((willAdd) => {
+					if (willAdd) {
+						const url = `http://localhost:4000/campaign-list`;
+						fetch(url, {
+							method: "POST",
+							headers: {
+								"content-type": "application/json",
+							},
+							body: JSON.stringify(DraftData),
+						})
+							.then((res) => res.json())
+							.then((data) => {
+								swal("Campaign is added", {
+									icon: "success"
+								})
+								navigate('/campaigns')
+							});
 
-		const url = `http://localhost:4000/campaign-list`;
-		fetch(url, {
-			method: "POST",
-			headers: {
-				"content-type": "application/json",
-			},
-			body: JSON.stringify(DraftData),
-		})
-			.then((res) => res.json())
-			.then((data) => console.log(data, "data gone"));
-
+					} else {
+						swal(" Some Error Occurs!");
+					}
+				});
+		}
 		console.log(DraftData);
 	};
 
@@ -171,7 +191,7 @@ const NewCampaign = () => {
 				<button
 					type="submit"
 					onClick={ScheduleCampaign}
-					className="addCampaignButton m-5"
+					className="addCampaignButton2 m-5"
 				>
 					Schedule Campaign
 				</button>
