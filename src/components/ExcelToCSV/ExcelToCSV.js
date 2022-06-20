@@ -46,26 +46,20 @@ const ExcelToCSV = () => {
 
 
     const csvFileToArray = string => {
-        const csvHeader = string.slice(0, string.indexOf("\n")).split(",");
+        const csvHeader = string.slice(0, string.indexOf("\r\n")).split(",");
         const csvRows = string.slice(string.indexOf("\n") + 1).split("\r\n");
-
-        // console.log(csvRows);
-
-        const array = csvRows.map(i => {
+        const CSVArray = csvRows.map(i => {
             const values = i.split(",");
-            // console.log(values);
             const obj = csvHeader.reduce((object, header, index) => {
+
                 object[header] = values[index];
-                // I need to add index but here is no option to get add index
-                // let x = Math.random();
-                // object["id"] = x;
                 return object;
             }, {});
+
             return obj;
         });
-        setArray(array)
+        setArray(CSVArray)
     };
-
     const ListName = (e) => {
         setListName(e.target.value)
     }
