@@ -27,6 +27,7 @@ import ApiAnalytics from "./pages/ApiAnalytics/ApiAnalytics";
 import EditSubscriptions from "./pages/EditSubscriptions/EditSubscriptions";
 import AllList from "./pages/AllList/AllList";
 import EditAllList from "./components/EditAllList/EditAllList";
+import EditAllList02 from "./components/EditAllList02/EditAllList02";
 
 function App() {
   return (
@@ -41,7 +42,8 @@ function App() {
         <Route path="/sms" element={<Sms />}></Route>
         <Route path="/excel-to-csv" element={<ExcelToCSV />}></Route>
         <Route path="/all-lists" element={<AllList />}></Route>
-        <Route path="/edit-all-lists/:Id" element={<EditAllList />}></Route>
+        {/* <Route path="/edit-all-lists/:Id" element={<EditAllList />}></Route> */}
+        <Route path="/edit-all-lists/:Id" element={<EditAllList02 />}></Route>
         <Route path="/user/:userId" element={<User />}></Route>
         <Route path="/newUser" element={<NewUser />}></Route>
         <Route path="/campaigns" element={<CampaignList />}></Route>

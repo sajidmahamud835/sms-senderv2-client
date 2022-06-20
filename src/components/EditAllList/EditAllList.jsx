@@ -1,11 +1,11 @@
-import React, { useEffect } from 'react';
-import { useState } from 'react';
+import { DataGrid } from "@material-ui/data-grid";
+import { useEffect, useState } from 'react';
 import { Container } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
-import { DataGrid } from "@material-ui/data-grid";
-import './EditAllList.css'
+import './EditAllList.css';
 import { DeleteOutline } from "@material-ui/icons";
 import { Link } from 'react-router-dom';
+
 const EditAllList = () => {
     let { Id } = useParams();
     const [listData, setListData] = useState({})
@@ -27,6 +27,7 @@ const EditAllList = () => {
     }, [listData])
 
     console.log(rowData);
+
     const columns = [
         {
             field: "id",
