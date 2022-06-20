@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import Sidebar from '../../components/sidebar/Sidebar';
-import TopBar from '../../components/topBar/TopBar';
+import TopBar from '../../components/topbar/Topbar';
 import UseFirebase from '../../Hooks/UseFirebase';
 
 
@@ -28,7 +28,7 @@ const Main = () => {
     return (
         <div>
             <section>
-                <TopBar />
+                < TopBar />
                 <div className="container">
                     <Sidebar />
                     <Outlet />
