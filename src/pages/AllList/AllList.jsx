@@ -49,7 +49,7 @@ const AllList = () => {
         fetch(`http://localhost:4000/upload-excel-file?email=${user?.email}`)
             .then(res => res.json())
             .then(data => setAllList(data))
-    }, [])
+    }, [user?.email])
 
     useEffect(() => {
         let id = 0;
