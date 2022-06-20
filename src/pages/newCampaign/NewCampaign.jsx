@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import UseFirebase from "../../Hooks/UseFirebase";
 import "./newCampaign.css";
 
 const NewCampaign = () => {
+	const { user } = UseFirebase();
 	const [nameInputData, setNameInputData] = useState();
 	const [optionInputData, setOptionInputData] = useState();
 	const [campaignMsg, setCampaignNote] = useState();
@@ -12,6 +14,16 @@ const NewCampaign = () => {
 	const [status, setStatus] = useState();
 	const [number, setNumber] = useState();
 	const [myNumbers, setMyNumbers] = useState(["+19034204596", "+19785813348"]);
+	const [numberList, setNumberList] = useState([]);
+
+	useEffect(() => {
+		const url = `http://localhost:4000/upload-excel-file?email=${user?.email}`;
+		fetch(url)
+			.then((res) => res.json())
+			.then((data) => setNumberList(data));
+	}, [user?.email]);
+
+	console.log(numberList);
 
 	const campaignName = (e) => {
 		setNameInputData(e.target.value);
@@ -76,9 +88,11 @@ const NewCampaign = () => {
 
 		console.log(DraftData);
 	};
+
 	const handleSender = (e) => {
 		setNumber(e.target.value);
 	};
+
 	return (
 		<div className="newCampaign">
 			<form onSubmit={fromSubmit} className="addCampaignForm">
@@ -112,10 +126,11 @@ const NewCampaign = () => {
 				<div className="addCampaignItem d-flex justify-content-between align-items-center my-3">
 					<label htmlFor="lists">Contact List :</label>
 					<select name="lists" onBlur={OptionList} id="cars">
-						<option value="list1">List 1</option>
-						<option value="list2">List 2</option>
-						<option value="list3">List 3</option>
-						<option value="list4">List 4</option>
+						{numberList.map((numberListData) => (
+							<option key={numberListData._id} value={numberListData._id}>
+								{numberListData.listName}
+							</option>
+						))}
 					</select>
 				</div>
 				<div className="addCampaignItem d-flex justify-content-between align-items-center my-3">
