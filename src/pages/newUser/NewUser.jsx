@@ -1,8 +1,5 @@
-import { useState } from "react";
-import "./newUser.css";
-import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { getAuth } from "firebase/auth";
-import FirebaseApp from "../../firebase/FirebaseApp";
+import { useState } from "react";
 import { Alert } from "react-bootstrap";
 import React from 'react';
 import UseFirebase from "../../Hooks/UseFirebase";
@@ -58,11 +55,11 @@ const NewUser = () => {
           <label>Gender</label>
           <div className="newUserGender">
             <input type="radio" name="gender" id="male" value="male" disabled />
-            <label htmlFor="male">Male</label>
+            <label for="male">Male</label>
             <input type="radio" name="gender" id="female" value="female" disabled />
-            <label htmlFor="female">Female</label>
+            <label for="female">Female</label>
             <input type="radio" name="gender" id="other" value="other" disabled />
-            <label htmlFor="other">Other</label>
+            <label for="other">Other</label>
           </div>
         </div>
         <div className="newUserItem">
@@ -82,4 +79,3 @@ const NewUser = () => {
 };
 
 export default NewUser;
-
