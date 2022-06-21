@@ -22,11 +22,15 @@ import MySubscription from "./pages/GeneralUserPages/MySubscription/MySubscripti
 import MyReports from "./pages/GeneralUserPages/MyReports/MyReports";
 import LoginPage from "./pages/auth/LoginPage/LoginPage";
 import PrivateRoute from "./PrivateRoute/PrivateRoute/PrivateRoute";
+import ManageAPI from "./pages/ManageAPI/ManageAPI";
 import ApiAnalytics from "./pages/ApiAnalytics/ApiAnalytics";
 
 function App() {
 	return (
 		<Routes>
+			{/* Should I delete it */}
+			{/* <Route path="/loginfsdfsdf" element={<Login />}></Route> */}
+
 			<Route path="/login" element={<LoginPage />}></Route>
 			<Route path="" element={<PrivateRoute><Main /></PrivateRoute>}>
 				<Route path="" element={<Home />} />
