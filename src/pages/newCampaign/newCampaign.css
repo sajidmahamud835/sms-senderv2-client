@@ -1,30 +1,8 @@
 .newCampaign {
   flex: 4;
-}
-
-.addCampaignForm {
-  margin-top: 10px;
-}
-
-.addCampaignItem {
-  width: 250px;
   display: flex;
-  flex-direction: column;
-  margin-bottom: 10px;
-}
-
-.addCampaignItem>label {
-  color: gray;
-  font-weight: 600;
-  margin-bottom: 10px;
-}
-
-.addCampaignItem>input {
-  padding: 10px;
-}
-
-.addCampaignItem>select {
-  padding: 10px;
+  justify-content: center;
+  ;
 }
 
 .addCampaignButton {
@@ -37,3 +15,15 @@
   font-weight: 600;
   cursor: pointer;
 }
+.addCampaignButton2 {
+  margin-top: 10px;
+  padding: 7px 10px;
+  border: none;
+  border-radius: 10px;
+  background-color: #3bb077;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+ 
+}
+ 

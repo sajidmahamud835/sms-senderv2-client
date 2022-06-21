@@ -1,28 +1,19 @@
 import { getAuth } from "firebase/auth";
 import { useState } from "react";
 import { Alert } from "react-bootstrap";
-import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
-import FirebaseApp from "../../firebase/FirebaseApp";
-import "./newUser.css";
+import React from 'react';
+import UseFirebase from "../../Hooks/UseFirebase";
 
-export default function NewUser() {
-	const [email, setEmail] = useState("");
-	const [password, setPassword] = useState("");
-	const [userProfile, setUserProfile] = useState({});
-	const auth = getAuth(FirebaseApp);
-	const [createUserWithEmailAndPassword, user, loading, error] =
-		useCreateUserWithEmailAndPassword(auth);
-
-	const createUser = (e, email, password) => {
-		e.preventDefault();
-		createUserWithEmailAndPassword(email, password);
-	};
+const NewUser = () => {
+	const [email, setEmail] = useState('');
+	const [password, setPassword] = useState('');
+	const { user, error } = UseFirebase()
 	return (
 		<div className="newUser">
 			<h1 className="newUserTitle">New User</h1>
 			<div className="" style={{ width: "800px" }}>
 				<div className="mt-2">
-					{loading && <h4 className="text-center">Sending...</h4>}
+					{/* {loading && <h4 className="text-center">Sending...</h4>} */}
 					{user && (
 						<Alert variant="success">
 							<h5 className="text-center">User successfully created.</h5>
@@ -46,19 +37,11 @@ export default function NewUser() {
 				</div>
 				<div className="newUserItem">
 					<label>Email</label>
-					<input
-						onChange={(e) => setEmail(e.target.value)}
-						type="email"
-						placeholder="john@gmail.com"
-					/>
+					<input onChange={(e) => setEmail(e.target.value)} type="email" placeholder="john@gmail.com" />
 				</div>
 				<div className="newUserItem">
 					<label>Password</label>
-					<input
-						onChange={(e) => setPassword(e.target.value)}
-						type="password"
-						placeholder="password"
-					/>
+					<input onChange={(e) => setPassword(e.target.value)} type="password" placeholder="password" />
 				</div>
 				<div className="newUserItem">
 					<label>Phone</label>
@@ -73,21 +56,9 @@ export default function NewUser() {
 					<div className="newUserGender">
 						<input type="radio" name="gender" id="male" value="male" disabled />
 						<label htmlFor="male">Male</label>
-						<input
-							type="radio"
-							name="gender"
-							id="female"
-							value="female"
-							disabled
-						/>
+						<input type="radio" name="gender" id="female" value="female" disabled />
 						<label htmlFor="female">Female</label>
-						<input
-							type="radio"
-							name="gender"
-							id="other"
-							value="other"
-							disabled
-						/>
+						<input type="radio" name="gender" id="other" value="other" disabled />
 						<label htmlFor="other">Other</label>
 					</div>
 				</div>
@@ -99,17 +70,13 @@ export default function NewUser() {
 					</select>
 				</div>
 				<div>
-					<span className="d-block mt-3">
-						After creating the user, you will be logged as the new user.
-					</span>
-					<button
-						onClick={(e) => createUser(e, email, password)}
-						className="newUserButton"
-					>
-						Create New User
-					</button>
+					<span className="d-block mt-3">After creating the user, you will be logged as the new user.</span>
+					{/* <button onClick={(e) => createUser(e, email, password)} className="newUserButton">Create New User</button> */}
 				</div>
 			</form>
 		</div>
 	);
-}
+};
+
+export default NewUser;
+

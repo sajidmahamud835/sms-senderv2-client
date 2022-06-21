@@ -8,8 +8,9 @@ import {
 } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 import "./user.css";
+import React from 'react';
 
-export default function User() {
+const User = () => {
   return (
     <div className="user">
       <div className="userTitleContainer">
@@ -108,7 +109,7 @@ export default function User() {
                   src="https://images.pexels.com/photos/1152994/pexels-photo-1152994.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
                   alt=""
                 />
-                <label htmlFor="file">
+                <label htmlhtmlFor="file">
                   <Publish className="userUpdateIcon" />
                 </label>
                 <input type="file" id="file" style={{ display: "none" }} />
@@ -120,4 +121,7 @@ export default function User() {
       </div>
     </div>
   );
-}
+};
+
+export default User;
+

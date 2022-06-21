@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import "./sms.css";
 import { Link } from "react-router-dom";
 import { Alert } from "react-bootstrap";
+import UseFirebase from "../../Hooks/UseFirebase";
 
 const Sms = () => {
+    const { user } = UseFirebase()
     const [isSingle, setIsSingle] = useState(true);
     const [message, setMessage] = useState("");
     const [error, setError] = useState("");
@@ -16,7 +18,7 @@ const Sms = () => {
         message: "",
     });
     const [myNumbers, setMyNumbers] = useState([
-        "+19034204596"
+        "+19034204596", "+19785813348"
     ])
 
     // console.log(messageIds);
@@ -33,6 +35,9 @@ const Sms = () => {
 
     const handleMessage = (e) => {
         smsData.message = e.target.value;
+        smsData.email = user.email;
+        smsData.displayName = user.displayName;
+
     };
 
     const handleSubmit = (e) => {
@@ -40,7 +45,7 @@ const Sms = () => {
         setIsLoading(true);
         setMessage("");
         setError("");
-        fetch("https://sms-sender-server.herokuapp.com/sms/send", {
+        fetch("http://localhost:4000/sms/send", {
             method: "POST",
             headers: {
                 "content-type": "application/json",
@@ -86,7 +91,7 @@ const Sms = () => {
                 </div>
                 <form onSubmit={handleSubmit} className="px-3">
                     <div className="d-flex justify-content-between align-items-center my-3">
-                        <label htmlFor="receiver" className="w-50">To:</label>
+                        <label htmlhtmlFor="receiver" className="w-50">To:</label>
                         {isSingle ? (
                             <input
                                 id="receiver"
@@ -119,7 +124,7 @@ const Sms = () => {
                                     name="numberRequired"
                                     onClick={() => setIsSingle(true)}
                                 />
-                                <label className="form-check-label" htmlFor="flexCheckChecked">
+                                <label className="form-check-label" htmlhtmlFor="flexCheckChecked">
                                     Single
                                 </label>
                             </div>
@@ -132,14 +137,14 @@ const Sms = () => {
                                     name="numberRequired"
                                     onClick={() => setIsSingle(false)}
                                 />
-                                <label className="form-check-label" htmlFor="flexCheckDefault">
+                                <label className="form-check-label" htmlhtmlFor="flexCheckDefault">
                                     Bulk
                                 </label>
                             </div>
                         </div>
                     </div>
                     <div className="d-flex justify-content-between align-items-center my-3">
-                        <label htmlFor="receiver" className="w-50">From:</label>
+                        <label htmlhtmlFor="receiver" className="w-50">From:</label>
                         <select
                             id="receiver"
                             className="ms-3 ps-2 form-control w-full"
@@ -154,7 +159,7 @@ const Sms = () => {
                         </select>
                     </div>
                     <div className="d-flex justify-content-between align-items-center my-3">
-                        <label htmlFor="receiver" className="w-50">Message Body:</label>
+                        <label htmlhtmlFor="receiver" className="w-50">Message Body:</label>
                         <textarea
                             id="receiver"
                             type="text"
@@ -182,7 +187,7 @@ const Sms = () => {
                     {isAdvanced && (
                         <div>
                             <div className="d-flex justify-content-between align-items-center mb-3">
-                                <label htmlFor="delay" className="w-50">Delay:</label>
+                                <label htmlhtmlFor="delay" className="w-50">Delay:</label>
                                 <input
                                     id="delay"
                                     type="text"
@@ -191,7 +196,7 @@ const Sms = () => {
                                 />
                             </div>
                             <div className="d-flex justify-content-between align-items-center my-3">
-                                <label htmlFor="timeout" className="w-50">Timeout:</label>
+                                <label htmlhtmlFor="timeout" className="w-50">Timeout:</label>
                                 <input
                                     id="timeout"
                                     type="text"
