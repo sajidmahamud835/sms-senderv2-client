@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import "./sms.css";
 import { Link } from "react-router-dom";
 import { Alert } from "react-bootstrap";
+import UseFirebase from "../../Hooks/UseFirebase";
 
 const Sms = () => {
+    const { user } = UseFirebase()
     const [isSingle, setIsSingle] = useState(true);
     const [message, setMessage] = useState("");
     const [error, setError] = useState("");
@@ -16,7 +18,7 @@ const Sms = () => {
         message: "",
     });
     const [myNumbers, setMyNumbers] = useState([
-        "+19034204596"
+        "+19034204596", "+19785813348"
     ])
 
     // console.log(messageIds);
@@ -33,6 +35,9 @@ const Sms = () => {
 
     const handleMessage = (e) => {
         smsData.message = e.target.value;
+        smsData.email = user.email;
+        smsData.displayName = user.displayName;
+
     };
 
     const handleSubmit = (e) => {
@@ -40,7 +45,7 @@ const Sms = () => {
         setIsLoading(true);
         setMessage("");
         setError("");
-        fetch("https://sms-sender-server.herokuapp.com/sms/send", {
+        fetch("http://localhost:4000/sms/send", {
             method: "POST",
             headers: {
                 "content-type": "application/json",
@@ -63,7 +68,7 @@ const Sms = () => {
     };
 
     return (
-        <section className="sms m-3 p-3">
+        <section className="updateNumber m-3 p-3">
             <div className="userListTitleContainer">
                 <h1 className="userTitle">Send Quick Message</h1>
                 <Link to="/newUser">

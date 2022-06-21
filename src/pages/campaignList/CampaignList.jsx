@@ -9,7 +9,7 @@ import { useState } from "react";
 
 const CampaignList = () => {
   const [data, setData] = useState(campaignRows);
-
+  console.log(data)
   const handleDelete = (id) => {
     setData(data.filter((item) => item.id !== id));
   };
@@ -66,7 +66,8 @@ const CampaignList = () => {
       },
     },
   ];
-
+  console.log(data);
+  console.log(columns);
   return (
     <div className="campaignList">
       <div className="campaignTitleContainer">
