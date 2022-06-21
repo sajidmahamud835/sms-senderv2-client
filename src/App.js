@@ -1,15 +1,15 @@
+import { Route, Routes } from "react-router-dom";
 import "./App.css";
-import Home from "./pages/home/Home";
-import { Routes, Route } from "react-router-dom";
-import UserList from "./pages/userList/UserList";
-import User from "./pages/user/User";
-import NewUser from "./pages/newUser/NewUser";
 import Campaign from "./pages/campaign/Campaign";
-import NewCampaign from "./pages/newCampaign/NewCampaign";
-import Sms from "./pages/sms/Sms";
-import Login from "./pages/auth/login/Login";
-import Main from "./pages/main/Main";
 import CampaignList from "./pages/campaignList/CampaignList";
+import Home from "./pages/home/Home";
+import Main from "./pages/main/Main";
+import ManageAPI from "./pages/ManageAPI/ManageAPI";
+import NewCampaign from "./pages/newCampaign/NewCampaign";
+import NewUser from "./pages/newUser/NewUser";
+import Sms from "./pages/sms/Sms";
+import User from "./pages/user/User";
+import UserList from "./pages/userList/UserList";
 import ExcelToCSV from "./components/ExcelToCSV/ExcelToCSV";
 import ManageSubscriptions from "./pages/ManageSubscriptions/ManageSubscriptions";
 import Reports from "./pages/Reports/Reports";
@@ -21,12 +21,9 @@ import MySubscription from "./pages/GeneralUserPages/MySubscription/MySubscripti
 import MyReports from "./pages/GeneralUserPages/MyReports/MyReports";
 import LoginPage from "./pages/auth/LoginPage/LoginPage";
 import PrivateRoute from "./PrivateRoute/PrivateRoute/PrivateRoute";
-import AdminRoute from "./PrivateRoute/AdminRoute/AdminRoute";
-import ManageAPI from "./pages/ManageAPI/ManageAPI";
 import ApiAnalytics from "./pages/ApiAnalytics/ApiAnalytics";
 import EditSubscriptions from "./pages/EditSubscriptions/EditSubscriptions";
 import AllList from "./pages/AllList/AllList";
-import EditAllList from "./components/EditAllList/EditAllList";
 import EditAllList02 from "./components/EditAllList02/EditAllList02";
 
 function App() {
@@ -34,7 +31,6 @@ function App() {
     <Routes>
       {/* Should I delete it */}
       {/* <Route path="/loginfsdfsdf" element={<Login />}></Route> */}
-
       <Route path="/login" element={<LoginPage />}></Route>
       <Route path="" element={<PrivateRoute><Main /></PrivateRoute>}>
         <Route path="" element={<Home />} />
