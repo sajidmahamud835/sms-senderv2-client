@@ -18,7 +18,12 @@ import { useEffect, useState } from "react";
 import UseFirebase from '../../Hooks/UseFirebase';
 
 const Sidebar = () => {
+<<<<<<< HEAD
   const { user, admin } = UseFirebase()
+=======
+  const auth = getAuth(FirebaseApp);
+  const [user] = useAuthState(auth);
+>>>>>>> production
   const [active, setActive] = useState('dashboard');
 
   useEffect(() => {

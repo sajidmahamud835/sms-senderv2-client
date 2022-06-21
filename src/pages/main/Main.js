@@ -34,7 +34,7 @@ const Main = () => {
                     <Outlet />
                 </div>
             </section>
-        </div>
+        </div >
         // <div>
         //     {user &&
         //         <section>
