@@ -4,8 +4,9 @@ import { DeleteOutline } from "@material-ui/icons";
 import { userRows } from "../../dummyData";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import React from 'react';
 
-export default function UserList() {
+const UserList = () => {
   const [data, setData] = useState(userRows);
 
   const handleDelete = (id) => {
@@ -72,7 +73,7 @@ export default function UserList() {
         <h1 className="userTitle">Manage Users</h1>
         <Link to="/newUser">
           <button className="userAddButton">Create</button>
-        </Link>
+        </Link> 
       </div>
       <DataGrid
         rows={data}
@@ -83,4 +84,6 @@ export default function UserList() {
       />
     </div>
   );
-}
+};
+
+export default UserList; 

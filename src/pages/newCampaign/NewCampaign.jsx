@@ -1,6 +1,7 @@
 import "./newCampaign.css";
+import React from 'react';
 
-export default function NewCampaign() {
+const NewCampaign = () => {
   return (
     <div className="newCampaign">
       <h1 className="addCampaignTitle">Create A Campaign</h1>
@@ -32,4 +33,6 @@ export default function NewCampaign() {
       </form>
     </div>
   );
-}
+};
+
+export default NewCampaign; 
