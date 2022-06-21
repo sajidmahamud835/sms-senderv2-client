@@ -11,8 +11,7 @@ const ApiAnalytics = () => {
 
     // for (let index = 0; index < 20; index++) {
     //     allDataIsComing(index)
-    // }
-    // console.log(messages);
+    // } 
 
     return (
         <div className='ApiAnalyticsContainer'>

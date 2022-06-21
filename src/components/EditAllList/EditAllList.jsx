@@ -25,8 +25,7 @@ const EditAllList = () => {
         }
 
     }, [listData])
-
-    console.log(rowData);
+ 
 
     const columns = [
         {

@@ -1,25 +1,81 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './ManageSubscriptions.css'
 import { DataGrid } from "@material-ui/data-grid";
 import { DeleteOutline } from "@material-ui/icons";
-import { SubscriptionsRows } from "../../dummyData";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import swal from 'sweetalert';
 const ManageSubscriptions = () => {
-    const [data, setData] = useState(SubscriptionsRows);
-    console.log(data)
+    const [data, setData] = useState([]);
+    const [rowData, setRowData] = useState([]);
+
+    useEffect(() => {
+        fetch('http://localhost:4000/subscription-list')
+            .then(res => res.json())
+            .then(data => setData(data))
+    }, [])
+    // console.log(data)
     const handleDelete = (id) => {
-        setData(data.filter((item) => item.id !== id));
+        if (id) {
+            swal({
+                title: "Are you sure?",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+                .then((willAdd) => {
+                    if (willAdd) {
+                        const url = `http://localhost:4000/delete-subscription/${id}`
+                        fetch(url, {
+                            method: 'DELETE'
+                        })
+                            .then(res => res.json())
+                            .then(data => {
+                                if (data.deletedCount > 0) {
+                                    swal("List is Deleted", {
+                                        icon: "success",
+                                    });
+                                    setRowData(rowData.filter((item) => item._id !== id));
+
+                                }
+                            });
+                    } else {
+                        swal("Sorry Some Error occurs!");
+                    }
+                });
+        }
+
     };
 
+    useEffect(() => {
+        let id = 1;
+        const initialArray = []
+        data.map(list => {
+            const newList = { ...list, id: id }
+            id++;
+            initialArray.push(newList)
+            return 0
+        })
+        setRowData(initialArray);
+
+    }, [data])
+    console.log(rowData)
     const columns = [
-        // {
-        //   field: "id",
-        //   headerName: "ID",
-        //   width: 100
-        // },
         {
-            field: "campaign",
+            field: "id",
+            headerName: "ID",
+            width: 100,
+            renderCell: (params) => {
+                return (
+                    <div className="campaignListItem">
+                        {params.row.id}
+                    </div>
+                );
+            }
+
+        },
+        {
+            field: "name",
             headerName: "Subscriptions Name",
             width: 250,
             renderCell: (params) => {
@@ -31,19 +87,28 @@ const ManageSubscriptions = () => {
             },
         },
         {
-            field: "sold",
-            headerName: "Total Sold",
-            width: 200
-        },
-        {
-            field: "price",
+            field: "Price",
             headerName: "Price",
             width: 120,
+            renderCell: (params) => {
+                return (
+                    <div className="campaignListItem">
+                        {params.row.Price}
+                    </div>
+                );
+            },
         },
         {
-            field: "limit",
+            field: "SmsLimit",
             headerName: "SMS limit",
             width: 160,
+            renderCell: (params) => {
+                return (
+                    <div className="campaignListItem">
+                        {params.row.SmsLimit}
+                    </div>
+                );
+            }
         },
         {
             field: "action",
@@ -57,7 +122,7 @@ const ManageSubscriptions = () => {
                         </Link>
                         <DeleteOutline
                             className="campaignListDelete"
-                            onClick={() => handleDelete(params.row.id)}
+                            onClick={() => handleDelete(params.row._id)}
                         />
                     </div>
                 );
@@ -65,17 +130,16 @@ const ManageSubscriptions = () => {
         },
     ];
     console.log(data);
-    console.log(columns);
     return (
         <div className="campaignList">
             <div className="campaignTitleContainer">
                 <h1 className="campaignTitle">Manage Subscriptions</h1>
-                <Link to="/new-campaign">
+                <Link to="/new-subscriptions">
                     <button className="campaignAddButton">Create</button>
                 </Link>
             </div>
             <DataGrid
-                rows={data}
+                rows={rowData}
                 disableSelectionOnClick
                 columns={columns}
                 pageSize={8}

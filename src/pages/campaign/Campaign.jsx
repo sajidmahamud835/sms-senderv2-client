@@ -1,23 +1,21 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import "./campaign.css";
 import Chart from "../../components/chart/Chart"
 import { campaignData } from "../../dummyData"
 import { ArrowDownward, ArrowUpward } from "@material-ui/icons";
-import { useParams } from 'react-router-dom';
+
 const Campaign = () => {
-    const [cdata, setCData] = useState([]);
+    const [cdata, setCData] = useState({});
 
-// every thing is fine but use params is showing undefined
+    let { Id } = useParams();
 
-    // let { Id } = useParams();
-
-    // useEffect(() => {
-    //     fetch(`http://localhost:4000/campaign-details/${Id}`)
-    //         .then((res) => res.json())
-    //         .then((data) => setCData(data));
-    // }, [Id]);
-    // console.log(Id)
+    useEffect(() => {
+        fetch(`http://localhost:4000/campaign-details/${Id}`)
+            .then((res) => res.json())
+            .then((data) => setCData(data[0]));
+    }, [Id]);
+    console.log(cdata)
     return (
         <div className="campaign">
             <div className="campaignTitleContainer">
@@ -35,9 +33,9 @@ const Campaign = () => {
                 <div className="col-8">
                     <div className="featuredItem">
                         <div className='d-block'>
-                            {/* <div><h4>Name: {cdata.name}</h4></div>
+                            <div><h4>Name: {cdata.name}</h4></div>
                             <div><h6>Number: {cdata.number}</h6></div>
-                            <div><h6>Campaign Id: {cdata._id}</h6></div> */}
+                            <div><h6>Campaign Id: {cdata._id}</h6></div>
                         </div>
 
                     </div>

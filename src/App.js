@@ -28,6 +28,7 @@ import EditSubscriptions from "./pages/EditSubscriptions/EditSubscriptions";
 import AllList from "./pages/AllList/AllList";
 import EditAllList from "./components/EditAllList/EditAllList";
 import EditAllList02 from "./components/EditAllList02/EditAllList02";
+import NewSubscriptions from "./pages/NewSubscriptions/NewSubscriptions";
 
 function App() {
   return (
@@ -47,10 +48,11 @@ function App() {
         <Route path="/user/:userId" element={<User />}></Route>
         <Route path="/newUser" element={<NewUser />}></Route>
         <Route path="/campaigns" element={<CampaignList />}></Route>
-        <Route path="/campaign/:campaignId" element={<Campaign />}></Route>
+        <Route path="/campaign/:Id" element={<Campaign />}></Route>
         <Route path="/new-campaign" element={<NewCampaign />}></Route>
         <Route path="/manage-subscriptions" element={<ManageSubscriptions />}></Route>
         <Route path="/edit-subscriptions/:Id" element={<EditSubscriptions />}></Route>
+        <Route path="/new-subscriptions" element={<NewSubscriptions />}></Route>
         <Route path="/manageAPI" element={<ManageAPI />}></Route>
         <Route path="/apiAnalytics" element={<ApiAnalytics />}></Route>
         <Route path="/reports" element={<Reports />}></Route>

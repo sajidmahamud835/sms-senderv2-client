@@ -19,12 +19,10 @@ const UseFirebase = () => {
         return signInWithPopup(auth, GoogleProvider)
             .finally(() => { setLoading(false) });
     }
-    const registerByEmailPass = (email, password, name) => {
-        console.log(email, password, name)
+    const registerByEmailPass = (email, password, name) => { 
         createUserWithEmailAndPassword(auth, email, password)
             .then((result) => {
-                navigate('/dashboard')
-                console.log(result);
+                navigate('/dashboard') 
                 setUser(result.user);
                 updateProfile(auth.currentUser, { displayName: name })
                     .then(result => {
@@ -40,8 +38,7 @@ const UseFirebase = () => {
 
 
 
-    const logInEmailPassword = (email, password) => {
-        console.log(email, password)
+    const logInEmailPassword = (email, password) => { 
         signInWithEmailAndPassword(auth, email, password)
             .then((result) => {
                 setUser(result.user);
@@ -89,8 +86,7 @@ const UseFirebase = () => {
 
     }, [user?.email])
 
-
-    console.log(user?.displayName, 'ADmin ?', admin)
+ 
     return { handleGoogleSignIn, user, admin, error, logOut, loading, registerByEmailPass, logInEmailPassword }
 };
 

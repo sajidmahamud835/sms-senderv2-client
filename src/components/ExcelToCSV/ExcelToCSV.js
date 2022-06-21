@@ -31,8 +31,7 @@ const ExcelToCSV = () => {
 
 
     const handleOnChange = (e) => {
-        const file = e.target.files[0];
-        // console.log(file);
+        const file = e.target.files[0]; 
         if (file) {
             fileReader.onload = function (event) {
                 const text = event.target.result;

@@ -44,12 +44,10 @@ const LoginPage = () => {
 
 
 
-    const handleReg = () => {
-        console.log(email, password, name,)
+    const handleReg = () => { 
         registerByEmailPass(email, password, name,)
     }
-    const handleLogIn = () => {
-        console.log(email, password)
+    const handleLogIn = () => { 
         logInEmailPassword(email, password)
     }
     const text = 'auth/wrong-password'
