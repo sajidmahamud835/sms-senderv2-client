@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Alert } from "react-bootstrap";
 import swal from "sweetalert";
 import AddNumberList from "./AddNumberList";
@@ -39,8 +39,8 @@ const ManageAPI = () => {
 		setIsLoading(true);
 		setMessage("");
 		setError("");
-		fetch("http://localhost:4000/smsApi", {
-			method: "POST",
+		fetch(`http://localhost:4000/smsApi/${manageApiData._id}`, {
+			method: "PUT",
 			headers: {
 				"content-type": "application/json",
 			},
@@ -62,6 +62,15 @@ const ManageAPI = () => {
 				}
 			});
 	};
+
+	useEffect(() => {
+		const url = `http://localhost:4000/smsApi`;
+		fetch(url)
+			.then((res) => res.json())
+			.then((data) => setManageApiData(data[0]));
+	}, []);
+
+	console.log(manageApiData);
 
 	return (
 		<section className="manageAPI m-3 p-3">
@@ -92,6 +101,7 @@ const ManageAPI = () => {
 								id="receiver"
 								type="text"
 								placeholder="Write your account SID..."
+								defaultValue={manageApiData.accountSID}
 								className="ms-3 ps-2 form-control w-full"
 								onChange={handleAccountSID}
 								required
@@ -105,6 +115,7 @@ const ManageAPI = () => {
 								id="receiver"
 								type="text"
 								placeholder="Write your auth token..."
+								defaultValue={manageApiData.authToken}
 								className="ms-3 ps-2 form-control w-full"
 								onChange={handleAuthToken}
 								required
