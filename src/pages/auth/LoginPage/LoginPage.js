@@ -54,7 +54,7 @@ const LoginPage = () => {
     }
     const text = 'auth/wrong-password'
     return (
-        <div>
+        <div id='logInPage'>
             <div>
                 <div id="login-box">
                     <div className="left">

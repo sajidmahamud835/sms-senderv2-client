@@ -111,7 +111,7 @@ const ExcelToCSV = () => {
 			<div className="card shadow px-5 py-4 my-5 w-75 mx-auto">
 				<div className="d-flex justify-content-between">
 					<h1 className="m-0">Upload Your excel File </h1>
-					<button onClick={GoTOAllLIst} className="allListBtn px-2 m-0">
+					<button onClick={GoTOAllLIst} className="btn btn-success px-2 m-0">
 						All List
 					</button>
 				</div>
@@ -124,7 +124,7 @@ const ExcelToCSV = () => {
 								onBlur={ListName}
 								type="text"
 								placeholder="List name"
-                                className="w-50"
+								className="w-50 form-control"
 							/>
 						</div>
 						<div className="d-flex mt-4 justify-content-between">
@@ -147,9 +147,9 @@ const ExcelToCSV = () => {
 								onChange={handleOnChange}
 							/>
 						</div>
-						<div className="text-center">
-							<button type="submit" className="makeListBtn m-5">
-								Create
+						<div className="text-end">
+							<button type="submit" className="btn btn-primary mt-4">
+								Create List
 							</button>
 						</div>
 					</form>
