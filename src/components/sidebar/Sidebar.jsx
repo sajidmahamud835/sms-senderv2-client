@@ -31,8 +31,8 @@ const Sidebar = () => {
   }
 
   return (
-    <div className="sidebar">
-      <div className="sidebarWrapper shadow-sm">
+    <div className="sidebar shadow-sm">
+      <div className="sidebarWrapper">
         <div className="sidebarMenu">
           <h3 className="sidebarTitle">Dashboard</h3>
           <ul className="sidebarList">
