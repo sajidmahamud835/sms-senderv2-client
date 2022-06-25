@@ -1,13 +1,12 @@
-import { getAuth } from "firebase/auth";
 import { useState } from "react";
 import { Alert } from "react-bootstrap";
-import React from 'react';
 import UseFirebase from "../../Hooks/UseFirebase";
+import "./newUser.css";
 
 const NewUser = () => {
-	const [email, setEmail] = useState('');
-	const [password, setPassword] = useState('');
-	const { user, error } = UseFirebase()
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
+	const { user, error } = UseFirebase();
 	return (
 		<div className="newUser">
 			<h1 className="newUserTitle">New User</h1>
@@ -37,11 +36,19 @@ const NewUser = () => {
 				</div>
 				<div className="newUserItem">
 					<label>Email</label>
-					<input onChange={(e) => setEmail(e.target.value)} type="email" placeholder="john@gmail.com" />
+					<input
+						onChange={(e) => setEmail(e.target.value)}
+						type="email"
+						placeholder="john@gmail.com"
+					/>
 				</div>
 				<div className="newUserItem">
 					<label>Password</label>
-					<input onChange={(e) => setPassword(e.target.value)} type="password" placeholder="password" />
+					<input
+						onChange={(e) => setPassword(e.target.value)}
+						type="password"
+						placeholder="password"
+					/>
 				</div>
 				<div className="newUserItem">
 					<label>Phone</label>
@@ -56,9 +63,21 @@ const NewUser = () => {
 					<div className="newUserGender">
 						<input type="radio" name="gender" id="male" value="male" disabled />
 						<label htmlFor="male">Male</label>
-						<input type="radio" name="gender" id="female" value="female" disabled />
+						<input
+							type="radio"
+							name="gender"
+							id="female"
+							value="female"
+							disabled
+						/>
 						<label htmlFor="female">Female</label>
-						<input type="radio" name="gender" id="other" value="other" disabled />
+						<input
+							type="radio"
+							name="gender"
+							id="other"
+							value="other"
+							disabled
+						/>
 						<label htmlFor="other">Other</label>
 					</div>
 				</div>
@@ -70,7 +89,9 @@ const NewUser = () => {
 					</select>
 				</div>
 				<div>
-					<span className="d-block mt-3">After creating the user, you will be logged as the new user.</span>
+					<span className="d-block mt-3">
+						After creating the user, you will be logged as the new user.
+					</span>
 					{/* <button onClick={(e) => createUser(e, email, password)} className="newUserButton">Create New User</button> */}
 				</div>
 			</form>
@@ -79,4 +100,3 @@ const NewUser = () => {
 };
 
 export default NewUser;
-
