@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router';
 import { useNavigate } from "react-router-dom";
 import SmsIcon from '@mui/icons-material/Sms';
@@ -7,15 +7,22 @@ import './LoginPage.css'
 
 const LoginPage = () => {
     const { handleGoogleSignIn, logInEmailPassword, registerByEmailPass, error } = UseFirebase();
+
     const [name, setName] = useState();
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
     const [regBtn, setRegBtn] = useState(false);
     const [logBtn, setLogBtn] = useState(true);
+    const [disabled, setDisabled] = useState(false)
+    const [errorMassage, setErrorMassage] = useState("")
+    const [emailErrorMassage, setEmailErrorMassage] = useState("")
+    const [passwordErrorMassage, setPasswordErrorMassage] = useState("")
+    const [nameErrorMassage, setNameErrorMassage] = useState("")
+    const [showError, setShowError] = useState("")
+
     const location = useLocation();
     let navigate = useNavigate();
     const redirect_uri = location.state?.from || '/sms';
-
     const handleName = (e) => {
         setName(e.target.value);
     }
@@ -41,19 +48,74 @@ const LoginPage = () => {
 
     }
 
+    // Add conditions
+    useEffect(() => {   
+        // for filling the input form
+        if(email !== "" && password !== "" && email !== undefined && password !== undefined){
+            setErrorMassage(false)
+        } else {
+            setErrorMassage("Please fill in the form.")
+        }
+        // for email
+        const regexEmail = new RegExp('[a-z0-9]+@[a-z]+.[a-z]{2,3}');
+        const regexPassword = new RegExp('^.{6,}$');
 
+        if(!regexEmail.test(email)){
+            setEmailErrorMassage("Enter valid email.")
+        } else{
+            setEmailErrorMassage(false)
+        }
+        //for password
+        if(!regexPassword.test(password)){
+            setPasswordErrorMassage("Invalid password.")
+        } else {
+            setPasswordErrorMassage(false);
+        }
+        // disable btn
+        if(errorMassage || emailErrorMassage || passwordErrorMassage || nameErrorMassage){
+            setDisabled(true)
+        } else {
+            setDisabled(false)
+        }
+        // for user name
+        if(regBtn){
+            if(name === undefined || name === ""){
+                setNameErrorMassage("Inter your name.")
+            } else {
+                setNameErrorMassage(false)
+            }
+         } else {
+        setNameErrorMassage(false)
+    }
+    }, [email, logInEmailPassword, password, disabled, errorMassage, emailErrorMassage, passwordErrorMassage, nameErrorMassage, name, regBtn])
 
-
+    // firebase error condition
+    useEffect(() => {
+        setShowError(false)
+     },[email, name, password])
+ 
     const handleReg = () => {
-        console.log(email, password, name,)
-        registerByEmailPass(email, password, name,)
+        if(error) {
+            setShowError(error)
+        }
+        if(disabled === false){
+            registerByEmailPass(email, password, name)            
+           // console.log(email, password, name)
+        }
     }
+    useEffect(() => {
+        if(error) {
+            setShowError(error)
+        }
+    }, [error])
     const handleLogIn = () => {
-        console.log(email, password)
-        logInEmailPassword(email, password)
+
+        if(disabled === false){
+            logInEmailPassword(email, password)
+           // console.log(email, password)
+        }
     }
-    const text = 'auth/wrong-password'
-    return (
+        return (
         <div id='logInPage'>
             <div>
                 <div id="login-box">
@@ -64,10 +126,13 @@ const LoginPage = () => {
                         <input type="password" name="password" placeholder="Password" onChange={handlePass} />
 
                         {
-                            error === text ? <span className="text-danger hidden">Wrong Password</span> : <span className="text-white hidden" >Wrong Password</span>
+                           showError && <span className="text-danger">{showError}</span> 
                         }
-                        {logBtn && (<input type="submit" name="signup_submit" value="Log in" onClick={handleLogIn} />)}
-                        {regBtn && (<input type="submit" name="signup_submit" value="Registration" onClick={handleReg} />)}
+                        {
+                            (errorMassage || emailErrorMassage || passwordErrorMassage || nameErrorMassage)  && <><span className="text-danger">{errorMassage || emailErrorMassage || passwordErrorMassage || nameErrorMassage}</span> <br /></>
+                        }
+                        {logBtn && (<input type="submit" name="signup_submit" value="Log in" disabled={disabled} onClick={handleLogIn} />)}
+                        {regBtn && (<input type="submit" name="signup_submit" value="Registration" disabled={disabled} onClick={handleReg} />)}
                     </div>
 
                     <div className="right">
