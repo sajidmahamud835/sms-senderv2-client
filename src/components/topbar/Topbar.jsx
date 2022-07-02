@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import './Topbar.css'
+import './topbar.css'
 import { NotificationsNone, Settings } from "@material-ui/icons";
 import { Link, useNavigate } from "react-router-dom";
 import Box from '@mui/material/Box';
