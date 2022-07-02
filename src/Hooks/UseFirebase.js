@@ -32,19 +32,20 @@ const UseFirebase = () => {
 		});
 	};
 
-	const registerByEmailPass = (email, password, name) => {
+	const registerByEmailPass = (email, password, name, userTotalData) => {
 		// console.log(email, password, name);
+		console.log(userTotalData);
 		createUserWithEmailAndPassword(auth, email, password)
 			.then((result) => {
-				navigate("/dashboard");
+				navigate("/login");
 				// console.log(result);
 				setUser(result.user);
 				// send to database
-				saveUser(email, name, "POST");
+				saveUser(email, name, userTotalData, "POST");
 				// ================
 				updateProfile(auth.currentUser, { displayName: name }).then(
 					(result) => {
-						navigate("/dashboard");
+						navigate("/login");
 					}
 				);
 				setUser(result.user);
@@ -77,13 +78,15 @@ const UseFirebase = () => {
 			.finally(() => setLoading(false));
 	};
 
-	console.log(SubscriptionsRows);
+	// console.log(SubscriptionsRows);
 
-	const saveUser = (email, displayName, method) => {
+	const saveUser = (email, displayName, userTotalData, method) => {
+		console.log(userTotalData);
 		const user = {
 			email,
 			displayName,
 			subscriptions: "none",
+			...userTotalData,
 		};
 		// send user data to database
 		fetch("http://localhost:4000/users", {
