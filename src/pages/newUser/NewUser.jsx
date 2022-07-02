@@ -4,16 +4,49 @@ import UseFirebase from "../../Hooks/UseFirebase";
 import "./newUser.css";
 
 const NewUser = () => {
+	const [name, setName] = useState("");
+	const [userName, setUserName] = useState("");
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
-	const { user, error } = UseFirebase();
+	const [mobileNumber, setMobileNumber] = useState("");
+	const [address, setAddress] = useState("");
+	const [gender, setGender] = useState("");
+	const [isActiveUser, setIsActiveUser] = useState("");
+
+	const { user, error, loading, registerByEmailPass } = UseFirebase();
+
+	const userTotalData = {
+		userName,
+		mobileNumber,
+		address,
+		gender,
+		isActiveUser,
+	};
+
+	const createUser = (e) => {
+		registerByEmailPass(email, password, name, userTotalData);
+
+		// fetch("http://localhost:4000/users", {
+		// 	method: "PUT",
+		// 	headers: {
+		// 		"content-type": "application/json",
+		// 	},
+		// 	body: JSON.stringify(userTotalData),
+		// })
+		// 	.then((res) => res.json())
+		// 	.then((data) => console.log(data));
+
+		e.preventDefault();
+		console.log("data submitted");
+	};
+
 	return (
 		<div className="newUser">
 			<div className="card shadow px-5 py-4 my-5 w-100 mx-5">
 				<h1 className="newUserTitle">New User</h1>
 				<div className="" style={{ width: "800px" }}>
 					<div className="mt-2">
-						{/* {loading && <h4 className="text-center">Sending...</h4>} */}
+						{loading && <h4 className="text-center">Sending...</h4>}
 						{user && (
 							<Alert variant="success">
 								<h5 className="text-center">User successfully created.</h5>
@@ -26,19 +59,30 @@ const NewUser = () => {
 						)}
 					</div>
 				</div>
-				<form className="newUserForm">
+				<form onSubmit={createUser} className="newUserForm">
 					<div className="newUserItem">
 						<label>Username</label>
-						<input type="text" placeholder="john32" disabled />
+						<input
+							type="text"
+							placeholder="john32"
+							onBlur={(e) => setUserName(e.target.value)}
+							required
+						/>
 					</div>
 					<div className="newUserItem">
 						<label>Full Name</label>
-						<input type="text" placeholder="John Smith" disabled />
+						<input
+							onBlur={(e) => setName(e.target.value)}
+							required
+							type="text"
+							placeholder="John Smith"
+						/>
 					</div>
 					<div className="newUserItem">
 						<label>Email</label>
 						<input
-							onChange={(e) => setEmail(e.target.value)}
+							onBlur={(e) => setEmail(e.target.value)}
+							required
 							type="email"
 							placeholder="john@gmail.com"
 						/>
@@ -46,18 +90,29 @@ const NewUser = () => {
 					<div className="newUserItem">
 						<label>Password</label>
 						<input
-							onChange={(e) => setPassword(e.target.value)}
+							onBlur={(e) => setPassword(e.target.value)}
+							required
 							type="password"
 							placeholder="password"
 						/>
 					</div>
 					<div className="newUserItem">
 						<label>Phone</label>
-						<input type="text" placeholder="+1 123 456 78" disabled />
+						<input
+							type="text"
+							placeholder="+1 123 456 78"
+							onBlur={(e) => setMobileNumber(e.target.value)}
+							required
+						/>
 					</div>
 					<div className="newUserItem">
 						<label>Address</label>
-						<input type="text" placeholder="New York | USA" disabled />
+						<input
+							type="text"
+							placeholder="New York | USA"
+							onBlur={(e) => setAddress(e.target.value)}
+							required
+						/>
 					</div>
 					<div className="newUserItem">
 						<label>Gender</label>
@@ -67,7 +122,8 @@ const NewUser = () => {
 								name="gender"
 								id="male"
 								value="male"
-								disabled
+								onBlur={(e) => setGender(e.target.value)}
+								required
 							/>
 							<label htmlFor="male">Male</label>
 							<input
@@ -75,7 +131,8 @@ const NewUser = () => {
 								name="gender"
 								id="female"
 								value="female"
-								disabled
+								onBlur={(e) => setGender(e.target.value)}
+								required
 							/>
 							<label htmlFor="female">Female</label>
 							<input
@@ -83,7 +140,8 @@ const NewUser = () => {
 								name="gender"
 								id="other"
 								value="other"
-								disabled
+								onBlur={(e) => setGender(e.target.value)}
+								required
 							/>
 							<label htmlFor="other">Other</label>
 						</div>
@@ -94,7 +152,8 @@ const NewUser = () => {
 							className="newUserSelect"
 							name="active"
 							id="active"
-							disabled
+							onBlur={(e) => setIsActiveUser(e.target.value)}
+							required
 						>
 							<option value="yes">Yes</option>
 							<option value="no">No</option>
@@ -104,7 +163,9 @@ const NewUser = () => {
 						<span className="d-block mt-3">
 							After creating the user, you will be logged as the new user.
 						</span>
-						{/* <button onClick={(e) => createUser(e, email, password)} className="newUserButton">Create New User</button> */}
+						<button type="submit" className="newUserButton">
+							Create New User
+						</button>
 					</div>
 				</form>
 			</div>
