@@ -31,7 +31,7 @@ const Sidebar = () => {
   }
 
   return (
-    <div className="sidebar">
+    <div className="sidebar shadow-sm">
       <div className="sidebarWrapper">
         <div className="sidebarMenu">
           <h3 className="sidebarTitle">Dashboard</h3>
@@ -72,10 +72,10 @@ const Sidebar = () => {
                   Manage Subscriptions
                 </li>
               </Link>
-              <Link to="/excel-to-csv" className="link">
+              <Link to="/all-lists" className="link">
                 <li onClick={(e) => makeActive('reports')} id="reports" className="sidebarListItem">
                   <ViewListIcon className="sidebarIcon" />
-                  Upload List
+                  Manage Contact List
                 </li>
               </Link>
               <Link to="/reports" className="link">

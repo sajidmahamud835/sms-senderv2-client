@@ -1,11 +1,14 @@
+
 import React, { useEffect } from 'react';
 import './ManageSubscriptions.css'
+
 import { DataGrid } from "@material-ui/data-grid";
 import { DeleteOutline } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import swal from 'sweetalert';
 const ManageSubscriptions = () => {
+
     const [data, setData] = useState([]);
     const [rowData, setRowData] = useState([]);
 
@@ -147,6 +150,7 @@ const ManageSubscriptions = () => {
             />
         </div>
     );
+
 };
 
 export default ManageSubscriptions;

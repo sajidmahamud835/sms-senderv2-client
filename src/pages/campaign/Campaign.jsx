@@ -38,38 +38,38 @@ const Campaign = () => {
                             <div><h6>Campaign Id: {cdata._id}</h6></div>
                         </div>
 
-                    </div>
-                </div>
-                <div className="col-4">
-                    <div>
-                        <div className="featuredItem">
-                            <span className="featuredTitle">Sent Massage</span>
-                            <div className="featuredMoneyContainer">
-                                <span className="featuredMoney">130 <ArrowUpward className="featuredIcon" /></span>
+					</div>
+				</div>
+				<div className="col-4">
+					<div>
+						<div className="featuredItem">
+							<span className="featuredTitle">Sent Massage</span>
+							<div className="featuredMoneyContainer">
+								<span className="featuredMoney">130 <ArrowUpward className="featuredIcon" /></span>
 
-                            </div>
-                        </div>
+							</div>
+						</div>
 
-                        <div className="featuredItem">
-                            <span className="featuredTitle">Cost</span>
-                            <div className="featuredMoneyContainer">
-                                <span className="featuredMoney">$225 <ArrowUpward className="featuredIcon" /></span>
-                            </div>
-                        </div>
-                        <div className="featuredItem">
-                            <span className="featuredTitle">Failed</span>
-                            <div className="featuredMoneyContainer">
-                                <span className="featuredMoney">12 /1000 <ArrowDownward className="featuredIcon negative" /></span>
+						<div className="featuredItem">
+							<span className="featuredTitle">Cost</span>
+							<div className="featuredMoneyContainer">
+								<span className="featuredMoney">$225 <ArrowUpward className="featuredIcon" /></span>
+							</div>
+						</div>
+						<div className="featuredItem">
+							<span className="featuredTitle">Failed</span>
+							<div className="featuredMoneyContainer">
+								<span className="featuredMoney">12 /1000 <ArrowDownward className="featuredIcon negative" /></span>
 
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <button className="addCampaignButton m-5">Stop</button>
-            <button className="addCampaignButton m-5">Pause</button>
-        </div>
-    );
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<button className="addCampaignButton m-5">Stop</button>
+			<button className="addCampaignButton m-5">Pause</button>
+		</div>
+	);
 };
 
 export default Campaign;

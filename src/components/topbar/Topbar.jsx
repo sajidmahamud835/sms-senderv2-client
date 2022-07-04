@@ -1,14 +1,14 @@
 import React, { useEffect } from 'react';
-import './TopBar.css'
+import './topbar.css'
 import { NotificationsNone, Settings } from "@material-ui/icons";
 import { Link, useNavigate } from "react-router-dom";
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import { Avatar, MenuItem } from '@mui/material';
-import Menu from '@mui/material/Menu';      
+import Menu from '@mui/material/Menu';
 import UseFirebase from '../../Hooks/UseFirebase';
 
-const TopBar = () => {
+const Topbar = () => {
     const { user, logOut } = UseFirebase()
     const [anchorEl, setAnchorEl] = React.useState(null);
     // const [userName, setUserName] = React.useState("Admin")
@@ -47,6 +47,7 @@ const TopBar = () => {
     // useEffect(() => {
     //     setUserName(user.displayName)
     // }, [user]) 
+
     return (
         <div className="topbar">
             <nav className="topbarWrapper">
@@ -128,4 +129,4 @@ const TopBar = () => {
     );
 };
 
-export default TopBar; 
+export default Topbar; 
