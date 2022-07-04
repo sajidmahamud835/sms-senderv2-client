@@ -11,16 +11,27 @@ const NewUser = () => {
 	const [mobileNumber, setMobileNumber] = useState("");
 	const [address, setAddress] = useState("");
 	const [gender, setGender] = useState("");
-	const [isActiveUser, setIsActiveUser] = useState("");
+	const [isActiveUser, setIsActiveUser] = useState("no");
+	const [imageUrl, setImageUrl] = useState(
+		"https://i.picsum.photos/id/46/200/200.jpg?hmac=lUGWM3WNJB0TQ-OXq3KI1x-TPgKIuViXG4lKHiCGbao"
+	);
 
 	const { user, error, loading, registerByEmailPass } = UseFirebase();
 
+	if (user?.photoURL) {
+		setImageUrl(user?.photoURL);
+	}
+
+	const id = JSON.stringify(Math.round(Math.random() * 100000));
+
 	const userTotalData = {
+		id,
 		userName,
 		mobileNumber,
 		address,
 		gender,
 		isActiveUser,
+		imageUrl,
 	};
 
 	const createUser = (e) => {
@@ -47,11 +58,11 @@ const NewUser = () => {
 				<div className="" style={{ width: "800px" }}>
 					<div className="mt-2">
 						{loading && <h4 className="text-center">Sending...</h4>}
-						{user && (
+						{/* {user && (
 							<Alert variant="success">
 								<h5 className="text-center">User successfully created.</h5>
 							</Alert>
-						)}
+						)} */}
 						{error && (
 							<Alert variant="danger">
 								<h5 className="text-center">{error.message}</h5>
@@ -152,6 +163,7 @@ const NewUser = () => {
 							className="newUserSelect"
 							name="active"
 							id="active"
+							defaultValue={isActiveUser}
 							onBlur={(e) => setIsActiveUser(e.target.value)}
 							required
 						>

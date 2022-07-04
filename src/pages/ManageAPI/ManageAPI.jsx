@@ -56,7 +56,7 @@ const ManageAPI = () => {
 					setMessageIds(data.messageIds);
 					setError("");
 				} else if (data.status === 400) {
-					swal("Error!", "Something is wrong...", "danger");
+					swal("Error!", "Something is wrong...", "error");
 					setMessage("");
 					setError(data.message);
 				}
