@@ -1,14 +1,15 @@
 import { Spinner } from "react-bootstrap";
-
+import './LoadingSpinner.css';
 const LoadingSpinner = () => {
 	return (
-		<div className="d-flex" style={{ height: "90vh" }}>
-			<div className="justify-content-center align-items-center">
+		<div className="screen">
+			<div className="spinner-container" style={{}}>
 				<Spinner
 					animation="border"
 					variant="primary"
 					className="d-block mx-auto"
 					role="status"
+					style={{ width: "70px", height: "70px" }}
 				>
 					<span className="visually-hidden">Loading...</span>
 				</Spinner>

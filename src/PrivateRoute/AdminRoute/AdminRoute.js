@@ -7,8 +7,8 @@ const AdminRoute = ({ children, ...rest }) => {
     const { user, admin, isAdminLoading } = UseFirebase();
     const location = useLocation();
     if (isAdminLoading) {
-        return <div style={{ display: "flex", justifyContent: 'center'  }}><div>
-            <CircularProgress /></div></div>
+        return <div style={{ display: "flex", justifyContent: 'center' }}><div>
+            <CircularProgress /></div></div>;
     }
     if (user.email && admin) {
         return children;
