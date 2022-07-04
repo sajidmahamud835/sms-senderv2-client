@@ -10,8 +10,7 @@ import './AllList.css';
 const AllList = () => {
     const [allList, setAllList] = useState([]);
     const [rowDatas, setRowDatas] = useState([]);
-    const { user } = UseFirebase();
-    console.log(user?.email)
+    const { user } = UseFirebase(); 
 
     const handleDelete = (id) => {
         if (id) {
@@ -124,8 +123,7 @@ const AllList = () => {
                 );
             },
         },
-    ];
-    console.log(rowDatas)
+    ]; 
     return (
         <div className=' allListContainer'>
             <div className="campaignTitleContainer">

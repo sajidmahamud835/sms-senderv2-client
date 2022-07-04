@@ -33,12 +33,10 @@ const UseFirebase = () => {
   };
 
   const registerByEmailPass = (email, password, name, userTotalData) => {
-    // console.log(email, password, name);
     console.log(userTotalData);
     createUserWithEmailAndPassword(auth, email, password)
       .then((result) => {
-        navigate("/");
-        // console.log(result);
+        navigate("/dashboard");
         setUser(result.user);
         // send to database
         saveUser(email, name, userTotalData, "POST");
@@ -57,7 +55,6 @@ const UseFirebase = () => {
   };
 
   const logInEmailPassword = (email, password) => {
-    console.log(email, password);
     signInWithEmailAndPassword(auth, email, password)
       .then((result) => {
         setUser(result.user);
@@ -124,8 +121,6 @@ const UseFirebase = () => {
       setAdmin(true);
     }
   }, [user?.email]);
-
-  // console.log(user?.displayName, "ADmin ?", admin);
 
   return {
     handleGoogleSignIn,

@@ -21,6 +21,7 @@ import "./ExcelToCSV.css";
 //     },
 // ];
 const ExcelToCSV = () => {
+
 	const navigate = useNavigate();
 	const { user } = UseFirebase();
 	// Code for convert csv to json
@@ -31,7 +32,6 @@ const ExcelToCSV = () => {
 
 	const handleOnChange = (e) => {
 		const file = e.target.files[0];
-		// console.log(file);
 		if (file) {
 			fileReader.onload = function (event) {
 				const text = event.target.result;
