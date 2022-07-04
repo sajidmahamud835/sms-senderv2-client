@@ -20,9 +20,9 @@ const AddNumberList = (props) => {
 		const numbers = numberString.split("\n");
 		manageMobileData.twilioNumbers = [...numbers];
 	};
-
 	const handleSubmit = (e) => {
 		e.preventDefault();
+		e.target.receiver.value = ""
 		setIsLoading(true);
 		setMessage("");
 		setError("");
@@ -36,6 +36,7 @@ const AddNumberList = (props) => {
 			.then((res) => res.json())
 			.then((data) => {
 				setChangedData(data);
+				console.log(data);
 				setIsLoading(false);
 				if (data.status === 200) {
 					setMessage(data.message);
@@ -90,6 +91,7 @@ const AddNumberList = (props) => {
 									{isSingle ? (
 										<input
 											id="receiver"
+											name="receiver"
 											type="text"
 											placeholder="Receiver Number..."
 											className="ms-3 ps-2 form-control w-full"

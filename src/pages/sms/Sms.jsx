@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Alert } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import UseFirebase from "../../Hooks/UseFirebase";
@@ -17,9 +17,14 @@ const Sms = () => {
         sender: "",
         message: "",
     });
-    const [myNumbers, setMyNumbers] = useState([
-        "+19034204596", "+19785813348"
-    ])
+    const [myNumbers, setMyNumbers] = useState([])
+    useEffect(() => {
+        fetch("http://localhost:4000/smsApi/numbers")
+        .then(res => res.json())
+        .then(data => {
+            setMyNumbers(data)
+        })
+    }, [])
 
     // console.log(messageIds);
 
@@ -154,8 +159,8 @@ const Sms = () => {
                                     required
                                 >
                                     <option value="saab">None</option>
-                                    {myNumbers.map(myNumber => (
-                                        <option value={myNumber}>{myNumber}</option>
+                                    {myNumbers?.map(myNumber => (
+                                        <option key={myNumber?._id} value={myNumber?.number}>{myNumber?.number}</option>
                                     ))
                                     }
                                 </select>
