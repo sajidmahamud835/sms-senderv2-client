@@ -46,8 +46,7 @@ const Topbar = () => {
 
     // useEffect(() => {
     //     setUserName(user.displayName)
-    // }, [user])
-    // console.log(user.displayName);
+    // }, [user]) 
 
     return (
         <div className="topbar">

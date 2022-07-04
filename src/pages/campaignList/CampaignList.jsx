@@ -29,8 +29,7 @@ const CampaignList = () => {
     setRowData(initArray);
 
   }, [cdata])
-
-  console.log(rowData)
+ 
 
 
   const handleDelete = (id) => {

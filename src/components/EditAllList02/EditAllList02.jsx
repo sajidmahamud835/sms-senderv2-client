@@ -52,8 +52,7 @@ const EditAllList02 = () => {
 			setRowData(listData.array);
 		}
 	}, [listData]);
-
-	console.log(rowData);
+ 
 
 	return (
 		<div className="EditAllListContainer">

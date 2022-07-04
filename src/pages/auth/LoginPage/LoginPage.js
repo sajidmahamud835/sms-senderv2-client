@@ -89,6 +89,7 @@ const LoginPage = () => {
     }
     }, [email, logInEmailPassword, password, disabled, errorMassage, emailErrorMassage, passwordErrorMassage, nameErrorMassage, name, regBtn])
 
+
     // firebase error condition
     useEffect(() => {
         setShowError(false)
@@ -114,6 +115,7 @@ const LoginPage = () => {
             logInEmailPassword(email, password)
            // console.log(email, password)
         }
+
     }
         return (
         <div id='logInPage'>
