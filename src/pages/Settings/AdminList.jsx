@@ -3,7 +3,7 @@ import swal from "sweetalert";
 import SingleAdmin from "./SingleAdmin";
 
 const AdminList = (props) => {
-	const { adminData, setAdminData } = props;
+	const { adminData, setAdminData, dataChanged, setDataChanged } = props;
 
 	// delete a admin
 	const handleDeleteData = (id) => {
@@ -54,6 +54,8 @@ const AdminList = (props) => {
 							key={singleAdminData._id}
 							singleAdminData={singleAdminData}
 							handleDeleteData={handleDeleteData}
+							dataChanged={dataChanged}
+							setDataChanged={setDataChanged}
 						/>
 					))}
 				</tbody>

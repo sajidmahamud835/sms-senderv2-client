@@ -117,7 +117,12 @@ const Settings = () => {
 			</div>
 			<div className="mt-4">
 				<div>
-					<AdminList adminData={adminData} setAdminData={setAdminData} />
+					<AdminList
+						adminData={adminData}
+						setAdminData={setAdminData}
+						dataChanged={dataChanged}
+						setDataChanged={setDataChanged}
+					/>
 				</div>
 			</div>
 		</section>

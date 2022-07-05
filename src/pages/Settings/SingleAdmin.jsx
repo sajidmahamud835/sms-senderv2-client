@@ -10,7 +10,7 @@ const SingleAdmin = (props) => {
 	const [error, setError] = useState("");
 	const [isLoading, setIsLoading] = useState(false);
 
-	const { handleDeleteData } = props;
+	const { handleDeleteData, dataChanged, setDataChanged } = props;
 	const { _id, email } = props.singleAdminData;
 
 	const EditButton = () => {
@@ -41,6 +41,7 @@ const SingleAdmin = (props) => {
 			.then((res) => res.json())
 			.then((data) => {
 				setChangedData(data.data);
+				setDataChanged(!dataChanged);
 				setIsLoading(false);
 				if (data.status === 200) {
 					swal("Good job!", "Data added successfully...", "success");
