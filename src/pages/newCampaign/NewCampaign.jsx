@@ -7,15 +7,15 @@ import "./newCampaign.css";
 const NewCampaign = () => {
 	const { user } = UseFirebase();
 	const [name, setNameInputData] = useState();
-	const [optionInputData, setOptionInputData] = useState();
-	const [campaignMsg, setCampaignNote] = useState();
-	const [startTimeInput, setStartTime] = useState();
+	const [contactList, setContactList] = useState();
+	const [messageBody, setCampaignNote] = useState();
+	const [startTime, setStartTime] = useState();
 	const [endTime, setEndTime] = useState();
 	const [startDate, setStartDate] = useState();
 	const [endDate, setEndDate] = useState();
 	const [status, setStatus] = useState();
 	const [number, setNumber] = useState();
-	const [myNumbers, setMyNumbers] = useState(["+19034204596", "+19785813348"]);
+	const [myNumbers, setMyNumbers] = useState([]);
 	const [numberList, setNumberList] = useState([]);
 	const navigate = useNavigate();
 	useEffect(() => {
@@ -25,6 +25,15 @@ const NewCampaign = () => {
 			.then((data) => setNumberList(data));
 	}, [user?.email]);
 
+	//GET Twilio Numbers
+	useEffect(() => {
+		fetch("http://localhost:4000/smsApi/numbers")
+			.then(res => res.json())
+			.then(data => {
+				setMyNumbers(data);
+			});
+	}, []);
+
 	console.log(numberList);
 
 	const campaignName = (e) => {
@@ -32,7 +41,7 @@ const NewCampaign = () => {
 	};
 
 	const OptionList = (e) => {
-		setOptionInputData(e.target.value);
+		setContactList(e.target.value);
 	};
 
 	const campaignNote = (e) => {
@@ -68,13 +77,15 @@ const NewCampaign = () => {
 		const DraftData = {
 			name,
 			number,
-			optionInputData,
-			campaignMsg,
-			startTimeInput,
+			contactList,
+			messageBody,
+			startTime,
 			endTime,
 			startDate,
 			endDate,
 			status,
+			email: user?.email
+
 		};
 		if (e) {
 			swal({
@@ -138,7 +149,7 @@ const NewCampaign = () => {
 						>
 							<option value="saab">None</option>
 							{myNumbers.map((myNumber) => (
-								<option value={myNumber}>{myNumber}</option>
+								<option value={myNumber.number}>{myNumber.number}</option>
 							))}
 						</select>
 					</div>
