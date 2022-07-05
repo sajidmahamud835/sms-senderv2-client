@@ -13,23 +13,23 @@ const CampaignList = () => {
   useEffect(() => {
     fetch('http://localhost:4000/campaign-list')
       .then(res => res.json())
-      .then(data => setCData(data))
-  }, [])
+      .then(data => setCData(data));
+  }, []);
 
 
   useEffect(() => {
     let id = 1;
-    const initArray = []
+    const initArray = [];
     cdata.map(list => {
-      const newList = { ...list, id: id }
+      const newList = { ...list, id: id };
       id++;
-      initArray.push(newList)
-      return 0
-    })
+      initArray.push(newList);
+      return 0;
+    });
     setRowData(initArray);
 
-  }, [cdata])
- 
+  }, [cdata]);
+
 
 
   const handleDelete = (id) => {
@@ -42,7 +42,7 @@ const CampaignList = () => {
       })
         .then((willAdd) => {
           if (willAdd) {
-            const url = `http://localhost:4000/delete-campaign/${id}`
+            const url = `http://localhost:4000/delete-campaign/${id}`;
             fetch(url, {
               method: 'DELETE'
             })
