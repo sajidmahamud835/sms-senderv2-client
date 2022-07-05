@@ -117,3 +117,65 @@ export const campaignRows = [
     smssent: "232/1000",
   }
 ];
+
+export const SubscriptionsRows = [
+  {
+    id: 0,
+    name: "Subscriptions 1",
+    sold: 123,
+    price: '$ 5700',
+    limit: 500,
+  },
+  {
+    id: 1,
+    name: "Subscriptions 2",
+    sold: 123,
+    price: '$ 5700',
+    limit: 10000,
+  },
+  {
+    id: 2,
+    name: "Subscriptions 3",
+    sold: 123,
+    price: '$ 5700',
+    limit: 1000,
+  },
+  {
+    id: 4,
+    name: "Subscriptions 4",
+    sold: 123,
+    price: '$ 5700',
+    limit: 1000,
+  },
+  {
+    id: 5,
+    name: "Subscriptions 5",
+    sold: 123,
+    price: '$ 5700',
+    limit: 1000,
+  },
+];
+
+export const AllListRows = [
+  {
+    id: 0,
+    name: "List 1",
+    number: 123,
+    Ref: 'Field',
+    campaign: "false"
+  },
+  {
+    id: 1,
+    name: "List 2",
+    number: 123,
+    Ref: 'home',
+    campaign: "true"
+  },
+  {
+    id: 2,
+    name: "List 3",
+    number: 123,
+    Ref: 'Sales',
+    campaign: "true"
+  }
+];

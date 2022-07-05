@@ -1,6 +1,7 @@
+import React from 'react';
 import "./widgetLg.css";
 
-export default function WidgetLg() {
+const WidgetLg = () => {
   const Button = ({ type }) => {
     return <button className={"widgetLgButton " + type}>{type}</button>;
   };
@@ -90,4 +91,6 @@ export default function WidgetLg() {
       </table>
     </div>
   );
-}
+};
+
+export default WidgetLg; 
