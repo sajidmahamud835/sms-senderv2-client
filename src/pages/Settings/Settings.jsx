@@ -1,50 +1,61 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Settings.css";
 import { Alert } from "react-bootstrap";
 import swal from "sweetalert";
+import AdminList from "./AdminList";
 
 const Settings = () => {
 	const [message, setMessage] = useState("");
 	const [error, setError] = useState("");
 	const [isLoading, setIsLoading] = useState(false);
-	const [adminData, setAdminData] = useState({});
-	const [changedData, setChangedData] = useState([]);
+	const [adminData, setAdminData] = useState([]);
 
-	// const handleAccountSID = (e) => {
-	// 	manageApiData.accountSID = e.target.value;
-	// };
-	// const handleAuthToken = (e) => {
-	// 	manageApiData.authToken = e.target.value;
-	// };
+	const [dataChanged, setDataChanged] = useState(true);
+
+	const adminEmail = {
+		email: "",
+		role: "admin",
+	};
+
+	// handle admin email
+	const handleAdminEmail = (e) => {
+		adminEmail.email = e.target.value;
+	};
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		setIsLoading(true);
 		setMessage("");
 		setError("");
-		// fetch(`http://localhost:4000/smsApi/${manageApiData._id}`, {
-		// 	method: "PUT",
-		// 	headers: {
-		// 		"content-type": "application/json",
-		// 	},
-		// 	body: JSON.stringify(manageApiData),
-		// })
-		// 	.then((res) => res.json())
-		// 	.then((data) => {
-		// 		// console.log(data);
-		// 		setIsLoading(false);
-		// 		if (data.status === 200) {
-		// 			swal("Good job!", "Data added successfully...", "success");
-		// 			setMessage(data.message);
-		// 			setMessageIds(data.messageIds);
-		// 			setError("");
-		// 		} else if (data.status === 400) {
-		// 			swal("Error!", "Something is wrong...", "error");
-		// 			setMessage("");
-		// 			setError(data.message);
-		// 		}
-		// 	});
+		fetch(`http://localhost:4000/admins`, {
+			method: "POST",
+			headers: {
+				"content-type": "application/json",
+			},
+			body: JSON.stringify(adminEmail),
+		})
+			.then((res) => res.json())
+			.then((data) => {
+				setIsLoading(false);
+				setDataChanged(!dataChanged);
+				if (data.status === 200) {
+					swal("Good job!", "Data added successfully...", "success");
+					setMessage(data.message);
+					setError("");
+				} else if (data.status === 400) {
+					swal("Error!", "Something is wrong...", "error");
+					setMessage("");
+					setError(data.message);
+				}
+			});
 	};
+
+	useEffect(() => {
+		const url = `http://localhost:4000/admins`;
+		fetch(url)
+			.then((res) => res.json())
+			.then((data) => setAdminData(data));
+	}, [dataChanged]);
 
 	return (
 		<section className="settings m-3 p-3">
@@ -73,11 +84,10 @@ const Settings = () => {
 							</label>
 							<input
 								id="receiver"
-								type="text"
+								type="email"
 								placeholder="Write new admin email..."
-								// defaultValue={manageApiData.accountSID}
 								className="ms-3 ps-2 form-control w-50"
-								// onChange={handleAccountSID}
+								onChange={handleAdminEmail}
 								required
 							/>
 							<div className="" style={{ textAlign: "right" }}>
@@ -106,12 +116,9 @@ const Settings = () => {
 				</div>
 			</div>
 			<div className="mt-4">
-				{/* <div>
-					<ManageAPIList
-						changedData={changedData}
-						setChangedData={setChangedData}
-					/>
-				</div> */}
+				<div>
+					<AdminList adminData={adminData} setAdminData={setAdminData} />
+				</div>
 			</div>
 		</section>
 	);
