@@ -26,6 +26,7 @@ import EditSubscriptions from "./pages/EditSubscriptions/EditSubscriptions";
 import AllList from "./pages/AllList/AllList";
 import EditAllList02 from "./components/EditAllList02/EditAllList02";
 import NewSubscriptions from "./pages/NewSubscriptions/NewSubscriptions";
+import Settings from "./pages/Settings/Settings";
 
 function App() {
   return (
@@ -52,6 +53,7 @@ function App() {
         <Route path="/manageAPI" element={<ManageAPI />}></Route>
         <Route path="/apiAnalytics" element={<ApiAnalytics />}></Route>
         <Route path="/reports" element={<Reports />}></Route>
+        <Route path="/settings" element={<Settings />}></Route>
         {/* This Route For General User */}
         <Route path="/profile" element={<Profile />}></Route>
         <Route path="/myCampaigns" element={<MyCampaigns />}></Route>
