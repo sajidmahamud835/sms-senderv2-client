@@ -180,6 +180,25 @@ const User = () => {
 											className="userUpdateInput"
 										/>
 									</div>
+									<div className="userUpdateItem">
+										<label>Active User?</label>
+										<select
+											className="newUserSelect"
+											name="active"
+											id="active"
+											defaultValue={userData.isActiveUser}
+											onChange={(e) =>
+												setInputFieldData({
+													...inputFieldData,
+													isActiveUser: e.target.value,
+												})
+											}
+											required
+										>
+											<option value="yes">Yes</option>
+											<option value="no">No</option>
+										</select>
+									</div>
 								</div>
 								<div className="userUpdateRight">
 									<div className="userUpdateUpload">
