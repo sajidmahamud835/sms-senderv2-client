@@ -40,6 +40,7 @@ const SingleAdmin = (props) => {
 		})
 			.then((res) => res.json())
 			.then((data) => {
+				setIsEdit(false);
 				setChangedData(data.data);
 				setDataChanged(!dataChanged);
 				setIsLoading(false);
@@ -67,10 +68,11 @@ const SingleAdmin = (props) => {
 							) : (
 								<div className="d-flex">
 									<input
-										type="text"
+										type="email"
 										defaultValue={email}
 										onBlur={handleNumberChange}
 										className="form-control w-50"
+										required
 									/>
 									<div>
 										<button className="btn btn-primary ms-2" type="submit">
