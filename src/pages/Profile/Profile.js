@@ -2,7 +2,6 @@ import { CalendarToday, LocationSearching, MailOutline, PermIdentity, PhoneAndro
 import "./Profile.css";
 import React, { useEffect, useState } from "react";
 import UseFirebase from "../../Hooks/UseFirebase";
-import { userData } from "../../dummyData";
 
 const Profile = () => {
 	const { user, loading } = UseFirebase();
@@ -15,7 +14,6 @@ const Profile = () => {
 	useEffect(() => {
 		if (!loading) {
 			const url = `http://localhost:4000/users/email/${user.email}`;
-			console.log(url);
 			fetch(url)
 				.then((res) => res.json())
 				.then((data) => {
