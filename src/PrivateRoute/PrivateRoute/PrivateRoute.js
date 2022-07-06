@@ -1,6 +1,6 @@
-import { CircularProgress } from "@mui/material";
 import React from "react";
 import { Navigate, useLocation } from "react-router-dom";
+import LoadingSpinner from "../../components/loadingSpinner/LoadingSpinner";
 import UseFirebase from "../../Hooks/UseFirebase";
 
 const PrivateRoute = ({ children, ...rest }) => {
@@ -13,7 +13,7 @@ const PrivateRoute = ({ children, ...rest }) => {
 		return (
 			<div style={{ display: "flex", justifyContent: "center" }}>
 				<div>
-					<CircularProgress />
+					<LoadingSpinner />
 				</div>
 			</div>
 		);

@@ -3,7 +3,7 @@ import './LoadingSpinner.css';
 const LoadingSpinner = () => {
 	return (
 		<div className="screen">
-			<div className="spinner-container" style={{}}>
+			<div className="spinner-container">
 				<Spinner
 					animation="border"
 					variant="primary"

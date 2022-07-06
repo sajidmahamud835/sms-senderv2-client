@@ -44,16 +44,16 @@
 }
 
 .widgetLgButton.Approved{
-    background-color: #e5faf2;
+    background-color: #c7fee9;
     color: #3bb077;
 }
 .widgetLgButton.Declined{
-    background-color: #fff0f1;
+    background-color: #fcccd0;
     color: #d95087;
 
 }
 .widgetLgButton.Pending{
-    background-color: #ebf1fe;
+    background-color: #c3d6ff;
     color: #2a7ade;
 
 }

@@ -1,10 +1,20 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const SingleData = (props) => {
-	const { name, email, status } = props.singleCData;
+	const { _id, name, email, status } = props.singleCData;
 
 	const Button = ({ type }) => {
-		return <button className={"widgetLgButton " + type}>{type}</button>;
+		return (
+			<button className={"widgetLgButton " + type}>
+				<Link
+					to={`/campaign/` + _id}
+					className="text-dark text-decoration-none"
+				>
+					{type}
+				</Link>
+			</button>
+		);
 	};
 
 	return (
