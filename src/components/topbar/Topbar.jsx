@@ -106,8 +106,9 @@ const Topbar = () => {
 										) : (
 											<Avatar
 												style={{ color: "black" }}
-												{...stringAvatar("Samsul Alam")}
+												{...stringAvatar(user.displayName)}
 											/>
+											// user.displayName?.split(" ")[0][0] + user.displayName?.split(" ")[1][0]
 										)}
 									</Button>
 									<Menu
