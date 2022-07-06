@@ -9,10 +9,12 @@ const SingleData = (props) => {
 		<>
 			{isActiveUser === "no" && (
 				<li className="widgetSmListItem">
-					<img src={imageUrl} alt={displayName} className="widgetSmImg" />
-					<div className="widgetSmUser">
-						<span className="widgetSmUsername">{displayName}</span>
-						<span className="widgetSmUserTitle">Engineer</span>
+					<div className="d-flex align-items-center">
+						<img src={imageUrl} alt={displayName} className="widgetSmImg" />
+						<div className="widgetSmUser ms-3">
+							<span className="widgetSmUsername">{displayName}</span>
+							<span className="widgetSmUserTitle">Engineer</span>
+						</div>
 					</div>
 					<Link to={`/user/${id}`} className="widgetSmButton btn">
 						<Visibility className="widgetSmIcon" />
