@@ -7,8 +7,11 @@ import Button from "@mui/material/Button";
 import { Avatar, MenuItem } from "@mui/material";
 import Menu from "@mui/material/Menu";
 import UseFirebase from "../../Hooks/UseFirebase";
+import { IconButton } from "@material-ui/core";
+import MenuIcon from '@mui/icons-material/Menu';
+import CloseIcon from '@mui/icons-material/Close';
 
-const Topbar = () => {
+const Topbar = ({ small, setClose, close }) => {
 	const { admin, user, logOut } = UseFirebase();
 	const [anchorEl, setAnchorEl] = React.useState(null);
 	// const [userName, setUserName] = React.useState("Admin")
@@ -48,6 +51,15 @@ const Topbar = () => {
 		<div className="topbar">
 			<nav className="topbarWrapper">
 				<div className="topLeft">
+					{small &&
+						// <button  className="campaignAddButton">{close ? "open" : "close"}</button>
+						// <IconButton onClick={() => setClose(!close)} aria-label="menu" style={{ color: 'white' }} size="large">
+						// 	<MenuIcon fontSize="inherit" />
+						// </IconButton>
+						<button onClick={() => setClose(!close)} className="menuBtn">
+							{close ? <MenuIcon className="menuIcon" /> : <CloseIcon className="menuIcon" />}
+						</button>
+					}
 					<span className="logo">SMS Sender App</span>
 				</div>
 				<div className="topRight">
