@@ -9,7 +9,7 @@ import Menu from "@mui/material/Menu";
 import UseFirebase from "../../Hooks/UseFirebase";
 
 const Topbar = () => {
-	const { user, logOut } = UseFirebase();
+	const { admin, user, logOut } = UseFirebase();
 	const [anchorEl, setAnchorEl] = React.useState(null);
 	// const [userName, setUserName] = React.useState("Admin")
 	// open
@@ -64,19 +64,21 @@ const Topbar = () => {
 						<ul className="dropdown-menu" aria-labelledby="NotificationsMenu">
 							{/* <li><span className="dropdown-item">We have no notification for you today.</span></li> */}
 							<li>
-								<Link to="/myProfile" className="dropdown-item" type="button">
+								<Link to="/Profile" className="dropdown-item" type="button">
 									Welcome to our website. Please update your profile to enjoy
 									all our features.
 								</Link>
 							</li>
 						</ul>
 					</div>
-					<div
-						onClick={() => navigate("/settings", { replace: true })}
-						className="topbarIconContainer"
-					>
-						<Settings />
-					</div>
+					{admin &&
+						<div
+							onClick={() => navigate("/settings", { replace: true })}
+							className="topbarIconContainer"
+						>
+							<Settings />
+						</div>
+					}
 
 					<Box sx={{ flexGrow: 0 }}>
 						{
