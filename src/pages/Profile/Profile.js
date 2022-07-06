@@ -1,11 +1,4 @@
-import {
-	CalendarToday,
-	LocationSearching,
-	MailOutline,
-	PermIdentity,
-	PhoneAndroid,
-	Publish,
-} from "@material-ui/icons";
+import { CalendarToday, LocationSearching, MailOutline, PermIdentity, PhoneAndroid, Publish } from "@material-ui/icons";
 import "./Profile.css";
 import React, { useEffect, useState } from "react";
 import UseFirebase from "../../Hooks/UseFirebase";
@@ -67,24 +60,28 @@ const Profile = () => {
 					<div className="userContainer">
 						<div className="userShow">
 							<div className="userShowTop">
-								<img
-									src={userData.imageUrl}
-									alt={userData.displayName}
-									className="userShowImg"
-								/>
+								{userData.imageUrl &&
+									<img
+										src={userData.imageUrl}
+										alt={userData.displayName}
+										className="userShowImg"
+									/>
+								}
 								<div className="userShowTopTitle">
 									<span className="userShowUsername">
 										{userData.displayName}
 									</span>
-									<span className="userShowUserTitle">Software Engineer</span>
+									<span className="userShowUserTitle">User</span>
 								</div>
 							</div>
 							<div className="userShowBottom">
 								<span className="userShowTitle">Account Details</span>
-								<div className="userShowInfo">
-									<PermIdentity className="userShowIcon" />
-									<span className="userShowInfoTitle">{userData.userName}</span>
-								</div>
+								{userData.userName &&
+									<div className="userShowInfo">
+										<PermIdentity className="userShowIcon" />
+										<span className="userShowInfoTitle">{userData.userName}</span>
+									</div>
+								}
 								{userData.accountCreated && (
 									<div className="userShowInfo">
 										<CalendarToday className="userShowIcon" />
@@ -94,20 +91,24 @@ const Profile = () => {
 									</div>
 								)}
 								<span className="userShowTitle">Contact Details</span>
-								<div className="userShowInfo">
-									<PhoneAndroid className="userShowIcon" />
-									<span className="userShowInfoTitle">
-										{userData.mobileNumber}
-									</span>
-								</div>
+								{userData.mobileNumber &&
+									<div className="userShowInfo">
+										<PhoneAndroid className="userShowIcon" />
+										<span className="userShowInfoTitle">
+											{userData.mobileNumber}
+										</span>
+									</div>
+								}
 								<div className="userShowInfo">
 									<MailOutline className="userShowIcon" />
 									<span className="userShowInfoTitle">{userData.email}</span>
 								</div>
-								<div className="userShowInfo">
-									<LocationSearching className="userShowIcon" />
-									<span className="userShowInfoTitle">{userData.address}</span>
-								</div>
+								{userData.address &&
+									<div className="userShowInfo">
+										<LocationSearching className="userShowIcon" />
+										<span className="userShowInfoTitle">{userData.address}</span>
+									</div>
+								}
 							</div>
 						</div>
 						<div className="userUpdate">
@@ -182,15 +183,19 @@ const Profile = () => {
 								</div>
 								<div className="userUpdateRight">
 									<div className="userUpdateUpload">
-										<img
-											className="userUpdateImg"
-											src={userData.imageUrl}
-											alt={userData.displayName}
-										/>
-										<label htmlFor="file">
-											<Publish className="userUpdateIcon" />
-										</label>
-										<input type="file" id="file" style={{ display: "none" }} />
+										{userData.imageUrl &&
+											<div>
+												<img
+													className="userUpdateImg"
+													src={userData.imageUrl}
+													alt={userData.displayName}
+												/>
+												<label htmlFor="file">
+													<Publish className="userUpdateIcon" />
+												</label>
+												<input type="file" id="file" style={{ display: "none" }} />
+											</div>
+										}
 									</div>
 									<button type="submit" className="userUpdateButton">
 										Update

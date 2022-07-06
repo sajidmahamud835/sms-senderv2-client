@@ -64,7 +64,7 @@ const Topbar = () => {
 						<ul className="dropdown-menu" aria-labelledby="NotificationsMenu">
 							{/* <li><span className="dropdown-item">We have no notification for you today.</span></li> */}
 							<li>
-								<Link to="/Profile" className="dropdown-item" type="button">
+								<Link to="/profile" className="dropdown-item" type="button">
 									Welcome to our website. Please update your profile to enjoy
 									all our features.
 								</Link>
