@@ -14,7 +14,7 @@ const WidgetLg = () => {
 	console.log(cdata);
 
 	return (
-		<div className="widgetLg">
+		<div className="widgetLg" style={{ width: "100%" }}>
 			<h3 className="widgetLgTitle">Review Latest Campaigns</h3>
 			<table className="widgetLgTable mt-3">
 				<tr className="widgetLgTr">

@@ -2,6 +2,7 @@ import { CalendarToday, LocationSearching, MailOutline, PermIdentity, PhoneAndro
 import "./Profile.css";
 import React, { useEffect, useState } from "react";
 import UseFirebase from "../../Hooks/UseFirebase";
+import { Grid } from "@material-ui/core";
 
 const Profile = () => {
 	const { user, loading } = UseFirebase();
@@ -56,151 +57,158 @@ const Profile = () => {
 				)}
 				{!isLoading && (
 					<div className="userContainer">
-						<div className="userShow">
-							<div className="userShowTop">
-								{userData.imageUrl &&
-									<img
-										src={userData.imageUrl}
-										alt={userData.displayName}
-										className="userShowImg"
-									/>
-								}
-								<div className="userShowTopTitle">
-									<span className="userShowUsername">
-										{userData.displayName}
-									</span>
-									<span className="userShowUserTitle">User</span>
-								</div>
-							</div>
-							<div className="userShowBottom">
-								<span className="userShowTitle">Account Details</span>
-								{userData.userName &&
-									<div className="userShowInfo">
-										<PermIdentity className="userShowIcon" />
-										<span className="userShowInfoTitle">{userData.userName}</span>
-									</div>
-								}
-								{userData.accountCreated && (
-									<div className="userShowInfo">
-										<CalendarToday className="userShowIcon" />
-										<span className="userShowInfoTitle">
-											{userData.accountCreated}
-										</span>
-									</div>
-								)}
-								<span className="userShowTitle">Contact Details</span>
-								{userData.mobileNumber &&
-									<div className="userShowInfo">
-										<PhoneAndroid className="userShowIcon" />
-										<span className="userShowInfoTitle">
-											{userData.mobileNumber}
-										</span>
-									</div>
-								}
-								<div className="userShowInfo">
-									<MailOutline className="userShowIcon" />
-									<span className="userShowInfoTitle">{userData.email}</span>
-								</div>
-								{userData.address &&
-									<div className="userShowInfo">
-										<LocationSearching className="userShowIcon" />
-										<span className="userShowInfoTitle">{userData.address}</span>
-									</div>
-								}
-							</div>
-						</div>
-						<div className="userUpdate">
-							<span className="userUpdateTitle">Edit</span>
-							<form onSubmit={handleSubmit} className="userUpdateForm">
-								<div className="userUpdateLeft">
-									<div className="userUpdateItem">
-										<label>Username</label>
-										<input
-											type="text"
-											defaultValue={userData.userName}
-											onChange={(e) =>
-												setInputFieldData({
-													...inputFieldData,
-													userName: e.target.value,
-												})
-											}
-											className="userUpdateInput"
-										/>
-									</div>
-									<div className="userUpdateItem">
-										<label>Full Name</label>
-										<input
-											type="text"
-											defaultValue={userData.displayName}
-											onChange={(e) =>
-												setInputFieldData({
-													...inputFieldData,
-													displayName: e.target.value,
-												})
-											}
-											className="userUpdateInput"
-										/>
-									</div>
-									<div className="userUpdateItem">
-										<label>Email</label>
-										<input
-											type="text"
-											defaultValue={userData.email}
-											className="userUpdateInput"
-											disabled
-										/>
-									</div>
-									<div className="userUpdateItem">
-										<label>Phone</label>
-										<input
-											type="text"
-											defaultValue={userData.mobileNumber}
-											onChange={(e) =>
-												setInputFieldData({
-													...inputFieldData,
-													mobileNumber: e.target.value,
-												})
-											}
-											className="userUpdateInput"
-										/>
-									</div>
-									<div className="userUpdateItem">
-										<label>Address</label>
-										<input
-											type="text"
-											defaultValue={userData.address}
-											onChange={(e) =>
-												setInputFieldData({
-													...inputFieldData,
-													address: e.target.value,
-												})
-											}
-											className="userUpdateInput"
-										/>
-									</div>
-								</div>
-								<div className="userUpdateRight">
-									<div className="userUpdateUpload">
+						<Grid container spacing={2}>
+							<Grid item md={12} lg={5} style={{ width: "100%" }}>
+								<div className="userShow">
+									<div className="userShowTop">
 										{userData.imageUrl &&
-											<div>
-												<img
-													className="userUpdateImg"
-													src={userData.imageUrl}
-													alt={userData.displayName}
-												/>
-												<label htmlFor="file">
-													<Publish className="userUpdateIcon" />
-												</label>
-												<input type="file" id="file" style={{ display: "none" }} />
+											<img
+												src={userData.imageUrl}
+												alt={userData.displayName}
+												className="userShowImg"
+											/>
+										}
+										<div className="userShowTopTitle">
+											<span className="userShowUsername">
+												{userData.displayName}
+											</span>
+											<span className="userShowUserTitle">User</span>
+										</div>
+									</div>
+									<div className="userShowBottom">
+										<span className="userShowTitle">Account Details</span>
+										{userData.userName &&
+											<div className="userShowInfo">
+												<PermIdentity className="userShowIcon" />
+												<span className="userShowInfoTitle">{userData.userName}</span>
+											</div>
+										}
+										{userData.accountCreated && (
+											<div className="userShowInfo">
+												<CalendarToday className="userShowIcon" />
+												<span className="userShowInfoTitle">
+													{userData.accountCreated}
+												</span>
+											</div>
+										)}
+										<span className="userShowTitle">Contact Details</span>
+										{userData.mobileNumber &&
+											<div className="userShowInfo">
+												<PhoneAndroid className="userShowIcon" />
+												<span className="userShowInfoTitle">
+													{userData.mobileNumber}
+												</span>
+											</div>
+										}
+										<div className="userShowInfo">
+											<MailOutline className="userShowIcon" />
+											<span className="userShowInfoTitle">{userData.email}</span>
+										</div>
+										{userData.address &&
+											<div className="userShowInfo">
+												<LocationSearching className="userShowIcon" />
+												<span className="userShowInfoTitle">{userData.address}</span>
 											</div>
 										}
 									</div>
-									<button type="submit" className="userUpdateButton">
-										Update
-									</button>
 								</div>
-							</form>
-						</div>
+							</Grid>
+							<Grid item md={12} lg={7} style={{ width: "100%" }}>
+								<div className="userUpdate">
+									<span className="userUpdateTitle">Edit</span>
+									<form onSubmit={handleSubmit} className="userUpdateForm">
+										<div className="userUpdateLeft">
+											<div className="userUpdateItem">
+												<label>Username</label>
+												<input
+													type="text"
+													defaultValue={userData.userName}
+													onChange={(e) =>
+														setInputFieldData({
+															...inputFieldData,
+															userName: e.target.value,
+														})
+													}
+													className="userUpdateInput"
+												/>
+											</div>
+											<div className="userUpdateItem">
+												<label>Full Name</label>
+												<input
+													type="text"
+													defaultValue={userData.displayName}
+													onChange={(e) =>
+														setInputFieldData({
+															...inputFieldData,
+															displayName: e.target.value,
+														})
+													}
+													className="userUpdateInput"
+												/>
+											</div>
+											<div className="userUpdateItem">
+												<label>Email</label>
+												<input
+													type="text"
+													defaultValue={userData.email}
+													className="userUpdateInput"
+													disabled
+												/>
+											</div>
+											<div className="userUpdateItem">
+												<label>Phone</label>
+												<input
+													type="text"
+													defaultValue={userData.mobileNumber}
+													onChange={(e) =>
+														setInputFieldData({
+															...inputFieldData,
+															mobileNumber: e.target.value,
+														})
+													}
+													className="userUpdateInput"
+												/>
+											</div>
+											<div className="userUpdateItem">
+												<label>Address</label>
+												<input
+													type="text"
+													defaultValue={userData.address}
+													onChange={(e) =>
+														setInputFieldData({
+															...inputFieldData,
+															address: e.target.value,
+														})
+													}
+													className="userUpdateInput"
+												/>
+											</div>
+										</div>
+										<div className="userUpdateRight">
+											<div className="userUpdateUpload">
+												{userData.imageUrl &&
+													<div>
+														<img
+															className="userUpdateImg"
+															src={userData.imageUrl}
+															alt={userData.displayName}
+														/>
+														<label htmlFor="file">
+															<Publish className="userUpdateIcon" />
+														</label>
+														<input type="file" id="file" style={{ display: "none" }} />
+													</div>
+												}
+											</div>
+											<button type="submit" className="userUpdateButton">
+												Update
+											</button>
+										</div>
+									</form>
+								</div>
+							</Grid>
+						</Grid>
+
 					</div>
 				)}
 			</div>
