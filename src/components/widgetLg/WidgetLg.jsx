@@ -18,10 +18,8 @@ const WidgetLg = () => {
 			<h3 className="widgetLgTitle">Review Latest Campaigns</h3>
 			<table className="widgetLgTable mt-3">
 				<tr className="widgetLgTr">
-					<th className="widgetLgTh">User</th>
 					<th className="widgetLgTh">Campaign</th>
-					<th className="widgetLgTh">Date Created</th>
-					<th className="widgetLgTh">Contacts</th>
+					<th className="widgetLgTh">Start Date</th>
 					<th className="widgetLgTh">Status</th>
 				</tr>
 				{cdata.map((singleCData) => (

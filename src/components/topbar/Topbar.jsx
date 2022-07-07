@@ -109,7 +109,7 @@ const Topbar = ({ small, setClose, close }) => {
 										aria-expanded={open ? "true" : undefined}
 										onClick={handleClick}
 									>
-										{user.photoURL ? (
+										{true ? (
 											<img
 												src={user.photoURL}
 												style={{ borderRadius: "50%", width: "50%" }}
@@ -122,7 +122,6 @@ const Topbar = ({ small, setClose, close }) => {
 												{...stringAvatar(user.displayName ? (user.displayName) : ("Sajid Mahamud"))}
 
 											/>
-											// user.displayName?.split(" ")[0][0] + user.displayName?.split(" ")[1][0]
 										)}
 									</Button>
 									<Menu
