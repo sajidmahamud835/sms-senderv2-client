@@ -127,23 +127,23 @@ const NewCampaign = () => {
 			<div className="card shadow px-5 py-4 my-4">
 				<form onSubmit={fromSubmit} className="addCampaignForm">
 					<h1>Create A Campaign</h1>
-					<div className="py-1 addCampaignItem d-flex justify-content-between align-items-center my-3">
+					<div className="my-4 d-flex justify-content-between my-3 flex-lg-row flex-column">
 						<label htmlFor="lists">Name :</label>
 						<input
-							className="m-0 ms-3 ps-2 w-75 form-control"
+							className="m-0 ps-2 w-75 form-control"
 							required
 							onBlur={campaignName}
 							type="text"
 							placeholder="Campaign Name"
 						/>
 					</div>
-					<div className="py-1 d-flex justify-content-between align-items-center my-3">
+					<div className="my-4 d-flex justify-content-between my-3 flex-lg-row flex-column">
 						<label htmlFor="receiver" className="">
 							From:
 						</label>
 						<select
 							id="receiver"
-							className="ms-3 ps-2 form-control w-75"
+							className="ps-2 form-control w-75"
 							onBlur={handleSender}
 							required
 						>
@@ -153,7 +153,7 @@ const NewCampaign = () => {
 							))}
 						</select>
 					</div>
-					<div className="py-1 addCampaignItem my-3 d-flex justify-content-between align-items-center">
+					<div className="my-4 d-flex justify-content-between my-3 flex-lg-row flex-column">
 						<label htmlFor="lists">Contact List :</label>
 						<select
 							name="lists"
@@ -178,7 +178,7 @@ const NewCampaign = () => {
 							className="form-control"
 						></textarea>
 					</div>
-					<div className="py-1 inputContainer d-flex justify-content-between align-items-center my-3">
+					<div className="py-1 inputContainer d-flex justify-content-between  my-3 flex-lg-row flex-column">
 						<div>
 							<label className="pe-3">Start Time</label>
 							<input required onBlur={StartTime} className="form-control" type="time" name="startTime" />
@@ -188,7 +188,7 @@ const NewCampaign = () => {
 							<input required onBlur={EndTime} className="form-control" type="time" name="endTime" />
 						</div>
 					</div>
-					<div className="py-1 inputContainer d-flex justify-content-between align-items-center my-3">
+					<div className="py-1 inputContainer d-flex justify-content-between  my-3 flex-lg-row flex-column">
 						<div>
 							<label className="pe-3">Start Date</label>
 							<input required onBlur={StartDate} className="form-control" type="date" name="starDate" />
@@ -198,7 +198,7 @@ const NewCampaign = () => {
 							<input required onBlur={EndDate} className="form-control" type="date" name="endDate" />
 						</div>
 					</div>
-					<div className="d-flex justify-content-between mt-5">
+					<div className="d-flex justify-content-between mt-5 flex-lg-row flex-column">
 						<button
 							type="submit"
 							onClick={SavedDraft}

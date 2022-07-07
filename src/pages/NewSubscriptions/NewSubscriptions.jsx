@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import './NewSubscriptions.css'
+import './NewSubscriptions.css';
+
 import swal from 'sweetalert';
 import { useNavigate } from 'react-router-dom';
 import UseFirebase from '../../Hooks/UseFirebase';
@@ -9,7 +10,7 @@ const NewSubscriptions = () => {
     const [Price, setPackagePrice] = useState();
     const [SubscriptionsNote, setSubscriptionsNote] = useState();
     const [SmsLimit, setPackageSmsLimit] = useState();
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
     const PackageName = (e) => {
         setNameInputData(e.target.value);
@@ -55,8 +56,8 @@ const NewSubscriptions = () => {
                             .then((data) => {
                                 swal("Campaign is added", {
                                     icon: "success"
-                                })
-                                navigate('/manage-subscriptions')
+                                });
+                                navigate('/manage-subscriptions');
                             });
 
                     } else {
@@ -71,50 +72,58 @@ const NewSubscriptions = () => {
 
     return (
         <div className="newCampaign">
-            <form onSubmit={fromSubmit} className="addCampaignForm">
-                <h1>Create A Package</h1>
-                <div className="addCampaignItem align-items-center my-3">
-                    <label htmlFor="lists">Package Name :</label>
-                    <input
-                        required
-                        onBlur={PackageName}
-                        type="text"
-                        placeholder="Package Name"
-                    />
-                </div>
-                <div className="my-3">
-                    <label htmlFor="lists" className='d-block'>Package Price :</label>
-                    <input
-                        required
-                        onBlur={PackagePrice}
-                        type="number"
-                        placeholder="Package Price"
-                    />
-                </div>
-                <div className="my-3">
-                    <label htmlFor="lists" className='d-block'>Package SMS Limit :</label>
-                    <input
-                        required
-                        onBlur={PackageSmsLimit}
-                        type="number"
-                        placeholder="Package Price"
-                    />
-                </div>
-                <div className="addCampaignItem  my-3">
-                    <label className="d-block py-3">Message :</label>
-                    <textarea
-                        rows="4" cols="50"
-                        onBlur={campaignNote}
-                        placeholder="Notes about campaign ....."
-                    ></textarea>
-                </div>
-                <button
-                    type="submit"
-                    className="m-5"
-                >
-                    Add Subscription
-                </button>
-            </form>
+            <div className="card shadow px-5 py-4 my-4">
+                <form onSubmit={fromSubmit} className="addCampaignForm">
+                    <h1>Create A Package</h1>
+                    <div className="my-4 d-flex justify-content-between my-3 flex-lg-row flex-column">
+                        <label htmlFor="lists">Package Name :</label>
+                        <input
+                            className="ps-2 form-control w-75"
+                            required
+                            onBlur={PackageName}
+                            type="text"
+                            placeholder="Package Name"
+                        />
+                    </div>
+                    <div className="my-4 d-flex justify-content-between my-3 flex-lg-row flex-column">
+                        <label htmlFor="lists" className='d-block'>Package Price :</label>
+                        <input
+                            className="ps-2 form-control w-75"
+                            required
+                            onBlur={PackagePrice}
+                            type="number"
+                            placeholder="Package Price"
+                        />
+                    </div>
+                    <div className="my-4 d-flex justify-content-between my-3 flex-lg-row flex-column">
+                        <label htmlFor="lists" className='d-block'>SMS Limit :</label>
+                        <input
+                            className="ps-2 form-control w-75"
+                            required
+                            onBlur={PackageSmsLimit}
+                            type="number"
+                            placeholder="Package SMS Limit"
+                        />
+                    </div>
+                    <div className="my-4 d-flex justify-content-between my-3 flex-lg-row flex-column">
+                        <label className="d-block py-3">Message :</label>
+                        <textarea
+                            className="ps-2 form-control w-75"
+                            rows="4" cols="50"
+                            onBlur={campaignNote}
+                            placeholder="Notes about subscription ....."
+                        ></textarea>
+                    </div>
+                    <div className="d-flex justify-content-center">
+                        <button
+                            type="submit"
+                            className="m-5 addCampaignButton"
+                        >
+                            Add Subscription
+                        </button>
+                    </div>
+                </form>
+            </div>
         </div>
     );
 };
