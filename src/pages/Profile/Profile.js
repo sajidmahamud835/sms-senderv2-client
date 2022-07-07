@@ -152,7 +152,7 @@ const Profile = () => {
 													type="text"
 													defaultValue={userData.email}
 													className="userUpdateInput"
-													disabled
+													readOnly
 												/>
 											</div>
 											<div className="userUpdateItem">
