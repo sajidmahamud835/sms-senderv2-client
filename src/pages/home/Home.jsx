@@ -5,6 +5,7 @@ import { userData } from "../../dummyData";
 import WidgetSm from "../../components/widgetSm/WidgetSm";
 import WidgetLg from "../../components/widgetLg/WidgetLg";
 import React from 'react';
+import { Grid } from "@material-ui/core";
 
 const Home = () => {
   return (
@@ -12,8 +13,14 @@ const Home = () => {
       <FeaturedInfo />
       <Chart data={userData} title="User Analytics" grid dataKey="Active User" />
       <div className="homeWidgets">
-        <WidgetSm />
-        <WidgetLg />
+        <Grid container spacing={1}>
+          <Grid item sm={12} md={6}>
+            <WidgetSm />
+          </Grid>
+          <Grid item sm={12} md={6}>
+            <WidgetLg />
+          </Grid>
+        </Grid>
       </div>
     </div>
   );

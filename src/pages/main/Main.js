@@ -5,10 +5,11 @@ import { Outlet } from 'react-router-dom';
 import Sidebar from '../../components/sidebar/Sidebar';
 import TopBar from '../../components/topbar/Topbar';
 import useWindowDimensions from '../../Hooks/useWindowDimensions';
+import "./Main.css";
 
 const Main = () => {
     const [small, setSmall] = useState(false);
-    const [close, setClose] = useState(false);
+    const [close, setClose] = useState(true);
     const { width } = useWindowDimensions();
 
     useEffect(() => {
@@ -28,10 +29,10 @@ const Main = () => {
                     <Grid container spacing={2}>
                         {!small &&
                             <>
-                                <Grid item sm={12} md={4}>
+                                <Grid item sm={12} md={3}>
                                     <Sidebar setClose={setClose} />
                                 </Grid>
-                                <Grid item sm={12} md={8}>
+                                <Grid item sm={12} md={9}>
                                     <Outlet />
                                 </Grid>
                             </>
@@ -39,12 +40,12 @@ const Main = () => {
                         {small &&
                             <>
                                 {!close &&
-                                    <Grid item sm={12} md={4}>
+                                    <Grid item sm={12} md={3}>
                                         <Sidebar setClose={setClose} />
                                     </Grid>
                                 }
                                 {close &&
-                                    <Grid item sm={12} md={8}>
+                                    <Grid item sm={12} md={9}>
                                         <Outlet />
                                     </Grid>
                                 }

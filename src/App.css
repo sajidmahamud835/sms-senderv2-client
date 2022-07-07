@@ -4,6 +4,9 @@
     margin-top: 10px;
 }
 
+.MuiDataGrid-main {
+    min-height: 70vh;
+}
 
 .link {
     text-decoration: none;
