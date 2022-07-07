@@ -39,7 +39,7 @@ function App() {
         <Route path="/users" element={<UserList />}></Route>
         <Route path="/sms" element={<Sms />}></Route>
         <Route path="/excel-to-csv" element={<ExcelToCSV />}></Route>
-        <Route path="/all-lists" element={<AllList />}></Route>
+        {/* <Route path="/all-lists" element={<AllList />}></Route> */}
         {/* <Route path="/edit-all-lists/:Id" element={<EditAllList />}></Route> */}
         <Route path="/edit-all-lists/:Id" element={<EditAllList02 />}></Route>
         <Route path="/user/:userId" element={<User />}></Route>
@@ -48,6 +48,7 @@ function App() {
         <Route path="/campaign/:Id" element={<Campaign />}></Route>
         <Route path="/new-campaign" element={<NewCampaign />}></Route>
         <Route path="/manage-subscriptions" element={<ManageSubscriptions />}></Route>
+        <Route path="/all-contacts-lists" element={<AllList />}></Route>
         <Route path="/edit-subscriptions/:Id" element={<EditSubscriptions />}></Route>
         <Route path="/new-subscriptions" element={<NewSubscriptions />}></Route>
         <Route path="/manageAPI" element={<ManageAPI />}></Route>
