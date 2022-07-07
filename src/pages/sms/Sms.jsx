@@ -1,3 +1,4 @@
+import { Box } from "@mui/system";
 import { useEffect, useState } from "react";
 import { Alert } from "react-bootstrap";
 import { Link } from "react-router-dom";
@@ -5,7 +6,7 @@ import UseFirebase from "../../Hooks/UseFirebase";
 import "./sms.css";
 
 const Sms = () => {
-    const { user } = UseFirebase()
+    const { user } = UseFirebase();
     const [isSingle, setIsSingle] = useState(true);
     const [message, setMessage] = useState("");
     const [error, setError] = useState("");
@@ -17,14 +18,14 @@ const Sms = () => {
         sender: "",
         message: "",
     });
-    const [myNumbers, setMyNumbers] = useState([])
+    const [myNumbers, setMyNumbers] = useState([]);
     useEffect(() => {
         fetch("http://localhost:4000/smsApi/numbers")
-        .then(res => res.json())
-        .then(data => {
-            setMyNumbers(data)
-        })
-    }, [])
+            .then(res => res.json())
+            .then(data => {
+                setMyNumbers(data);
+            });
+    }, []);
 
     // console.log(messageIds);
 
@@ -96,15 +97,17 @@ const Sms = () => {
                         )}
                     </div>
                     <div>
-                        <form onSubmit={handleSubmit} className="px-3">
-                            <div className="my-4 d-flex justify-content-between align-items-center my-3">
-                                <label htmlFor="receiver" className="w-50">To:</label>
+                        <form onSubmit={handleSubmit} >
+                            <div className="my-4 d-flex justify-content-between my-3 flex-lg-row flex-column">
+                                <Box lx={{ width: "0%" }} mx={{ width: '50%' }}>
+                                    <label htmlFor="receiver" className="">To:</label>
+                                </Box>
                                 {isSingle ? (
                                     <input
                                         id="receiver"
                                         type="text"
                                         placeholder="Receiver Number..."
-                                        className="m-0 ms-3 ps-2 form-control w-full"
+                                        className="m-0 ps-2 form-control w-full"
                                         onChange={receiverNumberCollect}
                                         required
                                     />
@@ -119,7 +122,7 @@ const Sms = () => {
                                     />
                                 )}
                             </div>
-                            <div className="my-4 d-flex align-items-center justify-content-between my-3">
+                            <div className="my-4 d-flex flex-lg-row flex-column justify-content-between my-3">
                                 <div></div>
                                 <div className="d-flex">
                                     <div className="form-check me-3">
@@ -150,11 +153,11 @@ const Sms = () => {
                                     </div>
                                 </div>
                             </div>
-                            <div className="my-4 d-flex justify-content-between align-items-center my-3">
+                            <div className="my-4 d-flex justify-content-between flex-lg-row flex-column my-3">
                                 <label htmlFor="receiver" className="w-50">From:</label>
                                 <select
                                     id="receiver"
-                                    className="ms-3 ps-2 form-control w-full"
+                                    className=" ps-2 form-control w-full"
                                     onChange={handleSender}
                                     required
                                 >
@@ -165,14 +168,14 @@ const Sms = () => {
                                     }
                                 </select>
                             </div>
-                            <div className="my-4 d-flex justify-content-between align-items-center my-3">
+                            <div className="my-4 d-flex justify-content-between flex-lg-row flex-column my-3">
                                 <label htmlFor="receiver" className="w-50">Message Body:</label>
                                 <textarea
                                     id="receiver"
                                     type="text"
                                     placeholder="Write your message..."
-                                    className="ms-3 ps-2 form-control w-full"
-                                style={{height: 100}}
+                                    className=" ps-2 form-control w-full"
+                                    style={{ height: 100 }}
                                     onChange={handleMessage}
                                     required
                                 />

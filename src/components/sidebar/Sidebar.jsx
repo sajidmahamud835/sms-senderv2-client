@@ -23,7 +23,7 @@ const Sidebar = ({ setClose }) => {
     logOut();
   };
   return (
-    <div className="sidebar shadow-sm">
+    <div className="sidebar shadow-sm" style={{}}>
       <div className="sidebarWrapper" onClick={() => setClose(true)}>
         <div className="sidebarMenu">
           <h3 className="sidebarTitle">Dashboard</h3>

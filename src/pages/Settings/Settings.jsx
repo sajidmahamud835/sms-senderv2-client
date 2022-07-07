@@ -78,7 +78,7 @@ const Settings = () => {
 				</div>
 				<form onSubmit={handleSubmit} className="">
 					<div className="d-flex align-items-lg-center flex-lg-row flex-column gap-lg-5 gap-md-2">
-						<div className="d-flex justify-content-between align-items-center my-3 w-100">
+						<div className="d-flex justify-content-between align-items-center my-3 w-100 flex-lg-row flex-column">
 							<label htmlFor="receiver" className="fs-5">
 								Make Admin:
 							</label>
@@ -86,7 +86,7 @@ const Settings = () => {
 								id="receiver"
 								type="email"
 								placeholder="Write new admin email..."
-								className="ms-3 ps-2 form-control w-50"
+								className="ms-3 ps-2 form-control w-50 my-3"
 								onChange={handleAdminEmail}
 								required
 							/>

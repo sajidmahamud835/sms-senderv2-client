@@ -6,7 +6,7 @@ const FeaturedInfo = () => {
   return (
     <div className="featured">
       <Grid container spacing={1}>
-        <Grid item sm={12} md={6} lg={4}>
+        <Grid item sm={12} md={6} lg={4} style={{ width: "100%" }}>
           {/* 1 */}
           <div className="featuredItem">
             <span className="featuredTitle">Active Campaign</span>
@@ -19,7 +19,7 @@ const FeaturedInfo = () => {
             <span className="featuredSub">Compared to last month</span>
           </div>
         </Grid>
-        <Grid item sm={12} md={6} lg={4}>
+        <Grid item sm={12} md={6} lg={4} style={{ width: "100%" }}>
           {/* 2 */}
           <div className="featuredItem">
             <span className="featuredTitle">Active Users</span>
@@ -32,7 +32,7 @@ const FeaturedInfo = () => {
             <span className="featuredSub">Compared to last month</span>
           </div>
         </Grid>
-        <Grid item sm={12} md={6} lg={4}>
+        <Grid item sm={12} md={6} lg={4} style={{ width: "100%" }}>
           {/* 3 */}
           <div className="featuredItem">
             <span className="featuredTitle">Twilio API Cost</span>

@@ -14,10 +14,10 @@ const Home = () => {
       <Chart data={userData} title="User Analytics" grid dataKey="Active User" />
       <div className="homeWidgets">
         <Grid container spacing={1}>
-          <Grid item sm={12} md={6}>
+          <Grid item style={{ width: "100%" }} sm={12} md={6}>
             <WidgetSm />
           </Grid>
-          <Grid item sm={12} md={6}>
+          <Grid item style={{ width: "100%" }} sm={12} md={6}>
             <WidgetLg />
           </Grid>
         </Grid>

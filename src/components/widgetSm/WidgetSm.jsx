@@ -15,7 +15,7 @@ const WidgetSm = () => {
 	console.log(usersData);
 
 	return (
-		<div className="widgetSm">
+		<div className="widgetSm" style={{ width: "100%" }}>
 			<span className="widgetSmTitle">Pending Members</span>
 			<ul className="widgetSmList">
 				{usersData.map((userData) => (
