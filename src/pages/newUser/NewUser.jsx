@@ -22,10 +22,10 @@ const NewUser = () => {
 		setImageUrl(user?.photoURL);
 	}
 
-	const id = JSON.stringify(Math.round(Math.random() * 100000));
+	// const id = JSON.stringify(Math.round(Math.random() * 100000));
+	//id will be added in server side
 
 	const userTotalData = {
-		id,
 		userName,
 		mobileNumber,
 		address,
