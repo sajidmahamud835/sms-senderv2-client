@@ -106,7 +106,7 @@ const Topbar = () => {
 										) : (
 											<Avatar
 												style={{ color: "black" }}
-												{...stringAvatar(user.displayName)}
+												{...stringAvatar(user.displayName ? (user.displayName) : ("Sajid Mahamud"))}
 											/>
 											// user.displayName?.split(" ")[0][0] + user.displayName?.split(" ")[1][0]
 										)}
