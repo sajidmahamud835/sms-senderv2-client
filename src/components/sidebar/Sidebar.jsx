@@ -7,26 +7,24 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import UseFirebase from '../../Hooks/UseFirebase';
 
-const Sidebar = () => {
-  const { user, admin, logOut } = UseFirebase()
+const Sidebar = ({ setClose }) => {
+  const { user, admin, logOut } = UseFirebase();
   const [active, setActive] = useState('dashboard');
-
   useEffect(() => {
     document.getElementById(active).classList.add("active");
-  }, [active])
+  }, [active]);
 
   const makeActive = (id) => {
     document.getElementById(active).classList.remove("active");
     setActive(id);
-  }
+  };
 
   const logout = () => {
     logOut();
   };
-
   return (
     <div className="sidebar shadow-sm">
-      <div className="sidebarWrapper">
+      <div className="sidebarWrapper" onClick={() => setClose(true)}>
         <div className="sidebarMenu">
           <h3 className="sidebarTitle">Dashboard</h3>
           <ul className="sidebarList">

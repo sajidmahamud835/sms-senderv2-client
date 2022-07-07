@@ -16,11 +16,17 @@
   justify-content: space-between;
 }
 
+.topLeft {
+  display: flex;
+  align-items: center;
+}
+
 .logo {
   font-weight: bold;
   font-size: 30px;
   color: rgb(253, 253, 253);
   cursor: pointer;
+  margin: 0;
 }
 
 .topRight {
@@ -55,4 +61,12 @@
   height: 40px;
   border-radius: 50%;
   cursor: pointer;
+}
+
+.menuBtn {
+  background-color: white;
+  padding: 6px;
+  margin-right: 10px;
+  border: none;
+  border-radius: 5px;
 }
