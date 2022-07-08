@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Alert } from "react-bootstrap";
 import UseFirebase from "../../Hooks/UseFirebase";
 import "./newUser.css";
 
 const NewUser = () => {
-	const [name, setName] = useState("");
+	const [fullName, setFullName] = useState("");
 	const [userName, setUserName] = useState("");
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
@@ -12,6 +12,11 @@ const NewUser = () => {
 	const [address, setAddress] = useState("");
 	const [gender, setGender] = useState("");
 	const [isActiveUser, setIsActiveUser] = useState("no");
+	const [errorMassage, setErrorMassage] = useState(false);
+	const [emailErrorMassage, setEmailErrorMassage] = useState("");
+	const [passwordErrorMassage, setPasswordErrorMassage] = useState("");
+	const [disabled, setDisabled] = useState(false);
+
 	const [imageUrl, setImageUrl] = useState(
 		"https://i.picsum.photos/id/46/200/200.jpg?hmac=lUGWM3WNJB0TQ-OXq3KI1x-TPgKIuViXG4lKHiCGbao"
 	);
@@ -34,8 +39,35 @@ const NewUser = () => {
 		imageUrl,
 	};
 
+	useEffect(() => {
+		if (fullName !== "" && userName !== "" && email !== "" && password !== "" && mobileNumber !== "" && address !== "" && gender !== "" && isActiveUser !== "" && imageUrl !== "") {
+			setErrorMassage(false);
+		} else {
+			setErrorMassage("Please fill in the inputs");
+		}
+		const regexEmail = new RegExp('[a-z0-9]+@[a-z]+.[a-z]{2,3}');
+		const regexPassword = new RegExp('^.{6,}$');
+		// for email
+		if (!regexEmail.test(email)) {
+			setEmailErrorMassage("Enter valid email.");
+		} else {
+			setEmailErrorMassage(false);
+		}
+		//for password
+		if (!regexPassword.test(password)) {
+			setPasswordErrorMassage("Invalid password.");
+		} else {
+			setPasswordErrorMassage(false);
+		}
+		// disable btn
+		if (errorMassage || emailErrorMassage || passwordErrorMassage) {
+			setDisabled(true);
+		} else {
+			setDisabled(false);
+		}
+	}, [address, email, emailErrorMassage, errorMassage, fullName, gender, imageUrl, isActiveUser, mobileNumber, password, passwordErrorMassage, userName]);
+
 	const createUser = (e) => {
-		registerByEmailPass(email, password, name, userTotalData);
 
 		// fetch("http://localhost:4000/users", {
 		// 	method: "PUT",
@@ -48,7 +80,16 @@ const NewUser = () => {
 		// 	.then((data) => console.log(data));
 
 		e.preventDefault();
-		console.log("data submitted");
+		// alert("data submitted");
+
+		// Condition
+		if (!disabled) {
+			registerByEmailPass(email, password, fullName, userTotalData)
+				.then(() => {
+					alert("user created");
+				});
+		}
+
 	};
 
 	return (
@@ -63,11 +104,11 @@ const NewUser = () => {
 								<h5 className="text-center">User successfully created.</h5>
 							</Alert>
 						)} */}
-						{error && (
+						{/* {error && (
 							<Alert variant="danger">
 								<h5 className="text-center">{error.message}</h5>
 							</Alert>
-						)}
+						)} */}
 					</div>
 				</div>
 				<form onSubmit={createUser} className="newUserForm">
@@ -76,15 +117,15 @@ const NewUser = () => {
 						<input
 							type="text"
 							placeholder="john32"
-							onBlur={(e) => setUserName(e.target.value)}
-							required
+							onChange={(e) => setUserName(e.target.value)}
+						// required
 						/>
 					</div>
 					<div className="newUserItem">
 						<label>Full Name</label>
 						<input
-							onBlur={(e) => setName(e.target.value)}
-							required
+							onChange={(e) => setFullName(e.target.value)}
+							// required
 							type="text"
 							placeholder="John Smith"
 						/>
@@ -92,8 +133,8 @@ const NewUser = () => {
 					<div className="newUserItem">
 						<label>Email</label>
 						<input
-							onBlur={(e) => setEmail(e.target.value)}
-							required
+							onChange={(e) => setEmail(e.target.value)}
+							// required
 							type="email"
 							placeholder="john@gmail.com"
 						/>
@@ -101,8 +142,8 @@ const NewUser = () => {
 					<div className="newUserItem">
 						<label>Password</label>
 						<input
-							onBlur={(e) => setPassword(e.target.value)}
-							required
+							onChange={(e) => setPassword(e.target.value)}
+							// required
 							type="password"
 							placeholder="password"
 						/>
@@ -112,8 +153,8 @@ const NewUser = () => {
 						<input
 							type="text"
 							placeholder="+1 123 456 78"
-							onBlur={(e) => setMobileNumber(e.target.value)}
-							required
+							onChange={(e) => setMobileNumber(e.target.value)}
+						// required
 						/>
 					</div>
 					<div className="newUserItem">
@@ -121,8 +162,8 @@ const NewUser = () => {
 						<input
 							type="text"
 							placeholder="New York | USA"
-							onBlur={(e) => setAddress(e.target.value)}
-							required
+							onChange={(e) => setAddress(e.target.value)}
+						// required
 						/>
 					</div>
 					<div className="newUserItem">
@@ -133,8 +174,8 @@ const NewUser = () => {
 								name="gender"
 								id="male"
 								value="male"
-								onBlur={(e) => setGender(e.target.value)}
-								required
+								onChange={(e) => setGender(e.target.value)}
+							// required
 							/>
 							<label htmlFor="male">Male</label>
 							<input
@@ -142,8 +183,8 @@ const NewUser = () => {
 								name="gender"
 								id="female"
 								value="female"
-								onBlur={(e) => setGender(e.target.value)}
-								required
+								onChange={(e) => setGender(e.target.value)}
+							// required
 							/>
 							<label htmlFor="female">Female</label>
 							<input
@@ -151,8 +192,8 @@ const NewUser = () => {
 								name="gender"
 								id="other"
 								value="other"
-								onBlur={(e) => setGender(e.target.value)}
-								required
+								onChange={(e) => setGender(e.target.value)}
+							// required
 							/>
 							<label htmlFor="other">Other</label>
 						</div>
@@ -164,18 +205,19 @@ const NewUser = () => {
 							name="active"
 							id="active"
 							defaultValue={isActiveUser}
-							onBlur={(e) => setIsActiveUser(e.target.value)}
-							required
+							onChange={(e) => setIsActiveUser(e.target.value)}
+						// required
 						>
 							<option value="yes">Yes</option>
 							<option value="no">No</option>
 						</select>
 					</div>
 					<div>
-						<span className="d-block mt-3">
+						{(errorMassage || emailErrorMassage || passwordErrorMassage || error) && <h5 className="text-danger my-3">* {errorMassage || emailErrorMassage || passwordErrorMassage || error}</h5>}
+						<span className="d-block mb-3">
 							After creating the user, you will be logged as the new user.
 						</span>
-						<button type="submit" className="newUserButton">
+						<button type="submit" disabled={disabled} className="newUserButton">
 							Create New User
 						</button>
 					</div>

@@ -55,10 +55,10 @@ const LoginPage = () => {
         } else {
             setErrorMassage("Please fill in the form.");
         }
-        // for email
         const regexEmail = new RegExp('[a-z0-9]+@[a-z]+.[a-z]{2,3}');
         const regexPassword = new RegExp('^.{6,}$');
 
+        // for email
         if (!regexEmail.test(email)) {
             setEmailErrorMassage("Enter valid email.");
         } else {
