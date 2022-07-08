@@ -27,6 +27,8 @@ import AllList from "./pages/AllList/AllList";
 import EditAllList02 from "./components/EditAllList02/EditAllList02";
 import NewSubscriptions from "./pages/NewSubscriptions/NewSubscriptions";
 import Settings from "./pages/Settings/Settings";
+import VerifyRoute from "./PrivateRoute/PrivateRoute/VerifyRoute";
+import Verify from "./pages/Verify/Verify";
 
 function App() {
   return (
@@ -34,7 +36,8 @@ function App() {
       {/* Should I delete it */}
       {/* <Route path="/loginfsdfsdf" element={<Login />}></Route> */}
       <Route path="/login" element={<LoginPage />}></Route>
-      <Route path="" element={<PrivateRoute><Main /></PrivateRoute>}>
+      <Route path="/verify" element={<Verify />}></Route>
+      <Route path="" element={<PrivateRoute><VerifyRoute><Main /></VerifyRoute></PrivateRoute>}>
         <Route path="" element={<Home />} />
         <Route path="/users" element={<UserList />}></Route>
         <Route path="/sms" element={<Sms />}></Route>

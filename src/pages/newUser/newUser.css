@@ -54,3 +54,10 @@
   margin-top: 30px;
   cursor: pointer;
 }
+
+.newUserButton:disabled {
+  background-color: rgba(0, 0, 139, 0.6);
+  cursor: not-allowed;
+  transition: 0.1s ease;
+  box-shadow: none;
+}

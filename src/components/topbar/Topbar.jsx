@@ -25,10 +25,13 @@ const Topbar = ({ small, setClose, close }) => {
 	};
 
 	function stringAvatar(name) {
+		console.log(name);
 		return {
-			children: `${name?.split(" ")[0][0]}${name?.split(" ")[1][0]}`,
+			// children: `${name?.split(" ")[0][0]}${name?.split(" ")[1][0]}`,
+			children: name?.slice(0, 2)
 		};
 	}
+
 
 	const logout = () => {
 		logOut();
@@ -118,8 +121,7 @@ const Topbar = ({ small, setClose, close }) => {
 										) : (
 											<Avatar
 												style={{ color: "black" }}
-
-												{...stringAvatar(user.displayName ? (user.displayName) : ("Sajid Mahamud"))}
+												{...stringAvatar(user?.displayName ? (user.displayName) : ("Sajid Mahamud"))}
 
 											/>
 										)}
