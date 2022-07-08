@@ -1,38 +1,30 @@
 import React from 'react';
 import "./sidebar.css";
-import {
-  LineStyle,
-  Timeline,
-  PermIdentity,
-  AttachMoney,
-  BarChart,
-  MailOutline,
-  DynamicFeed,
-  ChatBubbleOutline,
-  WorkOutline,
-  Settings,
-} from "@material-ui/icons";
+import { LineStyle, Timeline, PermIdentity, AttachMoney, BarChart, MailOutline, DynamicFeed, ChatBubbleOutline, WorkOutline, Settings } from "@material-ui/icons";
+import LogoutIcon from '@mui/icons-material/Logout';
 import ViewListIcon from '@mui/icons-material/ViewList';
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import UseFirebase from '../../Hooks/UseFirebase';
 
-const Sidebar = () => {
-  const { user, admin } = UseFirebase()
+const Sidebar = ({ setClose }) => {
+  const { user, admin, logOut } = UseFirebase();
   const [active, setActive] = useState('dashboard');
-
   useEffect(() => {
     document.getElementById(active).classList.add("active");
-  }, [active])
+  }, [active]);
 
   const makeActive = (id) => {
     document.getElementById(active).classList.remove("active");
     setActive(id);
-  }
+  };
 
+  const logout = () => {
+    logOut();
+  };
   return (
-    <div className="sidebar shadow-sm">
-      <div className="sidebarWrapper">
+    <div className="sidebar shadow-sm" style={{}}>
+      <div className="sidebarWrapper" onClick={() => setClose(true)}>
         <div className="sidebarMenu">
           <h3 className="sidebarTitle">Dashboard</h3>
           <ul className="sidebarList">
@@ -66,13 +58,19 @@ const Sidebar = () => {
                   Manage Campaigns
                 </li>
               </Link>
+              <Link to="/templates" className="link">
+                <li onClick={(e) => makeActive('myTemplates')} id="myTemplates" className="sidebarListItem">
+                  <MailOutline className="sidebarIcon" />
+                  Message Templates
+                </li>
+              </Link>
               <Link to="/manage-subscriptions" className="link">
                 <li onClick={(e) => makeActive('subscription')} id="subscription" className="sidebarListItem">
                   <AttachMoney className="sidebarIcon" />
                   Manage Subscriptions
                 </li>
               </Link>
-              <Link to="/all-lists" className="link">
+              <Link to="/all-contacts-lists" className="link">
                 <li onClick={(e) => makeActive('reports')} id="reports" className="sidebarListItem">
                   <ViewListIcon className="sidebarIcon" />
                   Manage Contact List
@@ -85,72 +83,81 @@ const Sidebar = () => {
                 </li>
               </Link>
             </ul>
-          </div>}
-        {admin === false &&
+          </div>
+        }
+        {/* {admin === false && */}
+        <div className="sidebarMenu">
+          <h3 className="sidebarTitle">User</h3>
+          <ul className="sidebarList">
+            <Link to="/profile" className="link">
+              <li onClick={(e) => makeActive('profile')} id="profile" className="sidebarListItem">
+                <PermIdentity className="sidebarIcon" />
+                My Profile
+              </li>
+            </Link>
+            <Link to="/campaigns" className="link">
+              <li onClick={(e) => makeActive('myCampaigns')} id="myCampaigns" className="sidebarListItem">
+                <DynamicFeed className="sidebarIcon" />
+                My Campaigns
+              </li>
+            </Link>
+            <Link to="/templates" className="link">
+              <li onClick={(e) => makeActive('myTemplates')} id="myTemplates" className="sidebarListItem">
+                <MailOutline className="sidebarIcon" />
+                Message Templates
+              </li>
+            </Link>
+            <Link to="/contacts" className="link">
+              <li onClick={(e) => makeActive('myContacts')} id="myContacts" className="sidebarListItem">
+                <PermIdentity className="sidebarIcon" />
+                My Contacts
+              </li>
+            </Link>
+            <Link to="/manage-subscriptions" className="link">
+              <li onClick={(e) => makeActive('mySubscription')} id="mySubscription" className="sidebarListItem">
+                <AttachMoney className="sidebarIcon" />
+                My Subscription
+              </li>
+            </Link>
+            <Link to="/reports" className="link">
+              <li onClick={(e) => makeActive('myReports')} id="myReports" className="sidebarListItem">
+                <BarChart className="sidebarIcon" />
+                My Reports
+              </li>
+            </Link>
+
+            <li onClick={logout} id="settings" className="sidebarListItem">
+              <LogoutIcon className="sidebarIcon" />
+              Logout
+            </li>
+          </ul>
+        </div>
+        {/* } */}
+        {admin &&
           <div className="sidebarMenu">
-            <h3 className="sidebarTitle">User</h3>
+            <h3 className="sidebarTitle">Website</h3>
             <ul className="sidebarList">
-              <Link to="/profile" className="link">
-                <li onClick={(e) => makeActive('profile')} id="profile" className="sidebarListItem">
-                  <PermIdentity className="sidebarIcon" />
-                  My Profile
+              <Link to="/manageAPI" className="link">
+                <li onClick={(e) => makeActive('manageAPI')} id="manageAPI" className="sidebarListItem">
+                  <WorkOutline className="sidebarIcon" />
+                  Manage API
                 </li>
               </Link>
-              <Link to="/myCampaigns" className="link">
-                <li onClick={(e) => makeActive('myCampaigns')} id="myCampaigns" className="sidebarListItem">
-                  <DynamicFeed className="sidebarIcon" />
-                  My Campaigns
+              <Link to="/apiAnalytics" className="link">
+                <li onClick={(e) => makeActive('apiAnalytics')} id="apiAnalytics" className="sidebarListItem">
+                  <Timeline className="sidebarIcon" />
+                  API Analytics
                 </li>
               </Link>
-              <Link to="/myTemplates" className="link">
-                <li onClick={(e) => makeActive('myTemplates')} id="myTemplates" className="sidebarListItem">
-                  <MailOutline className="sidebarIcon" />
-                  Message Templates
-                </li>
-              </Link>
-              <Link to="/myContacts" className="link">
-                <li onClick={(e) => makeActive('myContacts')} id="myContacts" className="sidebarListItem">
-                  <PermIdentity className="sidebarIcon" />
-                  My Contacts
-                </li>
-              </Link>
-              <Link to="/mySubscription" className="link">
-                <li onClick={(e) => makeActive('mySubscription')} id="mySubscription" className="sidebarListItem">
-                  <AttachMoney className="sidebarIcon" />
-                  My Subscription
-                </li>
-              </Link>
-              <Link to="/myReports" className="link">
-                <li onClick={(e) => makeActive('myReports')} id="myReports" className="sidebarListItem">
-                  <BarChart className="sidebarIcon" />
-                  My Reports
+              <Link to="/settings" className="link">
+                <li onClick={(e) => makeActive('settings')} id="settings" className="sidebarListItem">
+                  <Settings className="sidebarIcon" />
+                  Website Settings
                 </li>
               </Link>
             </ul>
-          </div>}
-        <div className="sidebarMenu">
-          <h3 className="sidebarTitle">Website</h3>
-          <ul className="sidebarList">
-            <Link to="/manageAPI" className="link">
-              <li onClick={(e) => makeActive('manageAPI')} id="manageAPI" className="sidebarListItem">
-                <WorkOutline className="sidebarIcon" />
-                Manage API
-              </li>
-            </Link>
-            <Link to="/apiAnalytics" className="link">
-              <li onClick={(e) => makeActive('apiAnalytics')} id="apiAnalytics" className="sidebarListItem">
-                <Timeline className="sidebarIcon" />
-                API Analytics
-              </li>
-            </Link>
-            <Link to="/settings" className="link">
-              <li onClick={(e) => makeActive('settings')} id="settings" className="sidebarListItem">
-                <Settings className="sidebarIcon" />
-                Website Settings
-              </li>
-            </Link>
-          </ul>
-        </div>
+          </div>
+        }
       </div>
     </div>
   );

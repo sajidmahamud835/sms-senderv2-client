@@ -26,6 +26,7 @@ import EditSubscriptions from "./pages/EditSubscriptions/EditSubscriptions";
 import AllList from "./pages/AllList/AllList";
 import EditAllList02 from "./components/EditAllList02/EditAllList02";
 import NewSubscriptions from "./pages/NewSubscriptions/NewSubscriptions";
+import Settings from "./pages/Settings/Settings";
 
 function App() {
   return (
@@ -38,7 +39,7 @@ function App() {
         <Route path="/users" element={<UserList />}></Route>
         <Route path="/sms" element={<Sms />}></Route>
         <Route path="/excel-to-csv" element={<ExcelToCSV />}></Route>
-        <Route path="/all-lists" element={<AllList />}></Route>
+        {/* <Route path="/all-lists" element={<AllList />}></Route> */}
         {/* <Route path="/edit-all-lists/:Id" element={<EditAllList />}></Route> */}
         <Route path="/edit-all-lists/:Id" element={<EditAllList02 />}></Route>
         <Route path="/user/:userId" element={<User />}></Route>
@@ -47,11 +48,13 @@ function App() {
         <Route path="/campaign/:Id" element={<Campaign />}></Route>
         <Route path="/new-campaign" element={<NewCampaign />}></Route>
         <Route path="/manage-subscriptions" element={<ManageSubscriptions />}></Route>
+        <Route path="/all-contacts-lists" element={<AllList />}></Route>
         <Route path="/edit-subscriptions/:Id" element={<EditSubscriptions />}></Route>
         <Route path="/new-subscriptions" element={<NewSubscriptions />}></Route>
         <Route path="/manageAPI" element={<ManageAPI />}></Route>
         <Route path="/apiAnalytics" element={<ApiAnalytics />}></Route>
         <Route path="/reports" element={<Reports />}></Route>
+        <Route path="/settings" element={<Settings />}></Route>
         {/* This Route For General User */}
         <Route path="/profile" element={<Profile />}></Route>
         <Route path="/myCampaigns" element={<MyCampaigns />}></Route>

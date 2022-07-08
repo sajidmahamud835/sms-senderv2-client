@@ -13,6 +13,7 @@ import "./user.css";
 const User = () => {
 	const [userData, setUserData] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
+	const [dataChanged, setDataChanged] = useState(true);
 	const { userId } = useParams();
 
 	const [inputFieldData, setInputFieldData] = useState({});
@@ -27,7 +28,7 @@ const User = () => {
 				setUserData(data[0]);
 				setIsLoading(false);
 			});
-	}, [userId]);
+	}, [userId, dataChanged]);
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
@@ -43,6 +44,7 @@ const User = () => {
 			.then((data) => {
 				console.log(data);
 				setIsLoading(false);
+				setDataChanged(!dataChanged);
 			});
 	};
 
@@ -84,10 +86,14 @@ const User = () => {
 									<PermIdentity className="userShowIcon" />
 									<span className="userShowInfoTitle">{userData.userName}</span>
 								</div>
-								<div className="userShowInfo">
-									<CalendarToday className="userShowIcon" />
-									<span className="userShowInfoTitle">10.12.1999</span>
-								</div>
+								{userData.accountCreated && (
+									<div className="userShowInfo">
+										<CalendarToday className="userShowIcon" />
+										<span className="userShowInfoTitle">
+											{userData.accountCreated}
+										</span>
+									</div>
+								)}
 								<span className="userShowTitle">Contact Details</span>
 								<div className="userShowInfo">
 									<PhoneAndroid className="userShowIcon" />
@@ -142,13 +148,8 @@ const User = () => {
 										<input
 											type="text"
 											defaultValue={userData.email}
-											onChange={(e) =>
-												setInputFieldData({
-													...inputFieldData,
-													email: e.target.value,
-												})
-											}
 											className="userUpdateInput"
+											disabled
 										/>
 									</div>
 									<div className="userUpdateItem">
@@ -178,6 +179,25 @@ const User = () => {
 											}
 											className="userUpdateInput"
 										/>
+									</div>
+									<div className="userUpdateItem">
+										<label>Active User?</label>
+										<select
+											className="newUserSelect"
+											name="active"
+											id="active"
+											defaultValue={userData.isActiveUser}
+											onChange={(e) =>
+												setInputFieldData({
+													...inputFieldData,
+													isActiveUser: e.target.value,
+												})
+											}
+											required
+										>
+											<option value="yes">Yes</option>
+											<option value="no">No</option>
+										</select>
 									</div>
 								</div>
 								<div className="userUpdateRight">

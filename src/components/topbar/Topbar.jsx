@@ -7,9 +7,12 @@ import Button from "@mui/material/Button";
 import { Avatar, MenuItem } from "@mui/material";
 import Menu from "@mui/material/Menu";
 import UseFirebase from "../../Hooks/UseFirebase";
+import { IconButton } from "@material-ui/core";
+import MenuIcon from '@mui/icons-material/Menu';
+import CloseIcon from '@mui/icons-material/Close';
 
-const Topbar = () => {
-	const { user, logOut } = UseFirebase();
+const Topbar = ({ small, setClose, close }) => {
+	const { admin, user, logOut } = UseFirebase();
 	const [anchorEl, setAnchorEl] = React.useState(null);
 	// const [userName, setUserName] = React.useState("Admin")
 	// open
@@ -48,6 +51,15 @@ const Topbar = () => {
 		<div className="topbar">
 			<nav className="topbarWrapper">
 				<div className="topLeft">
+					{small &&
+						// <button  className="campaignAddButton">{close ? "open" : "close"}</button>
+						// <IconButton onClick={() => setClose(!close)} aria-label="menu" style={{ color: 'white' }} size="large">
+						// 	<MenuIcon fontSize="inherit" />
+						// </IconButton>
+						<button onClick={() => setClose(!close)} className="menuBtn">
+							{close ? <MenuIcon className="menuIcon" /> : <CloseIcon className="menuIcon" />}
+						</button>
+					}
 					<span className="logo">SMS Sender App</span>
 				</div>
 				<div className="topRight">
@@ -64,19 +76,21 @@ const Topbar = () => {
 						<ul className="dropdown-menu" aria-labelledby="NotificationsMenu">
 							{/* <li><span className="dropdown-item">We have no notification for you today.</span></li> */}
 							<li>
-								<Link to="/myProfile" className="dropdown-item" type="button">
+								<Link to="/profile" className="dropdown-item" type="button">
 									Welcome to our website. Please update your profile to enjoy
 									all our features.
 								</Link>
 							</li>
 						</ul>
 					</div>
-					<div
-						onClick={() => navigate("/settings", { replace: true })}
-						className="topbarIconContainer"
-					>
-						<Settings />
-					</div>
+					{admin &&
+						<div
+							onClick={() => navigate("/settings", { replace: true })}
+							className="topbarIconContainer"
+						>
+							<Settings />
+						</div>
+					}
 
 					<Box sx={{ flexGrow: 0 }}>
 						{
@@ -104,7 +118,9 @@ const Topbar = () => {
 										) : (
 											<Avatar
 												style={{ color: "black" }}
-												{...stringAvatar("Samsul Alam")}
+
+												{...stringAvatar(user.displayName ? (user.displayName) : ("Sajid Mahamud"))}
+
 											/>
 										)}
 									</Button>
