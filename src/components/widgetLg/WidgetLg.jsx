@@ -11,7 +11,7 @@ const WidgetLg = () => {
 			.then((data) => setCData(data));
 	}, []);
 
-	console.log(cdata);
+	// console.log(cdata);
 
 	return (
 		<div className="widgetLg" style={{ width: "100%" }}>
