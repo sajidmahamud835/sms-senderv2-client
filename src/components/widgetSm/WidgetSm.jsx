@@ -12,7 +12,7 @@ const WidgetSm = () => {
 			.then((data) => setUsersData(data));
 	}, []);
 
-	console.log(usersData);
+	// console.log(usersData);
 
 	return (
 		<div className="widgetSm" style={{ width: "100%" }}>

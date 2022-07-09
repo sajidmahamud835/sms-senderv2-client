@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./Topbar.css";
 import { NotificationsNone, Settings } from "@material-ui/icons";
 import { Link, useNavigate } from "react-router-dom";
@@ -13,7 +13,7 @@ import CloseIcon from '@mui/icons-material/Close';
 
 const Topbar = ({ small, setClose, close }) => {
 	const { admin, user, logOut } = UseFirebase();
-	const [anchorEl, setAnchorEl] = React.useState(null);
+	const [anchorEl, setAnchorEl] = useState(null);
 	// const [userName, setUserName] = React.useState("Admin")
 	// open
 	const open = Boolean(anchorEl);
@@ -23,12 +23,22 @@ const Topbar = ({ small, setClose, close }) => {
 	const handleClose = () => {
 		setAnchorEl(null);
 	};
-
+	// console.log(avatarName);
 	function stringAvatar(name) {
-		console.log(name);
+		const userName = name?.split(" ");
+		// console.log({ userName });
+		const sliceName = [];
+		if (userName.length > 0) {
+			userName.map(word => {
+				return sliceName.push(word.slice(0, 1));
+			});
+			// sliceName = sliceName + word.slice(0, 1)
+		}
+		let shortName = "";
+		sliceName.map(s => shortName += s);
 		return {
 			// children: `${name?.split(" ")[0][0]}${name?.split(" ")[1][0]}`,
-			children: name?.slice(0, 2)
+			children: shortName
 		};
 	}
 
