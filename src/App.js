@@ -27,16 +27,18 @@ import AllList from "./pages/AllList/AllList";
 import EditAllList02 from "./components/EditAllList02/EditAllList02";
 import NewSubscriptions from "./pages/NewSubscriptions/NewSubscriptions";
 import Settings from "./pages/Settings/Settings";
-import VerifyRoute from "./PrivateRoute/PrivateRoute/VerifyRoute";
-import Verify from "./pages/Verify/Verify";
-
+import VerifyRoute from "./verification/VerifyRoute";
+import Verify from "./verification/Verify";
+import VerifyProfile from "./verification/VerifyProfile";
 function App() {
   return (
+    <>
     <Routes>
       {/* Should I delete it */}
       {/* <Route path="/loginfsdfsdf" element={<Login />}></Route> */}
       <Route path="/login" element={<LoginPage />}></Route>
       <Route path="/verify" element={<Verify />}></Route>
+      <Route path="/verify-profile" element={<VerifyProfile />}></Route>
       <Route path="" element={<PrivateRoute><VerifyRoute><Main /></VerifyRoute></PrivateRoute>}>
         <Route path="" element={<Home />} />
         <Route path="/users" element={<UserList />}></Route>
@@ -68,7 +70,7 @@ function App() {
         <Route path="*" element={<Home />}></Route>
       </Route>
     </Routes>
-
+    </>
   );
 }
 
