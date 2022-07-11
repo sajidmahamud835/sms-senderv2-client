@@ -55,13 +55,13 @@ const Profile = () => {
 						</span>
 					</>
 				)}
-				{!isLoading && (
+				{(!isLoading && (
 					<div className="userContainer">
 						<Grid container spacing={2}>
 							<Grid item md={12} lg={5} style={{ width: "100%" }}>
 								<div className="userShow">
 									<div className="userShowTop">
-										{userData.imageUrl &&
+										{userData &&
 											<img
 												src={userData.imageUrl}
 												alt={userData.displayName}
