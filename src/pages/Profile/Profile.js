@@ -55,19 +55,19 @@ const Profile = () => {
 						</span>
 					</>
 				)}
-				{(!isLoading && (
+				{!isLoading && (
 					<div className="userContainer">
 						<Grid container spacing={2}>
 							<Grid item md={12} lg={5} style={{ width: "100%" }}>
 								<div className="userShow">
 									<div className="userShowTop">
-										{userData &&
-											<img
-												src={userData.imageUrl}
-												alt={userData.displayName}
-												className="userShowImg"
-											/>
-										}
+
+										<img
+											src={userData.imageUrl}
+											alt={userData.displayName}
+											className="userShowImg"
+										/>
+
 										<div className="userShowTopTitle">
 											<span className="userShowUsername">
 												{userData.displayName}
@@ -186,19 +186,19 @@ const Profile = () => {
 										</div>
 										<div className="userUpdateRight">
 											<div className="userUpdateUpload">
-												{userData &&
-													<div>
-														<img
-															className="userUpdateImg"
-															src={userData.imageUrl}
-															alt={userData.displayName}
-														/>
-														<label htmlFor="file">
-															<Publish className="userUpdateIcon" />
-														</label>
-														<input type="file" id="file" style={{ display: "none" }} />
-													</div>
-												}
+
+												<div>
+													<img
+														className="userUpdateImg"
+														src={userData.imageUrl}
+														alt={userData.displayName}
+													/>
+													<label htmlFor="file">
+														<Publish className="userUpdateIcon" />
+													</label>
+													<input type="file" id="file" style={{ display: "none" }} />
+												</div>
+
 											</div>
 											<button type="submit" className="userUpdateButton">
 												Update
