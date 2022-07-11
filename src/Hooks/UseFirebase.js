@@ -86,7 +86,7 @@ const UseFirebase = () => {
       ...userTotalData,
     };
     // send user data to database
-    fetch("http://localhost:4000/users", {
+    fetch(`${process.env.REACT_APP_SERVER_URL}/users`, {
       method: method,
       headers: {
         "content-type": "application/json",

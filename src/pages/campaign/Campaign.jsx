@@ -17,7 +17,7 @@ const Campaign = () => {
 		const statusValue = e.target.value;
 		const newStatus = { status: statusValue };
 		console.log(newStatus);
-		const url = `http://localhost:4000/campaign-details/${Id}`;
+		const url = `${process.env.REACT_APP_SERVER_URL}/campaign-details/${Id}`;
 		fetch(url, {
 			method: "PUT",
 			headers: {
@@ -34,7 +34,7 @@ const Campaign = () => {
 	};
 
 	useEffect(() => {
-		fetch(`http://localhost:4000/campaign-details/${Id}`)
+		fetch(`${process.env.REACT_APP_SERVER_URL}/campaign-details/${Id}`)
 			.then((res) => res.json())
 			.then((data) => setCData(data[0]));
 	}, [Id, dataChanged]);

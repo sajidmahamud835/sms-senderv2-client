@@ -69,7 +69,7 @@ const ExcelToCSV = () => {
 		const email = user.email;
 		const listData = { listName, email, listText, array };
 
-		const url = `http://localhost:4000/upload-excel-file`;
+		const url = `${process.env.REACT_APP_SERVER_URL}/upload-excel-file`;
 		fetch(url, {
 			method: "POST",
 			headers: {

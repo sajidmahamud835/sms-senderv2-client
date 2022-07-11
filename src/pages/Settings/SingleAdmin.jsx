@@ -30,7 +30,7 @@ const SingleAdmin = (props) => {
 	// update admin email
 	const saveChange = (e) => {
 		e.preventDefault();
-		const url = `http://localhost:4000/admins/${_id}`;
+		const url = `${process.env.REACT_APP_SERVER_URL}/admins/${_id}`;
 		fetch(url, {
 			method: "PUT",
 			headers: {

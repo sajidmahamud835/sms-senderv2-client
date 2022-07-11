@@ -19,7 +19,7 @@ const NewCampaign = () => {
 	const [numberList, setNumberList] = useState([]);
 	const navigate = useNavigate();
 	useEffect(() => {
-		const url = `http://localhost:4000/upload-excel-file?email=${user?.email}`;
+		const url = `${process.env.REACT_APP_SERVER_URL}/upload-excel-file?email=${user?.email}`;
 		fetch(url)
 			.then((res) => res.json())
 			.then((data) => setNumberList(data));
@@ -27,7 +27,7 @@ const NewCampaign = () => {
 
 	//GET Twilio Numbers
 	useEffect(() => {
-		fetch("http://localhost:4000/smsApi/numbers")
+		fetch(`${process.env.REACT_APP_SERVER_URL}/smsApi/numbers`)
 			.then(res => res.json())
 			.then(data => {
 				setMyNumbers(data);
@@ -95,7 +95,7 @@ const NewCampaign = () => {
 				dangerMode: true,
 			}).then((willAdd) => {
 				if (willAdd) {
-					const url = `http://localhost:4000/campaign-list`;
+					const url = `${process.env.REACT_APP_SERVER_URL} / campaign - list`;
 					fetch(url, {
 						method: "POST",
 						headers: {

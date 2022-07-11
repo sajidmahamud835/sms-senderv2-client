@@ -30,7 +30,7 @@ const UpdateNumberModal = (props) => {
 		// setIsLoading(true);
 		// setMessage("");
 		// setError("");
-		// fetch("http://localhost:4000/smsApi/numbers", {
+		// fetch(`${process.env.REACT_APP_SERVER_URL}/smsApi/numbers`, {
 		// 	method: "POST",
 		// 	headers: {
 		// 		"content-type": "application/json",

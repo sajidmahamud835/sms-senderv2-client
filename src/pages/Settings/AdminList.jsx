@@ -15,7 +15,7 @@ const AdminList = (props) => {
 			dangerMode: true,
 		}).then((willDelete) => {
 			if (willDelete) {
-				const url = `http://localhost:4000/admins/${id}`;
+				const url = `${process.env.REACT_APP_SERVER_URL}/admins/${id}`;
 				fetch(url, {
 					method: "DELETE",
 				})

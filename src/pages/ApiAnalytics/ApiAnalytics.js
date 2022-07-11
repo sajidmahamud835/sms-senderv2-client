@@ -4,7 +4,7 @@ import './ApiAnalytics.css'
 const ApiAnalytics = () => {
     const [messages, setMessages] = useState([])
     // const allDataIsComing = (id) => {
-    //     fetch(`http://localhost:4000/allAPIData/${id}`)
+    //     fetch(`${process.env.REACT_APP_SERVER_URL}/allAPIData/${id}`)
     //         .then(res => res.json())
     //         .then(data => setMessages([...messages, data]))
     // }

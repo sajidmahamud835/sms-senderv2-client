@@ -10,7 +10,7 @@ import './AllList.css';
 const AllList = () => {
     const [allList, setAllList] = useState([]);
     const [rowDatas, setRowDatas] = useState([]);
-    const { user } = UseFirebase(); 
+    const { user } = UseFirebase();
 
     const handleDelete = (id) => {
         if (id) {
@@ -22,7 +22,7 @@ const AllList = () => {
             })
                 .then((willAdd) => {
                     if (willAdd) {
-                        const url = `http://localhost:4000/delete-excel-file/${id}`
+                        const url = `${process.env.REACT_APP_SERVER_URL}/delete-excel-file/${id}`
                         fetch(url, {
                             method: 'DELETE'
                         })
@@ -45,7 +45,7 @@ const AllList = () => {
 
     };
     useEffect(() => {
-        fetch(`http://localhost:4000/upload-excel-file?email=${user?.email}`)
+        fetch(`${process.env.REACT_APP_SERVER_URL}/upload-excel-file?email=${user?.email}`)
             .then(res => res.json())
             .then(data => setAllList(data))
     }, [user?.email])
@@ -123,7 +123,7 @@ const AllList = () => {
                 );
             },
         },
-    ]; 
+    ];
     return (
         <div className=' allListContainer'>
             <div className="campaignTitleContainer">

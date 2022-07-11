@@ -6,7 +6,7 @@ const WidgetSm = () => {
 	const [usersData, setUsersData] = useState([]);
 
 	useEffect(() => {
-		const url = `http://localhost:4000/users`;
+		const url = `${process.env.REACT_APP_SERVER_URL}/users`;
 		fetch(url)
 			.then((res) => res.json())
 			.then((data) => setUsersData(data));

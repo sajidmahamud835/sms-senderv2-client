@@ -14,7 +14,7 @@ const Profile = () => {
 
 	useEffect(() => {
 		if (!loading) {
-			const url = `http://localhost:4000/users/email/${user.email}`;
+			const url = `${process.env.REACT_APP_SERVER_URL}/users/email/${user.email}`;
 			fetch(url)
 				.then((res) => res.json())
 				.then((data) => {
@@ -26,7 +26,7 @@ const Profile = () => {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		const url = `http://localhost:4000/users/${userData._id}`;
+		const url = `${process.env.REACT_APP_SERVER_URL}/users/${userData._id}`;
 		fetch(url, {
 			method: "PUT",
 			headers: {

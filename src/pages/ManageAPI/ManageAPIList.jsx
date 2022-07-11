@@ -7,7 +7,7 @@ const ManageAPIList = (props) => {
 	const { changedData, setChangedData } = props;
 
 	useEffect(() => {
-		fetch(`http://localhost:4000/smsApi/numbers`)
+		fetch(`${process.env.REACT_APP_SERVER_URL}/smsApi/numbers`)
 			.then((res) => res.json())
 			.then((data) => setMobileNumberData(data));
 
@@ -24,7 +24,7 @@ const ManageAPIList = (props) => {
 			dangerMode: true,
 		}).then((willDelete) => {
 			if (willDelete) {
-				const url = `http://localhost:4000/smsApi/numbers/${id}`;
+				const url = `${process.env.REACT_APP_SERVER_URL}/smsApi/numbers/${id}`;
 				fetch(url, {
 					method: "DELETE",
 				})

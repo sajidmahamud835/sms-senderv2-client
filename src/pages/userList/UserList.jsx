@@ -13,7 +13,7 @@ const UserList = () => {
 	const [isLoading, setIsLoading] = useState(true);
 
 	useEffect(() => {
-		const url = `http://localhost:4000/users`;
+		const url = `${process.env.REACT_APP_SERVER_URL}/users`;
 		fetch(url)
 			.then((res) => res.json())
 			.then((data) => {
@@ -31,7 +31,7 @@ const UserList = () => {
 			dangerMode: true,
 		}).then((willDelete) => {
 			if (willDelete) {
-				const url = `http://localhost:4000/users/${id}`;
+				const url = `${process.env.REACT_APP_SERVER_URL}/users/${id}`;
 				fetch(url, {
 					method: "DELETE",
 				})
