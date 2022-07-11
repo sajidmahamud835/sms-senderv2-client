@@ -109,7 +109,7 @@ const Topbar = ({ small, setClose, close }) => {
 										aria-expanded={open ? "true" : undefined}
 										onClick={handleClick}
 									>
-										{true ? (
+										{user.photoURL? (
 											<img
 												src={user.photoURL}
 												style={{ borderRadius: "50%", width: "50%" }}
