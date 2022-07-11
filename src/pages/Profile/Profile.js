@@ -186,7 +186,7 @@ const Profile = () => {
 										</div>
 										<div className="userUpdateRight">
 											<div className="userUpdateUpload">
-												{userData.imageUrl &&
+												{userData &&
 													<div>
 														<img
 															className="userUpdateImg"
