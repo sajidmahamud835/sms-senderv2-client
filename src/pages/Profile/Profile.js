@@ -193,12 +193,11 @@ const Profile = () => {
 														src={userData.imageUrl}
 														alt={userData.displayName}
 													/>
-													<label htmlFor="file">
-														<Publish className="userUpdateIcon" />
-													</label>
+													<label htmlFor="file"></label>
+													<Publish className="userUpdateIcon" />
 													<input type="file" id="file" style={{ display: "none" }} />
 												</div>
-
+												}
 											</div>
 											<button type="submit" className="userUpdateButton">
 												Update
