@@ -13,7 +13,7 @@ const ManageSubscriptions = () => {
     const [rowData, setRowData] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:4000/subscription-list')
+        fetch(`${process.env.REACT_APP_SERVER_URL}/subscription-list`)
             .then(res => res.json())
             .then(data => setData(data))
     }, [])
@@ -28,7 +28,7 @@ const ManageSubscriptions = () => {
             })
                 .then((willAdd) => {
                     if (willAdd) {
-                        const url = `http://localhost:4000/delete-subscription/${id}`
+                        const url = `${process.env.REACT_APP_SERVER_URL}/delete-subscription/${id}`
                         fetch(url, {
                             method: 'DELETE'
                         })

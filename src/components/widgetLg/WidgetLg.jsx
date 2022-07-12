@@ -6,7 +6,7 @@ const WidgetLg = () => {
 	const [cdata, setCData] = useState([]);
 
 	useEffect(() => {
-		fetch("http://localhost:4000/campaign-list")
+		fetch(`${process.env.REACT_APP_SERVER_URL}/campaign-list`)
 			.then((res) => res.json())
 			.then((data) => setCData(data));
 	}, []);

@@ -11,7 +11,7 @@ const CampaignList = () => {
   const [cdata, setCData] = useState([]);
   const [rowData, setRowData] = useState([]);
   useEffect(() => {
-    fetch('http://localhost:4000/campaign-list')
+    fetch(`${process.env.REACT_APP_SERVER_URL}/campaign-list`)
       .then(res => res.json())
       .then(data => setCData(data));
   }, []);
@@ -42,7 +42,7 @@ const CampaignList = () => {
       })
         .then((willAdd) => {
           if (willAdd) {
-            const url = `http://localhost:4000/delete-campaign/${id}`;
+            const url = `${process.env.REACT_APP_SERVER_URL}/delete-campaign/${id}`;
             fetch(url, {
               method: 'DELETE'
             })

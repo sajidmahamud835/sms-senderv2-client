@@ -39,7 +39,7 @@ const ManageAPI = () => {
 		setIsLoading(true);
 		setMessage("");
 		setError("");
-		fetch(`http://localhost:4000/smsApi/${manageApiData._id}`, {
+		fetch(`${process.env.REACT_APP_SERVER_URL}/smsApi/${manageApiData._id}`, {
 			method: "PUT",
 			headers: {
 				"content-type": "application/json",
@@ -64,7 +64,7 @@ const ManageAPI = () => {
 	};
 
 	useEffect(() => {
-		const url = `http://localhost:4000/smsApi`;
+		const url = `${process.env.REACT_APP_SERVER_URL}/smsApi`;
 		fetch(url)
 			.then((res) => res.json())
 			.then((data) => setManageApiData(data[0]));

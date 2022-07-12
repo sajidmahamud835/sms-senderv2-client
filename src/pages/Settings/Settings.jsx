@@ -27,7 +27,7 @@ const Settings = () => {
 		setIsLoading(true);
 		setMessage("");
 		setError("");
-		fetch(`http://localhost:4000/admins`, {
+		fetch(`${process.env.REACT_APP_SERVER_URL}/admins`, {
 			method: "POST",
 			headers: {
 				"content-type": "application/json",
@@ -51,7 +51,7 @@ const Settings = () => {
 	};
 
 	useEffect(() => {
-		const url = `http://localhost:4000/admins`;
+		const url = `${process.env.REACT_APP_SERVER_URL}/admins`;
 		fetch(url)
 			.then((res) => res.json())
 			.then((data) => setAdminData(data));

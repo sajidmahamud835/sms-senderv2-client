@@ -29,7 +29,7 @@ const ManageAPISingleData = (props) => {
 
 	const saveChange = (e) => {
 		e.preventDefault();
-		const url = `http://localhost:4000/smsApi/numbers/${_id}`;
+		const url = `${process.env.REACT_APP_SERVER_URL}/smsApi/numbers/${_id}`;
 		fetch(url, {
 			method: "PUT",
 			headers: {

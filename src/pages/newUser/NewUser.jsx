@@ -69,7 +69,7 @@ const NewUser = () => {
 
 	const createUser = (e) => {
 
-		// fetch("http://localhost:4000/users", {
+		// fetch(`${process.env.REACT_APP_SERVER_URL}/users`, {
 		// 	method: "PUT",
 		// 	headers: {
 		// 		"content-type": "application/json",

@@ -20,7 +20,7 @@ const Sms = () => {
     });
     const [myNumbers, setMyNumbers] = useState([]);
     useEffect(() => {
-        fetch("http://localhost:4000/smsApi/numbers")
+        fetch(`${process.env.REACT_APP_SERVER_URL}/smsApi/numbers`)
             .then(res => res.json())
             .then(data => {
                 setMyNumbers(data);
@@ -51,7 +51,7 @@ const Sms = () => {
         setIsLoading(true);
         setMessage("");
         setError("");
-        fetch("http://localhost:4000/sms/send", {
+        fetch(`${process.env.REACT_APP_SERVER_URL}/sms/send`, {
             method: "POST",
             headers: {
                 "content-type": "application/json",

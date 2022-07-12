@@ -41,7 +41,7 @@ const EditAllList02 = () => {
 	const [rowData, setRowData] = useState([]);
 
 	useEffect(() => {
-		fetch(`http://localhost:4000/excel-file/${Id}`)
+		fetch(`${process.env.REACT_APP_SERVER_URL}/excel-file/${Id}`)
 			.then((res) => res.json())
 			.then((data) => setListData(data[0]));
 	}, [Id]);
@@ -52,7 +52,7 @@ const EditAllList02 = () => {
 			setRowData(listData.array);
 		}
 	}, [listData]);
- 
+
 
 	return (
 		<div className="EditAllListContainer">

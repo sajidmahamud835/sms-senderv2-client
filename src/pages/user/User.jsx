@@ -21,7 +21,7 @@ const User = () => {
 	console.log(inputFieldData);
 
 	useEffect(() => {
-		const url = `http://localhost:4000/users/${userId}`;
+		const url = `${process.env.REACT_APP_SERVER_URL}/users/${userId}`;
 		fetch(url)
 			.then((res) => res.json())
 			.then((data) => {
@@ -32,7 +32,7 @@ const User = () => {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		const url = `http://localhost:4000/users/${userData._id}`;
+		const url = `${process.env.REACT_APP_SERVER_URL}/users/${userData._id}`;
 		fetch(url, {
 			method: "PUT",
 			headers: {
