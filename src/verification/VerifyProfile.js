@@ -1,28 +1,34 @@
 import React,{ useEffect, useState } from 'react';
 import LayOut from '../components/LayOut/LayOut';
-import { CalendarToday, LocationSearching, MailOutline, PermIdentity, PhoneAndroid, Publish } from "@material-ui/icons";
-import { Grid } from "@material-ui/core";
+import {  Publish } from "@material-ui/icons";
 import "../pages/Profile/Profile.css";
 import UseFirebase from '../Hooks/UseFirebase';
 import { useNavigate } from 'react-router-dom';
 
 const VerifyProfile = () => {
     const { user, loading } = UseFirebase();
-    const navigate = useNavigate()
+    const navigate = useNavigate("")
 
+	const [error, setError] = useState(false);
 	const [inputFieldData, setInputFieldData] = useState({});
     useEffect(() => {
         setInputFieldData({
             ...inputFieldData,
             email: user?.email,
         })
-        setInputFieldData({
-            ...inputFieldData,
-            imageUrl: "https://via.placeholder.com/350x150",
-        })
     }, [user?.email])
 	const handleSubmit = (e) => {
 		e.preventDefault();
+		setInputFieldData({
+            ...inputFieldData,
+            imageUrl: "https://via.placeholder.com/350x150",
+        })
+		const {userName,displayName, mobileNumber,address} = inputFieldData;
+		if(!userName || !displayName || !mobileNumber || !address){
+			setError("Please fill in the form")
+		} else {
+			setError(false)
+		}
 		const url = `http://localhost:4000/users`;
 		fetch(url, {
 			method: "POST",
@@ -37,7 +43,6 @@ const VerifyProfile = () => {
                 navigate('/')
 			});
 	};
-    console.log(inputFieldData);
     return (
         <LayOut>
 			{user ?
@@ -54,11 +59,12 @@ const VerifyProfile = () => {
 							</>
 						)}
 						{!loading && (
-							<div className="userContainer">
-								<Grid container spacing={2}>
-									<Grid item md={12} lg={7} style={{ width: "100%" }}>
-										<div className="userUpdate">
+							<div className="userContainer d-flex justify-content-center align-item-center">
+								{/* <Grid container spacing={2}>
+									<Grid item md={12} lg={7} style={{ width: "100%" }}> */}
+										<div className="userUpdate" style={{maxWidth: '700px'}}>
 											<span className="userUpdateTitle">Edit</span>
+											{error && <p className="text-danger">{error}</p>}
 											<form onSubmit={handleSubmit} className="userUpdateForm">
 												<div className="userUpdateLeft">
 													<div className="userUpdateItem">
@@ -134,7 +140,9 @@ const VerifyProfile = () => {
 																<label htmlFor="file">
 																	<Publish className="userUpdateIcon" />
 																</label>
-																<input type="file" id="file" style={{ display: "none" }} />
+																<input
+																className="userUpdateInput"
+																 type="file" id="file" style={{ display: "none" }} />
 															</div>
 													</div>
 													<button type="submit" className="userUpdateButton">
@@ -143,9 +151,6 @@ const VerifyProfile = () => {
 												</div>
 											</form>
 										</div>
-									</Grid>
-								</Grid>
-
 							</div>
 						)}
 					</div>
