@@ -1,37 +1,49 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Alert } from "react-bootstrap";
 
 const AddTemplates = (props) => {
 	// { manageApiData }
 
 	const [isSingle, setIsSingle] = useState(true);
-	const [message, setMessage] = useState("");
 	const [error, setError] = useState("");
 	const [messageIds, setMessageIds] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
-	const [manageMobileData, setManageMobileData] = useState({
-		twilioNumbers: [],
-	});
+	// const [manageMobileData, setManageMobileData] = useState({
+	// 	twilioNumbers: [],
+	// });
+    const [template, setTemplate] = useState({})
+    const [title, setTitle] = useState("")
+    const [message,setMessage] = useState("")
 
 	const { changedData, setChangedData } = props;
 
-	const receiverNumberCollect = (e) => {
-		const numberString = e.target.value;
-		const numbers = numberString.split("\n");
-		manageMobileData.twilioNumbers = [...numbers];
+	const TemplateTitle = (e) => {
+		const text = e.target.value;
+		setTitle(text);
 	};
+
+	const TemplateMessage = (e) => {
+		const message = e.target.value;
+		setMessage(message);
+	};
+    
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		e.target.receiver.value = ""
 		setIsLoading(true);
-		setMessage("");
 		setError("");
-		fetch(`${process.env.REACT_APP_SERVER_URL}/smsApi/numbers`, {
+
+        const data = {
+            title,
+            message
+        }
+
+		fetch(`http://localhost:4000/templates`, {
 			method: "POST",
 			headers: {
 				"content-type": "application/json",
 			},
-			body: JSON.stringify(manageMobileData),
+			body: JSON.stringify(data),
 		})
 			.then((res) => res.json())
 			.then((data) => {
@@ -39,7 +51,6 @@ const AddTemplates = (props) => {
 				console.log(data);
 				setIsLoading(false);
 				if (data.status === 200) {
-					setMessage(data.message);
 					setMessageIds(data.messageIds);
 					setError("");
 				} else if (data.status === 400) {
@@ -73,7 +84,7 @@ const AddTemplates = (props) => {
 					<div className="modal-content">
 						<div className="modal-header">
 							<h5 className="modal-title" id="addNumberModalLabel">
-								Add Mobile Number
+								Add Template
 							</h5>
 							<button
 								type="button"
@@ -84,67 +95,30 @@ const AddTemplates = (props) => {
 						</div>
 						<form onSubmit={handleSubmit}>
 							<div className="modal-body">
-								<div className="d-flex justify-content-between align-items-center my-3">
+								<div className="d-flex justify-content-between flex-column my-3 px-2">
 									<label htmlFor="receiver" className="w-50">
-										Mobile Number:
+										Template title:
 									</label>
-									{isSingle ? (
 										<input
 											id="receiver"
 											name="receiver"
 											type="text"
 											placeholder="Receiver Number..."
-											className="ms-3 ps-2 form-control w-full"
-											onChange={receiverNumberCollect}
+											className="form-control w-full mb-3"
+											onChange={TemplateTitle}
 											required
 										/>
-									) : (
+                                    <label htmlFor="receiver" className="w-50">
+										Template Message:
+									</label>
 										<textarea
 											id="receiver"
 											type="text"
 											placeholder="Receiver Number..."
-											className="ms-3 ps-2 form-control w-full"
-											onChange={receiverNumberCollect}
+											className="form-control w-full"
+											onChange={TemplateMessage}
 											required
 										/>
-									)}
-								</div>
-								<div className="d-flex align-items-center justify-content-between my-3">
-									<div></div>
-									<div className="d-flex">
-										<div className="form-check me-3">
-											<input
-												className="form-check-input radio"
-												type="radio"
-												value=""
-												id="flexCheckChecked"
-												name="numberRequired"
-												onClick={() => setIsSingle(true)}
-											/>
-											<label
-												className="form-check-label"
-												htmlFor="flexCheckChecked"
-											>
-												Single
-											</label>
-										</div>
-										<div className="form-check ms-3">
-											<input
-												className="form-check-input radio"
-												type="radio"
-												value=""
-												id="flexCheckDefault"
-												name="numberRequired"
-												onClick={() => setIsSingle(false)}
-											/>
-											<label
-												className="form-check-label"
-												htmlFor="flexCheckDefault"
-											>
-												Bulk
-											</label>
-										</div>
-									</div>
 								</div>
 							</div>
 							<div className="modal-footer">
@@ -162,11 +136,6 @@ const AddTemplates = (props) => {
 							<div className="mx-4">
 								{isLoading && (
 									<h6 className="text-center">Sending to database...</h6>
-								)}
-								{message && (
-									<Alert variant="success">
-										<h5 className="text-center">{message}</h5>
-									</Alert>
 								)}
 								{error && (
 									<Alert variant="danger">
