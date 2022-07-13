@@ -30,6 +30,7 @@ import Settings from "./pages/Settings/Settings";
 import VerifyRoute from "./verification/VerifyRoute";
 import Verify from "./verification/Verify";
 import VerifyProfile from "./verification/VerifyProfile";
+import MessageTemplates from "./pages/MessageTemplates/MessageTemplates";
 function App() {
   return (
     <>
@@ -66,6 +67,7 @@ function App() {
         <Route path="/myTemplates" element={<MyTemplates />}></Route>
         <Route path="/myContacts" element={<MyContacts />}></Route>
         <Route path="/mySubscription" element={<MySubscription />}></Route>
+        <Route path="/templates" element={<MessageTemplates />}></Route>
         <Route path="/myReports" element={<MyReports />}></Route>
         <Route path="*" element={<Home />}></Route>
       </Route>
