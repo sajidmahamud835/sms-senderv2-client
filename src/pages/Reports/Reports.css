@@ -1,3 +1,83 @@
-.reportsContainer{
+.reports {
     flex: 4;
+}
+
+.reportsContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    padding: 0px;
+    margin: 0px;
+}
+
+.reportsItem {
+    width: 50%;
+    height: 100%;
+    padding: 0px;
+    margin: 0px;
+}
+
+.reportsItemContainer {
+    width: 100%;
+    height: 100%;
+    padding: 0px;
+    margin: 0px;
+}
+
+.reportsItemContent {
+    width: 100%;
+    height: 100%;
+    padding: 0px;
+    margin: 0px;
+}
+
+.reportsItemContentHeader {
+    width: 100%;
+    height: 10%;
+    padding: 0px;
+    margin: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.reportsItemContentBody {
+    width: 100%;
+    height: 90%;
+    padding: 0px;
+    margin: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.reportsItemContentBodyTable {
+    width: 100%;
+    height: 100%;
+    padding: 0px;
+    margin: 0px;
+}
+
+.reportsItemContentBodyTableThead {
+    width: 100%;
+    height: 100%;
+    padding: 0px;
+    margin: 0px;
+}
+
+.reportsItemContentBodyTableTbody {
+    width: 100%;
+    height: 100%;
+    padding: 0px;
+    margin: 0px;
+}
+
+.reportsItemContentBodyTableTr {
+    width: 100%;
+    height: 100%;
+    padding: 0px;
+    margin: 0px;
 }
