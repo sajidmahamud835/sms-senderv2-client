@@ -77,8 +77,8 @@ const Reports = () => {
                                                     <tr key={smsLog.sid}>
                                                         <td>{smsLog.to}</td>
                                                         <td>{smsLog.from}</td>
-                                                        <td><div className="bg-white p-2">{smsLog.body}</div></td>
-                                                        <td>{smsLog.status}</td>
+                                                        <td>{smsLog.body}</td>
+                                                        <td><span className='bg-primary text-light rounded p-1 m'>{smsLog.status}</span></td>
                                                         <td>{smsLog.dateSent}</td>
                                                         <td>{smsLog.price} {smsLog.priceUnit}</td>
                                                     </tr>
