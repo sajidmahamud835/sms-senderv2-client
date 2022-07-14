@@ -20,7 +20,7 @@ const getSMSLogs = (id) => {
             console.log(error);
         }
         );
-}
+};
 
 
 const Reports = () => {
@@ -31,6 +31,7 @@ const Reports = () => {
     useEffect(() => {
         getSMSLogs().then((data) => {
             setSmsLogs(data.messages);
+            console.log(data);
         }
         ).catch((error) => {
             console.log(error);
@@ -94,5 +95,5 @@ const Reports = () => {
             </div>
         </PrivateRoute>
     );
-}
+};
 export default Reports;

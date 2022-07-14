@@ -6,7 +6,7 @@ import useSidebarToggles from '../../Hooks/useSidebarToggles';
 import "./Main.css";
 
 const Main = () => {
-    const [small, close, setClose] = useSidebarToggles()
+    const [small, close, setClose] = useSidebarToggles();
 
     return (
         <LayOut>

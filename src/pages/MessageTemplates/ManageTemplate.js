@@ -2,6 +2,7 @@ import { useState } from "react";
 import { AiOutlineDelete } from "react-icons/ai";
 import { FiEdit } from "react-icons/fi";
 import swal from "sweetalert";
+import { toast } from 'react-toastify';
 
 const ManageTemplate = (props) => {
 	const { _id, title, message: templateMessage } = props.templateData;
@@ -35,7 +36,6 @@ const ManageTemplate = (props) => {
 
 	const saveChange = (e) => {
 		e.preventDefault();
-		alert("clicked");
 		setIsEdit(false);
 		const updatedData = {
 			title: changedTitle,
@@ -52,6 +52,9 @@ const ManageTemplate = (props) => {
 		})
 			.then((res) => res.json())
 			.then((data) => {
+				if (data.data) {
+					toast.success("Data updated!");
+				}
 				setChangedData(data.data);
 				setIsLoading(false);
 				if (data.status === 200) {

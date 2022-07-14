@@ -4,6 +4,7 @@ import swal from "sweetalert";
 import AddNumberList from "./AddNumberList";
 import "./ManageAPI.css";
 import ManageAPIList from "./ManageAPIList";
+import { toast } from 'react-toastify';
 
 const ManageAPI = () => {
 	const [isSingle, setIsSingle] = useState(true);
@@ -48,7 +49,9 @@ const ManageAPI = () => {
 		})
 			.then((res) => res.json())
 			.then((data) => {
-				// console.log(data);
+				if (data) {
+					toast.success("Data updated!");
+				}
 				setIsLoading(false);
 				if (data.status === 200) {
 					swal("Good job!", "Data added successfully...", "success");
