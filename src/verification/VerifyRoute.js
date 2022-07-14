@@ -17,14 +17,17 @@ const VerifyRoute = ({ children, ...rest }) => {
         setDatas(data);
         setIsLoading(false);
       });
+  }, [user]);
 
+  useEffect(() => {
     const find = datas.find((data) => data?.email === user?.email);
-    if (find) {
+    if (find?.displayName.length > 1) {
       setIsUser(true);
+      console.log("find", find.displayName);
     } else {
       setIsUser(false);
     }
-  }, [datas, user]);
+  }, [datas, user?.email]);
 
   let location = useLocation();
   if (loading || isLoading) {

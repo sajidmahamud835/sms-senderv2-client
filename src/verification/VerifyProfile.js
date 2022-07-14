@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 
 const VerifyProfile = () => {
 	const { user, loading } = UseFirebase();
-	const navigate = useNavigate("")
+	const navigate = useNavigate("");
 
 	const [error, setError] = useState(false);
 	const [inputFieldData, setInputFieldData] = useState({});
@@ -15,21 +15,21 @@ const VerifyProfile = () => {
 		setInputFieldData({
 			...inputFieldData,
 			email: user?.email,
-		})
-	}, [user?.email])
+		});
+	}, [user?.email]);
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		setInputFieldData({
 			...inputFieldData
-		})
+		});
 		const { userName, displayName, mobileNumber, address } = inputFieldData;
 		if (!userName || !displayName || !mobileNumber || !address) {
-			setError("Please fill in the form")
+			setError("Please fill in the form");
 		} else {
-			setError(false)
+			setError(false);
 		}
-		const url = `${process.env.REACT_APP_SERVER_URL}/users`;
+		const url = `${process.env.REACT_APP_SERVER_URL}/users/complete`;
 		fetch(url, {
 			method: "POST",
 			headers: {
@@ -40,7 +40,7 @@ const VerifyProfile = () => {
 			.then((res) => res.json())
 			.then((data) => {
 				console.log(data);
-				navigate('/')
+				navigate('/');
 			});
 	};
 	return (
