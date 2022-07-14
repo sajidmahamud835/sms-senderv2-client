@@ -9,6 +9,7 @@ import {
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import "./user.css";
+import { toast } from 'react-toastify';
 
 const User = () => {
 	const [userData, setUserData] = useState([]);
@@ -42,6 +43,9 @@ const User = () => {
 		})
 			.then((res) => res.json())
 			.then((data) => {
+				if (data) {
+					toast.success("Data updated!");
+				}
 				console.log(data);
 				setIsLoading(false);
 				setDataChanged(!dataChanged);

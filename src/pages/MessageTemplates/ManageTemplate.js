@@ -2,9 +2,10 @@ import { useState } from "react";
 import { AiOutlineDelete } from "react-icons/ai";
 import { FiEdit } from "react-icons/fi";
 import swal from "sweetalert";
+import { toast } from 'react-toastify';
 
 const ManageTemplate = (props) => {
-	const { _id, title, message:templateMessage } = props.mobileData;
+	const { _id, title, message: templateMessage } = props.templateData;
 	const { handleDeleteData, setChangedData, changedData } = props;
 	const [isEdit, setIsEdit] = useState(false);
 	const [changedTitle, setChangedTitle] = useState(title);
@@ -22,6 +23,7 @@ const ManageTemplate = (props) => {
 			setIsEdit(true);
 		}
 	};
+	console.log(isEdit);
 
 	const handleTitleChange = (e) => {
 		const changedTitle = e.target.value;
@@ -34,12 +36,12 @@ const ManageTemplate = (props) => {
 
 	const saveChange = (e) => {
 		e.preventDefault();
+		setIsEdit(false);
+		const updatedData = {
+			title: changedTitle,
+			message: changedMessage
+		};
 
-        const updatedData = {
-            title: changedTitle,
-            message: changedMessage
-        }
-        
 		const url = `http://localhost:4000/templates/${_id}`;
 		fetch(url, {
 			method: "PUT",
@@ -50,7 +52,9 @@ const ManageTemplate = (props) => {
 		})
 			.then((res) => res.json())
 			.then((data) => {
-                console.log(data.data);
+				if (data.data) {
+					toast.success("Data updated!");
+				}
 				setChangedData(data.data);
 				setIsLoading(false);
 				if (data.status === 200) {
@@ -83,13 +87,13 @@ const ManageTemplate = (props) => {
 									onBlur={handleTitleChange}
 									className="form-control w-50"
 								/>
-                                <textarea
-                                    id="receiver"
-                                    type="text"
-                                    className="form-control w-50"
-                                    defaultValue={templateMessage}
-                                    onBlur={handleMessageChange}
-                                />
+								<textarea
+									id="receiver"
+									type="text"
+									className="form-control w-50"
+									defaultValue={templateMessage}
+									onBlur={handleMessageChange}
+								/>
 								<div>
 									<button className="btn btn-primary ms-2" type="submit">
 										Save

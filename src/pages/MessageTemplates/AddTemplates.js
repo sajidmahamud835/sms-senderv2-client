@@ -1,17 +1,9 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Alert } from "react-bootstrap";
 
 const AddTemplates = (props) => {
-	// { manageApiData }
-
-	const [isSingle, setIsSingle] = useState(true);
 	const [error, setError] = useState("");
-	const [messageIds, setMessageIds] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
-	// const [manageMobileData, setManageMobileData] = useState({
-	// 	twilioNumbers: [],
-	// });
-    const [template, setTemplate] = useState({})
     const [title, setTitle] = useState("")
     const [message,setMessage] = useState("")
 
@@ -51,7 +43,6 @@ const AddTemplates = (props) => {
 				console.log(data);
 				setIsLoading(false);
 				if (data.status === 200) {
-					setMessageIds(data.messageIds);
 					setError("");
 				} else if (data.status === 400) {
 					setMessage("");
@@ -67,7 +58,7 @@ const AddTemplates = (props) => {
 				type="button"
 				className="btn btn-primary"
 				data-bs-toggle="modal"
-				data-bs-target="#addNumberModal"
+				data-bs-target="#addTemplate"
 			>
 				Add New Templates
 			</button>
@@ -75,15 +66,15 @@ const AddTemplates = (props) => {
 			{/* Modal */}
 			<div
 				className="modal fade"
-				id="addNumberModal"
+				id="addTemplate"
 				tabIndex="-1"
-				aria-labelledby="addNumberModalLabel"
+				aria-labelledby="addTemplateLabel"
 				aria-hidden="true"
 			>
 				<div className="modal-dialog modal-dialog-centered">
 					<div className="modal-content">
 						<div className="modal-header">
-							<h5 className="modal-title" id="addNumberModalLabel">
+							<h5 className="modal-title" id="addTemplateLabel">
 								Add Template
 							</h5>
 							<button
@@ -130,7 +121,7 @@ const AddTemplates = (props) => {
 									Close
 								</button>
 								<button type="submit" className="btn btn-primary">
-									Add Numbers
+									Add Template
 								</button>
 							</div>
 							<div className="mx-4">

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { FiEdit } from "react-icons/fi";
 import { AiOutlineDelete } from "react-icons/ai";
 import swal from "sweetalert";
+import { toast } from 'react-toastify';
 
 const SingleAdmin = (props) => {
 	const [isEdit, setIsEdit] = useState(false);
@@ -41,6 +42,9 @@ const SingleAdmin = (props) => {
 			.then((res) => res.json())
 			.then((data) => {
 				setIsEdit(false);
+				if (data) {
+					toast.success("Data updated!");
+				}
 				setChangedData(data.data);
 				setDataChanged(!dataChanged);
 				setIsLoading(false);

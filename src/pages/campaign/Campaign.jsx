@@ -4,6 +4,7 @@ import "./campaign.css";
 import Chart from "../../components/chart/Chart";
 import { campaignData } from "../../dummyData";
 import { ArrowDownward, ArrowUpward } from "@material-ui/icons";
+import { toast } from 'react-toastify';
 
 const Campaign = () => {
 	const [cdata, setCData] = useState({});
@@ -27,6 +28,9 @@ const Campaign = () => {
 		})
 			.then((res) => res.json())
 			.then((data) => {
+				if (data) {
+					toast.success("Data updated!");
+				}
 				console.log(data);
 				setIsLoading(false);
 				setDataChanged(!dataChanged);

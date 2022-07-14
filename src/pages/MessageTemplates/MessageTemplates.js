@@ -1,13 +1,9 @@
 import { useState } from "react";
-import { Alert } from "react-bootstrap";
 import "../ManageAPI/ManageAPI.css";
-import ManageAPIList from "../ManageAPI/ManageAPIList";
 import AddTemplates from "./AddTemplates";
 import TemplateList from "./TemplateList";
 
 const MessageTemplates = () => {
-	const [error, setError] = useState("");
-	const [isLoading, setIsLoading] = useState(false);
 	const [changedData, setChangedData] = useState([]);
 
 	return (
@@ -16,14 +12,6 @@ const MessageTemplates = () => {
 				<h1 className="userTitle">Message Templates</h1>
 			</div>
 			<div className="" style={{ width: "100%" }}>
-				<div className="mx-4">
-					{isLoading && <h4 className="text-center">Sending...</h4>}
-					{error && (
-						<Alert variant="danger">
-							<h5 className="text-center">{error}</h5>
-						</Alert>
-					)}
-				</div>
 			</div>
 			<div className="mt-4">
 				<div
