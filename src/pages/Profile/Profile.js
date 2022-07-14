@@ -26,7 +26,7 @@ const Profile = () => {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		const url = `${process.env.REACT_APP_SERVER_URL}/users/${userData._id}`;
+		const url = `${process.env.REACT_APP_SERVER_URL}/users/complete`;
 		fetch(url, {
 			method: "PUT",
 			headers: {
