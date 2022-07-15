@@ -6,9 +6,16 @@ const TemplateList = (props) => {
 	const [templateData, setTemplateData] = useState([]);
 	const { changedData, setChangedData } = props;
 	useEffect(() => {
-		fetch(`http://localhost:4000/templates`)
+		fetch(`http://localhost:4000/templates`, {
+			headers: {
+				authorization: `Bearer ${localStorage.getItem('accessToken')}`
+			}
+		})
 			.then((res) => res.json())
-			.then((data) => setTemplateData(data));
+			.then((data) => {
+				setTemplateData(data);
+				console.log(data);
+			});
 
 		console.log(changedData);
 	}, [changedData]);
