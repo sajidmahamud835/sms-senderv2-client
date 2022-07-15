@@ -4,9 +4,10 @@ import { useNavigate } from "react-router-dom";
 import SmsIcon from '@mui/icons-material/Sms';
 import UseFirebase from '../../../Hooks/UseFirebase';
 import './LoginPage.css';
+import useToken from '../../../Hooks/useToken';
 
 const LoginPage = () => {
-    const { handleGoogleSignIn, logInEmailPassword, registerByEmailPass, error } = UseFirebase();
+    const { handleGoogleSignIn, logInEmailPassword, registerByEmailPass, error, user } = UseFirebase();
 
     const [name, setName] = useState();
     const [email, setEmail] = useState();
@@ -19,6 +20,9 @@ const LoginPage = () => {
     const [passwordErrorMassage, setPasswordErrorMassage] = useState("");
     const [nameErrorMassage, setNameErrorMassage] = useState("");
     const [showError, setShowError] = useState("");
+    // adding jwt token hook
+    useToken(user);
+
 
     const location = useLocation();
     let navigate = useNavigate();

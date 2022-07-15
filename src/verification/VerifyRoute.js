@@ -23,7 +23,6 @@ const VerifyRoute = ({ children, ...rest }) => {
     const find = datas.find((data) => data?.email === user?.email);
     if (find?.displayName.length > 1) {
       setIsUser(true);
-      console.log("find", find.displayName);
     } else {
       setIsUser(false);
     }
