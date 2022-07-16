@@ -1,7 +1,7 @@
 import { CalendarToday, LocationSearching, MailOutline, PermIdentity, PhoneAndroid, Publish } from "@material-ui/icons";
 import "./Profile.css";
 import React, { useEffect, useState } from "react";
-import UseFirebase from "../../../Hooks/UseFirebase";
+import UseFirebase from "../../Hooks/UseFirebase";
 import { Grid } from "@material-ui/core";
 import { toast } from 'react-toastify';
 

@@ -13,7 +13,7 @@ import UserList from "./pages/userList/UserList";
 import NewContacts from "./components/NewContacts/NewContacts";
 import ManageSubscriptions from "./pages/ManageSubscriptions/ManageSubscriptions";
 import Reports from "./pages/Reports/Reports";
-import Profile from "./pages/GeneralUserPages/Profile/Profile";
+import Profile from "./pages/Profile/Profile";
 import MyCampaigns from "./pages/GeneralUserPages/MyCampaigns/MyCampaigns";
 import MyTemplates from "./pages/GeneralUserPages/MyTemplates/MyTemplates";
 import MyContacts from "./pages/GeneralUserPages/MyContacts/MyContacts";

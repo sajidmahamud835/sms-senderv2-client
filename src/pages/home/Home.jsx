@@ -10,6 +10,7 @@ import WidgetLg from "../../components/widgetLg/WidgetLg";
 import { Grid } from "@material-ui/core";
 
 const Home = () => {
+
   return (
     <div className="home">
       <FeaturedInfo data={[
