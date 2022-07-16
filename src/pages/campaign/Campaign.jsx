@@ -18,7 +18,7 @@ const Campaign = () => {
 		const statusValue = e.target.value;
 		const newStatus = { status: statusValue };
 		console.log(newStatus);
-		const url = `${process.env.REACT_APP_SERVER_URL}/campaign-details/${Id}`;
+		const url = `${process.env.REACT_APP_SERVER_URL}/campaigns/${Id}`;
 		fetch(url, {
 			method: "PUT",
 			headers: {
@@ -38,7 +38,7 @@ const Campaign = () => {
 	};
 
 	useEffect(() => {
-		fetch(`${process.env.REACT_APP_SERVER_URL}/campaign-details/${Id}`, {
+		fetch(`${process.env.REACT_APP_SERVER_URL}/campaigns/${Id}`, {
 			headers: {
 				authorization: `Bearer ${localStorage.getItem('accessToken')}`
 			}
@@ -60,7 +60,7 @@ const Campaign = () => {
 		<div className="campaign">
 			<div className="campaignTitleContainer">
 				<h1 className="campaignTitle">Campaign</h1>
-				<Link to="/new-campaign">
+				<Link to="/newCampaign">
 					<button className="campaignAddButton">Create</button>
 				</Link>
 			</div>

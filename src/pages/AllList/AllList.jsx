@@ -22,7 +22,7 @@ const AllList = () => {
             })
                 .then((willAdd) => {
                     if (willAdd) {
-                        const url = `${process.env.REACT_APP_SERVER_URL}/delete-excel-file/${id}`;
+                        const url = `${process.env.REACT_APP_SERVER_URL}/contacts${id}`;
                         fetch(url, {
                             method: 'DELETE'
                         })
@@ -45,7 +45,7 @@ const AllList = () => {
 
     };
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_SERVER_URL}/upload-excel-file?email=${user?.email}`, {
+        fetch(`${process.env.REACT_APP_SERVER_URL}/contacts?email=${user?.email}`, {
             headers: {
                 authorization: `Bearer ${localStorage.getItem('accessToken')}`
             }
@@ -112,7 +112,7 @@ const AllList = () => {
             renderCell: (params) => {
                 return (
                     <div>
-                        <Link to={"/edit-all-lists/" + params.row._id}>
+                        <Link to={"/contacts/" + params.row._id}>
                             <button className="campaignListEdit">Edit</button>
                         </Link>
                     </div>
@@ -139,7 +139,7 @@ const AllList = () => {
         <div className=' allListContainer'>
             <div className="campaignTitleContainer">
                 <h1 className="campaignTitle">All List</h1>
-                <Link to="/excel-to-csv">
+                <Link to="/newContacts">
                     <button className="createCSVBtn"> <span><UploadFileIcon /> </span> Upload</button>
                 </Link>
             </div>

@@ -64,13 +64,13 @@ const Sidebar = ({ setClose }) => {
                   Message Templates
                 </li>
               </Link>
-              <Link to="/manage-subscriptions" className="link">
+              <Link to="/subscription" className="link">
                 <li onClick={(e) => makeActive('subscription')} id="subscription" className="sidebarListItem">
                   <AttachMoney className="sidebarIcon" />
                   Manage Subscriptions
                 </li>
               </Link>
-              <Link to="/all-contacts-lists" className="link">
+              <Link to="/contacts" className="link">
                 <li onClick={(e) => makeActive('reports')} id="reports" className="sidebarListItem">
                   <ViewListIcon className="sidebarIcon" />
                   Manage Contact List
@@ -113,7 +113,7 @@ const Sidebar = ({ setClose }) => {
                 My Contacts
               </li>
             </Link>
-            <Link to="/manage-subscriptions" className="link">
+            <Link to="/subscription" className="link">
               <li onClick={(e) => makeActive('mySubscription')} id="mySubscription" className="sidebarListItem">
                 <AttachMoney className="sidebarIcon" />
                 My Subscription
