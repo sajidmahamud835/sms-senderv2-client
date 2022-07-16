@@ -20,7 +20,7 @@ const PricingTable = () => {
   const navigate = useNavigate();
   // subscriptions
   useEffect(() => {
-    fetch("http://localhost:4000/subscription-list")
+    fetch("http://localhost:4000/subscriptions")
       .then((res) => res.json())
       .then((data) => setSubscriptions(data));
   }, []);

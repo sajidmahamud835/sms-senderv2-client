@@ -19,7 +19,7 @@ const NewCampaign = () => {
 	const [numberList, setNumberList] = useState([]);
 	const navigate = useNavigate();
 	useEffect(() => {
-		const url = `${process.env.REACT_APP_SERVER_URL}/upload-excel-file?email=${user?.email}`;
+		const url = `${process.env.REACT_APP_SERVER_URL}/contacts?email=${user?.email}`;
 		fetch(url)
 			.then((res) => res.json())
 			.then((data) => setNumberList(data));

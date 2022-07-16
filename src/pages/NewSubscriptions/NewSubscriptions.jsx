@@ -44,7 +44,7 @@ const NewSubscriptions = () => {
             })
                 .then((willAdd) => {
                     if (willAdd) {
-                        const url = `${process.env.REACT_APP_SERVER_URL}/subscription-list`;
+                        const url = `${process.env.REACT_APP_SERVER_URL}/subscriptions`;
                         fetch(url, {
                             method: "POST",
                             headers: {
