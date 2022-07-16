@@ -20,7 +20,7 @@ const PricingTable = () => {
   const navigate = useNavigate();
   // subscriptions
   useEffect(() => {
-    fetch("http://localhost:4000/subscription-list", {
+    fetch("http://localhost:4000/subscriptions", {
       headers: {
         authorization: `Bearer ${localStorage.getItem('accessToken')}`
       }
@@ -118,7 +118,7 @@ const PricingTable = () => {
                   <Button
                     fullWidth
                     variant="contained"
-                    onClick={() => navigate("/verify-profile")}
+                    onClick={() => navigate("/updateProfile")}
                   >
                     Get started
                   </Button>

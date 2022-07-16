@@ -13,7 +13,7 @@ const ManageSubscriptions = () => {
     const [rowData, setRowData] = useState([]);
     const navigate = useNavigate();
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_SERVER_URL}/subscription-list`, {
+        fetch(`${process.env.REACT_APP_SERVER_URL}/subscriptions`, {
             headers: {
                 authorization: `Bearer ${localStorage.getItem('accessToken')}`
             }
@@ -39,7 +39,7 @@ const ManageSubscriptions = () => {
             })
                 .then((willAdd) => {
                     if (willAdd) {
-                        const url = `${process.env.REACT_APP_SERVER_URL}/delete-subscription/${id}`;
+                        const url = `${process.env.REACT_APP_SERVER_URL}/subscriptions/${id}`;
                         fetch(url, {
                             method: 'DELETE'
                         })
@@ -131,7 +131,7 @@ const ManageSubscriptions = () => {
             renderCell: (params) => {
                 return (
                     <div>
-                        <Link to={"/edit-subscriptions/" + params.row.id}>
+                        <Link to={"/subscriptions/" + params.row.id}>
                             <button className="campaignListEdit">Edit</button>
                         </Link>
                         <DeleteOutline

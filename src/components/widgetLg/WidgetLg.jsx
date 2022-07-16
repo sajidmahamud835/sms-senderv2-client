@@ -7,7 +7,7 @@ const WidgetLg = () => {
 	const [cdata, setCData] = useState([]);
 	const navigate = useNavigate();
 	useEffect(() => {
-		fetch(`${process.env.REACT_APP_SERVER_URL}/campaign-list`, {
+		fetch(`${process.env.REACT_APP_SERVER_URL}/campaigns`, {
 			headers: {
 				authorization: `Bearer ${localStorage.getItem('accessToken')}`
 			}

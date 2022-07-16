@@ -12,7 +12,7 @@ const CampaignList = () => {
   const [rowData, setRowData] = useState([]);
   const navigate = useNavigate();
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_SERVER_URL}/campaign-list`, {
+    fetch(`${process.env.REACT_APP_SERVER_URL}/campaigns`, {
       headers: {
         authorization: `Bearer ${localStorage.getItem('accessToken')}`
       }
@@ -54,7 +54,7 @@ const CampaignList = () => {
       })
         .then((willAdd) => {
           if (willAdd) {
-            const url = `${process.env.REACT_APP_SERVER_URL}/delete-campaign/${id}`;
+            const url = `${process.env.REACT_APP_SERVER_URL}/campaigns/${id}`;
             fetch(url, {
               method: 'DELETE'
             })
@@ -147,7 +147,7 @@ const CampaignList = () => {
     <div className="campaignList ">
       <div className="campaignTitleContainer">
         <h1 className="campaignTitle">Manage Campaigns</h1>
-        <Link to="/new-campaign">
+        <Link to="/newCampaign">
           <button className="campaignAddButton">Create</button>
         </Link>
       </div>
