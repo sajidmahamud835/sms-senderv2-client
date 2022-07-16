@@ -13,7 +13,7 @@ import UserList from "./pages/userList/UserList";
 import NewContacts from "./components/NewContacts/NewContacts";
 import ManageSubscriptions from "./pages/ManageSubscriptions/ManageSubscriptions";
 import Reports from "./pages/Reports/Reports";
-import Profile from "./pages/Profile/Profile";
+import Profile from "./pages/GeneralUserPages/Profile/Profile";
 import MyCampaigns from "./pages/GeneralUserPages/MyCampaigns/MyCampaigns";
 import MyTemplates from "./pages/GeneralUserPages/MyTemplates/MyTemplates";
 import MyContacts from "./pages/GeneralUserPages/MyContacts/MyContacts";
@@ -42,16 +42,11 @@ function App() {
         <Route path="" element={<PrivateRoute><VerifyRoute><Main /></VerifyRoute></PrivateRoute>}>
           <Route path="" element={<Home />} />
           <Route path="/users" element={<AdminRoute><UserList /></AdminRoute>}></Route>
-          <Route path="/sms" element={<AdminRoute><Sms /></AdminRoute>}></Route>
-          <Route path="/newContacts" element={<AdminRoute><NewContacts /></AdminRoute>}></Route>
-          <Route path="/contacts/:Id" element={<AdminRoute><ViewContacts /></AdminRoute>}></Route>
+          <Route path="/sms" element={<Sms />}></Route>
           <Route path="/user/:userId" element={<AdminRoute><User /></AdminRoute>}></Route>
           <Route path="/newUser" element={<AdminRoute><NewUser /></AdminRoute>}></Route>
           <Route path="/campaigns" element={<AdminRoute><CampaignList /></AdminRoute>}></Route>
-          <Route path="/campaign/:Id" element={<AdminRoute><Campaign /></AdminRoute>}></Route>
-          <Route path="/newCampaign" element={<AdminRoute><NewCampaign /></AdminRoute>}></Route>
           <Route path="/subscription" element={<AdminRoute><ManageSubscriptions /></AdminRoute>}></Route>
-          <Route path="/contacts" element={<AdminRoute><AllList /></AdminRoute>}></Route>
           <Route path="/subscriptions/:Id" element={<AdminRoute><EditSubscriptions /></AdminRoute>}></Route>
           <Route path="/new-subscriptions" element={<AdminRoute><NewSubscriptions /></AdminRoute>}></Route>
           <Route path="/manageAPI" element={<AdminRoute><ManageAPI /></AdminRoute>}></Route>
@@ -60,9 +55,12 @@ function App() {
           <Route path="/settings" element={<AdminRoute><Settings /></AdminRoute>}></Route>
           {/* This Route For General User */}
           <Route path="/profile" element={<Profile />}></Route>
+          <Route path="/contacts" element={<AllList />}></Route>
+          <Route path="/newContacts" element={<NewContacts />}></Route>
+          <Route path="/contacts/:Id" element={<ViewContacts />}></Route>
           <Route path="/myCampaigns" element={<MyCampaigns />}></Route>
-          <Route path="/myTemplates" element={<MyTemplates />}></Route>
-          <Route path="/myContacts" element={<MyContacts />}></Route>
+          <Route path="/campaign/:Id" element={<Campaign />}></Route>
+          <Route path="/newCampaign" element={<NewCampaign />}></Route>
           <Route path="/mySubscription" element={<MySubscription />}></Route>
           <Route path="/templates" element={<MessageTemplates />}></Route>
           <Route path="/myReports" element={<MyReports />}></Route>

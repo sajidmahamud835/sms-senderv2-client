@@ -1,9 +1,11 @@
 import React from 'react';
+import CampaignList from '../../campaignList/CampaignList';
 const MyCampaigns = () => {
+
     return (
-        <div style={{ flex: "4" }}>
-            <h1>welcome to MyCampaigns</h1>
-        </div>
+        <>
+            <CampaignList />
+        </>
     );
 };
 

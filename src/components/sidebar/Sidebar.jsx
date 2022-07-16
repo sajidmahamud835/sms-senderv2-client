@@ -2,7 +2,6 @@ import React from 'react';
 import "./sidebar.css";
 import { LineStyle, Timeline, PermIdentity, AttachMoney, BarChart, MailOutline, DynamicFeed, ChatBubbleOutline, WorkOutline, Settings } from "@material-ui/icons";
 import LogoutIcon from '@mui/icons-material/Logout';
-import ViewListIcon from '@mui/icons-material/ViewList';
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import UseFirebase from '../../Hooks/UseFirebase';
@@ -52,28 +51,16 @@ const Sidebar = ({ setClose }) => {
                   Manage Users
                 </li>
               </Link>
-              <Link to="/campaigns" className="link">
+              <Link to="/myCampaigns" className="link">
                 <li onClick={(e) => makeActive('campaigns')} id="campaigns" className="sidebarListItem">
                   <DynamicFeed className="sidebarIcon" />
                   Manage Campaigns
-                </li>
-              </Link>
-              <Link to="/templates" className="link">
-                <li onClick={(e) => makeActive('myTemplates')} id="myTemplates" className="sidebarListItem">
-                  <MailOutline className="sidebarIcon" />
-                  Message Templates
                 </li>
               </Link>
               <Link to="/subscription" className="link">
                 <li onClick={(e) => makeActive('subscription')} id="subscription" className="sidebarListItem">
                   <AttachMoney className="sidebarIcon" />
                   Manage Subscriptions
-                </li>
-              </Link>
-              <Link to="/contacts" className="link">
-                <li onClick={(e) => makeActive('reports')} id="reports" className="sidebarListItem">
-                  <ViewListIcon className="sidebarIcon" />
-                  Manage Contact List
                 </li>
               </Link>
               <Link to="/reports" className="link">
