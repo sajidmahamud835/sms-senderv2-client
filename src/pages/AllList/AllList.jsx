@@ -101,7 +101,7 @@ const AllList = () => {
             renderCell: (params) => {
                 return (
                     <div>
-                        <Link to={"/edit-all-lists/" + params.row._id}>
+                        <Link to={"/contacts/" + params.row._id}>
                             <button className="campaignListEdit">Edit</button>
                         </Link>
                     </div>
@@ -128,7 +128,7 @@ const AllList = () => {
         <div className=' allListContainer'>
             <div className="campaignTitleContainer">
                 <h1 className="campaignTitle">All List</h1>
-                <Link to="/excel-to-csv">
+                <Link to="/newContacts">
                     <button className="createCSVBtn"> <span><UploadFileIcon /> </span> Upload</button>
                 </Link>
             </div>

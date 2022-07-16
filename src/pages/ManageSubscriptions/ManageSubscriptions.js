@@ -120,7 +120,7 @@ const ManageSubscriptions = () => {
             renderCell: (params) => {
                 return (
                     <div>
-                        <Link to={"/edit-subscriptions/" + params.row.id}>
+                        <Link to={"/subscriptions/" + params.row.id}>
                             <button className="campaignListEdit">Edit</button>
                         </Link>
                         <DeleteOutline

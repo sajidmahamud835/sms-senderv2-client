@@ -107,7 +107,7 @@ const PricingTable = () => {
                   <Button
                     fullWidth
                     variant="contained"
-                    onClick={() => navigate("/verify-profile")}
+                    onClick={() => navigate("/updateProfile")}
                   >
                     Get started
                   </Button>

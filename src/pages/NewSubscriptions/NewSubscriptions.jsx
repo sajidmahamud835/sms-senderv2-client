@@ -57,7 +57,7 @@ const NewSubscriptions = () => {
                                 swal("Campaign is added", {
                                     icon: "success"
                                 });
-                                navigate('/manage-subscriptions');
+                                navigate('/subscription');
                             });
 
                     } else {

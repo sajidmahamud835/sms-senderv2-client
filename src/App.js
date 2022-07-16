@@ -24,7 +24,7 @@ import PrivateRoute from "./PrivateRoute/PrivateRoute/PrivateRoute";
 import ApiAnalytics from "./pages/ApiAnalytics/ApiAnalytics";
 import EditSubscriptions from "./pages/EditSubscriptions/EditSubscriptions";
 import AllList from "./pages/AllList/AllList";
-import EditAllList02 from "./components/EditAllList02/EditAllList02";
+import EditAllList from "./components/EditAllList/EditAllList";
 import NewSubscriptions from "./pages/NewSubscriptions/NewSubscriptions";
 import Settings from "./pages/Settings/Settings";
 import VerifyRoute from "./verification/VerifyRoute";
@@ -36,27 +36,23 @@ function App() {
   return (
     <>
       <Routes>
-        {/* Should I delete it */}
-        {/* <Route path="/loginfsdfsdf" element={<Login />}></Route> */}
         <Route path="/login" element={<LoginPage />}></Route>
         <Route path="/verify" element={<Verify />}></Route>
-        <Route path="/verify-profile" element={<VerifyProfile />}></Route>
+        <Route path="/updateProfile" element={<VerifyProfile />}></Route>
         <Route path="" element={<PrivateRoute><VerifyRoute><Main /></VerifyRoute></PrivateRoute>}>
           <Route path="" element={<Home />} />
           <Route path="/users" element={<AdminRoute><UserList /></AdminRoute>}></Route>
           <Route path="/sms" element={<AdminRoute><Sms /></AdminRoute>}></Route>
-          <Route path="/excel-to-csv" element={<AdminRoute><ExcelToCSV /></AdminRoute>}></Route>
-          {/* <Route path="/all-lists" element={<AdminRoute><AllList /></AdminRoute>}></Route> */}
-          {/* <Route path="/edit-all-lists/:Id" element={<AdminRoute><EditAllList /></AdminRoute>}></Route> */}
-          <Route path="/edit-all-lists/:Id" element={<AdminRoute><EditAllList02 /></AdminRoute>}></Route>
+          <Route path="/newContacts" element={<AdminRoute><ExcelToCSV /></AdminRoute>}></Route>
+          <Route path="/contacts/:Id" element={<AdminRoute><EditAllList /></AdminRoute>}></Route>
           <Route path="/user/:userId" element={<AdminRoute><User /></AdminRoute>}></Route>
           <Route path="/newUser" element={<AdminRoute><NewUser /></AdminRoute>}></Route>
           <Route path="/campaigns" element={<AdminRoute><CampaignList /></AdminRoute>}></Route>
           <Route path="/campaign/:Id" element={<AdminRoute><Campaign /></AdminRoute>}></Route>
-          <Route path="/new-campaign" element={<AdminRoute><NewCampaign /></AdminRoute>}></Route>
-          <Route path="/manage-subscriptions" element={<AdminRoute><ManageSubscriptions /></AdminRoute>}></Route>
-          <Route path="/all-contacts-lists" element={<AdminRoute><AllList /></AdminRoute>}></Route>
-          <Route path="/edit-subscriptions/:Id" element={<AdminRoute><EditSubscriptions /></AdminRoute>}></Route>
+          <Route path="/newCampaign" element={<AdminRoute><NewCampaign /></AdminRoute>}></Route>
+          <Route path="/subscription" element={<AdminRoute><ManageSubscriptions /></AdminRoute>}></Route>
+          <Route path="/contacts" element={<AdminRoute><AllList /></AdminRoute>}></Route>
+          <Route path="/subscriptions/:Id" element={<AdminRoute><EditSubscriptions /></AdminRoute>}></Route>
           <Route path="/new-subscriptions" element={<AdminRoute><NewSubscriptions /></AdminRoute>}></Route>
           <Route path="/manageAPI" element={<AdminRoute><ManageAPI /></AdminRoute>}></Route>
           <Route path="/apiAnalytics" element={<AdminRoute><ApiAnalytics /></AdminRoute>}></Route>

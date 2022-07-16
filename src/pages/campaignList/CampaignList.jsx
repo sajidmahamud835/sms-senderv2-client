@@ -135,7 +135,7 @@ const CampaignList = () => {
     <div className="campaignList ">
       <div className="campaignTitleContainer">
         <h1 className="campaignTitle">Manage Campaigns</h1>
-        <Link to="/new-campaign">
+        <Link to="/newCampaign">
           <button className="campaignAddButton">Create</button>
         </Link>
       </div>

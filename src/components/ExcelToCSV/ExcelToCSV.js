@@ -110,7 +110,7 @@ const ExcelToCSV = () => {
 			{/* Drop Box Code End */}
 			<div className="card shadow px-5 py-4 my-5 w-75 mx-auto">
 				<div className="d-flex justify-content-between">
-					<h1 className="m-0">Upload Your excel File </h1>
+					<h1 className="m-0">Create Contacts </h1>
 					<button onClick={GoTOAllLIst} className="btn btn-success px-2 m-0">
 						All List
 					</button>

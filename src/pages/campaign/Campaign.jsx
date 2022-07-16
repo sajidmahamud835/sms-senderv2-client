@@ -49,7 +49,7 @@ const Campaign = () => {
 		<div className="campaign">
 			<div className="campaignTitleContainer">
 				<h1 className="campaignTitle">Campaign</h1>
-				<Link to="/new-campaign">
+				<Link to="/newCampaign">
 					<button className="campaignAddButton">Create</button>
 				</Link>
 			</div>
