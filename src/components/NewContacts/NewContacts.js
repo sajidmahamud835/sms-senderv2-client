@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import swal from "sweetalert";
 import UseFirebase from "../../Hooks/UseFirebase";
-import "./ExcelToCSV.css";
+import "./NewContacts.css";
 
 // const columns = [
 //     { field: 'id', headerName: 'ID', width: 100 },
@@ -20,7 +20,7 @@ import "./ExcelToCSV.css";
 //         editable: true,
 //     },
 // ];
-const ExcelToCSV = () => {
+const NewContacts = () => {
 
 	const navigate = useNavigate();
 	const { user } = UseFirebase();
@@ -104,7 +104,7 @@ const ExcelToCSV = () => {
 	};
 
 	return (
-		<div className="excelToCSVContainer">
+		<div className="NewContactsContainer">
 			{/* Drop Box Code Start here*/}
 
 			{/* Drop Box Code End */}
@@ -170,4 +170,4 @@ const ExcelToCSV = () => {
 	);
 };
 
-export default ExcelToCSV;
+export default NewContacts;

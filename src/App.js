@@ -10,7 +10,7 @@ import NewUser from "./pages/newUser/NewUser";
 import Sms from "./pages/sms/Sms";
 import User from "./pages/user/User";
 import UserList from "./pages/userList/UserList";
-import ExcelToCSV from "./components/ExcelToCSV/ExcelToCSV";
+import NewContacts from "./components/NewContacts/NewContacts";
 import ManageSubscriptions from "./pages/ManageSubscriptions/ManageSubscriptions";
 import Reports from "./pages/Reports/Reports";
 import Profile from "./pages/Profile/Profile";
@@ -43,7 +43,7 @@ function App() {
           <Route path="" element={<Home />} />
           <Route path="/users" element={<AdminRoute><UserList /></AdminRoute>}></Route>
           <Route path="/sms" element={<AdminRoute><Sms /></AdminRoute>}></Route>
-          <Route path="/newContacts" element={<AdminRoute><ExcelToCSV /></AdminRoute>}></Route>
+          <Route path="/newContacts" element={<AdminRoute><NewContacts /></AdminRoute>}></Route>
           <Route path="/contacts/:Id" element={<AdminRoute><EditAllList /></AdminRoute>}></Route>
           <Route path="/user/:userId" element={<AdminRoute><User /></AdminRoute>}></Route>
           <Route path="/newUser" element={<AdminRoute><NewUser /></AdminRoute>}></Route>
