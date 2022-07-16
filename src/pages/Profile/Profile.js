@@ -4,26 +4,42 @@ import React, { useEffect, useState } from "react";
 import UseFirebase from "../../Hooks/UseFirebase";
 import { Grid } from "@material-ui/core";
 import { toast } from 'react-toastify';
+import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
 	const { user, loading } = UseFirebase();
 	const [userData, setUserData] = useState({});
 	const [isLoading, setIsLoading] = useState(true);
 	const [dataChanged, setDataChanged] = useState(true);
-
+	const navigate = useNavigate();
 	const [inputFieldData, setInputFieldData] = useState({});
 	console.log(userData);
 	useEffect(() => {
 		if (!loading) {
 			const url = `${process.env.REACT_APP_SERVER_URL}/users/email/${user.email}`;
-			fetch(url)
-				.then((res) => res.json())
+			fetch(url, {
+				headers: {
+					authorization: `Bearer ${localStorage.getItem('accessToken')}`
+				}
+			})
+				.then((res) => {
+					console.log(res.status);
+					if (res.status === 403 || res.status === 401) {
+						navigate('/login');
+					} else {
+						return res.json();
+					}
+				})
 				.then((data) => {
-					setUserData(data[0]);
-					setIsLoading(false);
+					if (data) {
+						setUserData(data[0]);
+						setIsLoading(false);
+					} else {
+						navigate('/login');
+					}
 				});
 		}
-	}, [loading, user.email, dataChanged]);
+	}, [loading, user.email, dataChanged, navigate]);
 
 	const handleSubmit = (e) => {
 		e.preventDefault();

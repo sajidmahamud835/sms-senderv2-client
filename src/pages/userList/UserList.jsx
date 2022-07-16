@@ -2,7 +2,7 @@ import "./userList.css";
 import { DataGrid } from "@material-ui/data-grid";
 import { DeleteOutline } from "@material-ui/icons";
 import { userRows } from "../../dummyData";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import React from "react";
 import swal from "sweetalert";
@@ -11,16 +11,27 @@ const UserList = () => {
 	// const [data, setData] = useState(userRows);
 	const [datas, setDatas] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
-
+	const navigate = useNavigate();
 	useEffect(() => {
 		const url = `${process.env.REACT_APP_SERVER_URL}/users`;
-		fetch(url)
-			.then((res) => res.json())
+		fetch(url, {
+			headers: {
+				authorization: `Bearer ${localStorage.getItem('accessToken')}`
+			}
+		})
+			.then((res) => {
+				console.log(res.status);
+				if (res.status === 403 || res.status === 401) {
+					navigate('/login');
+				} else {
+					return res.json();
+				}
+			})
 			.then((data) => {
 				setDatas(data);
 				setIsLoading(false);
 			});
-	}, []);
+	}, [navigate]);
 
 	const handleDelete = (id) => {
 		swal({
@@ -57,7 +68,7 @@ const UserList = () => {
 
 	// useEffect(() => {
 	// 	let i = 1;
-	// 	datas.map((data) => rowData.push({ ...data, id: i++ }));
+	// 	datas?.map((data) => rowData.push({ ...data, id: i++ }));
 	// 	console.log(rowData);
 
 	// }, [datas]);

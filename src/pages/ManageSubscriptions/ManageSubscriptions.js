@@ -1,22 +1,33 @@
 
 import React, { useEffect } from 'react';
-import './ManageSubscriptions.css'
+import './ManageSubscriptions.css';
 
 import { DataGrid } from "@material-ui/data-grid";
 import { DeleteOutline } from "@material-ui/icons";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import swal from 'sweetalert';
 const ManageSubscriptions = () => {
 
     const [data, setData] = useState([]);
     const [rowData, setRowData] = useState([]);
-
+    const navigate = useNavigate();
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_SERVER_URL}/subscriptions`)
-            .then(res => res.json())
-            .then(data => setData(data))
-    }, [])
+        fetch(`${process.env.REACT_APP_SERVER_URL}/subscriptions`, {
+            headers: {
+                authorization: `Bearer ${localStorage.getItem('accessToken')}`
+            }
+        })
+            .then((res) => {
+                console.log(res.status);
+                if (res.status === 403 || res.status === 401) {
+                    navigate('/login');
+                } else {
+                    return res.json();
+                }
+            })
+            .then(data => setData(data));
+    }, [navigate]);
     // console.log(data)
     const handleDelete = (id) => {
         if (id) {
@@ -28,7 +39,7 @@ const ManageSubscriptions = () => {
             })
                 .then((willAdd) => {
                     if (willAdd) {
-                        const url = `${process.env.REACT_APP_SERVER_URL}/subscriptions/${id}`
+                        const url = `${process.env.REACT_APP_SERVER_URL}/subscriptions/${id}`;
                         fetch(url, {
                             method: 'DELETE'
                         })
@@ -52,17 +63,17 @@ const ManageSubscriptions = () => {
 
     useEffect(() => {
         let id = 1;
-        const initialArray = []
-        data.map(list => {
-            const newList = { ...list, id: id }
+        const initialArray = [];
+        data?.map(list => {
+            const newList = { ...list, id: id };
             id++;
-            initialArray.push(newList)
-            return 0
-        })
+            initialArray.push(newList);
+            return 0;
+        });
         setRowData(initialArray);
 
-    }, [data])
-    console.log(rowData)
+    }, [data]);
+    console.log(rowData);
     const columns = [
         {
             field: "id",

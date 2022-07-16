@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Navigate, useLocation } from "react-router-dom";
+import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import LoadingSpinner from "../components/loadingSpinner/LoadingSpinner";
 import UseFirebase from "../Hooks/UseFirebase";
 
@@ -8,16 +8,27 @@ const VerifyRoute = ({ children, ...rest }) => {
   const [datas, setDatas] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isUser, setIsUser] = useState(false);
-  // console.log(user)
+  const navigate = useNavigate();
   useEffect(() => {
     const url = `http://localhost:4000/users`;
-    fetch(url)
-      .then((res) => res.json())
+    fetch(url, {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem('accessToken')}`
+      }
+    })
+      .then((res) => {
+        console.log(res.status);
+        if (res.status === 403 || res.status === 401) {
+          navigate('/login');
+        } else {
+          return res.json();
+        }
+      })
       .then((data) => {
         setDatas(data);
         setIsLoading(false);
       });
-  }, [user]);
+  }, [user, navigate]);
 
   useEffect(() => {
     const find = datas.find((data) => data?.email === user?.email);

@@ -20,10 +20,21 @@ const PricingTable = () => {
   const navigate = useNavigate();
   // subscriptions
   useEffect(() => {
-    fetch("http://localhost:4000/subscriptions")
-      .then((res) => res.json())
+    fetch("http://localhost:4000/subscriptions", {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem('accessToken')}`
+      }
+    })
+      .then((res) => {
+        console.log(res.status);
+        if (res.status === 403 || res.status === 401) {
+          navigate('/login');
+        } else {
+          return res.json();
+        }
+      })
       .then((data) => setSubscriptions(data));
-  }, []);
+  }, [navigate]);
   console.log(subscriptions);
 
   return (
@@ -34,7 +45,7 @@ const PricingTable = () => {
       <CssBaseline />
       <Container maxWidth="md" component="main">
         <Grid container spacing={5} alignItems="flex-end">
-          {subscriptions.map((tier) => (
+          {subscriptions?.map((tier) => (
             // Enterprise card is full width at sm breakpoint
             <Grid
               item

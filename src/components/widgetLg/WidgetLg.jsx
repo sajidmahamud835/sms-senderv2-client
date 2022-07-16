@@ -1,15 +1,27 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import SingleData from "./SingleData";
 import "./widgetLg.css";
 
 const WidgetLg = () => {
 	const [cdata, setCData] = useState([]);
-
+	const navigate = useNavigate();
 	useEffect(() => {
-		fetch(`${process.env.REACT_APP_SERVER_URL}/campaigns`)
-			.then((res) => res.json())
+		fetch(`${process.env.REACT_APP_SERVER_URL}/campaigns`, {
+			headers: {
+				authorization: `Bearer ${localStorage.getItem('accessToken')}`
+			}
+		})
+			.then((res) => {
+				console.log(res.status);
+				if (res.status === 403 || res.status === 401) {
+					navigate('/login');
+				} else {
+					return res.json();
+				}
+			})
 			.then((data) => setCData(data));
-	}, []);
+	}, [navigate]);
 
 	// console.log(cdata);
 

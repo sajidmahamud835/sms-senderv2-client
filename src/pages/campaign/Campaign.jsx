@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import "./campaign.css";
 import Chart from "../../components/chart/Chart";
 import { campaignData } from "../../dummyData";
@@ -10,7 +10,7 @@ const Campaign = () => {
 	const [cdata, setCData] = useState({});
 	const [isLoading, setIsLoading] = useState(true);
 	const [dataChanged, setDataChanged] = useState(true);
-
+	const navigate = useNavigate();
 	let { Id } = useParams();
 
 	const statusChanged = (e) => {
@@ -38,10 +38,21 @@ const Campaign = () => {
 	};
 
 	useEffect(() => {
-		fetch(`${process.env.REACT_APP_SERVER_URL}/campaigns/${Id}`)
-			.then((res) => res.json())
+		fetch(`${process.env.REACT_APP_SERVER_URL}/campaigns/${Id}`, {
+			headers: {
+				authorization: `Bearer ${localStorage.getItem('accessToken')}`
+			}
+		})
+			.then((res) => {
+				console.log(res.status);
+				if (res.status === 403 || res.status === 401) {
+					navigate('/login');
+				} else {
+					return res.json();
+				}
+			})
 			.then((data) => setCData(data[0]));
-	}, [Id, dataChanged]);
+	}, [Id, dataChanged, navigate]);
 
 	console.log(cdata);
 
