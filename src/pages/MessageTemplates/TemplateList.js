@@ -1,24 +1,33 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import swal from "sweetalert";
 import ManageTemplate from "./ManageTemplate";
 
 const TemplateList = (props) => {
 	const [templateData, setTemplateData] = useState([]);
 	const { changedData, setChangedData } = props;
+	const navigate = useNavigate();
 	useEffect(() => {
 		fetch(`http://localhost:4000/templates`, {
 			headers: {
 				authorization: `Bearer ${localStorage.getItem('accessToken')}`
 			}
 		})
-			.then((res) => res.json())
+			.then((res) => {
+				console.log(res.status);
+				if (res.status === 403 || res.status === 401) {
+					navigate('/login');
+				} else {
+					return res.json();
+				}
+			})
 			.then((data) => {
 				setTemplateData(data);
 				console.log(data);
 			});
 
 		console.log(changedData);
-	}, [changedData]);
+	}, [changedData, navigate]);
 	// delete a mobile number data
 	const handleDeleteData = (id) => {
 		swal({
@@ -62,7 +71,7 @@ const TemplateList = (props) => {
 					</tr>
 				</thead>
 				<tbody>
-					{templateData.map((data) => (
+					{templateData?.map((data) => (
 						<ManageTemplate
 							key={data._id + data.number}
 							templateData={data}

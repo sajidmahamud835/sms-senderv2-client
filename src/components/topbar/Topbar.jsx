@@ -29,13 +29,13 @@ const Topbar = ({ small, setClose, close }) => {
 		// console.log({ userName });
 		const sliceName = [];
 		if (userName.length > 0) {
-			userName.map(word => {
+			userName?.map(word => {
 				return sliceName.push(word.slice(0, 1));
 			});
 			// sliceName = sliceName + word.slice(0, 1)
 		}
 		let shortName = "";
-		sliceName.map(s => shortName += s);
+		sliceName?.map(s => shortName += s);
 		return {
 			// children: `${name?.split(" ")[0][0]}${name?.split(" ")[1][0]}`,
 			children: shortName

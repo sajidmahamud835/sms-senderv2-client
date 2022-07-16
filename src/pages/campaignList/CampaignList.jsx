@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import "./campaignList.css";
 import { DataGrid } from "@material-ui/data-grid";
 import { DeleteOutline } from "@material-ui/icons";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import swal from 'sweetalert';
 import { useState } from "react";
 
@@ -10,17 +10,29 @@ import { useState } from "react";
 const CampaignList = () => {
   const [cdata, setCData] = useState([]);
   const [rowData, setRowData] = useState([]);
+  const navigate = useNavigate();
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_SERVER_URL}/campaign-list`)
-      .then(res => res.json())
+    fetch(`${process.env.REACT_APP_SERVER_URL}/campaign-list`, {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem('accessToken')}`
+      }
+    })
+      .then((res) => {
+        console.log(res.status);
+        if (res.status === 403 || res.status === 401) {
+          navigate('/login');
+        } else {
+          return res.json();
+        }
+      })
       .then(data => setCData(data));
-  }, []);
+  }, [navigate]);
 
 
   useEffect(() => {
     let id = 1;
     const initArray = [];
-    cdata.map(list => {
+    cdata?.map(list => {
       const newList = { ...list, id: id };
       id++;
       initArray.push(newList);
