@@ -24,7 +24,7 @@ import PrivateRoute from "./PrivateRoute/PrivateRoute/PrivateRoute";
 import ApiAnalytics from "./pages/ApiAnalytics/ApiAnalytics";
 import EditSubscriptions from "./pages/EditSubscriptions/EditSubscriptions";
 import AllList from "./pages/AllList/AllList";
-import EditAllList from "./components/EditAllList/EditAllList";
+import ViewContacts from "./components/ViewContacts/ViewContacts";
 import NewSubscriptions from "./pages/NewSubscriptions/NewSubscriptions";
 import Settings from "./pages/Settings/Settings";
 import VerifyRoute from "./verification/VerifyRoute";
@@ -44,7 +44,7 @@ function App() {
           <Route path="/users" element={<AdminRoute><UserList /></AdminRoute>}></Route>
           <Route path="/sms" element={<AdminRoute><Sms /></AdminRoute>}></Route>
           <Route path="/newContacts" element={<AdminRoute><NewContacts /></AdminRoute>}></Route>
-          <Route path="/contacts/:Id" element={<AdminRoute><EditAllList /></AdminRoute>}></Route>
+          <Route path="/contacts/:Id" element={<AdminRoute><ViewContacts /></AdminRoute>}></Route>
           <Route path="/user/:userId" element={<AdminRoute><User /></AdminRoute>}></Route>
           <Route path="/newUser" element={<AdminRoute><NewUser /></AdminRoute>}></Route>
           <Route path="/campaigns" element={<AdminRoute><CampaignList /></AdminRoute>}></Route>

@@ -2,7 +2,7 @@ import { Container } from "@material-ui/core";
 import { DataGrid } from "@mui/x-data-grid";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import "../EditAllList/EditAllList.css";
+import "../ViewContacts/ViewContacts.css";
 
 const columns = [
 	{
@@ -25,7 +25,7 @@ const columns = [
 	}
 ];
 
-const EditAllList = () => {
+const ViewContacts = () => {
 	let { Id } = useParams();
 	const [listData, setListData] = useState({});
 	const [rowData, setRowData] = useState([]);
@@ -45,7 +45,7 @@ const EditAllList = () => {
 
 
 	return (
-		<div className="EditAllListContainer">
+		<div className="ViewContactsContainer">
 			<h1> Edit {listData?.listName} </h1>
 			<Container className="d-block">
 				<h5>
@@ -72,4 +72,4 @@ const EditAllList = () => {
 	);
 };
 
-export default EditAllList;
+export default ViewContacts;
