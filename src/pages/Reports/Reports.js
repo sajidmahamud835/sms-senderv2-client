@@ -1,18 +1,27 @@
 import React, { useEffect } from 'react';
 // import './Reports.css'
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import UseFirebase from '../../Hooks/UseFirebase';
 import PrivateRoute from '../../PrivateRoute/PrivateRoute/PrivateRoute';
-
+import { toast } from 'react-toastify';
 const getSMSLogs = (id) => {
     const url = `${process.env.REACT_APP_SERVER_URL}/sms/logs`;
     return fetch(url, {
         method: "GET",
         headers: {
             "content-type": "application/json",
+            authorization: `Bearer ${localStorage.getItem('accessToken')}`
         },
     })
-        .then((res) => res.json())
+        .then((res) => {
+            console.log(res.status);
+            if (res.status === 403 || res.status === 401) {
+                toast.error("UnAuthorized access ");
+            } else {
+                return res.json();
+            }
+        })
         .then((data) => {
             return data;
         }
@@ -74,7 +83,7 @@ const Reports = () => {
                                                     <td>Loading...</td>
                                                 </tr>
                                             ) : (
-                                                smsLogs.map((smsLog) => (
+                                                smsLogs?.map((smsLog) => (
                                                     <tr key={smsLog.sid}>
                                                         <td>{smsLog.to}</td>
                                                         <td>{smsLog.from}</td>

@@ -49,7 +49,7 @@ const AdminList = (props) => {
 					</tr>
 				</thead>
 				<tbody>
-					{adminData.map((singleAdminData) => (
+					{adminData?.map((singleAdminData) => (
 						<SingleAdmin
 							key={singleAdminData._id}
 							singleAdminData={singleAdminData}

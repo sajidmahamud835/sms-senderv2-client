@@ -74,7 +74,7 @@ const ManageAPIList = (props) => {
 					</tr>
 				</thead>
 				<tbody>
-					{mobileNumberData.map((mobileData) => (
+					{mobileNumberData?.map((mobileData) => (
 						<ManageAPISingleData
 							key={mobileData._id + mobileData.number}
 							mobileData={mobileData}

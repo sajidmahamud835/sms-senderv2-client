@@ -5,6 +5,7 @@ import AddNumberList from "./AddNumberList";
 import "./ManageAPI.css";
 import ManageAPIList from "./ManageAPIList";
 import { toast } from 'react-toastify';
+import { useNavigate } from "react-router-dom";
 
 const ManageAPI = () => {
 	const [isSingle, setIsSingle] = useState(true);
@@ -17,6 +18,7 @@ const ManageAPI = () => {
 		authToken: "",
 	});
 	const [changedData, setChangedData] = useState([]);
+	const navigate = useNavigate();
 
 	// const receiverNumberCollect = (e) => {
 	// 	const numberString = e.target.value;
@@ -68,10 +70,21 @@ const ManageAPI = () => {
 
 	useEffect(() => {
 		const url = `${process.env.REACT_APP_SERVER_URL}/smsApi`;
-		fetch(url)
-			.then((res) => res.json())
+		fetch(url, {
+			headers: {
+				authorization: `Bearer ${localStorage.getItem('accessToken')}`
+			}
+		})
+			.then((res) => {
+				console.log(res.status);
+				if (res.status === 403 || res.status === 401) {
+					navigate('/login');
+				} else {
+					return res.json();
+				}
+			})
 			.then((data) => setManageApiData(data[0]));
-	}, []);
+	}, [navigate]);
 
 	console.log(manageApiData);
 

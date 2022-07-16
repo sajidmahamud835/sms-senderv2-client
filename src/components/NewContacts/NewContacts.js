@@ -45,7 +45,7 @@ const NewContacts = () => {
 	const csvFileToArray = (string) => {
 		const csvHeader = string.slice(0, string.indexOf("\r\n")).split(",");
 		const csvRows = string.slice(string.indexOf("\n") + 1).split("\r\n");
-		const CSVArray = csvRows.map((i) => {
+		const CSVArray = csvRows?.map((i) => {
 			const values = i.split(",");
 			const obj = csvHeader.reduce((object, header, index) => {
 				object[header] = values[index];
