@@ -77,7 +77,7 @@ const Settings = () => {
 			</div>
 			<div className="" style={{ width: "100%" }}>
 				<div className="mx-4">
-					{isLoading && <h4 className="text-center">Sending...</h4>}
+					{isLoading && <h4 className="text-center">Adding... </h4>}
 					{message && (
 						<Alert variant="success">
 							<h5 className="text-center">{message}</h5>

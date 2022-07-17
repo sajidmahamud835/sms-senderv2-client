@@ -6,7 +6,7 @@ const AdminList = (props) => {
 	const { adminData, setAdminData, dataChanged, setDataChanged } = props;
 
 	// delete a admin
-	const handleDeleteData = (id) => {
+	const handleDeleteData = (email) => {
 		swal({
 			title: "Are you sure?",
 			text: "Once deleted, you will not be able to recover this data!",
@@ -15,7 +15,7 @@ const AdminList = (props) => {
 			dangerMode: true,
 		}).then((willDelete) => {
 			if (willDelete) {
-				const url = `${process.env.REACT_APP_SERVER_URL}/admins/${id}`;
+				const url = `${process.env.REACT_APP_SERVER_URL}/admins/${email}`;
 				fetch(url, {
 					method: "DELETE",
 				})
@@ -26,7 +26,7 @@ const AdminList = (props) => {
 								icon: "success",
 							});
 							const remainAdminData = adminData.filter(
-								(data) => data._id !== id
+								(data) => data.email !== email
 							);
 							setAdminData(remainAdminData);
 						}
@@ -42,7 +42,9 @@ const AdminList = (props) => {
 			<table className="table table-hover mx-auto">
 				<thead>
 					<tr>
+						<th scope="col">Name</th>
 						<th scope="col">Email Address</th>
+						<th scope="col">Position</th>
 						<th scope="col" className="text-end">
 							Action
 						</th>
