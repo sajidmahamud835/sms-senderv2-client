@@ -7,6 +7,7 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   updateProfile,
+  sendPasswordResetEmail,
 } from "firebase/auth";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -64,6 +65,17 @@ const UseFirebase = () => {
         setError(error.code);
       });
   };
+
+  const resetPassword = (email) => {
+    sendPasswordResetEmail(auth, email)
+      .then((result) => {
+        setError("");
+      }
+      ).catch((error) => {
+        setError(error.code);
+      }
+      );
+  }
 
   const logOut = () => {
     setLoading(true);
@@ -155,6 +167,7 @@ const UseFirebase = () => {
     registerByEmailPass,
     logInEmailPassword,
     isAdminLoading,
+    resetPassword,
   };
 };
 

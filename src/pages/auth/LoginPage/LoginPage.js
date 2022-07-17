@@ -7,7 +7,7 @@ import './LoginPage.css';
 import useToken from '../../../Hooks/useToken';
 
 const LoginPage = () => {
-    const { handleGoogleSignIn, logInEmailPassword, registerByEmailPass, error, user } = UseFirebase();
+    const { handleGoogleSignIn, logInEmailPassword, registerByEmailPass, resetPassword, error, user } = UseFirebase();
 
     const [name, setName] = useState();
     const [email, setEmail] = useState();
@@ -120,6 +120,18 @@ const LoginPage = () => {
         }
 
     };
+    const handleResetPassword = async () => {
+        //confirmation box
+        const confirm = window.confirm("Are you sure you want to reset your password?");
+        if (confirm) {
+            if (email !== "" && email !== undefined) {
+                await resetPassword(email);
+                setShowError("Password reset email sent.");
+            } else {
+                setShowError("Please enter your email.");
+            }
+        }
+    };
     return (
         <div id='logInPage'>
             <div>
@@ -138,6 +150,9 @@ const LoginPage = () => {
                         }
                         {logBtn && (<input type="submit" name="signup_submit" value="Log in" disabled={disabled} onClick={handleLogIn} />)}
                         {regBtn && (<input type="submit" name="signup_submit" value="Registration" disabled={disabled} onClick={handleReg} />)}
+                        {/* forget password */}
+                        <p className='mt-3'>Can't login? <small onClick={handleResetPassword} className='text-primary' style={{ cursor: 'pointer' }}>Reset Password</small>.</p>
+
                     </div>
 
                     <div className="right">
@@ -154,7 +169,6 @@ const LoginPage = () => {
                     <div className="or">OR</div>
                 </div>
             </div>
-
         </div >
     );
 };
