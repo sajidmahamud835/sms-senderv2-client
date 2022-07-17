@@ -7,7 +7,7 @@ const WidgetSm = () => {
 	const [usersData, setUsersData] = useState([]);
 	const navigate = useNavigate();
 	useEffect(() => {
-		const url = `${process.env.REACT_APP_SERVER_URL}/users`;
+		const url = `${process.env.REACT_APP_SERVER_URL}/users/inactive`;
 		fetch(url, {
 			headers: {
 				authorization: `Bearer ${localStorage.getItem('accessToken')}`
@@ -30,12 +30,39 @@ const WidgetSm = () => {
 		<div className="widgetSm" style={{ width: "100%" }}>
 			<span className="widgetSmTitle">Pending Members</span>
 			<ul className="widgetSmList">
-				{usersData?.map((userData) => (
-					<SingleData key={userData._id} userData={userData} />
-				))}
+				{
+					usersData.length > 0 ? (
+
+						usersData.slice(0, 5).map((user) => (
+							<SingleData
+								key={user.id}
+								userData={user}
+							/>
+						))
+					) : (
+						//style for when there are no pending members
+						<div style={{
+							display: "flex",
+							marginTop: "10px",
+							marginLeft: "10px",
+							flexDirection: "column",
+							alignItems: "center",
+							justifyContent: "center",
+							height: "100%",
+							width: "100%",
+							fontSize: "1.5rem"
+						}}>
+							<span>No pending members</span>
+						</div>
+
+					)
+
+
+				}
 			</ul>
 		</div>
 	);
 };
 
 export default WidgetSm;
+
