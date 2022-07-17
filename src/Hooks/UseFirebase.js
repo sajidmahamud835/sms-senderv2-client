@@ -11,7 +11,6 @@ import {
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import initializeAuthentication from "../firebase/FirebaseInit";
-import { SubscriptionsRows } from "../dummyData";
 
 initializeAuthentication();
 
@@ -120,15 +119,31 @@ const UseFirebase = () => {
 
   useEffect(() => {
     setAdminIsLoading(true);
-    if (
-      user?.email === "sajidmahamud835@gmail.com" ||
-      user?.email === "admin@admin.com" ||
-      user?.email === "contactsamsulalam@gmail.com"
-    ) {
-      setAdminIsLoading(false);
-      setAdmin(true);
+    if (user.email) {
+      fetch(`${process.env.REACT_APP_SERVER_URL}/admin/check/${user.email}`, {
+        method: "GET",
+        headers: {
+          "content-type": "application/json",
+          authorization: `Bearer ${localStorage.getItem('accessToken')}`
+        },
+      })
+        .then((res) => {
+          if (res.status === 403 || res.status === 401) {
+            navigate('/login');
+          } else {
+            return res.json();
+          }
+        }
+        ).then((data) => {
+          console.log(data);
+          if (data.isAdmin) {
+            setAdmin(true);
+          }
+          setAdminIsLoading(false);
+        }
+        );
     }
-  }, [user?.email]);
+  }, [navigate, user?.email]);
 
   return {
     handleGoogleSignIn,
@@ -139,6 +154,7 @@ const UseFirebase = () => {
     loading,
     registerByEmailPass,
     logInEmailPassword,
+    isAdminLoading,
   };
 };
 
