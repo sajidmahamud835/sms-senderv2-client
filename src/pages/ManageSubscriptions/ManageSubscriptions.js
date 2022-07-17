@@ -131,7 +131,7 @@ const ManageSubscriptions = () => {
             renderCell: (params) => {
                 return (
                     <div>
-                        <Link to={"/subscriptions/" + params.row.id}>
+                        <Link to={"/subscriptions/" + params.row._id}>
                             <button className="campaignListEdit">Edit</button>
                         </Link>
                         <DeleteOutline
