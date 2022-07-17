@@ -69,37 +69,37 @@ const Home = () => {
       <FeaturedInfo data={[
         {
           id: 1,
-          name: "Active User",
+          name: "Active Users",
           value: activeUsers,
           icon: <FiUserCheck />,
         },
         {
           id: 2,
-          name: "Pending User",
+          name: "Pending Users",
           value: pendingUsers,
           icon: <FiUser />,
         },
         {
           id: 3,
-          name: "Total User",
+          name: "Total Users",
           value: totalUsers,
           icon: <FiUser />,
         },
         {
           id: 4,
-          name: "Active Campaign",
+          name: "Active Campaigns",
           value: activeCampaigns,
           icon: <Message />,
         },
         {
           id: 5,
-          name: "Pending Campaign",
+          name: "Pending Campaigns",
           value: pendingCampaigns,
           icon: <Message />,
         },
         {
           id: 6,
-          name: "Total Campaign",
+          name: "Total Campaigns",
           value: totalCampaigns,
           icon: <Message />,
         }
