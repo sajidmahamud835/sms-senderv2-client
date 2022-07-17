@@ -9,7 +9,7 @@ import UseFirebase from "../../Hooks/UseFirebase";
 import { IconButton } from "@material-ui/core";
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
-import './Topbar.css';
+import './topbar.css';
 const Topbar = ({ small, setClose, close }) => {
 	const { admin, user, logOut, loading } = UseFirebase();
 	const [anchorEl, setAnchorEl] = useState(null);
