@@ -36,11 +36,13 @@ const Reports = () => {
     const { user, loading } = UseFirebase();
     const [error, setError] = useState(false);
     const [smsLogs, setSmsLogs] = useState([]);
-
+    const [dataLoading, setDataLoading] = useState(false);
     useEffect(() => {
+        setDataLoading(true);
         getSMSLogs().then((data) => {
-            setSmsLogs(data.messages);
+            setSmsLogs(data?.messages);
             console.log(data);
+            setDataLoading(false);
         }
         ).catch((error) => {
             console.log(error);
@@ -78,7 +80,7 @@ const Reports = () => {
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {loading ? (
+                                            {(loading || dataLoading) ? (
                                                 <tr>
                                                     <td>Loading...</td>
                                                 </tr>
