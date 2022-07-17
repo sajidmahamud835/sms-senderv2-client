@@ -14,11 +14,6 @@ import NewContacts from "./components/NewContacts/NewContacts";
 import ManageSubscriptions from "./pages/ManageSubscriptions/ManageSubscriptions";
 import Reports from "./pages/Reports/Reports";
 import Profile from "./pages/Profile/Profile";
-import MyCampaigns from "./pages/GeneralUserPages/MyCampaigns/MyCampaigns";
-import MyTemplates from "./pages/GeneralUserPages/MyTemplates/MyTemplates";
-import MyContacts from "./pages/GeneralUserPages/MyContacts/MyContacts";
-import MySubscription from "./pages/GeneralUserPages/MySubscription/MySubscription";
-import MyReports from "./pages/GeneralUserPages/MyReports/MyReports";
 import LoginPage from "./pages/auth/LoginPage/LoginPage";
 import PrivateRoute from "./PrivateRoute/PrivateRoute/PrivateRoute";
 import ApiAnalytics from "./pages/ApiAnalytics/ApiAnalytics";
@@ -58,12 +53,9 @@ function App() {
           <Route path="/contacts" element={<AllList />}></Route>
           <Route path="/newContacts" element={<NewContacts />}></Route>
           <Route path="/contacts/:Id" element={<ViewContacts />}></Route>
-          <Route path="/myCampaigns" element={<MyCampaigns />}></Route>
           <Route path="/campaign/:Id" element={<Campaign />}></Route>
           <Route path="/newCampaign" element={<NewCampaign />}></Route>
-          <Route path="/mySubscription" element={<MySubscription />}></Route>
           <Route path="/templates" element={<MessageTemplates />}></Route>
-          <Route path="/myReports" element={<MyReports />}></Route>
           <Route path="*" element={<Home />}></Route>
         </Route>
       </Routes>

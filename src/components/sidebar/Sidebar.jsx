@@ -51,7 +51,7 @@ const Sidebar = ({ setClose }) => {
                   Manage Users
                 </li>
               </Link>
-              <Link to="/myCampaigns" className="link">
+              <Link to="/campaigns" className="link">
                 <li onClick={(e) => makeActive('campaigns')} id="campaigns" className="sidebarListItem">
                   <DynamicFeed className="sidebarIcon" />
                   Manage Campaigns
