@@ -17,7 +17,6 @@ const VerifyRoute = ({ children, ...rest }) => {
       }
     })
       .then((res) => {
-        console.log(res.status);
         if (res.status === 403 || res.status === 401) {
           navigate('/login');
         } else {
@@ -31,8 +30,8 @@ const VerifyRoute = ({ children, ...rest }) => {
   }, [user, navigate]);
 
   useEffect(() => {
-    const find = datas.find((data) => data?.email === user?.email);
-    if (find?.displayName.length > 1) {
+    const find = datas?.find((data) => data?.email === user?.email);
+    if (find?.displayName?.length > 1) {
       setIsUser(true);
     } else {
       setIsUser(false);

@@ -13,7 +13,9 @@ const Profile = () => {
 	const [dataChanged, setDataChanged] = useState(true);
 	const navigate = useNavigate();
 	const [inputFieldData, setInputFieldData] = useState({});
-	console.log(userData);
+	const [smallLoading, setSmallLoading] = useState(false);
+	const [image, setImage] = useState(false);
+
 	useEffect(() => {
 		if (!loading) {
 			const url = `${process.env.REACT_APP_SERVER_URL}/users/email/${user.email}`;
@@ -59,6 +61,35 @@ const Profile = () => {
 				}
 				setIsLoading(false);
 				setDataChanged(!dataChanged);
+			});
+	};
+
+
+	const handleImageChange = (e) => {
+		const image = e.target.files[0];
+		const imageStorageKey = process.env.REACT_APP_IMAGE_STORAGE_KEY;
+		const formData = new FormData();
+		formData.append('image', image);
+		const url = `https://api.imgbb.com/1/upload?key=${imageStorageKey}`;
+		if (image)
+			setSmallLoading(true);
+		fetch(url, {
+			method: "POST",
+			body: formData
+		})
+			.then(res => res.json())
+			.then(data => {
+				if (data) {
+					setImage(data.data.url);
+					setSmallLoading(false);
+					toast.success("Image updated");
+					setInputFieldData({
+						...inputFieldData,
+						imageUrl: data.data.url,
+					});
+				} else {
+					console.log("something went wrong");
+				}
 			});
 	};
 
@@ -206,16 +237,20 @@ const Profile = () => {
 										</div>
 										<div className="userUpdateRight">
 											<div className="userUpdateUpload">
-
 												<div>
-													<img
+													{smallLoading ? "Loading" : <img
 														className="userUpdateImg"
-														src={userData.imageUrl}
-														alt={userData.displayName}
+														src={image ? image : userData.imageUrl}
+														alt="placeholder"
+													/>}
+													<label htmlFor="file">
+														<Publish className="userUpdateIcon" />
+													</label>
+													<input
+														className="userUpdateInput"
+														type="file" id="file" style={{ display: "none" }}
+														onChange={handleImageChange}
 													/>
-													<label htmlFor="file"></label>
-													<Publish className="userUpdateIcon" />
-													<input type="file" id="file" style={{ display: "none" }} />
 												</div>
 											</div>
 											<button type="submit" className="userUpdateButton">
