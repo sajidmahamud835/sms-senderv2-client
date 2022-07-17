@@ -57,7 +57,7 @@ const VerifyProfile = () => {
 
 	const handleImageChange = (e) => {
 		const image = e.target.files[0];
-		const imageStorageKey = '8e83d1fae7e6eac6ba7c1112bd135e2e';
+		const imageStorageKey = process.env.REACT_APP_IMAGE_STORAGE_KEY;
 		const formData = new FormData();
 		formData.append('image', image);
 		const url = `https://api.imgbb.com/1/upload?key=${imageStorageKey}`;
@@ -172,7 +172,7 @@ const VerifyProfile = () => {
 												<div>
 													{smallLoading ? "Loading" : <img
 														className="userUpdateImg"
-														src={image ? image : "https://via.placeholder.com/350x150"}
+														src={image ? image : "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200"}
 														alt="placeholder"
 													/>}
 													<label htmlFor="file">
