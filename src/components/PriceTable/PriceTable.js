@@ -20,7 +20,7 @@ const PricingTable = () => {
   const navigate = useNavigate();
   // subscriptions
   useEffect(() => {
-    fetch("${process.env.REACT_APP_SERVER_URL}/subscriptions", {
+    fetch(`${process.env.REACT_APP_SERVER_URL}/subscriptions`, {
       headers: {
         authorization: `Bearer ${localStorage.getItem('accessToken')}`
       }
@@ -120,7 +120,7 @@ const PricingTable = () => {
                     variant="contained"
                     onClick={() => navigate("/updateProfile")}
                   >
-                    Get started
+                    Select
                   </Button>
                 </CardActions>
               </Card>

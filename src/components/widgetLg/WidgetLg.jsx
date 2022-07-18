@@ -1,27 +1,32 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import UseFirebase from "../../Hooks/UseFirebase";
 import SingleData from "./SingleData";
 import "./widgetLg.css";
 
 const WidgetLg = () => {
 	const [cdata, setCData] = useState([]);
 	const navigate = useNavigate();
+	const { user, loading } = UseFirebase();
+
 	useEffect(() => {
-		fetch(`${process.env.REACT_APP_SERVER_URL}/campaigns`, {
-			headers: {
-				authorization: `Bearer ${localStorage.getItem('accessToken')}`
-			}
-		})
-			.then((res) => {
-				console.log(res.status);
-				if (res.status === 403 || res.status === 401) {
-					navigate('/login');
-				} else {
-					return res.json();
+		if (!loading && user) {
+			fetch(`${process.env.REACT_APP_SERVER_URL}/campaigns/user/${user.email}`, {
+				headers: {
+					authorization: `Bearer ${localStorage.getItem('accessToken')}`
 				}
 			})
-			.then((data) => setCData(data));
-	}, [navigate]);
+				.then((res) => {
+					console.log(res.status);
+					if (res.status === 403 || res.status === 401) {
+						navigate('/login');
+					} else {
+						return res.json();
+					}
+				})
+				.then((data) => setCData(data));
+		}
+	}, [loading, navigate, user]);
 
 	// console.log(cdata);
 
