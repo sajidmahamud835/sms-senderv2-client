@@ -23,7 +23,7 @@ const AddTemplates = (props) => {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		e.target.receiver.value = ""
+		e.target.receiver.value = "";
 		setIsLoading(true);
 		setError("");
 
@@ -31,7 +31,7 @@ const AddTemplates = (props) => {
 			title,
 			message,
 			email: user?.email
-		}
+		};
 
 		fetch(`${process.env.REACT_APP_SERVER_URL}/templates`, {
 			method: "POST",
@@ -97,7 +97,7 @@ const AddTemplates = (props) => {
 										id="receiver"
 										name="receiver"
 										type="text"
-										placeholder="Receiver Number..."
+										placeholder="Give a title"
 										className="form-control w-full mb-3"
 										onChange={TemplateTitle}
 										required
@@ -108,7 +108,7 @@ const AddTemplates = (props) => {
 									<textarea
 										id="receiver"
 										type="text"
-										placeholder="Receiver Number..."
+										placeholder="Give a description"
 										className="form-control w-full"
 										onChange={TemplateMessage}
 										required
