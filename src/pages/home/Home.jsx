@@ -126,7 +126,7 @@ const Home = () => {
         }
       ]} />
 
-      <Chart data={smsLogs} title="API Analytics" Grid dataKey="SMS Sent" />
+      {smsLogs.length > 0 ? <Chart data={smsLogs} title="Monthly API Analytics" grid dataKey="SMS Sent" /> : <div className='noData'>Loading Monthly API Analytics...</div>}
       <div className="homeWidgets">
         <Grid container spacing={1}>
           <Grid item style={{ width: "100%" }} sm={12} md={6}>

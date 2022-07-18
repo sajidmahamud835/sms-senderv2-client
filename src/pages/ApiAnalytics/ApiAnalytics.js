@@ -56,8 +56,7 @@ const ApiAnalytics = () => {
                     icon: <Message />,
                 },
             ]} />
-            <Chart data={smsLogs} title="API Analytics" grid dataKey="SMS Sent" />
-            {/*Create a buttion to view sms reports using bootstarp */}
+            {smsLogs.length > 0 ? <Chart data={smsLogs} title="Monthly API Analytics" grid dataKey="SMS Sent" /> : <div className='noData'>Loading Monthly API Analytics...</div>}
             <button onClick={() => navigate('/reports')} className="btn btn-primary">View SMS Reports</button>
             <button onClick={() => navigate('/campaigns')} className="btn btn-success ms-4">View All Campaigns</button>
 
