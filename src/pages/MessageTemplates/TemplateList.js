@@ -8,7 +8,7 @@ const TemplateList = (props) => {
 	const [templateData, setTemplateData] = useState([]);
 	const { changedData, setChangedData } = props;
 	const navigate = useNavigate();
-	const { user, loading } = UseFirebase();
+	const { user, loading, admin } = UseFirebase();
 
 	useEffect(() => {
 		if (!loading) {
@@ -72,7 +72,7 @@ const TemplateList = (props) => {
 			<table className="table table-hover">
 				<thead>
 					<tr>
-						<th scope="col">Numbers</th>
+						<th scope="col">Template</th>
 						<th scope="col" className="text-end">
 							Actions
 						</th>
@@ -88,6 +88,8 @@ const TemplateList = (props) => {
 							setMobileNumberData={setTemplateData}
 							changedData={changedData}
 							setChangedData={setChangedData}
+							admin={admin}
+
 						/>
 					))}
 				</tbody>

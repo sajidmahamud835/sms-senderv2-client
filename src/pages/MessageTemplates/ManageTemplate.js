@@ -5,8 +5,8 @@ import swal from "sweetalert";
 import { toast } from 'react-toastify';
 
 const ManageTemplate = (props) => {
-	const { _id, title, message: templateMessage } = props.templateData;
-	const { handleDeleteData, setChangedData, changedData } = props;
+	const { _id, title, message: templateMessage, email } = props.templateData;
+	const { handleDeleteData, setChangedData, changedData, admin } = props;
 	const [isEdit, setIsEdit] = useState(false);
 	const [changedTitle, setChangedTitle] = useState(title);
 	const [changedMessage, setChangedMessage] = useState(templateMessage);
@@ -78,7 +78,7 @@ const ManageTemplate = (props) => {
 				<th scope="row" className="fs-6 pt-3">
 					<form onSubmit={saveChange}>
 						{!isEdit ? (
-							<span>{title}</span>
+							<span>{title} {admin && <span>({email})</span>}</span>
 						) : (
 							<div className="d-flex">
 								<input

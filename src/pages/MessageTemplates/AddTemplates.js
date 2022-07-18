@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { Alert } from "react-bootstrap";
+import UseFirebase from "../../Hooks/UseFirebase";
 
 const AddTemplates = (props) => {
 	const [error, setError] = useState("");
 	const [isLoading, setIsLoading] = useState(false);
-	const [title, setTitle] = useState("")
-	const [message, setMessage] = useState("")
+	const [title, setTitle] = useState("");
+	const [message, setMessage] = useState("");
+	const { user, loading } = UseFirebase();
 
 	const { changedData, setChangedData } = props;
 
@@ -27,7 +29,8 @@ const AddTemplates = (props) => {
 
 		const data = {
 			title,
-			message
+			message,
+			email: user?.email
 		}
 
 		fetch(`${process.env.REACT_APP_SERVER_URL}/templates`, {

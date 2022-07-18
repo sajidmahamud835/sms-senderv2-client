@@ -45,7 +45,7 @@ const AllList = () => {
 
     };
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_SERVER_URL}/contacts?email=${user?.email}`, {
+        fetch(`${process.env.REACT_APP_SERVER_URL}/contacts/${user?.email}`, {
             headers: {
                 authorization: `Bearer ${localStorage.getItem('accessToken')}`
             }
