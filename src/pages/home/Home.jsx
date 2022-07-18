@@ -4,7 +4,6 @@ import FeaturedInfo from "../../components/featuredInfo/FeaturedInfo";
 import "./home.css";
 import { FiUser, FiUserCheck } from 'react-icons/fi';
 import { Message } from "@material-ui/icons";
-import { userData } from "../../dummyData";
 import WidgetSm from "../../components/widgetSm/WidgetSm";
 import WidgetLg from "../../components/widgetLg/WidgetLg";
 import { Grid } from "@material-ui/core";
@@ -19,6 +18,7 @@ const Home = () => {
   const [pendingUsers, setPendingUsers] = useState(0);
   const [totalCampaigns, setTotalCampaigns] = useState(0);
   const [totalUsers, setTotalUsers] = useState(0);
+  const [smsLogs, setSmsLogs] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -64,6 +64,27 @@ const Home = () => {
       .then((data) => setUsersCount(data));
   }, [navigate]);
 
+  useEffect(() => {
+    fetch(`${process.env.REACT_APP_SERVER_URL}/sms/logs/month`, {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem('accessToken')}`
+      }
+    })
+      .then((res) => {
+        if (res.status === 403 || res.status === 401) {
+          navigate('/login');
+        } else {
+          return res.json();
+        }
+      }
+      )
+      .then((data) => {
+        setSmsLogs(data.report);
+      }
+      );
+  }, [navigate]);
+
+
   return (
     <div className="home">
       <FeaturedInfo data={[
@@ -105,7 +126,7 @@ const Home = () => {
         }
       ]} />
 
-      <Chart data={userData} title="User Analytics" grid dataKey="Active User" />
+      <Chart data={smsLogs} title="API Analytics" Grid dataKey="SMS Sent" />
       <div className="homeWidgets">
         <Grid container spacing={1}>
           <Grid item style={{ width: "100%" }} sm={12} md={6}>

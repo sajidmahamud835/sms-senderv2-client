@@ -147,7 +147,6 @@ const UseFirebase = () => {
           }
         }
         ).then((data) => {
-          console.log(data);
           if (data.isAdmin) {
             setAdmin(true);
           }
