@@ -4,8 +4,8 @@ import { Alert } from "react-bootstrap";
 const AddTemplates = (props) => {
 	const [error, setError] = useState("");
 	const [isLoading, setIsLoading] = useState(false);
-    const [title, setTitle] = useState("")
-    const [message,setMessage] = useState("")
+	const [title, setTitle] = useState("")
+	const [message, setMessage] = useState("")
 
 	const { changedData, setChangedData } = props;
 
@@ -18,19 +18,19 @@ const AddTemplates = (props) => {
 		const message = e.target.value;
 		setMessage(message);
 	};
-    
+
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		e.target.receiver.value = ""
 		setIsLoading(true);
 		setError("");
 
-        const data = {
-            title,
-            message
-        }
+		const data = {
+			title,
+			message
+		}
 
-		fetch(`http://localhost:4000/templates`, {
+		fetch(`${process.env.REACT_APP_SERVER_URL}/templates`, {
 			method: "POST",
 			headers: {
 				"content-type": "application/json",
@@ -90,26 +90,26 @@ const AddTemplates = (props) => {
 									<label htmlFor="receiver" className="w-50">
 										Template title:
 									</label>
-										<input
-											id="receiver"
-											name="receiver"
-											type="text"
-											placeholder="Receiver Number..."
-											className="form-control w-full mb-3"
-											onChange={TemplateTitle}
-											required
-										/>
-                                    <label htmlFor="receiver" className="w-50">
+									<input
+										id="receiver"
+										name="receiver"
+										type="text"
+										placeholder="Receiver Number..."
+										className="form-control w-full mb-3"
+										onChange={TemplateTitle}
+										required
+									/>
+									<label htmlFor="receiver" className="w-50">
 										Template Message:
 									</label>
-										<textarea
-											id="receiver"
-											type="text"
-											placeholder="Receiver Number..."
-											className="form-control w-full"
-											onChange={TemplateMessage}
-											required
-										/>
+									<textarea
+										id="receiver"
+										type="text"
+										placeholder="Receiver Number..."
+										className="form-control w-full"
+										onChange={TemplateMessage}
+										required
+									/>
 								</div>
 							</div>
 							<div className="modal-footer">

@@ -42,7 +42,7 @@ const ManageTemplate = (props) => {
 			message: changedMessage
 		};
 
-		const url = `http://localhost:4000/templates/${_id}`;
+		const url = `${process.env.REACT_APP_SERVER_URL}/templates/${_id}`;
 		fetch(url, {
 			method: "PUT",
 			headers: {

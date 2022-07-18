@@ -40,7 +40,6 @@ function App() {
           <Route path="/sms" element={<Sms />}></Route>
           <Route path="/user/:userId" element={<AdminRoute><User /></AdminRoute>}></Route>
           <Route path="/newUser" element={<AdminRoute><NewUser /></AdminRoute>}></Route>
-          <Route path="/campaigns" element={<AdminRoute><CampaignList /></AdminRoute>}></Route>
           <Route path="/subscription" element={<AdminRoute><ManageSubscriptions /></AdminRoute>}></Route>
           <Route path="/subscriptions/:Id" element={<AdminRoute><EditSubscriptions /></AdminRoute>}></Route>
           <Route path="/new-subscriptions" element={<AdminRoute><NewSubscriptions /></AdminRoute>}></Route>
@@ -48,7 +47,7 @@ function App() {
           <Route path="/apiAnalytics" element={<AdminRoute><ApiAnalytics /></AdminRoute>}></Route>
           <Route path="/reports" element={<AdminRoute><Reports /></AdminRoute>}></Route>
           <Route path="/settings" element={<AdminRoute><Settings /></AdminRoute>}></Route>
-          {/* This Route For General User */}
+          <Route path="/campaigns" element={<CampaignList />}></Route>
           <Route path="/profile" element={<Profile />}></Route>
           <Route path="/contacts" element={<AllList />}></Route>
           <Route path="/newContacts" element={<NewContacts />}></Route>

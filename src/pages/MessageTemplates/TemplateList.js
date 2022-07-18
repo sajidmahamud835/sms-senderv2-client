@@ -2,32 +2,40 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import swal from "sweetalert";
 import ManageTemplate from "./ManageTemplate";
+import UseFirebase from "../../Hooks/UseFirebase";
 
 const TemplateList = (props) => {
 	const [templateData, setTemplateData] = useState([]);
 	const { changedData, setChangedData } = props;
 	const navigate = useNavigate();
+	const { user, loading } = UseFirebase();
+
 	useEffect(() => {
-		fetch(`http://localhost:4000/templates`, {
-			headers: {
-				authorization: `Bearer ${localStorage.getItem('accessToken')}`
-			}
-		})
-			.then((res) => {
-				console.log(res.status);
-				if (res.status === 403 || res.status === 401) {
-					navigate('/login');
-				} else {
-					return res.json();
+		if (!loading) {
+			const url = `${process.env.REACT_APP_SERVER_URL}/templates/${user.email}`;
+			fetch(url, {
+				headers: {
+					authorization: `Bearer ${localStorage.getItem('accessToken')}`
 				}
 			})
-			.then((data) => {
-				setTemplateData(data);
-				console.log(data);
-			});
+				.then((res) => {
+					console.log(res.status);
+					if (res.status === 403 || res.status === 401) {
+						navigate('/login');
+					} else {
+						return res.json();
+					}
+				})
+				.then((data) => {
+					if (data) {
+						setTemplateData(data.templates);
+					} else {
+						navigate('/login');
+					}
+				});
+		}
+	}, [loading, user.email, changedData, navigate]);
 
-		console.log(changedData);
-	}, [changedData, navigate]);
 	// delete a mobile number data
 	const handleDeleteData = (id) => {
 		swal({
@@ -38,7 +46,7 @@ const TemplateList = (props) => {
 			dangerMode: true,
 		}).then((willDelete) => {
 			if (willDelete) {
-				const url = `http://localhost:4000/templates/${id}`;
+				const url = `${process.env.REACT_APP_SERVER_URL}/templates/${id}`;
 				fetch(url, {
 					method: "DELETE",
 				})

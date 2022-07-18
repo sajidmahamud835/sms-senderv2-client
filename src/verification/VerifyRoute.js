@@ -10,7 +10,7 @@ const VerifyRoute = ({ children, ...rest }) => {
   const [isUser, setIsUser] = useState(false);
   const navigate = useNavigate();
   useEffect(() => {
-    const url = `http://localhost:4000/users`;
+    const url = `${process.env.REACT_APP_SERVER_URL}/users`;
     fetch(url, {
       headers: {
         authorization: `Bearer ${localStorage.getItem('accessToken')}`

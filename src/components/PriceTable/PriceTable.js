@@ -20,7 +20,7 @@ const PricingTable = () => {
   const navigate = useNavigate();
   // subscriptions
   useEffect(() => {
-    fetch("http://localhost:4000/subscriptions", {
+    fetch("${process.env.REACT_APP_SERVER_URL}/subscriptions", {
       headers: {
         authorization: `Bearer ${localStorage.getItem('accessToken')}`
       }

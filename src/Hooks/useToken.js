@@ -7,7 +7,7 @@ const useToken = user => {
         console.log(email);
         const currentUser = { email: email };
         if (email) {
-            fetch(`http://localhost:4000/user/jwt/${email}`, {
+            fetch(`${process.env.REACT_APP_SERVER_URL}/user/jwt/${email}`, {
                 method: 'PUT',
                 headers: {
                     'content-type': 'application/json'
