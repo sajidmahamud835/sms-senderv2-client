@@ -19,7 +19,7 @@ const ManageSubscriptions = () => {
             }
         })
             .then((res) => {
-                console.log(res.status);
+                // console.log(res.status);
                 if (res.status === 403 || res.status === 401) {
                     navigate('/login');
                 } else {
