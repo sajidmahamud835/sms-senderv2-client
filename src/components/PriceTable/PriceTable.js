@@ -14,9 +14,13 @@ import Container from "@mui/material/Container";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import UseFirebase from "../../Hooks/UseFirebase";
 
 const PricingTable = () => {
   const [subscriptions, setSubscriptions] = useState([]);
+  const { user } = UseFirebase();
+  const [userData, setUserData] = useState([]);
   const navigate = useNavigate();
   // subscriptions
   useEffect(() => {
@@ -26,7 +30,7 @@ const PricingTable = () => {
       }
     })
       .then((res) => {
-        console.log(res.status);
+        // console.log(res.status);
         if (res.status === 403 || res.status === 401) {
           navigate('/login');
         } else {
@@ -34,8 +38,43 @@ const PricingTable = () => {
         }
       })
       .then((data) => setSubscriptions(data));
-  }, [navigate]);
-  console.log(subscriptions);
+
+    fetch(`http://localhost:4000/users/email/${user?.email}`, {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem('accessToken')}`
+      }
+    })
+      .then((res) => {
+        // console.log(res.status);
+        if (res.status === 403 || res.status === 401) {
+          navigate('/login');
+        } else {
+          return res.json();
+        }
+      })
+      .then(data => setUserData(data));
+  }, [navigate, user]);
+  // console.log(subscriptions);
+
+  const handelSubscription = (data) => {
+    console.log(userData);
+    const updateData = { subscriptionId: data._id };
+    const url = `${process.env.REACT_APP_SERVER_URL}/users/${userData[0]._id}`;
+    fetch(url, {
+      method: "PUT",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(updateData),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data) {
+          toast.success("Data updated!");
+        }
+        console.log(data);
+      });
+  };
 
   return (
     <React.Fragment>
@@ -118,7 +157,10 @@ const PricingTable = () => {
                   <Button
                     fullWidth
                     variant="contained"
-                    onClick={() => navigate("/updateProfile")}
+                    onClick={() => {
+                      // navigate("/updateProfile");
+                      handelSubscription(tier);
+                    }}
                   >
                     Select
                   </Button>

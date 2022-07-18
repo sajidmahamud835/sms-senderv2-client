@@ -29,7 +29,7 @@ const User = () => {
 			}
 		})
 			.then((res) => {
-				console.log(res.status);
+				// console.log(res.status);
 				if (res.status === 403 || res.status === 401) {
 					navigate('/login');
 				} else {
@@ -127,7 +127,7 @@ const User = () => {
 							</div>
 						</div>
 						<div className="userUpdate">
-							<span className="userUpdateTitle">Edit</span>
+							<span className="userUpdateTitle">Edit la la al</span>
 							<form onSubmit={handleSubmit} className="userUpdateForm">
 								<div className="userUpdateLeft">
 									<div className="userUpdateItem">

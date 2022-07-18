@@ -75,7 +75,7 @@ const UseFirebase = () => {
         setError(error.code);
       }
       );
-  }
+  };
 
   const logOut = () => {
     setLoading(true);
@@ -106,7 +106,7 @@ const UseFirebase = () => {
       body: JSON.stringify(user),
     })
       .then((res) => {
-        console.log(res.status);
+        // console.log(res.status);
         if (res.status === 403 || res.status === 401) {
           navigate('/login');
         } else {

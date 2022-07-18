@@ -15,7 +15,7 @@ const getSMSLogs = (id) => {
         },
     })
         .then((res) => {
-            console.log(res.status);
+            // console.log(res.status);
             if (res.status === 403 || res.status === 401) {
                 toast.error("UnAuthorized access ");
             } else {
