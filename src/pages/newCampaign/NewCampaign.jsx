@@ -5,7 +5,7 @@ import UseFirebase from "../../Hooks/UseFirebase";
 import "./newCampaign.css";
 
 const NewCampaign = () => {
-	const { user } = UseFirebase();
+	const { user, loading } = UseFirebase();
 	const [name, setNameInputData] = useState();
 	const [contactList, setContactList] = useState();
 	const [messageBody, setCampaignNote] = useState();
@@ -19,24 +19,23 @@ const NewCampaign = () => {
 	const [numberList, setNumberList] = useState([]);
 	const navigate = useNavigate();
 	useEffect(() => {
-		const url = `${process.env.REACT_APP_SERVER_URL}/contacts?email=${user?.email}`;
-		fetch(url, {
+		fetch(`${process.env.REACT_APP_SERVER_URL}/contacts/${user?.email}`, {
 			headers: {
 				authorization: `Bearer ${localStorage.getItem('accessToken')}`
 			}
 		})
 			.then((res) => {
-				res.json();
+				console.log(res.status);
 				if (res.status === 403 || res.status === 401) {
 					navigate('/login');
+				} else {
+					return res.json();
 				}
 			})
-			.then((data) => {
-				if (data) {
-					setNumberList(data);
-				}
-			});
-	}, [user?.email, navigate]);
+			.then(data => setNumberList(data))
+			.then(data => console.log(data));
+
+	}, [loading, navigate, user]);
 
 	//GET Twilio Numbers
 	useEffect(() => {

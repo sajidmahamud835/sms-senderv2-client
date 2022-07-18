@@ -5,29 +5,37 @@ import { DeleteOutline } from "@material-ui/icons";
 import { Link, useNavigate } from "react-router-dom";
 import swal from 'sweetalert';
 import { useState } from "react";
+import UseFirebase from '../../Hooks/UseFirebase';
 
 
 const CampaignList = () => {
   const [cdata, setCData] = useState([]);
   const [rowData, setRowData] = useState([]);
   const navigate = useNavigate();
+  const { user, loading } = UseFirebase();
+
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_SERVER_URL}/campaigns`, {
-      headers: {
-        authorization: `Bearer ${localStorage.getItem('accessToken')}`
-      }
-    })
-      .then((res) => {
-        console.log(res.status);
-        if (res.status === 403 || res.status === 401) {
-          navigate('/login');
-        } else {
-          return res.json();
+    if (!loading && user) {
+      fetch(`${process.env.REACT_APP_SERVER_URL}/campaigns/user/${user.email}`, {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem('accessToken')}`
         }
       })
-      .then(data => setCData(data));
-  }, [navigate]);
-
+        .then((res) => {
+          console.log(res.status);
+          if (res.status === 403 || res.status === 401) {
+            navigate('/login');
+          } else {
+            return res.json();
+          }
+        })
+        .then((data) => {
+          setCData(data);
+          console.log(data);
+        }
+        );
+    }
+  }, [loading, navigate, user]);
 
   useEffect(() => {
     let id = 1;
