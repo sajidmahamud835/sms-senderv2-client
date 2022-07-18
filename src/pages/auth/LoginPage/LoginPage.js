@@ -137,7 +137,7 @@ const LoginPage = () => {
             <div>
                 <div id="login-box">
                     <div className="left">
-                        <h1> Log In</h1>
+                        <h1 className="login-title"> Log In</h1>
                         {regBtn && (<input type="text" name="name" placeholder="Full Name" onChange={handleName} />)}
                         <input type="text" name="email" placeholder="E-mail" onChange={handleEmail} />
                         <input type="password" name="password" placeholder="Password" onChange={handlePass} />
@@ -151,7 +151,7 @@ const LoginPage = () => {
                         {logBtn && (<input type="submit" name="signup_submit" value="Log in" disabled={disabled} onClick={handleLogIn} />)}
                         {regBtn && (<input type="submit" name="signup_submit" value="Registration" disabled={disabled} onClick={handleReg} />)}
                         {/* forget password */}
-                        <p className='mt-3'>Can't login? <small onClick={handleResetPassword} className='text-primary' style={{ cursor: 'pointer' }}>Reset Password</small>.</p>
+                        <p className='mt-3 resetPassword'>Can't login? <small onClick={handleResetPassword} className='text-primary' style={{ cursor: 'pointer' }}>Reset Password</small>.</p>
 
                     </div>
 
