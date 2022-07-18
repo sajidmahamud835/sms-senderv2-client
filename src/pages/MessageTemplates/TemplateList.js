@@ -84,7 +84,7 @@ const TemplateList = (props) => {
 							key={data._id + data.number}
 							templateData={data}
 							handleDeleteData={handleDeleteData}
-							mobileNumberData={templateData}
+							allTemplateData={templateData}
 							setMobileNumberData={setTemplateData}
 							changedData={changedData}
 							setChangedData={setChangedData}

@@ -16,6 +16,7 @@ const Topbar = ({ small, setClose, close }) => {
 	const [userData, setUserData] = useState({});
 	const [isLoading, setIsLoading] = useState(true);
 	const [dataChanged, setDataChanged] = useState(true);
+	const [isUpdated, setIsUpdated] = useState(0);
 	const navigate = useNavigate();
 
 	// const [userName, setUserName] = React.useState("Admin")
@@ -114,12 +115,14 @@ const Topbar = ({ small, setClose, close }) => {
 							aria-expanded="false"
 						>
 							<NotificationsNone />
-							<span className="topIconBadge">1</span>
+							{(isUpdated < 1) &&
+								<span className="topIconBadge">1</span>
+							}
 						</div>
 						<ul className="dropdown-menu" aria-labelledby="NotificationsMenu">
 							{/* <li><span className="dropdown-item">We have no notification for you today.</span></li> */}
 							<li>
-								<Link to="/profile" className="dropdown-item" type="button">
+								<Link to="/profile" onClick={() => setIsUpdated(isUpdated + 1)} className="dropdown-item" type="button">
 									Welcome to our website. Please update your profile to enjoy
 									all our features.
 								</Link>
