@@ -13,23 +13,23 @@ const DragBox = () => {
         }
     });
 
-    const acceptedFileItems = acceptedFiles.map(file => (
+    const acceptedFileItems = acceptedFiles?.map(file => (
         <li key={file.path}>
             {file.path} - {file.size} bytes
         </li>
     ));
 
-    const fileRejectionItems = fileRejections.map(({ file, errors }) => (
+    const fileRejectionItems = fileRejections?.map(({ file, errors }) => (
         <li key={file.path}>
             {file.path} - {file.size} bytes
             <ul>
-                {errors.map(e => (
+                {errors?.map(e => (
                     <li key={e.code}>{e.message}</li>
                 ))}
             </ul>
         </li>
     ));
-    console.log(fileRejectionItems)
+    console.log(fileRejectionItems);
     return (
         <section className="container" style={{ border: '2px solid red', display: 'flex', justifyContent: "center" }}>
             <div>

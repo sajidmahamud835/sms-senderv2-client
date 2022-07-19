@@ -7,8 +7,6 @@ import UseFirebase from "../../Hooks/UseFirebase";
 const AdminRoute = ({ children, ...rest }) => {
 	const { user, admin, isAdminLoading, loading } = UseFirebase();
 	const location = useLocation();
-	console.log(user, admin);
-	console.log(admin);
 	if (isAdminLoading || loading) {
 		return (
 			<div style={{ display: "flex", justifyContent: "center" }}>

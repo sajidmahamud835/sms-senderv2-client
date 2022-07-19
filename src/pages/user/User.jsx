@@ -7,7 +7,7 @@ import {
 	Publish,
 } from "@material-ui/icons";
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import "./user.css";
 import { toast } from 'react-toastify';
 
@@ -19,17 +19,28 @@ const User = () => {
 
 	const [inputFieldData, setInputFieldData] = useState({});
 
-	console.log(inputFieldData);
+	const navigate = useNavigate();
 
 	useEffect(() => {
 		const url = `${process.env.REACT_APP_SERVER_URL}/users/${userId}`;
-		fetch(url)
-			.then((res) => res.json())
+		fetch(url, {
+			headers: {
+				authorization: `Bearer ${localStorage.getItem('accessToken')}`
+			}
+		})
+			.then((res) => {
+				// console.log(res.status);
+				if (res.status === 403 || res.status === 401) {
+					navigate('/login');
+				} else {
+					return res.json();
+				}
+			})
 			.then((data) => {
 				setUserData(data[0]);
 				setIsLoading(false);
 			});
-	}, [userId, dataChanged]);
+	}, [userId, dataChanged, navigate]);
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
@@ -116,7 +127,7 @@ const User = () => {
 							</div>
 						</div>
 						<div className="userUpdate">
-							<span className="userUpdateTitle">Edit</span>
+							<span className="userUpdateTitle">Edit la la al</span>
 							<form onSubmit={handleSubmit} className="userUpdateForm">
 								<div className="userUpdateLeft">
 									<div className="userUpdateItem">

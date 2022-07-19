@@ -10,12 +10,45 @@ import UseFirebase from "../../Hooks/UseFirebase";
 import { IconButton } from "@material-ui/core";
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
-
+import './topbar.css';
 const Topbar = ({ small, setClose, close }) => {
-	const { admin, user, logOut } = UseFirebase();
+	const { admin, user, logOut, loading } = UseFirebase();
 	const [anchorEl, setAnchorEl] = useState(null);
+	const [userData, setUserData] = useState({});
+	const [isLoading, setIsLoading] = useState(true);
+	const [dataChanged, setDataChanged] = useState(true);
+	const [isUpdated, setIsUpdated] = useState(0);
+	const navigate = useNavigate();
+
 	// const [userName, setUserName] = React.useState("Admin")
 	// open
+	useEffect(() => {
+		if (!loading) {
+			const url = `${process.env.REACT_APP_SERVER_URL}/users/email/${user.email}`;
+			fetch(url, {
+				headers: {
+					authorization: `Bearer ${localStorage.getItem('accessToken')}`
+				}
+			})
+				.then((res) => {
+					// console.log(res.status);
+					if (res.status === 403 || res.status === 401) {
+						navigate('/login');
+					} else {
+						return res.json();
+					}
+				})
+				.then((data) => {
+					if (data) {
+						setUserData(data[0]);
+						setIsLoading(false);
+					} else {
+						navigate('/login');
+					}
+				});
+		}
+	}, [loading, user.email, dataChanged, navigate]);
+
 	const open = Boolean(anchorEl);
 	const handleClick = (event) => {
 		setAnchorEl(event.currentTarget);
@@ -29,13 +62,13 @@ const Topbar = ({ small, setClose, close }) => {
 		// console.log({ userName });
 		const sliceName = [];
 		if (userName.length > 0) {
-			userName.map(word => {
+			userName?.map(word => {
 				return sliceName.push(word.slice(0, 1));
 			});
 			// sliceName = sliceName + word.slice(0, 1)
 		}
 		let shortName = "";
-		sliceName.map(s => shortName += s);
+		sliceName?.map(s => shortName += s);
 		return {
 			// children: `${name?.split(" ")[0][0]}${name?.split(" ")[1][0]}`,
 			children: shortName
@@ -51,7 +84,6 @@ const Topbar = ({ small, setClose, close }) => {
 	};
 	// const [user, loading, error] = useAuthState(auth);
 
-	let navigate = useNavigate();
 	const goToProfile = () => {
 		navigate("/profile");
 	};
@@ -84,12 +116,14 @@ const Topbar = ({ small, setClose, close }) => {
 							aria-expanded="false"
 						>
 							<NotificationsNone />
-							<span className="topIconBadge">1</span>
+							{(isUpdated < 1) &&
+								<span className="topIconBadge">1</span>
+							}
 						</div>
 						<ul className="dropdown-menu" aria-labelledby="NotificationsMenu">
 							{/* <li><span className="dropdown-item">We have no notification for you today.</span></li> */}
 							<li>
-								<Link to="/profile" className="dropdown-item" type="button">
+								<Link to="/profile" onClick={() => setIsUpdated(isUpdated + 1)} className="dropdown-item" type="button">
 									Welcome to our website. Please update your profile to enjoy
 									all our features.
 								</Link>
@@ -122,17 +156,15 @@ const Topbar = ({ small, setClose, close }) => {
 										aria-expanded={open ? "true" : undefined}
 										onClick={handleClick}
 									>
-										{user.photoURL ? (
-											<img
-												src={user.photoURL}
-												style={{ borderRadius: "50%", width: "50%" }}
+										{userData.imageUrl ? (
+											<Avatar
+												src={userData.imageUrl}
 												alt="User"
 											/>
 										) : (
 											<Avatar
 												style={{ color: "black" }}
 												{...stringAvatar(user?.displayName ? (user.displayName) : ("Sajid Mahamud"))}
-
 											/>
 										)}
 									</Button>

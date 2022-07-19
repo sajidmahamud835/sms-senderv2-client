@@ -2,7 +2,6 @@ import React from 'react';
 import "./sidebar.css";
 import { LineStyle, Timeline, PermIdentity, AttachMoney, BarChart, MailOutline, DynamicFeed, ChatBubbleOutline, WorkOutline, Settings } from "@material-ui/icons";
 import LogoutIcon from '@mui/icons-material/Logout';
-import ViewListIcon from '@mui/icons-material/ViewList';
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import UseFirebase from '../../Hooks/UseFirebase';
@@ -58,22 +57,10 @@ const Sidebar = ({ setClose }) => {
                   Manage Campaigns
                 </li>
               </Link>
-              <Link to="/templates" className="link">
-                <li onClick={(e) => makeActive('myTemplates')} id="myTemplates" className="sidebarListItem">
-                  <MailOutline className="sidebarIcon" />
-                  Message Templates
-                </li>
-              </Link>
-              <Link to="/manage-subscriptions" className="link">
+              <Link to="/subscription" className="link">
                 <li onClick={(e) => makeActive('subscription')} id="subscription" className="sidebarListItem">
                   <AttachMoney className="sidebarIcon" />
                   Manage Subscriptions
-                </li>
-              </Link>
-              <Link to="/all-contacts-lists" className="link">
-                <li onClick={(e) => makeActive('reports')} id="reports" className="sidebarListItem">
-                  <ViewListIcon className="sidebarIcon" />
-                  Manage Contact List
                 </li>
               </Link>
               <Link to="/reports" className="link">
@@ -113,7 +100,7 @@ const Sidebar = ({ setClose }) => {
                 My Contacts
               </li>
             </Link>
-            <Link to="/manage-subscriptions" className="link">
+            <Link to="/verify" className="link">
               <li onClick={(e) => makeActive('mySubscription')} id="mySubscription" className="sidebarListItem">
                 <AttachMoney className="sidebarIcon" />
                 My Subscription

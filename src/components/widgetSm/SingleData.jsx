@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Visibility } from "@material-ui/icons";
 
 const SingleData = (props) => {
-	const { id, imageUrl, displayName, isActiveUser } = props.userData;
+	const { id, imageUrl, displayName, isActiveUser, email } = props.userData;
 
 	return (
 		<>
@@ -13,7 +13,7 @@ const SingleData = (props) => {
 						<img src={imageUrl} alt={displayName} className="widgetSmImg" />
 						<div className="widgetSmUser ms-3">
 							<span className="widgetSmUsername">{displayName}</span>
-							<span className="widgetSmUserTitle">Engineer</span>
+							<span className="widgetSmUserTitle">{email}</span>
 						</div>
 					</div>
 					<Link to={`/user/${id}`} className="widgetSmButton btn">
@@ -22,7 +22,6 @@ const SingleData = (props) => {
 					</Link>
 				</li>
 			)}
-			{!isActiveUser === "no" && <span>So user is in pending...</span>}
 		</>
 	);
 };

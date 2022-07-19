@@ -1,18 +1,29 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import swal from "sweetalert";
 import ManageAPISingleData from "../../components/ManageAPISingleData/ManageAPISingleData";
-
 const ManageAPIList = (props) => {
 	const [mobileNumberData, setMobileNumberData] = useState([]);
 	const { changedData, setChangedData } = props;
-
+	const navigate = useNavigate();
 	useEffect(() => {
-		fetch(`${process.env.REACT_APP_SERVER_URL}/smsApi/numbers`)
-			.then((res) => res.json())
+		fetch(`${process.env.REACT_APP_SERVER_URL}/smsApi/numbers`, {
+			headers: {
+				authorization: `Bearer ${localStorage.getItem('accessToken')}`
+			}
+		})
+			.then((res) => {
+				// // console.log(res.status);
+				if (res.status === 403 || res.status === 401) {
+					navigate('/login');
+				} else {
+					return res.json();
+				}
+			})
 			.then((data) => setMobileNumberData(data));
 
-		console.log(changedData);
-	}, [changedData]);
+		// console.log(changedData);
+	}, [changedData, navigate]);
 
 	// delete a mobile number data
 	const handleDeleteData = (id) => {
@@ -74,7 +85,7 @@ const ManageAPIList = (props) => {
 					</tr>
 				</thead>
 				<tbody>
-					{mobileNumberData.map((mobileData) => (
+					{mobileNumberData?.map((mobileData) => (
 						<ManageAPISingleData
 							key={mobileData._id + mobileData.number}
 							mobileData={mobileData}

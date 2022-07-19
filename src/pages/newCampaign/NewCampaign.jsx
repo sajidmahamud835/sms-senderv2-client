@@ -5,7 +5,7 @@ import UseFirebase from "../../Hooks/UseFirebase";
 import "./newCampaign.css";
 
 const NewCampaign = () => {
-	const { user } = UseFirebase();
+	const { user, loading } = UseFirebase();
 	const [name, setNameInputData] = useState();
 	const [contactList, setContactList] = useState();
 	const [messageBody, setCampaignNote] = useState();
@@ -19,20 +19,43 @@ const NewCampaign = () => {
 	const [numberList, setNumberList] = useState([]);
 	const navigate = useNavigate();
 	useEffect(() => {
-		const url = `${process.env.REACT_APP_SERVER_URL}/upload-excel-file?email=${user?.email}`;
-		fetch(url)
-			.then((res) => res.json())
-			.then((data) => setNumberList(data));
-	}, [user?.email]);
+		fetch(`${process.env.REACT_APP_SERVER_URL}/contacts/${user?.email}`, {
+			headers: {
+				authorization: `Bearer ${localStorage.getItem('accessToken')}`
+			}
+		})
+			.then((res) => {
+				// console.log(res.status);
+				if (res.status === 403 || res.status === 401) {
+					navigate('/login');
+				} else {
+					return res.json();
+				}
+			})
+			.then(data => setNumberList(data))
+			.then(data => console.log(data));
+
+	}, [loading, navigate, user]);
 
 	//GET Twilio Numbers
 	useEffect(() => {
-		fetch(`${process.env.REACT_APP_SERVER_URL}/smsApi/numbers`)
-			.then(res => res.json())
+		fetch(`${process.env.REACT_APP_SERVER_URL}/smsApi/numbers`, {
+			headers: {
+				authorization: `Bearer ${localStorage.getItem('accessToken')}`
+			}
+		})
+			.then((res) => {
+				// console.log(res.status);
+				if (res.status === 403 || res.status === 401) {
+					navigate('/login');
+				} else {
+					return res.json();
+				}
+			})
 			.then(data => {
 				setMyNumbers(data);
 			});
-	}, []);
+	}, [navigate]);
 
 	console.log(numberList);
 
@@ -148,7 +171,7 @@ const NewCampaign = () => {
 							required
 						>
 							<option value="saab">None</option>
-							{myNumbers.map((myNumber) => (
+							{myNumbers?.map((myNumber) => (
 								<option value={myNumber.number}>{myNumber.number}</option>
 							))}
 						</select>
@@ -161,7 +184,7 @@ const NewCampaign = () => {
 							id="cars"
 							className="form-control w-50"
 						>
-							{numberList.map((numberListData) => (
+							{numberList?.map((numberListData) => (
 								<option key={numberListData._id} value={numberListData._id}>
 									{numberListData.listName}
 								</option>

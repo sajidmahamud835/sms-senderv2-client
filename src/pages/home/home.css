@@ -1,8 +1,15 @@
-.home{
+.home {
     flex: 4;
 }
 
-.homeWidgets{
+.homeWidgets {
     display: flex;
     margin: 20px;
+}
+
+.noData {
+    flex: 4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

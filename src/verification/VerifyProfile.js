@@ -12,13 +12,41 @@ const VerifyProfile = () => {
 	const [error, setError] = useState(false);
 	const [image, setImage] = useState(false);
 	const [inputFieldData, setInputFieldData] = useState({});
+	const [userData, setUserData] = useState({});
 	const [smallLoading, setSmallLoading] = useState(false);
+
 	useEffect(() => {
 		setInputFieldData({
 			...inputFieldData,
 			email: user?.email,
 		});
 	}, [user?.email]);
+
+	useEffect(() => {
+		if (!loading) {
+			const url = `${process.env.REACT_APP_SERVER_URL}/users/email/${user.email}`;
+			fetch(url, {
+				headers: {
+					authorization: `Bearer ${localStorage.getItem('accessToken')}`
+				}
+			})
+				.then((res) => {
+					// console.log(res.status);
+					if (res.status === 403 || res.status === 401) {
+						navigate('/login');
+					} else {
+						return res.json();
+					}
+				})
+				.then((data) => {
+					if (data) {
+						setUserData(data[0]);
+					} else {
+						navigate('/login');
+					}
+				});
+		}
+	}, [loading, user.email, navigate]);
 
 	useEffect(() => {
 		const { userName, displayName, mobileNumber, address } = inputFieldData;
@@ -57,7 +85,7 @@ const VerifyProfile = () => {
 
 	const handleImageChange = (e) => {
 		const image = e.target.files[0];
-		const imageStorageKey = '8e83d1fae7e6eac6ba7c1112bd135e2e';
+		const imageStorageKey = process.env.REACT_APP_IMAGE_STORAGE_KEY;
 		const formData = new FormData();
 		formData.append('image', image);
 		const url = `https://api.imgbb.com/1/upload?key=${imageStorageKey}`;
@@ -83,13 +111,24 @@ const VerifyProfile = () => {
 			});
 	};
 
+	useEffect(() => {
+		if (!loading) {
+			//check all feild of userData is not empty
+			if (userData.userName && userData.displayName && userData.mobileNumber && userData.address && userData.imageUrl) {
+				navigate('/');
+			}
+		}
+	}, [loading, userData, navigate]);
+
+
+
 	return (
 		<LayOut>
 			{user ?
 				<>
 					<div className="user">
 						<div className="userTitleContainer">
-							<h1 className="userTitle">Edit Profile</h1>
+							<h1 className="userTitle">Update Your Profile</h1>
 						</div>
 						{loading && (
 							<>
@@ -109,6 +148,7 @@ const VerifyProfile = () => {
 												<label>Username</label>
 												<input
 													type="text"
+													defaultValue={userData.userName}
 													onChange={(e) =>
 														setInputFieldData({
 															...inputFieldData,
@@ -122,6 +162,7 @@ const VerifyProfile = () => {
 												<label>Full Name</label>
 												<input
 													type="text"
+													defaultValue={userData.displayName}
 													onChange={(e) =>
 														setInputFieldData({
 															...inputFieldData,
@@ -144,6 +185,7 @@ const VerifyProfile = () => {
 												<label>Phone</label>
 												<input
 													type="text"
+													defaultValue={userData.mobileNumber}
 													onChange={(e) =>
 														setInputFieldData({
 															...inputFieldData,
@@ -157,6 +199,7 @@ const VerifyProfile = () => {
 												<label>Address</label>
 												<input
 													type="text"
+													defaultValue={userData.address}
 													onChange={(e) =>
 														setInputFieldData({
 															...inputFieldData,
@@ -172,7 +215,7 @@ const VerifyProfile = () => {
 												<div>
 													{smallLoading ? "Loading" : <img
 														className="userUpdateImg"
-														src={image ? image : "https://via.placeholder.com/350x150"}
+														src={image ? image : "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200"}
 														alt="placeholder"
 													/>}
 													<label htmlFor="file">

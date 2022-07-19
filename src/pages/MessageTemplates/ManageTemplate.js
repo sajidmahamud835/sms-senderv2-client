@@ -5,8 +5,8 @@ import swal from "sweetalert";
 import { toast } from 'react-toastify';
 
 const ManageTemplate = (props) => {
-	const { _id, title, message: templateMessage } = props.templateData;
-	const { handleDeleteData, setChangedData, changedData } = props;
+	const { _id, title, message: templateMessage, email } = props.templateData;
+	const { handleDeleteData, setChangedData, changedData, admin } = props;
 	const [isEdit, setIsEdit] = useState(false);
 	const [changedTitle, setChangedTitle] = useState(title);
 	const [changedMessage, setChangedMessage] = useState(templateMessage);
@@ -42,7 +42,7 @@ const ManageTemplate = (props) => {
 			message: changedMessage
 		};
 
-		const url = `http://localhost:4000/templates/${_id}`;
+		const url = `${process.env.REACT_APP_SERVER_URL}/templates/${_id}`;
 		fetch(url, {
 			method: "PUT",
 			headers: {
@@ -56,8 +56,8 @@ const ManageTemplate = (props) => {
 					toast.success("Data updated!");
 				}
 				setChangedData(data.data);
-				setIsLoading(false);
 				if (data.status === 200) {
+					setIsLoading(false);
 					swal("Good job!", "Data added successfully...", "success");
 					setMessage(data.message);
 					setMessageIds(data.messageIds);
@@ -71,50 +71,55 @@ const ManageTemplate = (props) => {
 
 		console.log("saved", updatedData);
 	};
+	if (error) {
+		return error;
+	}
 
 	return (
 		<>
-			<tr className="" key={_id}>
-				<th scope="row" className="fs-6 pt-3">
-					<form onSubmit={saveChange}>
-						{!isEdit ? (
-							<span>{title}</span>
-						) : (
-							<div className="d-flex">
-								<input
-									type="text"
-									defaultValue={title}
-									onBlur={handleTitleChange}
-									className="form-control w-50"
-								/>
-								<textarea
-									id="receiver"
-									type="text"
-									className="form-control w-50"
-									defaultValue={templateMessage}
-									onBlur={handleMessageChange}
-								/>
-								<div>
-									<button className="btn btn-primary ms-2" type="submit">
-										Save
-									</button>
+			{isLoading ? <p>Loading</p> :
+				<tr className="" key={_id}>
+					<th scope="row" className="fs-6 pt-3">
+						<form onSubmit={saveChange}>
+							{!isEdit ? (
+								<span>{title} {admin && <span>({email})</span>}</span>
+							) : (
+								<div className="d-flex">
+									<input
+										type="text"
+										defaultValue={title}
+										onBlur={handleTitleChange}
+										className="form-control w-50"
+									/>
+									<textarea
+										id="receiver"
+										type="text"
+										className="form-control w-50"
+										defaultValue={templateMessage}
+										onBlur={handleMessageChange}
+									/>
+									<div>
+										<button className="btn btn-primary ms-2" type="submit">
+											Save
+										</button>
+									</div>
 								</div>
-							</div>
-						)}
-					</form>
-				</th>
-				<td className="text-end">
-					<button className="btn btn-primary" onClick={EditButton}>
-						<FiEdit />
-					</button>
-					<button
-						className="btn btn-danger ms-3"
-						onClick={() => handleDeleteData(_id)}
-					>
-						<AiOutlineDelete />
-					</button>
-				</td>
-			</tr>
+							)}
+						</form>
+					</th>
+					<td className="text-end">
+						<button className="btn btn-primary" onClick={EditButton}>
+							<FiEdit />
+						</button>
+						<button
+							className="btn btn-danger ms-3"
+							onClick={() => handleDeleteData(_id)}
+						>
+							<AiOutlineDelete />
+						</button>
+					</td>
+				</tr>
+			}
 		</>
 	);
 };

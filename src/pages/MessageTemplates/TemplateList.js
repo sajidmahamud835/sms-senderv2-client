@@ -1,17 +1,41 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import swal from "sweetalert";
 import ManageTemplate from "./ManageTemplate";
+import UseFirebase from "../../Hooks/UseFirebase";
 
 const TemplateList = (props) => {
 	const [templateData, setTemplateData] = useState([]);
 	const { changedData, setChangedData } = props;
-	useEffect(() => {
-		fetch(`http://localhost:4000/templates`)
-			.then((res) => res.json())
-			.then((data) => setTemplateData(data));
+	const navigate = useNavigate();
+	const { user, loading, admin } = UseFirebase();
 
-		console.log(changedData);
-	}, [changedData]);
+	useEffect(() => {
+		if (!loading) {
+			const url = `${process.env.REACT_APP_SERVER_URL}/templates/${user.email}`;
+			fetch(url, {
+				headers: {
+					authorization: `Bearer ${localStorage.getItem('accessToken')}`
+				}
+			})
+				.then((res) => {
+					// console.log(res.status);
+					if (res.status === 403 || res.status === 401) {
+						navigate('/login');
+					} else {
+						return res.json();
+					}
+				})
+				.then((data) => {
+					if (data) {
+						setTemplateData(data.templates);
+					} else {
+						navigate('/login');
+					}
+				});
+		}
+	}, [loading, user.email, changedData, navigate]);
+
 	// delete a mobile number data
 	const handleDeleteData = (id) => {
 		swal({
@@ -22,7 +46,7 @@ const TemplateList = (props) => {
 			dangerMode: true,
 		}).then((willDelete) => {
 			if (willDelete) {
-				const url = `http://localhost:4000/templates/${id}`;
+				const url = `${process.env.REACT_APP_SERVER_URL}/templates/${id}`;
 				fetch(url, {
 					method: "DELETE",
 				})
@@ -48,22 +72,24 @@ const TemplateList = (props) => {
 			<table className="table table-hover">
 				<thead>
 					<tr>
-						<th scope="col">Numbers</th>
+						<th scope="col">Template</th>
 						<th scope="col" className="text-end">
 							Actions
 						</th>
 					</tr>
 				</thead>
 				<tbody>
-					{templateData.map((data) => (
+					{templateData?.map((data) => (
 						<ManageTemplate
 							key={data._id + data.number}
 							templateData={data}
 							handleDeleteData={handleDeleteData}
-							mobileNumberData={templateData}
+							allTemplateData={templateData}
 							setMobileNumberData={setTemplateData}
 							changedData={changedData}
 							setChangedData={setChangedData}
+							admin={admin}
+
 						/>
 					))}
 				</tbody>

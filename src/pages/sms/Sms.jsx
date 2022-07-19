@@ -1,7 +1,7 @@
 import { Box } from "@mui/system";
 import { useEffect, useState } from "react";
 import { Alert } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import UseFirebase from "../../Hooks/UseFirebase";
 import "./sms.css";
 
@@ -19,13 +19,25 @@ const Sms = () => {
         message: "",
     });
     const [myNumbers, setMyNumbers] = useState([]);
+    const navigate = useNavigate();
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_SERVER_URL}/smsApi/numbers`)
-            .then(res => res.json())
+        fetch(`${process.env.REACT_APP_SERVER_URL}/smsApi/numbers`, {
+            headers: {
+                authorization: `Bearer ${localStorage.getItem('accessToken')}`
+            }
+        })
+            .then((res) => {
+                // console.log(res.status);
+                if (res.status === 403 || res.status === 401) {
+                    navigate('/login');
+                } else {
+                    return res.json();
+                }
+            })
             .then(data => {
                 setMyNumbers(data);
             });
-    }, []);
+    }, [navigate]);
 
     // console.log(messageIds);
 
