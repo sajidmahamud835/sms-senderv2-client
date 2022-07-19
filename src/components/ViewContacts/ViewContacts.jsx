@@ -51,8 +51,17 @@ const ViewContacts = () => {
 	useEffect(() => {
 		// setRowData(listData?.array);
 		if (listData.array) {
-			setRowData(listData.array)
-			console.log(listData.array);
+			let id = 1;
+			const initialArray = [];
+			listData.array.map(list => {
+				const newList = { ...list, id: id };
+				id++;
+				initialArray.push(newList);
+				return 0;
+			});
+
+
+			setRowData(initialArray);
 		}
 	}, [listData]);
 
