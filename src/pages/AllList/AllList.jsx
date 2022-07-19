@@ -22,7 +22,7 @@ const AllList = () => {
             })
                 .then((willAdd) => {
                     if (willAdd) {
-                        const url = `${process.env.REACT_APP_SERVER_URL}/contacts${id}`;
+                        const url = `${process.env.REACT_APP_SERVER_URL}/contacts/${id}`;
                         fetch(url, {
                             method: 'DELETE'
                         })
@@ -45,7 +45,7 @@ const AllList = () => {
 
     };
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_SERVER_URL}/contacts/${user?.email}`, {
+        fetch(`${process.env.REACT_APP_SERVER_URL}/contacts/email/${user?.email}`, {
             headers: {
                 authorization: `Bearer ${localStorage.getItem('accessToken')}`
             }
