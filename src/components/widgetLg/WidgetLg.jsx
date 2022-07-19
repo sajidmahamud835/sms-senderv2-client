@@ -34,14 +34,30 @@ const WidgetLg = () => {
 		<div className="widgetLg" style={{ width: "100%" }}>
 			<h3 className="widgetLgTitle">Review Latest Campaigns</h3>
 			<table className="widgetLgTable mt-3">
-				<tr className="widgetLgTr">
-					<th className="widgetLgTh">Campaign</th>
-					<th className="widgetLgTh">Start Date</th>
-					<th className="widgetLgTh">Status</th>
-				</tr>
-				{cdata.map((singleCData) => (
-					<SingleData key={singleCData._id} singleCData={singleCData} />
-				))}
+				{
+					cdata.length === 0 ?
+						<div>
+							<div className="alert alert-warning text-center" role="alert">
+								No Campaigns Found
+							</div>
+						</div>
+						:
+						<>
+							<tr className="widgetLgTr">
+								<th className="widgetLgTh">Campaign</th>
+								<th className="widgetLgTh">Start Date</th>
+								<th className="widgetLgTh">Status</th>
+							</tr>
+
+
+							{
+								cdata.map((singleCData) => (
+									<SingleData key={singleCData._id} singleCData={singleCData} />
+								))
+							}
+
+						</>
+				}
 			</table>
 		</div>
 	);

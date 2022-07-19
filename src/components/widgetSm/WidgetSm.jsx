@@ -41,18 +41,10 @@ const WidgetSm = () => {
 						))
 					) : (
 						//style for when there are no pending members
-						<div style={{
-							display: "flex",
-							marginTop: "10px",
-							marginLeft: "10px",
-							flexDirection: "column",
-							alignItems: "center",
-							justifyContent: "center",
-							height: "100%",
-							width: "100%",
-							fontSize: "1.5rem"
-						}}>
-							<span>No pending members</span>
+						<div>
+							<div className="alert alert-warning text-center" role="alert">
+								No pending members.
+							</div>
 						</div>
 
 					)
