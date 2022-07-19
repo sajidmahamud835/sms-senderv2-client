@@ -90,7 +90,7 @@ const Reports = () => {
                                                         <td>{smsLog.to}</td>
                                                         <td>{smsLog.from}</td>
                                                         <td>{smsLog.body}</td>
-                                                        <td>{smsLog.status === 'delivered' ? <span className='bg-primary text-light rounded p-1 m'>{smsLog.status}</span> : <span className='bg-danger text-light rounded p-1 m'>{smsLog.status}</span>}</td>
+                                                        <td>{smsLog.status === 'delivered' ? <span className='bg-primary text-light rounded p-1 m'>{smsLog.status}</span> : <span className='bg-info text-light rounded p-1 m'>{smsLog.status}</span>}</td>
                                                         <td>{smsLog.dateSent}</td>
                                                         <td>{smsLog.price} {smsLog.priceUnit}</td>
                                                     </tr>
