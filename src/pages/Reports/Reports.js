@@ -37,6 +37,7 @@ const Reports = () => {
     const [error, setError] = useState(false);
     const [smsLogs, setSmsLogs] = useState([]);
     const [dataLoading, setDataLoading] = useState(false);
+    const [page, setPage] = useState(1);
     useEffect(() => {
         setDataLoading(true);
         getSMSLogs().then((data) => {
@@ -50,6 +51,13 @@ const Reports = () => {
         );
     }
         , []);
+
+    //spit out the sms logs for pagination
+    const smsLogsPagination = () => {
+        const start = (page - 1) * 10;
+        const end = start + 10;
+        return smsLogs.slice(start, end);
+    }
 
 
     return (
@@ -85,7 +93,7 @@ const Reports = () => {
                                                     <td>Loading...</td>
                                                 </tr>
                                             ) : (
-                                                smsLogs?.map((smsLog) => (
+                                                smsLogsPagination()?.map((smsLog) => (
                                                     <tr key={smsLog.sid}>
                                                         <td>{smsLog.to}</td>
                                                         <td>{smsLog.from}</td>
@@ -98,6 +106,12 @@ const Reports = () => {
                                             )}
                                         </tbody>
                                     </table>
+                                    <div className="pagination">
+                                        {page > 1 && <button className="btn btn-primary" onClick={() => setPage(page - 1)}>Previous</button>}
+                                        <button className="btn btn-outline-dark ms-1" > Current Page: {page} </button>
+                                        {smsLogsPagination().length > 1 && <button className="btn btn-primary ms-1" onClick={() => setPage(page + 1)}>Next</button>}
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
