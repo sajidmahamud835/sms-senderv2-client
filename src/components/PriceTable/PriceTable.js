@@ -158,8 +158,8 @@ const PricingTable = () => {
                     fullWidth
                     variant="contained"
                     onClick={() => {
-                      // navigate("/updateProfile");
                       handelSubscription(tier);
+                      navigate("/updateProfile");
                     }}
                   >
                     Select
