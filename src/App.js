@@ -27,6 +27,7 @@ import Verify from "./verification/Verify";
 import VerifyProfile from "./verification/VerifyProfile";
 import MessageTemplates from "./pages/MessageTemplates/MessageTemplates";
 import AdminRoute from "./PrivateRoute/AdminRoute/AdminRoute";
+import CornJobsRun from "./pages/CornJobsRun/CornJobsRun";
 function App() {
   return (
     <>
@@ -34,6 +35,8 @@ function App() {
         <Route path="/login" element={<LoginPage />}></Route>
         <Route path="/verify" element={<Verify />}></Route>
         <Route path="/updateProfile" element={<VerifyProfile />}></Route>
+        <Route path="/cornjobs" element={<CornJobsRun />}></Route>
+
         <Route path="" element={<PrivateRoute><VerifyRoute><Main /></VerifyRoute></PrivateRoute>}>
           <Route path="" element={<Home />} />
           <Route path="/users" element={<AdminRoute><UserList /></AdminRoute>}></Route>
