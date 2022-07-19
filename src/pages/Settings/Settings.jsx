@@ -4,6 +4,7 @@ import { Alert } from "react-bootstrap";
 import swal from "sweetalert";
 import AdminList from "./AdminList";
 import { useNavigate } from "react-router-dom";
+import Cornjobs from "../../components/cornjobs/Cornjobs";
 
 const Settings = () => {
 	const [message, setMessage] = useState("");
@@ -120,12 +121,6 @@ const Settings = () => {
 					<div>
 						<h4 className="m-0 fw-bold">Admin List</h4>
 					</div>
-					{/* <div>
-						<AddNumberList
-							changedData={changedData}
-							setChangedData={setChangedData}
-						/>
-					</div> */}
 				</div>
 			</div>
 			<div className="mt-4">
@@ -138,6 +133,14 @@ const Settings = () => {
 					/>
 				</div>
 			</div>
+
+			<div className="mt-4">
+				<h1>Cornjob</h1>
+				<div>
+					<Cornjobs />
+				</div>
+			</div>
+
 		</section>
 	);
 };
