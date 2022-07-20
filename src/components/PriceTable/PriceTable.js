@@ -39,7 +39,7 @@ const PricingTable = () => {
       })
       .then((data) => setSubscriptions(data));
 
-    fetch(`http://localhost:4000/users/email/${user?.email}`, {
+    fetch(`${process.env.REACT_APP_SERVER_URL}/users/email/${user?.email}`, {
       headers: {
         authorization: `Bearer ${localStorage.getItem('accessToken')}`
       }
@@ -73,7 +73,8 @@ const PricingTable = () => {
           toast.success("Data updated!");
         }
         console.log(data);
-      });
+      })
+      .then(() => navigate("/updateProfile"));
   };
 
   return (
@@ -159,7 +160,6 @@ const PricingTable = () => {
                     variant="contained"
                     onClick={() => {
                       handelSubscription(tier);
-                      navigate("/updateProfile");
                     }}
                   >
                     Select

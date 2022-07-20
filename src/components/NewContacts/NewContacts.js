@@ -90,7 +90,7 @@ const NewContacts = () => {
 							swal("List is added", {
 								icon: "success",
 							});
-							navigate("/all-lists");
+							navigate("/contacts");
 						} else {
 							swal("Your imaginary file is safe!");
 						}
@@ -100,7 +100,7 @@ const NewContacts = () => {
 	};
 
 	const GoTOAllLIst = () => {
-		navigate("/all-lists");
+		navigate("/contacts");
 	};
 
 	return (

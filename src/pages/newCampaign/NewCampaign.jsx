@@ -19,7 +19,7 @@ const NewCampaign = () => {
 	const [numberList, setNumberList] = useState([]);
 	const navigate = useNavigate();
 	useEffect(() => {
-		fetch(`${process.env.REACT_APP_SERVER_URL}/contacts/${user?.email}`, {
+		fetch(`${process.env.REACT_APP_SERVER_URL}/contacts/email/${user?.email}`, {
 			headers: {
 				authorization: `Bearer ${localStorage.getItem('accessToken')}`
 			}

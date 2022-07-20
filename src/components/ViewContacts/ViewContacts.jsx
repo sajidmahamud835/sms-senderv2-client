@@ -1,7 +1,7 @@
 import { Container } from "@material-ui/core";
 import { DataGrid } from "@mui/x-data-grid";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import "../ViewContacts/ViewContacts.css";
 
 const columns = [
@@ -29,17 +29,39 @@ const ViewContacts = () => {
 	let { Id } = useParams();
 	const [listData, setListData] = useState({});
 	const [rowData, setRowData] = useState([]);
+	const navigate = useNavigate();
 
 	useEffect(() => {
-		fetch(`${process.env.REACT_APP_SERVER_URL}/contacts/${Id}`)
-			.then((res) => res.json())
-			.then((data) => setListData(data[0]));
-	}, [Id]);
+		fetch(`${process.env.REACT_APP_SERVER_URL}/contacts/${Id}`, {
+			headers: {
+				authorization: `Bearer ${localStorage.getItem("accessToken")}`
+			}
+		})
+			.then((res) => {
+				// console.log(res);
+				if (res.status === 403 || res.status === 401) {
+					navigate("/login");
+				} else {
+					return res.json();
+				}
+			})
+			.then(data => setListData(data[0]));
+	}, [Id, navigate]);
 
 	useEffect(() => {
 		// setRowData(listData?.array);
 		if (listData.array) {
-			setRowData(listData.array);
+			let id = 1;
+			const initialArray = [];
+			listData.array.map(list => {
+				const newList = { ...list, id: id };
+				id++;
+				initialArray.push(newList);
+				return 0;
+			});
+
+
+			setRowData(initialArray);
 		}
 	}, [listData]);
 
