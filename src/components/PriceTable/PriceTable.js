@@ -56,9 +56,7 @@ const PricingTable = () => {
       .then(data => setUserData(data));
   }, [navigate, user]);
   // console.log(subscriptions);
-
   const handelSubscription = (data) => {
-    console.log({ userData });
     const updateData = { subscriptionId: data._id };
     const url = `${process.env.REACT_APP_SERVER_URL}/users/${userData[0]._id}`;
     fetch(url, {
