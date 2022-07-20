@@ -16,10 +16,11 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import UseFirebase from "../../Hooks/UseFirebase";
+import LoadingSpinner from "../loadingSpinner/LoadingSpinner";
 
 const PricingTable = () => {
   const [subscriptions, setSubscriptions] = useState([]);
-  const { user } = UseFirebase();
+  const { user, loading } = UseFirebase();
   const [userData, setUserData] = useState([]);
   const navigate = useNavigate();
   // subscriptions
@@ -57,7 +58,7 @@ const PricingTable = () => {
   // console.log(subscriptions);
 
   const handelSubscription = (data) => {
-    console.log(userData);
+    console.log({ userData });
     const updateData = { subscriptionId: data._id };
     const url = `${process.env.REACT_APP_SERVER_URL}/users/${userData[0]._id}`;
     fetch(url, {
@@ -76,6 +77,10 @@ const PricingTable = () => {
       })
       .then(() => navigate("/updateProfile"));
   };
+
+  if (loading) {
+    return <LoadingSpinner></LoadingSpinner>;
+  }
 
   return (
     <React.Fragment>
