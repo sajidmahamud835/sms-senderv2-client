@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import UseFirebase from "../../Hooks/UseFirebase";
+import LoadingSpinner from "../loadingSpinner/LoadingSpinner";
 import SingleData from "./SingleData";
 import "./widgetLg.css";
 
@@ -29,6 +30,9 @@ const WidgetLg = () => {
 	}, [loading, navigate, user]);
 
 	// console.log(cdata);
+	if (loading) {
+		return <LoadingSpinner />;
+	}
 
 	return (
 		<div className="widgetLg" style={{ width: "100%" }}>
@@ -51,7 +55,7 @@ const WidgetLg = () => {
 
 
 							{
-								cdata.map((singleCData) => (
+								cdata?.map((singleCData) => (
 									<SingleData key={singleCData._id} singleCData={singleCData} />
 								))
 							}
