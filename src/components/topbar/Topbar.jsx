@@ -156,17 +156,17 @@ const Topbar = ({ small, setClose, close }) => {
 										aria-expanded={open ? "true" : undefined}
 										onClick={handleClick}
 									>
-										{userData.imageUrl ? (
+										{userData?.imageUrl ? (
 											<Avatar
 												src={userData.imageUrl}
 												alt="User"
 											/>
-										) : (
-											<Avatar
+										) : <>
+											{user && <Avatar
 												style={{ color: "black" }}
 												{...stringAvatar(user?.displayName ? (user.displayName) : ("Sajid Mahamud"))}
-											/>
-										)}
+											/>}
+										</>}
 									</Button>
 									<Menu
 										id="basic-menu"

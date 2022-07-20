@@ -31,7 +31,7 @@ const VerifyRoute = ({ children, ...rest }) => {
 
   useEffect(() => {
     const find = datas?.find((data) => data?.email === user?.email);
-    if (find?.displayName?.length > 1) {
+    if (find?.isActiveUser !== "no" && find?.displayName.length > 0) {
       setIsUser(true);
     } else {
       setIsUser(false);
