@@ -51,9 +51,9 @@ const VerifyProfile = () => {
 	useEffect(() => {
 		const { userName, displayName, mobileNumber, address } = inputFieldData;
 		if (!userName || userName === "" || !displayName || displayName === "" || !mobileNumber || mobileNumber === "" || !address || address === "") {
-			setError("Please fill in the form");
+			setError("Please fill in the form.");
 		} else if (!image) {
-			setError("Please upload your image");
+			setError("Please upload your image.");
 		} else {
 			setError(false);
 		}
