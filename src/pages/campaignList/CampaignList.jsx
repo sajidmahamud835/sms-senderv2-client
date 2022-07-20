@@ -2,25 +2,45 @@ import React, { useEffect } from 'react';
 import "./campaignList.css";
 import { DataGrid } from "@material-ui/data-grid";
 import { DeleteOutline } from "@material-ui/icons";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import swal from 'sweetalert';
 import { useState } from "react";
+import UseFirebase from '../../Hooks/UseFirebase';
 
 
 const CampaignList = () => {
   const [cdata, setCData] = useState([]);
   const [rowData, setRowData] = useState([]);
-  useEffect(() => {
-    fetch('http://localhost:4000/campaign-list')
-      .then(res => res.json())
-      .then(data => setCData(data));
-  }, []);
+  const navigate = useNavigate();
+  const { user, loading } = UseFirebase();
 
+  useEffect(() => {
+    if (!loading && user) {
+      fetch(`${process.env.REACT_APP_SERVER_URL}/campaigns/user/${user.email}`, {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem('accessToken')}`
+        }
+      })
+        .then((res) => {
+          // console.log(res.status);
+          if (res.status === 403 || res.status === 401) {
+            navigate('/login');
+          } else {
+            return res.json();
+          }
+        })
+        .then((data) => {
+          setCData(data);
+          console.log(data);
+        }
+        );
+    }
+  }, [loading, navigate, user]);
 
   useEffect(() => {
     let id = 1;
     const initArray = [];
-    cdata.map(list => {
+    cdata?.map(list => {
       const newList = { ...list, id: id };
       id++;
       initArray.push(newList);
@@ -42,7 +62,7 @@ const CampaignList = () => {
       })
         .then((willAdd) => {
           if (willAdd) {
-            const url = `http://localhost:4000/delete-campaign/${id}`;
+            const url = `${process.env.REACT_APP_SERVER_URL}/campaigns/${id}`;
             fetch(url, {
               method: 'DELETE'
             })
@@ -135,7 +155,7 @@ const CampaignList = () => {
     <div className="campaignList ">
       <div className="campaignTitleContainer">
         <h1 className="campaignTitle">Manage Campaigns</h1>
-        <Link to="/new-campaign">
+        <Link to="/newCampaign">
           <button className="campaignAddButton">Create</button>
         </Link>
       </div>

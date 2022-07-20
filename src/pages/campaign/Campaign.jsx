@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import "./campaign.css";
 import Chart from "../../components/chart/Chart";
 import { campaignData } from "../../dummyData";
 import { ArrowDownward, ArrowUpward } from "@material-ui/icons";
+import { toast } from 'react-toastify';
 
 const Campaign = () => {
 	const [cdata, setCData] = useState({});
 	const [isLoading, setIsLoading] = useState(true);
 	const [dataChanged, setDataChanged] = useState(true);
-
+	const navigate = useNavigate();
 	let { Id } = useParams();
 
 	const statusChanged = (e) => {
@@ -17,7 +18,7 @@ const Campaign = () => {
 		const statusValue = e.target.value;
 		const newStatus = { status: statusValue };
 		console.log(newStatus);
-		const url = `http://localhost:4000/campaign-details/${Id}`;
+		const url = `${process.env.REACT_APP_SERVER_URL}/campaigns/${Id}`;
 		fetch(url, {
 			method: "PUT",
 			headers: {
@@ -27,6 +28,9 @@ const Campaign = () => {
 		})
 			.then((res) => res.json())
 			.then((data) => {
+				if (data) {
+					toast.success("Data updated!");
+				}
 				console.log(data);
 				setIsLoading(false);
 				setDataChanged(!dataChanged);
@@ -34,10 +38,21 @@ const Campaign = () => {
 	};
 
 	useEffect(() => {
-		fetch(`http://localhost:4000/campaign-details/${Id}`)
-			.then((res) => res.json())
+		fetch(`${process.env.REACT_APP_SERVER_URL}/campaigns/${Id}`, {
+			headers: {
+				authorization: `Bearer ${localStorage.getItem('accessToken')}`
+			}
+		})
+			.then((res) => {
+				// console.log(res.status);
+				if (res.status === 403 || res.status === 401) {
+					navigate('/login');
+				} else {
+					return res.json();
+				}
+			})
 			.then((data) => setCData(data[0]));
-	}, [Id, dataChanged]);
+	}, [Id, dataChanged, navigate]);
 
 	console.log(cdata);
 
@@ -45,7 +60,7 @@ const Campaign = () => {
 		<div className="campaign">
 			<div className="campaignTitleContainer">
 				<h1 className="campaignTitle">Campaign</h1>
-				<Link to="/new-campaign">
+				<Link to="/newCampaign">
 					<button className="campaignAddButton">Create</button>
 				</Link>
 			</div>

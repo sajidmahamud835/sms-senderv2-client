@@ -2,7 +2,7 @@ import { DataGrid } from "@material-ui/data-grid";
 import { DeleteOutline } from "@material-ui/icons";
 import UploadFileIcon from '@mui/icons-material/UploadFile';
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import swal from 'sweetalert';
 import UseFirebase from "../../Hooks/UseFirebase";
 import './AllList.css';
@@ -10,8 +10,8 @@ import './AllList.css';
 const AllList = () => {
     const [allList, setAllList] = useState([]);
     const [rowDatas, setRowDatas] = useState([]);
-    const { user } = UseFirebase(); 
-
+    const { user } = UseFirebase();
+    const navigate = useNavigate();
     const handleDelete = (id) => {
         if (id) {
             swal({
@@ -22,7 +22,7 @@ const AllList = () => {
             })
                 .then((willAdd) => {
                     if (willAdd) {
-                        const url = `http://localhost:4000/delete-excel-file/${id}`
+                        const url = `${process.env.REACT_APP_SERVER_URL}/contacts${id}`;
                         fetch(url, {
                             method: 'DELETE'
                         })
@@ -45,23 +45,34 @@ const AllList = () => {
 
     };
     useEffect(() => {
-        fetch(`http://localhost:4000/upload-excel-file?email=${user?.email}`)
-            .then(res => res.json())
-            .then(data => setAllList(data))
-    }, [user?.email])
+        fetch(`${process.env.REACT_APP_SERVER_URL}/contacts/${user?.email}`, {
+            headers: {
+                authorization: `Bearer ${localStorage.getItem('accessToken')}`
+            }
+        })
+            .then((res) => {
+                // console.log(res.status);
+                if (res.status === 403 || res.status === 401) {
+                    navigate('/login');
+                } else {
+                    return res.json();
+                }
+            })
+            .then(data => setAllList(data));
+    }, [user?.email, navigate]);
 
     useEffect(() => {
         let id = 1;
-        const initialArray = []
-        allList.map(list => {
-            const newList = { ...list, id: id }
+        const initialArray = [];
+        allList?.map(list => {
+            const newList = { ...list, id: id };
             id++;
-            initialArray.push(newList)
-            return 0
-        })
+            initialArray.push(newList);
+            return 0;
+        });
         setRowDatas(initialArray);
 
-    }, [allList])
+    }, [allList]);
 
 
     const columns = [
@@ -101,7 +112,7 @@ const AllList = () => {
             renderCell: (params) => {
                 return (
                     <div>
-                        <Link to={"/edit-all-lists/" + params.row._id}>
+                        <Link to={"/contacts/" + params.row._id}>
                             <button className="campaignListEdit">Edit</button>
                         </Link>
                     </div>
@@ -123,12 +134,12 @@ const AllList = () => {
                 );
             },
         },
-    ]; 
+    ];
     return (
         <div className=' allListContainer'>
             <div className="campaignTitleContainer">
                 <h1 className="campaignTitle">All List</h1>
-                <Link to="/excel-to-csv">
+                <Link to="/newContacts">
                     <button className="createCSVBtn"> <span><UploadFileIcon /> </span> Upload</button>
                 </Link>
             </div>

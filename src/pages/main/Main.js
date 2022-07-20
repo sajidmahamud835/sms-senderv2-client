@@ -1,16 +1,30 @@
 import { Grid } from '@material-ui/core';
+import { useEffect, useState } from 'react';
+import { Button } from 'react-bootstrap';
 import { Outlet } from 'react-router-dom';
-import LayOut from '../../components/LayOut/LayOut';
 import Sidebar from '../../components/sidebar/Sidebar';
-import useSidebarToggles from '../../Hooks/useSidebarToggles';
+import TopBar from '../../components/topbar/Topbar';
+import useWindowDimensions from '../../Hooks/useWindowDimensions';
 import "./Main.css";
 
 const Main = () => {
-    const [small, close, setClose] = useSidebarToggles()
+    const [small, setSmall] = useState(false);
+    const [close, setClose] = useState(true);
+    const { width } = useWindowDimensions();
+
+    useEffect(() => {
+        if (width < 960) {
+            setSmall(true);
+        } else {
+            setSmall(false);
+        }
+    }, [width]);
 
     return (
-        <LayOut>
+        <div>
             <section>
+                <TopBar small={small} setClose={setClose} close={close} />
+
                 <div className="container" style={{ max: "1000px" }}>
                     <Grid container spacing={2}>
                         {!small &&
@@ -40,7 +54,7 @@ const Main = () => {
                     </Grid>
                 </div>
             </section>
-        </LayOut>
+        </div>
     );
 };
 

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import swal from "sweetalert";
 import UseFirebase from "../../Hooks/UseFirebase";
-import "./ExcelToCSV.css";
+import "./NewContacts.css";
 
 // const columns = [
 //     { field: 'id', headerName: 'ID', width: 100 },
@@ -20,7 +20,7 @@ import "./ExcelToCSV.css";
 //         editable: true,
 //     },
 // ];
-const ExcelToCSV = () => {
+const NewContacts = () => {
 
 	const navigate = useNavigate();
 	const { user } = UseFirebase();
@@ -45,7 +45,7 @@ const ExcelToCSV = () => {
 	const csvFileToArray = (string) => {
 		const csvHeader = string.slice(0, string.indexOf("\r\n")).split(",");
 		const csvRows = string.slice(string.indexOf("\n") + 1).split("\r\n");
-		const CSVArray = csvRows.map((i) => {
+		const CSVArray = csvRows?.map((i) => {
 			const values = i.split(",");
 			const obj = csvHeader.reduce((object, header, index) => {
 				object[header] = values[index];
@@ -69,7 +69,7 @@ const ExcelToCSV = () => {
 		const email = user.email;
 		const listData = { listName, email, listText, array };
 
-		const url = `http://localhost:4000/upload-excel-file`;
+		const url = `${process.env.REACT_APP_SERVER_URL}/contacts`;
 		fetch(url, {
 			method: "POST",
 			headers: {
@@ -104,13 +104,13 @@ const ExcelToCSV = () => {
 	};
 
 	return (
-		<div className="excelToCSVContainer">
+		<div className="NewContactsContainer">
 			{/* Drop Box Code Start here*/}
 
 			{/* Drop Box Code End */}
 			<div className="card shadow px-5 py-4 my-5 w-75 mx-auto">
 				<div className="d-flex justify-content-between">
-					<h1 className="m-0">Upload Your excel File </h1>
+					<h1 className="m-0">Create Contacts </h1>
 					<button onClick={GoTOAllLIst} className="btn btn-success px-2 m-0">
 						All List
 					</button>
@@ -170,4 +170,4 @@ const ExcelToCSV = () => {
 	);
 };
 
-export default ExcelToCSV;
+export default NewContacts;

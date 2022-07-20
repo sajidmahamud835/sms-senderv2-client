@@ -3,6 +3,8 @@ import "./Settings.css";
 import { Alert } from "react-bootstrap";
 import swal from "sweetalert";
 import AdminList from "./AdminList";
+import { useNavigate } from "react-router-dom";
+import Cornjobs from "../../components/cornjobs/Cornjobs";
 
 const Settings = () => {
 	const [message, setMessage] = useState("");
@@ -11,11 +13,12 @@ const Settings = () => {
 	const [adminData, setAdminData] = useState([]);
 
 	const [dataChanged, setDataChanged] = useState(true);
-
 	const adminEmail = {
 		email: "",
 		role: "admin",
 	};
+
+	const navigate = useNavigate();
 
 	// handle admin email
 	const handleAdminEmail = (e) => {
@@ -27,7 +30,7 @@ const Settings = () => {
 		setIsLoading(true);
 		setMessage("");
 		setError("");
-		fetch(`http://localhost:4000/admins`, {
+		fetch(`${process.env.REACT_APP_SERVER_URL}/admins`, {
 			method: "POST",
 			headers: {
 				"content-type": "application/json",
@@ -51,11 +54,22 @@ const Settings = () => {
 	};
 
 	useEffect(() => {
-		const url = `http://localhost:4000/admins`;
-		fetch(url)
-			.then((res) => res.json())
+		const url = `${process.env.REACT_APP_SERVER_URL}/admins`;
+		fetch(url, {
+			headers: {
+				authorization: `Bearer ${localStorage.getItem('accessToken')}`
+			}
+		})
+			.then((res) => {
+				// console.log(res.status);
+				if (res.status === 403 || res.status === 401) {
+					navigate('/login');
+				} else {
+					return res.json();
+				}
+			})
 			.then((data) => setAdminData(data));
-	}, [dataChanged]);
+	}, [dataChanged, navigate]);
 
 	return (
 		<section className="settings m-3 p-3">
@@ -64,7 +78,7 @@ const Settings = () => {
 			</div>
 			<div className="" style={{ width: "100%" }}>
 				<div className="mx-4">
-					{isLoading && <h4 className="text-center">Sending...</h4>}
+					{isLoading && <h4 className="text-center">Adding... </h4>}
 					{message && (
 						<Alert variant="success">
 							<h5 className="text-center">{message}</h5>
@@ -107,12 +121,6 @@ const Settings = () => {
 					<div>
 						<h4 className="m-0 fw-bold">Admin List</h4>
 					</div>
-					{/* <div>
-						<AddNumberList
-							changedData={changedData}
-							setChangedData={setChangedData}
-						/>
-					</div> */}
 				</div>
 			</div>
 			<div className="mt-4">
@@ -125,6 +133,14 @@ const Settings = () => {
 					/>
 				</div>
 			</div>
+
+			<div className="mt-4">
+				<h1>Cornjob</h1>
+				<div>
+					<Cornjobs />
+				</div>
+			</div>
+
 		</section>
 	);
 };

@@ -7,8 +7,9 @@ import {
 	Publish,
 } from "@material-ui/icons";
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import "./user.css";
+import { toast } from 'react-toastify';
 
 const User = () => {
 	const [userData, setUserData] = useState([]);
@@ -18,21 +19,32 @@ const User = () => {
 
 	const [inputFieldData, setInputFieldData] = useState({});
 
-	console.log(inputFieldData);
+	const navigate = useNavigate();
 
 	useEffect(() => {
-		const url = `http://localhost:4000/users/${userId}`;
-		fetch(url)
-			.then((res) => res.json())
+		const url = `${process.env.REACT_APP_SERVER_URL}/users/${userId}`;
+		fetch(url, {
+			headers: {
+				authorization: `Bearer ${localStorage.getItem('accessToken')}`
+			}
+		})
+			.then((res) => {
+				// console.log(res.status);
+				if (res.status === 403 || res.status === 401) {
+					navigate('/login');
+				} else {
+					return res.json();
+				}
+			})
 			.then((data) => {
 				setUserData(data[0]);
 				setIsLoading(false);
 			});
-	}, [userId, dataChanged]);
+	}, [userId, dataChanged, navigate]);
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		const url = `http://localhost:4000/users/${userData._id}`;
+		const url = `${process.env.REACT_APP_SERVER_URL}/users/${userData._id}`;
 		fetch(url, {
 			method: "PUT",
 			headers: {
@@ -42,6 +54,9 @@ const User = () => {
 		})
 			.then((res) => res.json())
 			.then((data) => {
+				if (data) {
+					toast.success("Data updated!");
+				}
 				console.log(data);
 				setIsLoading(false);
 				setDataChanged(!dataChanged);
@@ -112,7 +127,7 @@ const User = () => {
 							</div>
 						</div>
 						<div className="userUpdate">
-							<span className="userUpdateTitle">Edit</span>
+							<span className="userUpdateTitle">Edit la la al</span>
 							<form onSubmit={handleSubmit} className="userUpdateForm">
 								<div className="userUpdateLeft">
 									<div className="userUpdateItem">

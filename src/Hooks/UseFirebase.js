@@ -7,11 +7,11 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   updateProfile,
+  sendPasswordResetEmail,
 } from "firebase/auth";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import initializeAuthentication from "../firebase/FirebaseInit";
-import { SubscriptionsRows } from "../dummyData";
 
 initializeAuthentication();
 
@@ -66,6 +66,17 @@ const UseFirebase = () => {
       });
   };
 
+  const resetPassword = (email) => {
+    sendPasswordResetEmail(auth, email)
+      .then((result) => {
+        setError("");
+      }
+      ).catch((error) => {
+        setError(error.code);
+      }
+      );
+  };
+
   const logOut = () => {
     setLoading(true);
     signOut(auth)
@@ -86,14 +97,22 @@ const UseFirebase = () => {
       ...userTotalData,
     };
     // send user data to database
-    fetch("http://localhost:4000/users", {
+    fetch(`${process.env.REACT_APP_SERVER_URL}/users`, {
       method: method,
       headers: {
         "content-type": "application/json",
+        authorization: `Bearer ${localStorage.getItem('accessToken')}`
       },
       body: JSON.stringify(user),
     })
-      .then((res) => res.json())
+      .then((res) => {
+        // console.log(res.status);
+        if (res.status === 403 || res.status === 401) {
+          navigate('/login');
+        } else {
+          return res.json();
+        }
+      })
       .then((data) => console.log(data));
   };
 
@@ -112,15 +131,30 @@ const UseFirebase = () => {
 
   useEffect(() => {
     setAdminIsLoading(true);
-    if (
-      user?.email === "sajidmahamud835@gmail.com" ||
-      user?.email === "admin@admin.com" ||
-      user?.email === "contactsamsulalam@gmail.com"
-    ) {
-      setAdminIsLoading(false);
-      setAdmin(true);
+    if (user.email) {
+      fetch(`${process.env.REACT_APP_SERVER_URL}/admin/check/${user.email}`, {
+        method: "GET",
+        headers: {
+          "content-type": "application/json",
+          authorization: `Bearer ${localStorage.getItem('accessToken')}`
+        },
+      })
+        .then((res) => {
+          if (res.status === 403 || res.status === 401) {
+            navigate('/login');
+          } else {
+            return res.json();
+          }
+        }
+        ).then((data) => {
+          if (data.isAdmin) {
+            setAdmin(true);
+          }
+          setAdminIsLoading(false);
+        }
+        );
     }
-  }, [user?.email]);
+  }, [navigate, user?.email]);
 
   return {
     handleGoogleSignIn,
@@ -131,6 +165,8 @@ const UseFirebase = () => {
     loading,
     registerByEmailPass,
     logInEmailPassword,
+    isAdminLoading,
+    resetPassword,
   };
 };
 

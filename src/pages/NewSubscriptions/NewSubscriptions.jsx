@@ -44,7 +44,7 @@ const NewSubscriptions = () => {
             })
                 .then((willAdd) => {
                     if (willAdd) {
-                        const url = `http://localhost:4000/subscription-list`;
+                        const url = `${process.env.REACT_APP_SERVER_URL}/subscriptions`;
                         fetch(url, {
                             method: "POST",
                             headers: {
@@ -57,7 +57,7 @@ const NewSubscriptions = () => {
                                 swal("Campaign is added", {
                                     icon: "success"
                                 });
-                                navigate('/manage-subscriptions');
+                                navigate('/subscription');
                             });
 
                     } else {

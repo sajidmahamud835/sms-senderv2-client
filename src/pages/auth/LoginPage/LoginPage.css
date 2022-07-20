@@ -36,8 +36,9 @@ h1 {
 	box-sizing: border-box;
 	margin-bottom: 20px;
 	padding: 4px;
-	width: 220px;
+	width: 100%;
 	height: 32px;
+	border-radius: 2px;
 	border: none;
 	border-bottom: 1px solid #aaa;
 	font-family: "Roboto", sans-serif;
@@ -124,8 +125,6 @@ h1 {
 
 button.social-signin {
 	margin-bottom: 20px;
-	width: 220px;
-	height: 36px;
 	border: none;
 	border-radius: 2px;
 	color: #fff;
@@ -133,6 +132,8 @@ button.social-signin {
 	font-weight: 500;
 	transition: 0.2s ease;
 	cursor: pointer;
+	padding: 10px;
+	width: 100%;
 }
 
 button.social-signin:hover,
@@ -169,6 +170,10 @@ button.social-signin.google {
 		box-shadow: 0 2px 4px rgb(0 0 0 / 40%);
 	}
 
+	.login-title {
+		font-size: 40px;
+	}
+
 	.hidden {
 		display: block;
 	}
@@ -198,12 +203,17 @@ button.social-signin.google {
 		background-size: cover;
 		background-position: center;
 		border-radius: 0 2px 2px 0;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
 	}
 
 	.or {
 		position: absolute;
 		top: 51%;
-		left: 44%;
+		display: grid;
+		place-items: center;
 		width: 40px;
 		height: 40px;
 		background: #ddd;
@@ -211,5 +221,35 @@ button.social-signin.google {
 		box-shadow: 0 2px 4px rgb(0 0 0 / 40%);
 		line-height: 40px;
 		text-align: center;
+	}
+
+
+	#logInPage input[type="text"],
+	#logInPage input[type="password"] {
+		height: 90px;
+	}
+
+	#logInPage input[type="text"]:focus,
+	#logInPage input[type="password"]:focus {
+		height: 90px;
+	}
+
+	#logInPage input[type="submit"] {
+		width: 100%;
+		height: 90px;
+	}
+
+	#logInPage input[type="submit"]:hover,
+	#logInPage input[type="submit"]:focus {
+		height: 90px;
+	}
+
+	#logInPage input[type="submit"]:active {
+		height: 90px;
+	}
+
+
+	.resetPassword {
+		font-size: 20px;
 	}
 }

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { FiEdit } from "react-icons/fi";
 import { AiOutlineDelete } from "react-icons/ai";
 import swal from "sweetalert";
+import { toast } from 'react-toastify';
 
 const SingleAdmin = (props) => {
 	const [isEdit, setIsEdit] = useState(false);
@@ -11,7 +12,7 @@ const SingleAdmin = (props) => {
 	const [isLoading, setIsLoading] = useState(false);
 
 	const { handleDeleteData, dataChanged, setDataChanged } = props;
-	const { _id, email } = props.singleAdminData;
+	const { email, displayName, position } = props.singleAdminData;
 
 	const EditButton = () => {
 		if (isEdit) {
@@ -22,15 +23,15 @@ const SingleAdmin = (props) => {
 	};
 
 	const handleNumberChange = (e) => {
-		const updatedEmail = e.target.value;
-		const updatedData = { email: updatedEmail };
+		const updatedPosition = e.target.value;
+		const updatedData = { position: updatedPosition };
 		setChangedData(updatedData);
 	};
 
 	// update admin email
 	const saveChange = (e) => {
 		e.preventDefault();
-		const url = `http://localhost:4000/admins/${_id}`;
+		const url = `${process.env.REACT_APP_SERVER_URL}/admins/${email}`;
 		fetch(url, {
 			method: "PUT",
 			headers: {
@@ -41,6 +42,9 @@ const SingleAdmin = (props) => {
 			.then((res) => res.json())
 			.then((data) => {
 				setIsEdit(false);
+				if (data) {
+					toast.success("Data updated!");
+				}
 				setChangedData(data.data);
 				setDataChanged(!dataChanged);
 				setIsLoading(false);
@@ -61,22 +65,24 @@ const SingleAdmin = (props) => {
 			{isLoading && <div>Loading...</div>}
 			{!isLoading && (
 				<tr>
+					<td className="fs-5">{displayName}</td>
+					<td className="fs-5">{email}</td>
 					<td style={{ paddingTop: 11 }}>
 						<form onSubmit={saveChange}>
 							{!isEdit ? (
-								<span className="fs-5">{email}</span>
+								<span className="fs-5">{position}</span>
 							) : (
 								<div className="d-flex">
 									<input
-										type="email"
-										defaultValue={email}
+										type="text"
+										defaultValue={position}
 										onBlur={handleNumberChange}
 										className="form-control w-50"
 										required
 									/>
 									<div>
 										<button className="btn btn-primary ms-2" type="submit">
-											Save
+											Update
 										</button>
 									</div>
 								</div>
@@ -89,7 +95,7 @@ const SingleAdmin = (props) => {
 						</button>
 						<button
 							className="btn btn-danger ms-2"
-							onClick={() => handleDeleteData(_id)}
+							onClick={() => handleDeleteData(email)}
 						>
 							<AiOutlineDelete />
 						</button>
