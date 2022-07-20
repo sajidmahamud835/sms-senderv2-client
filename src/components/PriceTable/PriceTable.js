@@ -74,7 +74,7 @@ const PricingTable = () => {
         }
         console.log(data);
       })
-      .then(()=>  navigate("/updateProfile"));
+      .then(() => navigate("/updateProfile"));
   };
 
   return (

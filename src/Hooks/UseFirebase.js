@@ -101,17 +101,11 @@ const UseFirebase = () => {
       method: method,
       headers: {
         "content-type": "application/json",
-        authorization: `Bearer ${localStorage.getItem('accessToken')}`
       },
       body: JSON.stringify(user),
     })
       .then((res) => {
-        // console.log(res.status);
-        if (res.status === 403 || res.status === 401) {
-          navigate('/login');
-        } else {
-          return res.json();
-        }
+        return res.json();
       })
       .then((data) => console.log(data));
   };
