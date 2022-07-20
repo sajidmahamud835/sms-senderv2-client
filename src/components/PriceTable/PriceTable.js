@@ -73,7 +73,8 @@ const PricingTable = () => {
           toast.success("Data updated!");
         }
         console.log(data);
-      });
+      })
+      .then(()=>  navigate("/updateProfile"));
   };
 
   return (
@@ -159,7 +160,6 @@ const PricingTable = () => {
                     variant="contained"
                     onClick={() => {
                       handelSubscription(tier);
-                      navigate("/updateProfile");
                     }}
                   >
                     Select
