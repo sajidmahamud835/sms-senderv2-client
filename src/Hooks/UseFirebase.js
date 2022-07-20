@@ -104,11 +104,10 @@ const UseFirebase = () => {
       },
       body: JSON.stringify(user),
     })
-      .then((res) => {
-        return res.json();
-      })
+      .then((res) => res.json())
       .then((data) => console.log(data));
   };
+
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
