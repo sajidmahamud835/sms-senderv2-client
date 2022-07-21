@@ -31,7 +31,7 @@ const VerifyRoute = ({ children, ...rest }) => {
 
   useEffect(() => {
     const find = datas?.find((data) => data?.email === user?.email);
-    if (find?.isActiveUser !== "no" && find?.displayName.length > 0) {
+    if (find?.profileUpdated && find?.displayName.length > 0) {
       setIsUser(true);
     } else {
       setIsUser(false);
@@ -51,7 +51,7 @@ const VerifyRoute = ({ children, ...rest }) => {
   if (isUser) {
     return children;
   } else {
-    return <Navigate to="/verify" state={{ from: location }} />;
+    return <Navigate to="/subscription" state={{ from: location }} />;
   }
 };
 

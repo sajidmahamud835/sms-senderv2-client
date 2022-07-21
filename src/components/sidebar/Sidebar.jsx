@@ -100,7 +100,7 @@ const Sidebar = ({ setClose }) => {
                 My Contacts
               </li>
             </Link>
-            <Link to="/verify" className="link">
+            <Link to="/subscription" className="link">
               <li onClick={(e) => makeActive('mySubscription')} id="mySubscription" className="sidebarListItem">
                 <AttachMoney className="sidebarIcon" />
                 My Subscription

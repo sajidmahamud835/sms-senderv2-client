@@ -33,7 +33,7 @@ function App() {
     <>
       <Routes>
         <Route path="/login" element={<LoginPage />}></Route>
-        <Route path="/verify" element={<Verify />}></Route>
+        <Route path="/subscription" element={<Verify />}></Route>
         <Route path="/updateProfile" element={<VerifyProfile />}></Route>
         <Route path="/cornjobs" element={<CornJobsRun />}></Route>
 

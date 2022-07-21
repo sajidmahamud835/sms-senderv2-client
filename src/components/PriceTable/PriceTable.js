@@ -68,12 +68,19 @@ const PricingTable = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        if (data) {
-          toast.success("Data updated!");
-        }
+        // if (data) {
+        //   toast.success("Data updated!");
+        // }
         console.log(data);
       })
-      .then(() => navigate("/updateProfile"));
+      .then(() => {
+        if (userData[0].profileUpdated) {
+          navigate("/");
+        }
+        else {
+          navigate("/updateProfile");
+        }
+      });
   };
 
   if (loading) {
