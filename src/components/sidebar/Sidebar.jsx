@@ -57,7 +57,7 @@ const Sidebar = ({ setClose }) => {
                   Manage Campaigns
                 </li>
               </Link>
-              <Link to="/subscription" className="link">
+              <Link to="/subscriptions" className="link">
                 <li onClick={(e) => makeActive('subscription')} id="subscription" className="sidebarListItem">
                   <AttachMoney className="sidebarIcon" />
                   Manage Subscriptions

@@ -43,7 +43,7 @@ function App() {
           <Route path="/sms" element={<Sms />}></Route>
           <Route path="/user/:userId" element={<AdminRoute><User /></AdminRoute>}></Route>
           <Route path="/newUser" element={<AdminRoute><NewUser /></AdminRoute>}></Route>
-          <Route path="/subscription" element={<AdminRoute><ManageSubscriptions /></AdminRoute>}></Route>
+          <Route path="/subscriptions" element={<AdminRoute><ManageSubscriptions /></AdminRoute>}></Route>
           <Route path="/subscriptions/:Id" element={<AdminRoute><EditSubscriptions /></AdminRoute>}></Route>
           <Route path="/new-subscriptions" element={<AdminRoute><NewSubscriptions /></AdminRoute>}></Route>
           <Route path="/manageAPI" element={<AdminRoute><ManageAPI /></AdminRoute>}></Route>
