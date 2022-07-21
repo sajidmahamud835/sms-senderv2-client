@@ -106,12 +106,6 @@ const Sidebar = ({ setClose }) => {
                 My Subscription
               </li>
             </Link>
-            <Link to="/reports" className="link">
-              <li onClick={(e) => makeActive('myReports')} id="myReports" className="sidebarListItem">
-                <BarChart className="sidebarIcon" />
-                My Reports
-              </li>
-            </Link>
 
             <li onClick={logout} id="settings" className="sidebarListItem">
               <LogoutIcon className="sidebarIcon" />

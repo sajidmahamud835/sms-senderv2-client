@@ -3,8 +3,8 @@ import "./Profile.css";
 import React, { useEffect, useState } from "react";
 import UseFirebase from "../../Hooks/UseFirebase";
 import { Grid } from "@material-ui/core";
-import { toast } from 'react-toastify';
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Profile = () => {
 	const { user, loading } = UseFirebase();
@@ -45,6 +45,7 @@ const Profile = () => {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
+
 		const url = `${process.env.REACT_APP_SERVER_URL}/users/${userData._id}`;
 		fetch(url, {
 			method: "PUT",
@@ -55,10 +56,8 @@ const Profile = () => {
 		})
 			.then((res) => res.json())
 			.then((data) => {
-				console.log(data);
-				if (data) {
-					toast.success("Data updated!");
-				}
+				// console.log({ data });
+				toast.success("Data updated!");
 				setIsLoading(false);
 				setDataChanged(!dataChanged);
 			});
