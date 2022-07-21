@@ -57,12 +57,6 @@ const PricingTable = () => {
   }, [navigate, user]);
   // console.log(subscriptions);
   const handelSubscription = (data) => {
-    if (userData[0].profileUpdated) {
-      navigate("/");
-    }
-    else {
-      navigate("/updateProfile");
-    }
     const updateData = { subscriptionId: data._id };
     const url = `${process.env.REACT_APP_SERVER_URL}/users/${userData[0]._id}`;
     fetch(url, {
@@ -76,6 +70,14 @@ const PricingTable = () => {
       .then((data) => {
         console.log(data);
       })
+      .then(() => {
+        if (userData[0].profileUpdated) {
+          navigate("/");
+        }
+        else {
+          navigate("/updateProfile");
+        }
+      });
   };
 
   if (loading) {
@@ -164,7 +166,7 @@ const PricingTable = () => {
                     fullWidth
                     variant="contained"
                     onClick={() => {
-                      handelSubscription(tier);
+                      navigate("/updateProfile");
                     }}
                   >
                     Select
