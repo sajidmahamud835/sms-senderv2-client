@@ -118,7 +118,7 @@ const NewCampaign = () => {
 				dangerMode: true,
 			}).then((willAdd) => {
 				if (willAdd) {
-					const url = `${process.env.REACT_APP_SERVER_URL}/campaign-list`;
+					const url = `${process.env.REACT_APP_SERVER_URL}/campaigns`;
 					fetch(url, {
 						method: "POST",
 						headers: {
@@ -184,6 +184,7 @@ const NewCampaign = () => {
 							id="cars"
 							className="form-control w-50"
 						>
+							<option value="saab">None</option>
 							{numberList?.map((numberListData) => (
 								<option key={numberListData._id} value={numberListData._id}>
 									{numberListData.listName}
@@ -192,12 +193,12 @@ const NewCampaign = () => {
 						</select>
 					</div>
 					<div className="py-1 addCampaignItem  my-3">
-						<label className="d-block py-3">Keep Notes:</label>
+						<label className="d-block py-3">Message:</label>
 						<textarea
 							rows="4"
 							cols="50"
 							onBlur={campaignNote}
-							placeholder="Notes about campaign ....."
+							placeholder="Write your message here."
 							className="form-control"
 						></textarea>
 					</div>
