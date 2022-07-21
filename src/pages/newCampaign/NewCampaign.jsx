@@ -118,7 +118,7 @@ const NewCampaign = () => {
 				dangerMode: true,
 			}).then((willAdd) => {
 				if (willAdd) {
-					const url = `${process.env.REACT_APP_SERVER_URL} / campaign - list`;
+					const url = `${process.env.REACT_APP_SERVER_URL}/campaign-list`;
 					fetch(url, {
 						method: "POST",
 						headers: {
