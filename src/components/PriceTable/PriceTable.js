@@ -68,9 +68,6 @@ const PricingTable = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        // if (data) {
-        //   toast.success("Data updated!");
-        // }
         console.log(data);
       })
       .then(() => {

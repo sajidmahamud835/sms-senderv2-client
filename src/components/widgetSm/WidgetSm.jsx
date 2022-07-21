@@ -14,7 +14,6 @@ const WidgetSm = () => {
 			}
 		})
 			.then((res) => {
-				// console.log(res.status);
 				if (res.status === 403 || res.status === 401) {
 					navigate('/login');
 				} else {
@@ -24,7 +23,6 @@ const WidgetSm = () => {
 			.then((data) => setUsersData(data));
 	}, [navigate]);
 
-	// console.log(usersData);
 
 	return (
 		<div className="widgetSm" style={{ width: "100%" }}>
@@ -40,7 +38,6 @@ const WidgetSm = () => {
 							/>
 						))
 					) : (
-						//style for when there are no pending members
 						<div>
 							<div className="alert alert-warning text-center" role="alert">
 								No pending members.
