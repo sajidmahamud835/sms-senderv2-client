@@ -6,6 +6,7 @@ import "./ManageAPI.css";
 import ManageAPIList from "./ManageAPIList";
 import { toast } from 'react-toastify';
 import { useNavigate } from "react-router-dom";
+import LoadingSpinner from "../../components/loadingSpinner/LoadingSpinner";
 
 const ManageAPI = () => {
 	const [isSingle, setIsSingle] = useState(true);
@@ -69,6 +70,7 @@ const ManageAPI = () => {
 	};
 
 	useEffect(() => {
+		setIsSingle(true);
 		const url = `${process.env.REACT_APP_SERVER_URL}/smsApi`;
 		fetch(url, {
 			headers: {
@@ -83,10 +85,18 @@ const ManageAPI = () => {
 					return res.json();
 				}
 			})
-			.then((data) => setManageApiData(data[0]));
+			.then((data) => {
+				setManageApiData(data[0]);
+				setIsSingle(false);
+			});
 	}, [navigate]);
 
 	console.log(manageApiData);
+
+	if (isLoading) {
+		return <LoadingSpinner />;
+	}
+
 
 	return (
 		<section className="manageAPI m-3 p-3">

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import swal from "sweetalert";
+import AddMessageTemplate from "../../components/AddMessageTemplate/AddMessageTemplate";
 import UseFirebase from "../../Hooks/UseFirebase";
 import "./newCampaign.css";
 
@@ -22,6 +23,8 @@ const NewCampaign = () => {
 	const [errorMassage, setErrorMassage] = useState(false);
 	const [from, setFrom] = useState(false);
 	const [contactValue, setContactValue] = useState(false);
+	const [messageTemplate, setMessageTemplate] = useState("");
+	const [dataChanged, setDataChanged] = useState(false);
 	const navigate = useNavigate();
 	useEffect(() => {
 		fetch(`${process.env.REACT_APP_SERVER_URL}/contacts/email/${user?.email}`, {
@@ -44,8 +47,6 @@ const NewCampaign = () => {
 
 	//GET Twilio Numbers
 	useEffect(() => {
-
-
 		fetch(`${process.env.REACT_APP_SERVER_URL}/smsApi/numbers`, {
 			headers: {
 				authorization: `Bearer ${localStorage.getItem('accessToken')}`
@@ -68,12 +69,17 @@ const NewCampaign = () => {
 		console.log({ from, contactValue });
 		// condition for felling form
 		if (from && from !== "none" && contactValue && contactValue !== "none") {
-			console.log("fine");
 			setErrorMassage(false);
 			setDisabled(false);
 		}
 		// condition end
 	}, [contactValue, disabled, from]);
+
+	useEffect(() => {
+		if (messageTemplate) {
+			document.getElementById("message").value = messageTemplate;
+		}
+	}, [messageTemplate, dataChanged]);
 
 	// console.log(numberList);
 
@@ -89,6 +95,7 @@ const NewCampaign = () => {
 	const campaignNote = (e) => {
 		setCampaignNote(e.target.value);
 	};
+	console.log(messageTemplate);
 
 	const StartTime = (e) => {
 		setStartTime(e.target.value);
@@ -206,7 +213,6 @@ const NewCampaign = () => {
 					</div>
 					<div className="my-4 d-flex justify-content-between my-3 flex-lg-row flex-column">
 						<label htmlFor="lists">Contact List :</label>
-						{(numberList.length === 0) && <button onClick={() => navigate('/newContacts')} className="btn btn-danger m-2">Create</button>}
 						<select
 							name="lists"
 							onChange={OptionList}
@@ -220,16 +226,24 @@ const NewCampaign = () => {
 								</option>
 							))}
 						</select>
+						<button onClick={() => navigate('/newContacts')} className="btn btn-danger">Create</button>
 					</div>
 					<div className="py-1 addCampaignItem  my-3">
-						<label className="d-block py-3">Message:</label>
+						<div className="d-flex justify-content-between mb-2">
+							<label className="d-block">Message:</label>
+							{/* <button onClick={() => navigate('/newContacts')} className="btn btn-primary">Use Template</button> */}
+							<AddMessageTemplate setMessageTemplate={setMessageTemplate} dataChanged={dataChanged} setDataChanged={setDataChanged} />
+						</div>
+
 						<textarea
+							id="message"
 							rows="4"
 							cols="50"
 							onChange={campaignNote}
 							placeholder="Write your message here."
 							className="form-control"
 						></textarea>
+
 					</div>
 					<div className="py-1 inputContainer d-flex justify-content-between  my-3 flex-lg-row flex-column">
 						<div>
