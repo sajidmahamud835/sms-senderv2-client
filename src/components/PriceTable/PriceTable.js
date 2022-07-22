@@ -22,9 +22,11 @@ const PricingTable = () => {
   const [subscriptions, setSubscriptions] = useState([]);
   const { user, loading } = UseFirebase();
   const [userData, setUserData] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   // subscriptions
   useEffect(() => {
+    setIsLoading(true);
     fetch(`${process.env.REACT_APP_SERVER_URL}/subscriptions`, {
       headers: {
         authorization: `Bearer ${localStorage.getItem('accessToken')}`
@@ -53,7 +55,10 @@ const PricingTable = () => {
           return res.json();
         }
       })
-      .then(data => setUserData(data));
+      .then(data => {
+        setUserData(data);
+        setIsLoading(false);
+      });
   }, [navigate, user]);
   // console.log(subscriptions);
   const handelSubscription = (data) => {
@@ -80,7 +85,7 @@ const PricingTable = () => {
       });
   };
 
-  if (loading) {
+  if (loading || isLoading) {
     return <LoadingSpinner></LoadingSpinner>;
   }
 
