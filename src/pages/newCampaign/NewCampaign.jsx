@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import swal from "sweetalert";
 import UseFirebase from "../../Hooks/UseFirebase";
 import "./newCampaign.css";
@@ -32,8 +33,8 @@ const NewCampaign = () => {
 					return res.json();
 				}
 			})
-			.then(data => setNumberList(data))
-			.then(data => console.log(data));
+			.then(data => setNumberList(data));
+		// .then(data => console.log(data));
 
 	}, [loading, navigate, user]);
 
@@ -57,7 +58,7 @@ const NewCampaign = () => {
 			});
 	}, [navigate]);
 
-	console.log(numberList);
+	// console.log(numberList);
 
 	const campaignName = (e) => {
 		setNameInputData(e.target.value);
@@ -108,8 +109,8 @@ const NewCampaign = () => {
 			endDate,
 			status,
 			email: user?.email
-
 		};
+
 		if (e) {
 			swal({
 				title: "Are you sure?",
@@ -118,7 +119,7 @@ const NewCampaign = () => {
 				dangerMode: true,
 			}).then((willAdd) => {
 				if (willAdd) {
-					const url = `${process.env.REACT_APP_SERVER_URL} / campaign - list`;
+					const url = `${process.env.REACT_APP_SERVER_URL}/campaigns`;
 					fetch(url, {
 						method: "POST",
 						headers: {
@@ -131,6 +132,9 @@ const NewCampaign = () => {
 							swal("Campaign is added", {
 								icon: "success",
 							});
+							if (data) {
+								toast.success("Campaign is added");
+							}
 							navigate("/campaigns");
 						});
 				} else {
@@ -138,13 +142,12 @@ const NewCampaign = () => {
 				}
 			});
 		}
-		console.log(DraftData);
+		// console.log(DraftData);
 	};
 
 	const handleSender = (e) => {
 		setNumber(e.target.value);
 	};
-
 	return (
 		<div className="newCampaign">
 			<div className="card shadow px-5 py-4 my-4">
@@ -171,19 +174,21 @@ const NewCampaign = () => {
 							required
 						>
 							<option value="saab">None</option>
-							{myNumbers?.map((myNumber) => (
-								<option value={myNumber.number}>{myNumber.number}</option>
+							{myNumbers?.map((myNumber, index) => (
+								<option key={index} value={myNumber.number}>{myNumber.number}</option>
 							))}
 						</select>
 					</div>
 					<div className="my-4 d-flex justify-content-between my-3 flex-lg-row flex-column">
 						<label htmlFor="lists">Contact List :</label>
+						{(numberList.length === 0) && <button onClick={() => navigate('/newContacts')} className="btn btn-danger m-2">Create</button>}
 						<select
 							name="lists"
 							onBlur={OptionList}
 							id="cars"
 							className="form-control w-50"
 						>
+							<option value="saab">None</option>
 							{numberList?.map((numberListData) => (
 								<option key={numberListData._id} value={numberListData._id}>
 									{numberListData.listName}
@@ -192,12 +197,12 @@ const NewCampaign = () => {
 						</select>
 					</div>
 					<div className="py-1 addCampaignItem  my-3">
-						<label className="d-block py-3">Keep Notes:</label>
+						<label className="d-block py-3">Message:</label>
 						<textarea
 							rows="4"
 							cols="50"
 							onBlur={campaignNote}
-							placeholder="Notes about campaign ....."
+							placeholder="Write your message here."
 							className="form-control"
 						></textarea>
 					</div>

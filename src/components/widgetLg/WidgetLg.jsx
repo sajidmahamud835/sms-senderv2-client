@@ -18,7 +18,6 @@ const WidgetLg = () => {
 				}
 			})
 				.then((res) => {
-					// console.log(res.status);
 					if (res.status === 403 || res.status === 401) {
 						navigate('/login');
 					} else {
@@ -29,7 +28,6 @@ const WidgetLg = () => {
 		}
 	}, [loading, navigate, user]);
 
-	// console.log(cdata);
 	if (loading) {
 		return <LoadingSpinner />;
 	}

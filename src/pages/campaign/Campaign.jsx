@@ -134,8 +134,8 @@ const Campaign = () => {
 					</div>
 				</div>
 			</div>
-			<button className="m-5 btn btn-danger">Stop</button>
-			<button className="m-5 btn btn-primary">Pause</button>
+			<button className="m-1 btn btn-danger">Stop</button>
+			<button className="m-1 btn btn-primary">Pause</button>
 		</div>
 	);
 };

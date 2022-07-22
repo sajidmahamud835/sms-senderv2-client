@@ -18,7 +18,7 @@ const VerifyProfile = () => {
 		setInputFieldData({
 			...inputFieldData,
 			email: user?.email,
-			isActiveUser: "yes",
+			profileUpdated: true,
 		});
 	}, [user?.email]);
 
@@ -41,6 +41,7 @@ const VerifyProfile = () => {
 				.then((data) => {
 					if (data) {
 						setUserData(data[0]);
+						setImage(data[0].imageUrl);
 					} else {
 						navigate('/login');
 					}
@@ -110,16 +111,6 @@ const VerifyProfile = () => {
 				}
 			});
 	};
-
-	useEffect(() => {
-		if (!loading) {
-			//check all feild of userData is not empty
-			if (userData.userName && userData.displayName && userData.mobileNumber && userData.address && userData.imageUrl && userData.isActiveUser === "yes") {
-				navigate('/');
-			}
-		}
-	}, [loading, userData, navigate]);
-
 
 
 	return (
@@ -215,7 +206,7 @@ const VerifyProfile = () => {
 												<div>
 													{smallLoading ? "Loading" : <img
 														className="userUpdateImg"
-														src={image ? image : "https://ibb.co/m4x3Cbg"}
+														src={image ? image : "/user.jpg"}
 														alt="placeholder"
 													/>}
 													<label htmlFor="file">
