@@ -67,13 +67,10 @@ const NewCampaign = () => {
 	useEffect(() => {
 		console.log({ from, contactValue });
 		// condition for felling form
-		if (from && from !== "saab" && contactValue && contactValue !== "saab") {
+		if (from && from !== "none" && contactValue && contactValue !== "none") {
 			console.log("fine");
 			setErrorMassage(false);
 			setDisabled(false);
-		} else {
-			setErrorMassage("Please fill in from and contact!");
-			setDisabled(true);
 		}
 		// condition end
 	}, [contactValue, disabled, from]);
@@ -132,36 +129,41 @@ const NewCampaign = () => {
 			email: user?.email
 		};
 
-		if (e) {
-			swal({
-				title: "Are you sure?",
-				icon: "warning",
-				buttons: true,
-				dangerMode: true,
-			}).then((willAdd) => {
-				if (willAdd) {
-					const url = `${process.env.REACT_APP_SERVER_URL}/campaigns`;
-					fetch(url, {
-						method: "POST",
-						headers: {
-							"content-type": "application/json",
-						},
-						body: JSON.stringify(DraftData),
-					})
-						.then((res) => res.json())
-						.then((data) => {
-							swal("Campaign is added", {
-								icon: "success",
+		if (from && from !== "none" && contactValue && contactValue !== "none") {
+			if (e) {
+				swal({
+					title: "Are you sure?",
+					icon: "warning",
+					buttons: true,
+					dangerMode: true,
+				}).then((willAdd) => {
+					if (willAdd) {
+						const url = `${process.env.REACT_APP_SERVER_URL}/campaigns`;
+						fetch(url, {
+							method: "POST",
+							headers: {
+								"content-type": "application/json",
+							},
+							body: JSON.stringify(DraftData),
+						})
+							.then((res) => res.json())
+							.then((data) => {
+								swal("Campaign is added", {
+									icon: "success",
+								});
+								if (data) {
+									toast.success("Campaign is added");
+								}
+								navigate("/campaigns");
 							});
-							if (data) {
-								toast.success("Campaign is added");
-							}
-							navigate("/campaigns");
-						});
-				} else {
-					swal(" Some Error Occurs!");
-				}
-			});
+					} else {
+						swal(" Some Error Occurs!");
+					}
+				});
+			}
+		} else {
+			setErrorMassage("Please fill in from and contact!");
+			setDisabled(true);
 		}
 		// console.log(DraftData);
 	};
@@ -196,7 +198,7 @@ const NewCampaign = () => {
 							onChange={handleSender}
 							required
 						>
-							<option value="saab">None</option>
+							<option value="none">None</option>
 							{myNumbers?.map((myNumber, index) => (
 								<option key={index} value={myNumber.number}>{myNumber.number}</option>
 							))}
@@ -211,7 +213,7 @@ const NewCampaign = () => {
 							id="cars"
 							className="form-control w-50"
 						>
-							<option value="saab">None</option>
+							<option value="none">None</option>
 							{numberList?.map((numberListData) => (
 								<option key={numberListData._id} value={numberListData._id}>
 									{numberListData.listName}
