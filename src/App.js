@@ -28,6 +28,7 @@ import VerifyProfile from "./verification/VerifyProfile";
 import MessageTemplates from "./pages/MessageTemplates/MessageTemplates";
 import AdminRoute from "./PrivateRoute/AdminRoute/AdminRoute";
 import CornJobsRun from "./pages/CornJobsRun/CornJobsRun";
+import UpdateCampaign from "./pages/UpdateCampaign/UpdateCampaign";
 function App() {
   return (
     <>
@@ -51,6 +52,7 @@ function App() {
           <Route path="/reports" element={<AdminRoute><Reports /></AdminRoute>}></Route>
           <Route path="/settings" element={<AdminRoute><Settings /></AdminRoute>}></Route>
           <Route path="/campaigns" element={<CampaignList />}></Route>
+          <Route path="/updateCampaign/:id" element={<UpdateCampaign />}></Route>
           <Route path="/profile" element={<Profile />}></Route>
           <Route path="/contacts" element={<AllList />}></Route>
           <Route path="/newContacts" element={<NewContacts />}></Route>
