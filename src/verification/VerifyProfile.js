@@ -14,11 +14,11 @@ const VerifyProfile = () => {
 	const [inputFieldData, setInputFieldData] = useState({});
 	const [userData, setUserData] = useState({});
 	const [smallLoading, setSmallLoading] = useState(false);
-
 	useEffect(() => {
 		setInputFieldData({
 			...inputFieldData,
 			email: user?.email,
+			profileUpdated: true,
 		});
 	}, [user?.email]);
 
@@ -41,6 +41,7 @@ const VerifyProfile = () => {
 				.then((data) => {
 					if (data) {
 						setUserData(data[0]);
+						setImage(data[0].imageUrl);
 					} else {
 						navigate('/login');
 					}
@@ -48,16 +49,16 @@ const VerifyProfile = () => {
 		}
 	}, [loading, user.email, navigate]);
 
-	useEffect(() => {
-		const { userName, displayName, mobileNumber, address } = inputFieldData;
-		if (!userName || userName === "" || !displayName || displayName === "" || !mobileNumber || mobileNumber === "" || !address || address === "") {
-			setError("Please fill in the form");
-		} else if (!image) {
-			setError("Please upload your image");
-		} else {
-			setError(false);
-		}
-	}, [image, inputFieldData]);
+	// useEffect(() => {
+	// 	const { mobileNumber, address } = inputFieldData;
+	// 	if (!mobileNumber || mobileNumber === "" || !address || address === "") {
+	// 		setError("Please fill in the form");
+	// 	} else if (!image) {
+	// 		setError("Please upload your image");
+	// 	} else {
+	// 		setError(false);
+	// 	}
+	// }, [image, inputFieldData]);
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
@@ -110,16 +111,6 @@ const VerifyProfile = () => {
 				}
 			});
 	};
-
-	useEffect(() => {
-		if (!loading) {
-			//check all feild of userData is not empty
-			if (userData.userName && userData.displayName && userData.mobileNumber && userData.address && userData.imageUrl) {
-				navigate('/');
-			}
-		}
-	}, [loading, userData, navigate]);
-
 
 
 	return (
@@ -215,7 +206,7 @@ const VerifyProfile = () => {
 												<div>
 													{smallLoading ? "Loading" : <img
 														className="userUpdateImg"
-														src={image ? image : "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200"}
+														src={image ? image : "/user.jpg"}
 														alt="placeholder"
 													/>}
 													<label htmlFor="file">

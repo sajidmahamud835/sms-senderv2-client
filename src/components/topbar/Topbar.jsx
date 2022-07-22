@@ -20,7 +20,6 @@ const Topbar = ({ small, setClose, close }) => {
 	const [isUpdated, setIsUpdated] = useState(0);
 	const navigate = useNavigate();
 
-	// const [userName, setUserName] = React.useState("Admin")
 	// open
 	useEffect(() => {
 		if (!loading) {
@@ -59,18 +58,15 @@ const Topbar = ({ small, setClose, close }) => {
 	// console.log(avatarName);
 	function stringAvatar(name) {
 		const userName = name?.split(" ");
-		// console.log({ userName });
 		const sliceName = [];
 		if (userName.length > 0) {
 			userName?.map(word => {
 				return sliceName.push(word.slice(0, 1));
 			});
-			// sliceName = sliceName + word.slice(0, 1)
 		}
 		let shortName = "";
 		sliceName?.map(s => shortName += s);
 		return {
-			// children: `${name?.split(" ")[0][0]}${name?.split(" ")[1][0]}`,
 			children: shortName
 		};
 	}
@@ -82,30 +78,22 @@ const Topbar = ({ small, setClose, close }) => {
 	const goForLogIn = () => {
 		navigate("/login");
 	};
-	// const [user, loading, error] = useAuthState(auth);
 
 	const goToProfile = () => {
 		navigate("/profile");
 	};
 
-	// useEffect(() => {
-	//     setUserName(user.displayName)
-	// }, [user])
 
 	return (
 		<div className="topbar">
 			<nav className="topbarWrapper">
 				<div className="topLeft">
 					{small &&
-						// <button  className="campaignAddButton">{close ? "open" : "close"}</button>
-						// <IconButton onClick={() => setClose(!close)} aria-label="menu" style={{ color: 'white' }} size="large">
-						// 	<MenuIcon fontSize="inherit" />
-						// </IconButton>
 						<button onClick={() => setClose(!close)} className="menuBtn">
 							{close ? <MenuIcon className="menuIcon" /> : <CloseIcon className="menuIcon" />}
 						</button>
 					}
-					<span className="logo">SMS Sender App</span>
+					<span className="logo">SMS Campaign</span>
 				</div>
 				<div className="topRight">
 					<div className="dropdown">
@@ -121,7 +109,6 @@ const Topbar = ({ small, setClose, close }) => {
 							}
 						</div>
 						<ul className="dropdown-menu" aria-labelledby="NotificationsMenu">
-							{/* <li><span className="dropdown-item">We have no notification for you today.</span></li> */}
 							<li>
 								<Link to="/profile" onClick={() => setIsUpdated(isUpdated + 1)} className="dropdown-item" type="button">
 									Welcome to our website. Please update your profile to enjoy
@@ -156,17 +143,17 @@ const Topbar = ({ small, setClose, close }) => {
 										aria-expanded={open ? "true" : undefined}
 										onClick={handleClick}
 									>
-										{userData.imageUrl ? (
+										{userData?.imageUrl ? (
 											<Avatar
 												src={userData.imageUrl}
 												alt="User"
 											/>
-										) : (
-											<Avatar
+										) : <>
+											{user && <Avatar
 												style={{ color: "black" }}
 												{...stringAvatar(user?.displayName ? (user.displayName) : ("Sajid Mahamud"))}
-											/>
-										)}
+											/>}
+										</>}
 									</Button>
 									<Menu
 										id="basic-menu"
@@ -193,21 +180,9 @@ const Topbar = ({ small, setClose, close }) => {
 									Login
 								</Button>
 							)
-							// onClick={goToLogIn}
 						}
 					</Box>
 
-					{/* <div className="dropdown">
-                        <img src="https://media-exp1.licdn.com/dms/image/sync/C5627AQHDoC7cGiF_FQ/articleshare-shrink_480/0/1650973331366?e=2147483647&v=beta&t=dzC8F2yHDQMMfWhCXgE0Pa5V86uta_ULCFF5KKklq1M" alt="" className="topAvatar" id="profileMenu" data-bs-toggle="dropdown" aria-expanded="false" />
-                        <ul className="dropdown-menu" aria-labelledby="profileMenu">
-                            {user && <li><span className="dropdown-item">Hello, {user.email} </span></li>}
-                            <li>
-                                <hr />
-                            </li>
-                            <li><button className="dropdown-item" type="button">Profile</button></li>
-                            <li><button onClick={logout} className="dropdown-item" type="button">Logout</button></li>
-                        </ul>
-                    </div> */}
 				</div>
 			</nav>
 		</div>

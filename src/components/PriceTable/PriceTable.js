@@ -16,14 +16,17 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import UseFirebase from "../../Hooks/UseFirebase";
+import LoadingSpinner from "../loadingSpinner/LoadingSpinner";
 
 const PricingTable = () => {
   const [subscriptions, setSubscriptions] = useState([]);
-  const { user } = UseFirebase();
+  const { user, loading } = UseFirebase();
   const [userData, setUserData] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   // subscriptions
   useEffect(() => {
+    setIsLoading(true);
     fetch(`${process.env.REACT_APP_SERVER_URL}/subscriptions`, {
       headers: {
         authorization: `Bearer ${localStorage.getItem('accessToken')}`
@@ -52,12 +55,13 @@ const PricingTable = () => {
           return res.json();
         }
       })
-      .then(data => setUserData(data));
+      .then(data => {
+        setUserData(data);
+        setIsLoading(false);
+      });
   }, [navigate, user]);
   // console.log(subscriptions);
-
   const handelSubscription = (data) => {
-    console.log(userData);
     const updateData = { subscriptionId: data._id };
     const url = `${process.env.REACT_APP_SERVER_URL}/users/${userData[0]._id}`;
     fetch(url, {
@@ -69,13 +73,21 @@ const PricingTable = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        if (data) {
-          toast.success("Data updated!");
-        }
         console.log(data);
       })
-      .then(() => navigate("/updateProfile"));
+      .then(() => {
+        if (userData[0].profileUpdated) {
+          navigate("/");
+        }
+        else {
+          navigate("/updateProfile");
+        }
+      });
   };
+
+  if (loading || isLoading) {
+    return <LoadingSpinner></LoadingSpinner>;
+  }
 
   return (
     <React.Fragment>
