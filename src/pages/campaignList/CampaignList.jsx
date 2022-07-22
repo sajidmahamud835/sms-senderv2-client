@@ -135,12 +135,15 @@ const CampaignList = () => {
     {
       field: "action",
       headerName: "Action",
-      width: 150,
+      width: 200,
       renderCell: (params) => {
         return (
           <div>
             <Link to={"/campaign/" + params.row._id}>
               <button className="campaignListEdit">Details</button>
+            </Link>
+            <Link to={"/updateCampaign/" + params.row._id}>
+              <button className="campaignListEdit">Edit</button>
             </Link>
             <DeleteOutline
               className="campaignListDelete"
@@ -158,6 +161,7 @@ const CampaignList = () => {
         <Link to="/newCampaign">
           <button className="campaignAddButton">Create</button>
         </Link>
+
       </div>
       <DataGrid
         rows={rowData}
