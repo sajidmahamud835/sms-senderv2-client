@@ -1,50 +1,60 @@
-import React, { useEffect } from 'react';
-import { Outlet, useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
+import { Grid } from '@material-ui/core';
+import { useEffect, useState } from 'react';
+import { Button } from 'react-bootstrap';
+import { Outlet } from 'react-router-dom';
 import Sidebar from '../../components/sidebar/Sidebar';
-import TopBar from "../../components/TopBar/TopBar";
-import UseFirebase from '../../Hooks/UseFirebase';
-
+import TopBar from '../../components/topbar/Topbar';
+import useWindowDimensions from '../../Hooks/useWindowDimensions';
+import "./Main.css";
 
 const Main = () => {
+    const [small, setSmall] = useState(false);
+    const [close, setClose] = useState(true);
+    const { width } = useWindowDimensions();
 
-    // const { user, loading, error } = UseFirebase();
-    // let navigate = useNavigate();
+    useEffect(() => {
+        if (width < 960) {
+            setSmall(true);
+        } else {
+            setSmall(false);
+        }
+    }, [width]);
 
-    // useEffect(() => {
-    //     if (loading) {
-    //         console.log('Page is loading')
-    //     } else {
-    //         if (!user) {
-    //             toast("Please login!");
-    //             navigate("/login", { replace: true });
-    //         } else {
-    //             console.log('Logged in')
-    //             console.log(user?.email);
-    //         }
-    //     }
-    // }, [loading, user, navigate]);
-    // console.log(user)
     return (
         <div>
             <section>
-                <TopBar />
-                <div className="container">
-                    <Sidebar />
-                    <Outlet />
+                <TopBar small={small} setClose={setClose} close={close} />
+
+                <div className="container" style={{ max: "1000px" }}>
+                    <Grid container spacing={2}>
+                        {!small &&
+                            <>
+                                <Grid item xs={12} md={3} style={{ width: "100%" }}>
+                                    <Sidebar setClose={setClose} />
+                                </Grid>
+                                <Grid item xs={12} md={9} style={{ width: "100%" }}>
+                                    <Outlet />
+                                </Grid>
+                            </>
+                        }
+                        {small &&
+                            <>
+                                {!close &&
+                                    <Grid item sm={12} md={3} style={{ width: "100%" }}>
+                                        <Sidebar setClose={setClose} />
+                                    </Grid>
+                                }
+                                {close &&
+                                    <Grid item sm={12} md={9} style={{ width: "100%" }}>
+                                        <Outlet />
+                                    </Grid>
+                                }
+                            </>
+                        }
+                    </Grid>
                 </div>
             </section>
         </div>
-        // <div>
-        //     {user &&
-        //         <section>
-        //             <TopBar />
-        //             <div className="container">
-        //                 <Sidebar />
-        //                 <Outlet />
-        //             </div>
-        //         </section>}
-        // </div>
     );
 };
 

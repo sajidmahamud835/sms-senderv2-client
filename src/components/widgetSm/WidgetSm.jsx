@@ -1,90 +1,57 @@
-import React from 'react';
+import React, { useEffect, useState } from "react";
 import "./widgetSm.css";
-import { Visibility } from "@material-ui/icons";
+import SingleData from "./SingleData";
+import { useNavigate } from "react-router-dom";
 
 const WidgetSm = () => {
-  return (
-    <div className="widgetSm">
-      <span className="widgetSmTitle">Pending Members</span>
-      <ul className="widgetSmList">
-        <li className="widgetSmListItem">
-          <img
-            src="https://images.pexels.com/photos/3992656/pexels-photo-3992656.png?auto=compress&cs=tinysrgb&dpr=2&w=500"
-            alt=""
-            className="widgetSmImg"
-          />
-          <div className="widgetSmUser">
-            <span className="widgetSmUsername">Anna Keller</span>
-            <span className="widgetSmUserTitle">Software Engineer</span>
-          </div>
-          <button className="widgetSmButton">
-            <Visibility className="widgetSmIcon" />
-            Display
-          </button>
-        </li>
-        <li className="widgetSmListItem">
-          <img
-            src="https://images.pexels.com/photos/3992656/pexels-photo-3992656.png?auto=compress&cs=tinysrgb&dpr=2&w=500"
-            alt=""
-            className="widgetSmImg"
-          />
-          <div className="widgetSmUser">
-            <span className="widgetSmUsername">Anna Keller</span>
-            <span className="widgetSmUserTitle">Software Engineer</span>
-          </div>
-          <button className="widgetSmButton">
-            <Visibility className="widgetSmIcon" />
-            Display
-          </button>
-        </li>
-        <li className="widgetSmListItem">
-          <img
-            src="https://images.pexels.com/photos/3992656/pexels-photo-3992656.png?auto=compress&cs=tinysrgb&dpr=2&w=500"
-            alt=""
-            className="widgetSmImg"
-          />
-          <div className="widgetSmUser">
-            <span className="widgetSmUsername">Anna Keller</span>
-            <span className="widgetSmUserTitle">Software Engineer</span>
-          </div>
-          <button className="widgetSmButton">
-            <Visibility className="widgetSmIcon" />
-            Display
-          </button>
-        </li>
-        <li className="widgetSmListItem">
-          <img
-            src="https://images.pexels.com/photos/3992656/pexels-photo-3992656.png?auto=compress&cs=tinysrgb&dpr=2&w=500"
-            alt=""
-            className="widgetSmImg"
-          />
-          <div className="widgetSmUser">
-            <span className="widgetSmUsername">Anna Keller</span>
-            <span className="widgetSmUserTitle">Software Engineer</span>
-          </div>
-          <button className="widgetSmButton">
-            <Visibility className="widgetSmIcon" />
-            Display
-          </button>
-        </li>
-        <li className="widgetSmListItem">
-          <img
-            src="https://images.pexels.com/photos/3992656/pexels-photo-3992656.png?auto=compress&cs=tinysrgb&dpr=2&w=500"
-            alt=""
-            className="widgetSmImg"
-          />
-          <div className="widgetSmUser">
-            <span className="widgetSmUsername">Anna Keller</span>
-            <span className="widgetSmUserTitle">Software Engineer</span>
-          </div>
-          <button className="widgetSmButton">
-            <Visibility className="widgetSmIcon" />
-            Display
-          </button>
-        </li>
-      </ul>
-    </div>
-  );
+	const [usersData, setUsersData] = useState([]);
+	const navigate = useNavigate();
+	useEffect(() => {
+		const url = `${process.env.REACT_APP_SERVER_URL}/users/inactive`;
+		fetch(url, {
+			headers: {
+				authorization: `Bearer ${localStorage.getItem('accessToken')}`
+			}
+		})
+			.then((res) => {
+				if (res.status === 403 || res.status === 401) {
+					navigate('/login');
+				} else {
+					return res.json();
+				}
+			})
+			.then((data) => setUsersData(data));
+	}, [navigate]);
+
+
+	return (
+		<div className="widgetSm" style={{ width: "100%" }}>
+			<span className="widgetSmTitle">Pending Members</span>
+			<ul className="widgetSmList">
+				{
+					usersData.length > 0 ? (
+
+						usersData.slice(0, 5).map((user) => (
+							<SingleData
+								key={user.id}
+								userData={user}
+							/>
+						))
+					) : (
+						<div>
+							<div className="alert alert-warning text-center" role="alert">
+								No pending members.
+							</div>
+						</div>
+
+					)
+
+
+				}
+			</ul>
+		</div>
+	);
 };
 
 export default WidgetSm;
+

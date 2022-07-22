@@ -1,39 +1,35 @@
 import React from 'react';
 import "./featuredInfo.css";
-import { ArrowDownward, ArrowUpward } from "@material-ui/icons";
-const FeaturedInfo = () => {
+import { Grid } from '@material-ui/core';
+const FeaturedInfo = (props) => {
+  const [data, setData] = React.useState(props.data);
+  //use loading to show the loading spinner
+  const [loading, setLoading] = React.useState(true);
+
+  React.useEffect(() => {
+    setData(props.data);
+    if (props.data.length > 0) {
+      setLoading(false);
+    }
+  }
+    , [props.data]);
   return (
     <div className="featured">
-      <div className="featuredItem">
-        <span className="featuredTitle">Active Campaign</span>
-        <div className="featuredMoneyContainer">
-          <span className="featuredMoney">130</span>
-          <span className="featuredMoneyRate">
-            -11.4 <ArrowDownward className="featuredIcon negative" />
-          </span>
-        </div>
-        <span className="featuredSub">Compared to last month</span>
-      </div>
-      <div className="featuredItem">
-        <span className="featuredTitle">Active Users</span>
-        <div className="featuredMoneyContainer">
-          <span className="featuredMoney">3</span>
-          <span className="featuredMoneyRate">
-            -57.4 <ArrowDownward className="featuredIcon negative" />
-          </span>
-        </div>
-        <span className="featuredSub">Compared to last month</span>
-      </div>
-      <div className="featuredItem">
-        <span className="featuredTitle">Twilio API Cost</span>
-        <div className="featuredMoneyContainer">
-          <span className="featuredMoney">$225</span>
-          <span className="featuredMoneyRate">
-            +2.4 <ArrowUpward className="featuredIcon" />
-          </span>
-        </div>
-        <span className="featuredSub">Compared to last month</span>
-      </div>
+      {
+        loading ? <div className="loading">Loading...</div> :
+          <Grid container spacing={1}>
+            {data.map((item) =>
+              <Grid item sm={12} md={6} lg={4} key={item.id} style={{ width: "100%" }}>
+                <div className="featuredItem">
+                  <span className="featuredTitle">{item.icon} {item.name}</span>
+                  <div className="featuredMoneyContainer">
+                    <span className="featuredMoney">{item.value}</span>
+                  </div>
+                </div>
+              </Grid>
+            )}
+          </Grid>
+      }
     </div>
   );
 };

@@ -1,10 +1,14 @@
-.container{
-    display: flex;
+.container {
+    /* display: flex; */
+    padding: 0 10px;
     margin-top: 10px;
 }
 
+.MuiDataGrid-main {
+    min-height: 70vh;
+}
 
-.link{
+.link {
     text-decoration: none;
     color: inherit;
 }
