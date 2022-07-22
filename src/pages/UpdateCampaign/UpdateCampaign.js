@@ -19,10 +19,6 @@ const NewCampaign = () => {
     const [number, setNumber] = useState();
     const [myNumbers, setMyNumbers] = useState([]);
     const [numberList, setNumberList] = useState([]);
-    const [disabled, setDisabled] = useState(false);
-    const [errorMassage, setErrorMassage] = useState(false);
-    const [from, setFrom] = useState(false);
-    const [contactValue, setContactValue] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
     const navigate = useNavigate();
 
@@ -78,7 +74,6 @@ const NewCampaign = () => {
 
     const OptionList = (e) => {
         setContactList(e.target.value);
-        setContactValue(e.target.value);
     };
 
     const campaignNote = (e) => {
@@ -112,16 +107,7 @@ const NewCampaign = () => {
     const fromSubmit = (e) => {
         e.preventDefault();
         const DraftData = {
-            name,
-            number,
-            contactList,
-            messageBody,
-            startTime,
-            endTime,
-            startDate,
-            endDate,
-            status,
-            email: user?.email
+            name, number, contactList, messageBody, startTime, endTime, startDate, endDate, status, email: user?.email
         };
         if (e) {
             swal({
@@ -141,12 +127,11 @@ const NewCampaign = () => {
                     })
                         .then((res) => res.json())
                         .then((data) => {
-                            console.log(data);
-                            swal("Campaign is added", {
+                            swal("Campaign is updated", {
                                 icon: "success",
                             });
                             if (data) {
-                                toast.success("Campaign is added");
+                                toast.success("Campaign is updated");
                             }
                             navigate("/campaigns");
                         });
@@ -183,14 +168,12 @@ const NewCampaign = () => {
                 setEndDate(data[0].endDate);
                 setStatus(data[0].status);
                 setNumber(data[0].number);
-                setIsLoading(false);
-            }
-            );
+            })
+            .then(() => setIsLoading(false));
     }, [navigate, id]);
 
     const handleSender = (e) => {
         setNumber(e.target.value);
-        setFrom(e.target.value);
     };
     if (isLoading) {
         return <LoadingSpinner />;
@@ -198,7 +181,6 @@ const NewCampaign = () => {
     return (
         <div className="newCampaign">
             <div className="card shadow px-5 py-4 my-4">
-                {errorMassage && <div className="alert alert-danger">{errorMassage}</div>}
                 <form onSubmit={fromSubmit} className="addCampaignForm">
                     <h1>Edit Campaign</h1>
                     <div className="my-4 d-flex justify-content-between my-3 flex-lg-row flex-column">
@@ -289,7 +271,6 @@ const NewCampaign = () => {
                             type="submit"
                             onClick={SavedDraft}
                             className="btn btn-success m-2"
-                            disabled={disabled}
                         >
                             Save as Draft
                         </button>
@@ -297,7 +278,6 @@ const NewCampaign = () => {
                             type="submit"
                             onClick={ScheduleCampaign}
                             className="btn btn-primary m-2"
-                            disabled={disabled}
                         >
                             Schedule Campaign
                         </button>
