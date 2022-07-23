@@ -81,18 +81,19 @@ const NewContacts = () => {
 		textFileToArray(e.target.value);
 	}
 	const textFileToArray = (string) => {
-		const csvHeader = string.slice(0, string.indexOf("\r\n")).split(",");
-		const csvRows = string.slice(string.indexOf("\n") + 1).split("\r\n");
-		const CSVArray = csvRows?.map((i) => {
-			const values = i.split(",");
-			const obj = csvHeader.reduce((object, header, index) => {
-				object[header] = values[index];
-				return object;
-			}, {});
+		console.log(string);
+		// const csvHeader = string.slice(0, string.indexOf("\r\n")).split(",");
+		// const csvRows = string.slice(string.indexOf("\n") + 1).split("\r\n");
+		// const CSVArray = csvRows?.map((i) => {
+		// 	const values = i.split(",");
+		// 	const obj = csvHeader.reduce((object, header, index) => {
+		// 		object[header] = values[index];
+		// 		return object;
+		// 	}, {});
 
-			return obj;
-		});
-		console.log(CSVArray)
+		// 	return obj;
+		// });
+		// console.log(CSVArray)
 	}
 
 	const csvFileToArray = (string) => {
@@ -226,7 +227,7 @@ const NewContacts = () => {
 										excel
 									</label>
 								</div>
-								<div className="form-check ms-3">
+								{/* <div className="form-check ms-3">
 									<input
 										className="form-check-input radio"
 										type="radio"
@@ -242,7 +243,7 @@ const NewContacts = () => {
 									<label className="form-check-label" htmlFor="flexCheckDefault">
 										text
 									</label>
-								</div>
+								</div> */}
 							</div>
 
 						</div>
@@ -270,7 +271,7 @@ const NewContacts = () => {
 									/>
 								</div>
 							}
-							{
+							{/* {
 								showTextUpload && <div className="mt-5">
 									<textarea onBlur={textAreaOnChange} name="pls write here number and name" id="" cols="38" rows="3"></textarea>
 									<h6 className="text-center">OR</h6>
@@ -282,7 +283,7 @@ const NewContacts = () => {
 										onChange={handleOnTextChange}
 									/>
 								</div>
-							}
+							} */}
 						</div>
 
 						<div className="text-end">
