@@ -34,7 +34,7 @@ const Home = () => {
       console.log(campaignsCount, usersCount);
     }
   }
-    , [campaignsCount, usersCount]);
+    , [admin, campaignsCount, isAdminLoading, usersCount]);
 
   useEffect(() => {
     if (!isAdminLoading) {
