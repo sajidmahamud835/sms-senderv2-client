@@ -4,7 +4,7 @@ import swal from "sweetalert";
 import AddNumberList from "./AddNumberList";
 import "./ManageAPI.css";
 import ManageAPIList from "./ManageAPIList";
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 
@@ -74,13 +74,13 @@ const ManageAPI = () => {
 		const url = `${process.env.REACT_APP_SERVER_URL}/smsApi`;
 		fetch(url, {
 			headers: {
-				authorization: `Bearer ${localStorage.getItem('accessToken')}`
-			}
+				authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+			},
 		})
 			.then((res) => {
 				// console.log(res.status);
 				if (res.status === 403 || res.status === 401) {
-					navigate('/login');
+					navigate("/login");
 				} else {
 					return res.json();
 				}
@@ -96,7 +96,6 @@ const ManageAPI = () => {
 	if (isLoading) {
 		return <LoadingSpinner />;
 	}
-
 
 	return (
 		<section className="manageAPI m-3 p-3">

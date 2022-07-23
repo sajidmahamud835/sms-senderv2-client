@@ -1,7 +1,7 @@
 import "./AllUserList.css";
 import { DataGrid } from "@material-ui/data-grid";
 import { DeleteOutline } from "@material-ui/icons";
-import { userRows } from "../../dummyData";
+// import { userRows } from "../../dummyData";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import React from "react";
@@ -16,13 +16,13 @@ const UserList = () => {
 		const url = `${process.env.REACT_APP_SERVER_URL}/users`;
 		fetch(url, {
 			headers: {
-				authorization: `Bearer ${localStorage.getItem('accessToken')}`
-			}
+				authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+			},
 		})
 			.then((res) => {
 				// console.log(res.status);
 				if (res.status === 403 || res.status === 401) {
-					navigate('/login');
+					navigate("/login");
 				} else {
 					return res.json();
 				}
