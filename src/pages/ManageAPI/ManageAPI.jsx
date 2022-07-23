@@ -176,7 +176,7 @@ const ManageAPI = () => {
 				<div>
 					<ManageAPIList
 						changedData={changedData}
-						setChangedData={setChangedData}
+
 					/>
 				</div>
 			</div>
