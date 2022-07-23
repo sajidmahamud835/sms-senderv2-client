@@ -78,7 +78,8 @@ const Sms = () => {
 		smsData.displayName = user.displayName;
 	};
 
-	const handleSubmit = (e) => {
+	const handleSmsSubmit = (e) => {
+		console.log(e);
 		e.preventDefault();
 		setIsLoading(true);
 		setMessage("");
@@ -129,7 +130,7 @@ const Sms = () => {
 						)}
 					</div>
 					<div>
-						<form onSubmit={handleSubmit}>
+						<form onSubmit={handleSmsSubmit}>
 							<div className="my-4 d-flex justify-content-between my-3 flex-lg-row flex-column">
 								<Box lx={{ width: "0%" }} mx={{ width: "50%" }}>
 									<label htmlFor="receiver" className="">
@@ -287,7 +288,11 @@ const Sms = () => {
 								</div>
 							)}
 							<div className="text-center">
-								<button type="submit" className="btn btn-primary">
+								<button
+									type="submit"
+									id="sms_submit"
+									className="btn btn-danger"
+								>
 									Send Now
 								</button>
 							</div>

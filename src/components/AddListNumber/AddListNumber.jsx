@@ -45,7 +45,7 @@ const AddListNumber = ({
 			.then((data) => setFinalNumberData(data[0].array));
 	}, [navigate, numberListId, user?.email]);
 
-	const handleSubmit = () => {
+	const handleNumberSubmit = () => {
 		setTargetedNumberList(finalNumberData);
 		setDataChanged(!dataChanged);
 	};
@@ -57,7 +57,7 @@ const AddListNumber = ({
 				type="button"
 				className="btn btn-sm btn-warning me-4"
 				data-bs-toggle="modal"
-				data-bs-target="#messageTemplate"
+				data-bs-target="#addListNumber"
 			>
 				Use contact list
 			</button>
@@ -65,15 +65,15 @@ const AddListNumber = ({
 			{/* Modal */}
 			<div
 				className="modal fade"
-				id="messageTemplate"
+				id="addListNumber"
 				tabIndex="-1"
-				aria-labelledby="messageTemplateLabel"
+				aria-labelledby="addListNumberLabel"
 				aria-hidden="true"
 			>
 				<div className="modal-dialog modal-dialog-centered">
 					<div className="modal-content">
 						<div className="modal-header">
-							<h5 className="modal-title" id="messageTemplateLabel">
+							<h5 className="modal-title" id="addListNumberLabel">
 								Select Contact List
 							</h5>
 							<button
@@ -112,8 +112,9 @@ const AddListNumber = ({
 						</div>
 						<div className="modal-footer">
 							<button
-								onClick={handleSubmit}
+								onClick={handleNumberSubmit}
 								data-bs-dismiss="modal"
+                id="addListNumber"
 								className="btn btn-warning"
 							>
 								Use contact list
