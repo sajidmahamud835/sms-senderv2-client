@@ -1,26 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import swal from "sweetalert";
 
 import UseFirebase from "../../Hooks/UseFirebase";
 import "./NewContacts.css";
-
-// const columns = [
-//     { field: 'id', headerName: 'ID', width: 100 },
-//     {
-//         field: 'name',
-//         headerName: 'Name',
-//         width: 150,
-//         editable: true,
-//     },
-//     {
-//         field: 'number',
-//         headerName: 'Number',
-//         type: 'number',
-//         width: 200,
-//         editable: true,
-//     },
-// ];
 var xlsx = require('xlsx');
 
 const NewContacts = () => {
@@ -32,9 +15,10 @@ const NewContacts = () => {
 	const [listName, setListName] = useState("");
 	const [listText, setListText] = useState("");
 
-	const [showCSVUpload, setShowCSVUpload] = useState(false)
-	const [showTextUpload, setShowTextUpload] = useState(false)
-	const [showExcelUpload, setShowExcelUpload] = useState(false)
+	const [showCSVUpload, setShowCSVUpload] = useState(false);
+	const [showTextUpload, setShowTextUpload] = useState(false);
+	const [showExcelUpload, setShowExcelUpload] = useState(false);
+	const [textAreaValue, setTextAreaValue] = useState("");
 
 	const fileReader = new FileReader();
 
@@ -71,30 +55,31 @@ const NewContacts = () => {
 		if (file) {
 			fileReader.onload = function (event) {
 				const text = event.target.result;
-				textFileToArray(text);
+				console.log(text);
+				document.getElementById("textarea").value = text;
 			};
 
 			fileReader.readAsText(file);
 		}
 	};
-	const textAreaOnChange = (e) => {
-		textFileToArray(e.target.value);
-	}
-	const textFileToArray = (string) => {
-		console.log(string);
-		// const csvHeader = string.slice(0, string.indexOf("\r\n")).split(",");
-		// const csvRows = string.slice(string.indexOf("\n") + 1).split("\r\n");
-		// const CSVArray = csvRows?.map((i) => {
-		// 	const values = i.split(",");
-		// 	const obj = csvHeader.reduce((object, header, index) => {
-		// 		object[header] = values[index];
-		// 		return object;
-		// 	}, {});
 
-		// 	return obj;
-		// });
-		// console.log(CSVArray)
+	useEffect(() => {
+		console.log(textAreaValue);
+		const csvHeader = textAreaValue.slice(0, textAreaValue.indexOf("\r\n")).split(":");
+		const csvRows = textAreaValue.slice(textAreaValue.indexOf("\n") + 1).split("\r\n");
+		const CSVArray = csvRows?.map((i) => {
+			const values = i.split(",");
+			const obj = csvHeader.reduce((object, header, index) => {
+				object[header] = values[index];
+				return object;
+			}, {});
+
+			return obj;
+		});
+		console.log(CSVArray);
 	}
+		, [textAreaValue]);
+
 
 	const csvFileToArray = (string) => {
 		const csvHeader = string.slice(0, string.indexOf("\r\n")).split(",");
@@ -201,9 +186,9 @@ const NewContacts = () => {
 										id="flexCheckChecked"
 										name="numberRequired"
 										onClick={() => {
-											setShowCSVUpload(true)
-											setShowExcelUpload(false)
-											setShowTextUpload(false)
+											setShowCSVUpload(true);
+											setShowExcelUpload(false);
+											setShowTextUpload(false);
 										}}
 									/>
 									<label className="form-check-label" htmlFor="flexCheckChecked">
@@ -218,16 +203,16 @@ const NewContacts = () => {
 										id="flexCheckDefault"
 										name="numberRequired"
 										onClick={() => {
-											setShowCSVUpload(false)
-											setShowExcelUpload(true)
-											setShowTextUpload(false)
+											setShowCSVUpload(false);
+											setShowExcelUpload(true);
+											setShowTextUpload(false);
 										}}
 									/>
 									<label className="form-check-label" htmlFor="flexCheckDefault">
 										excel
 									</label>
 								</div>
-								{/* <div className="form-check ms-3">
+								<div className="form-check ms-3">
 									<input
 										className="form-check-input radio"
 										type="radio"
@@ -235,15 +220,15 @@ const NewContacts = () => {
 										id="flexCheckDefault"
 										name="numberRequired"
 										onClick={() => {
-											setShowCSVUpload(false)
-											setShowExcelUpload(false)
-											setShowTextUpload(true)
+											setShowCSVUpload(false);
+											setShowExcelUpload(false);
+											setShowTextUpload(true);
 										}}
 									/>
 									<label className="form-check-label" htmlFor="flexCheckDefault">
 										text
 									</label>
-								</div> */}
+								</div>
 							</div>
 
 						</div>
@@ -271,9 +256,9 @@ const NewContacts = () => {
 									/>
 								</div>
 							}
-							{/* {
+							{
 								showTextUpload && <div className="mt-5">
-									<textarea onBlur={textAreaOnChange} name="pls write here number and name" id="" cols="38" rows="3"></textarea>
+									<textarea onChange={(e) => setTextAreaValue(e.target.value)} name="pls write here number and name" id="textarea" cols="38" rows="3"></textarea>
 									<h6 className="text-center">OR</h6>
 									<input
 										className="form-control w-100"
@@ -283,7 +268,7 @@ const NewContacts = () => {
 										onChange={handleOnTextChange}
 									/>
 								</div>
-							} */}
+							}
 						</div>
 
 						<div className="text-end">
@@ -295,16 +280,6 @@ const NewContacts = () => {
 				</div>
 			</div >
 
-			{/* <br /> */}
-
-			{/* <DataGrid
-                rows={csvFile}
-                columns={columns}
-                pageSize={20}
-                rowsPerPageOptions={[25]}
-                checkboxSelection
-                disableSelectionOnClick
-            /> */}
 		</div >
 	);
 };
