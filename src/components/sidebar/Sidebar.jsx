@@ -1,5 +1,5 @@
 import React from 'react';
-import "./sidebar.css";
+import "./Sidebar.css";
 import { LineStyle, Timeline, PermIdentity, AttachMoney, BarChart, MailOutline, DynamicFeed, ChatBubbleOutline, WorkOutline, Settings } from "@material-ui/icons";
 import LogoutIcon from '@mui/icons-material/Logout';
 import { Link } from "react-router-dom";

@@ -19,15 +19,17 @@ const SingleData = (props) => {
 
 	return (
 		<>
-			<tr className="widgetLgTr">
-				<td className="table-items widgetLgCampaign">{name}</td>
-				<td className="table-items widgetLgDate">{startDate}</td>
-				<td className="table-items widgetLgStatus">
-					{status === "Scheduled" && <Button type="Pending" />}
-					{status === "Draft" && <Button type="Declined" />}
-					{status === "Active" && <Button type="Approved" />}
-				</td>
-			</tr>
+			{status !== "Draft" && (
+				<tr className="widgetLgTr">
+					<td className="table-items widgetLgCampaign">{name}</td>
+					<td className="table-items widgetLgDate">{startDate}</td>
+					<td className="table-items widgetLgStatus">
+						{status === "Scheduled" && <Button type="Pending" />}
+						{status === "Draft" && <Button type="Declined" />}
+						{status === "Active" && <Button type="Approved" />}
+					</td>
+				</tr>
+			)}
 		</>
 	);
 };

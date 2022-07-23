@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import { useState } from 'react';
 import './ApiAnalytics.css';
-import Chart from "../../components/chart/Chart";
+import Chart from "../../components/Chart/Chart";
 import { useNavigate } from 'react-router-dom';
-import FeaturedInfo from '../../components/featuredInfo/FeaturedInfo';
+import FeaturedInfo from '../../components/FeaturedInfo/FeaturedInfo';
 import { Message } from '@material-ui/icons';
 const ApiAnalytics = () => {
     const [smsLogs, setSmsLogs] = useState([]);
