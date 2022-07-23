@@ -4,7 +4,7 @@ import "./SingleCampaign.css";
 import Chart from "../../components/Chart/Chart";
 import { campaignData } from "../../dummyData";
 import { ArrowDownward, ArrowUpward } from "@material-ui/icons";
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
 
 const SingleCampaign = () => {
 	const [cdata, setCData] = useState({});
@@ -18,7 +18,7 @@ const SingleCampaign = () => {
 		const statusValue = e.target.value;
 		const newStatus = { status: statusValue };
 		console.log(newStatus);
-		const url = `${process.env.REACT_APP_SERVER_URL}/campaigns/${Id}`;
+		const url = `${process.env.REACT_APP_SERVER_URL}/campaigns-update/${Id}`;
 		fetch(url, {
 			method: "PUT",
 			headers: {
@@ -40,13 +40,13 @@ const SingleCampaign = () => {
 	useEffect(() => {
 		fetch(`${process.env.REACT_APP_SERVER_URL}/campaigns/${Id}`, {
 			headers: {
-				authorization: `Bearer ${localStorage.getItem('accessToken')}`
-			}
+				authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+			},
 		})
 			.then((res) => {
 				// console.log(res.status);
 				if (res.status === 403 || res.status === 401) {
-					navigate('/login');
+					navigate("/login");
 				} else {
 					return res.json();
 				}

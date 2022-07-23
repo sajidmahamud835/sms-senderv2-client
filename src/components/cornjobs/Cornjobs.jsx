@@ -23,7 +23,7 @@ const Cornjobs = () => {
 							className="btn btn-primary ms-1"
 							onClick={() => {
 								navigator.clipboard.writeText(`https://${domain}/cornjobs`);
-								swal("Good job!", "Link Copied on Clipboard", "success");
+								swal("Link Copied", "", "success");
 							}}
 						>
 							Copy
