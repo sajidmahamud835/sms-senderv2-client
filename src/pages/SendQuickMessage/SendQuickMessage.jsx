@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Alert } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import UseFirebase from "../../Hooks/UseFirebase";
-import "./sms.css";
+import "./SendQuickMessage.css";
 
 const Sms = () => {
     const { user } = UseFirebase();

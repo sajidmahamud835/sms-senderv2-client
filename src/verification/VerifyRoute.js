@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Navigate, useLocation, useNavigate } from "react-router-dom";
-import LoadingSpinner from "../components/loadingSpinner/LoadingSpinner";
+import LoadingSpinner from "../components/LoadingSpinner/LoadingSpinner";
 import UseFirebase from "../Hooks/UseFirebase";
 
 const VerifyRoute = ({ children, ...rest }) => {

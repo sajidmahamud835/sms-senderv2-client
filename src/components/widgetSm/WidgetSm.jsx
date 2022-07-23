@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./widgetSm.css";
+import "./WidgetSm.css";
 import SingleData from "./SingleData";
 import { useNavigate } from "react-router-dom";
 
