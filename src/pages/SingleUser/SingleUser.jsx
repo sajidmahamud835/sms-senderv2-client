@@ -8,7 +8,7 @@ import {
 } from "@material-ui/icons";
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import "./user.css";
+import "./SingleUser.css";
 import { toast } from 'react-toastify';
 
 const User = () => {

@@ -4,7 +4,7 @@ import { Alert } from "react-bootstrap";
 import swal from "sweetalert";
 import AdminList from "./AdminList";
 import { useNavigate } from "react-router-dom";
-import Cornjobs from "../../components/cornjobs/Cornjobs";
+import Cornjobs from "../../components/Cornjobs/Cornjobs";
 
 const Settings = () => {
 	const [message, setMessage] = useState("");

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Alert } from "react-bootstrap";
 import UseFirebase from "../../Hooks/UseFirebase";
-import "./newUser.css";
+import "./CreateNewUser.css";
 
 const NewUser = () => {
 	const [fullName, setFullName] = useState("");

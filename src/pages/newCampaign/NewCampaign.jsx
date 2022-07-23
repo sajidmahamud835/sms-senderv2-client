@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import swal from "sweetalert";
 import AddMessageTemplate from "../../components/AddMessageTemplate/AddMessageTemplate";
 import UseFirebase from "../../Hooks/UseFirebase";
-import "./newCampaign.css";
+import "./NewCampaign.css";
 
 const NewCampaign = () => {
 	const { user, loading } = UseFirebase();
