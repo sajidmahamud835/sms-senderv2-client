@@ -2,7 +2,7 @@ import { useState } from "react";
 import { AiOutlineDelete } from "react-icons/ai";
 import { FiEdit } from "react-icons/fi";
 import swal from "sweetalert";
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
 
 const ManageTemplate = (props) => {
 	const { _id, title, message: templateMessage, email } = props.templateData;
@@ -14,7 +14,6 @@ const ManageTemplate = (props) => {
 	const [error, setError] = useState("");
 	const [messageIds, setMessageIds] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
-
 
 	const EditButton = () => {
 		if (isEdit) {
@@ -39,7 +38,7 @@ const ManageTemplate = (props) => {
 		setIsEdit(false);
 		const updatedData = {
 			title: changedTitle,
-			message: changedMessage
+			message: changedMessage,
 		};
 
 		const url = `${process.env.REACT_APP_SERVER_URL}/templates/${_id}`;
@@ -77,12 +76,16 @@ const ManageTemplate = (props) => {
 
 	return (
 		<>
-			{isLoading ? <p>Loading</p> :
+			{isLoading ? (
+				<p>Loading...</p>
+			) : (
 				<tr className="" key={_id}>
 					<th scope="row" className="fs-6 pt-3">
 						<form onSubmit={saveChange}>
 							{!isEdit ? (
-								<span>{title} {admin && <span>({email})</span>}</span>
+								<span>
+									{title} {admin && <span>({email})</span>}
+								</span>
 							) : (
 								<div className="d-flex">
 									<input
@@ -119,7 +122,7 @@ const ManageTemplate = (props) => {
 						</button>
 					</td>
 				</tr>
-			}
+			)}
 		</>
 	);
 };
