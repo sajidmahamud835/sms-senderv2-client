@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import AddListNumber from "../../components/AddListNumber/AddListNumber";
 import AddMessageTemplate from "../../components/AddMessageTemplate/AddMessageTemplate";
 import UseFirebase from "../../Hooks/UseFirebase";
-import "./sms.css";
+import "./SendQuickMessage.css";
 
 const Sms = () => {
 	const { user } = UseFirebase();

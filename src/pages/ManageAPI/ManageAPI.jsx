@@ -6,7 +6,7 @@ import "./ManageAPI.css";
 import ManageAPIList from "./ManageAPIList";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import LoadingSpinner from "../../components/loadingSpinner/LoadingSpinner";
+import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 
 const ManageAPI = () => {
 	const [isSingle, setIsSingle] = useState(true);

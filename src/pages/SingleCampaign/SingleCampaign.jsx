@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import "./campaign.css";
-import Chart from "../../components/chart/Chart";
+import "./SingleCampaign.css";
+import Chart from "../../components/Chart/Chart";
 import { campaignData } from "../../dummyData";
 import { ArrowDownward, ArrowUpward } from "@material-ui/icons";
 import { toast } from "react-toastify";
 
-const Campaign = () => {
+const SingleCampaign = () => {
 	const [cdata, setCData] = useState({});
 	const [isLoading, setIsLoading] = useState(true);
 	const [dataChanged, setDataChanged] = useState(true);
@@ -140,4 +140,4 @@ const Campaign = () => {
 	);
 };
 
-export default Campaign;
+export default SingleCampaign;

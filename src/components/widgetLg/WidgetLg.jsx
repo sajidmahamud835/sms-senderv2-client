@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import UseFirebase from "../../Hooks/UseFirebase";
-import LoadingSpinner from "../loadingSpinner/LoadingSpinner";
+import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
 import SingleData from "./SingleData";
-import "./widgetLg.css";
+import "./WidgetLg.css";
 
 const WidgetLg = () => {
 	const [cdata, setCData] = useState([]);

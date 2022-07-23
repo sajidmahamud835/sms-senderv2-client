@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import "./campaignList.css";
+import React, { useEffect } from 'react';
+import "./CampaignList.css";
 import { DataGrid } from "@material-ui/data-grid";
 import { DeleteOutline } from "@material-ui/icons";
 import { Link, useNavigate } from "react-router-dom";

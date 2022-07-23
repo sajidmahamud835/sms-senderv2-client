@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import Chart from "../../components/chart/Chart";
-import FeaturedInfo from "../../components/featuredInfo/FeaturedInfo";
-import "./home.css";
+import Chart from "../../components/Chart/Chart";
+import FeaturedInfo from "../../components/FeaturedInfo/FeaturedInfo";
+import "./Home.css";
 import { FiUser, FiUserCheck } from 'react-icons/fi';
 import { Message } from "@material-ui/icons";
-import WidgetSm from "../../components/widgetSm/WidgetSm";
-import WidgetLg from "../../components/widgetLg/WidgetLg";
+import WidgetSm from "../../components/WidgetSm/WidgetSm";
+import WidgetLg from "../../components/WidgetLg/WidgetLg";
 import { Grid } from "@material-ui/core";
 import { useNavigate } from "react-router-dom";
 import UseFirebase from '../../Hooks/UseFirebase';

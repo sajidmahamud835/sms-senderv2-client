@@ -5,9 +5,9 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import swal from "sweetalert";
 import UseFirebase from "../../Hooks/UseFirebase";
-import "./AllList.css";
+import "./ContactLists.css";
 
-const AllList = () => {
+const ContactLists = () => {
 	const [allList, setAllList] = useState([]);
 	const [rowDatas, setRowDatas] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
@@ -160,4 +160,4 @@ const AllList = () => {
 	);
 };
 
-export default AllList;
+export default ContactLists;
