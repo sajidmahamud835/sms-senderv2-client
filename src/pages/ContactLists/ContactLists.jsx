@@ -5,45 +5,14 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import swal from "sweetalert";
 import UseFirebase from "../../Hooks/UseFirebase";
-<<<<<<< HEAD:src/pages/ContactLists/ContactLists.jsx
-import './ContactLists.css';
+import "./ContactLists.css";
 
 const ContactLists = () => {
-    const [allList, setAllList] = useState([]);
-    const [rowDatas, setRowDatas] = useState([]);
-    const { user } = UseFirebase();
-    const navigate = useNavigate();
-    const handleDelete = (id) => {
-        if (id) {
-            swal({
-                title: "Are you sure?",
-                icon: "warning",
-                buttons: true,
-                dangerMode: true,
-            })
-                .then((willAdd) => {
-                    if (willAdd) {
-                        const url = `${process.env.REACT_APP_SERVER_URL}/contacts/${id}`;
-                        fetch(url, {
-                            method: 'DELETE'
-                        })
-                            .then(res => res.json())
-                            .then(data => {
-                                if (data.deletedCount > 0) {
-                                    swal("List is Deleted", {
-                                        icon: "success",
-                                    });
-                                    setRowDatas(rowDatas.filter((item) => item._id !== id));
-=======
-import "./AllList.css";
-
-const AllList = () => {
 	const [allList, setAllList] = useState([]);
 	const [rowDatas, setRowDatas] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
 	const { user, loading } = UseFirebase();
 	const navigate = useNavigate();
->>>>>>> e31461734e5aa1854130637eda8ecf7532b3d3ab:src/pages/AllList/AllList.jsx
 
 	const handleDelete = (id) => {
 		if (id) {
@@ -191,8 +160,4 @@ const AllList = () => {
 	);
 };
 
-<<<<<<< HEAD:src/pages/ContactLists/ContactLists.jsx
 export default ContactLists;
-=======
-export default AllList;
->>>>>>> e31461734e5aa1854130637eda8ecf7532b3d3ab:src/pages/AllList/AllList.jsx
