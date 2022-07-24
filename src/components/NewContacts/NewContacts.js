@@ -55,7 +55,8 @@ const NewContacts = () => {
 		if (file) {
 			fileReader.onload = function (event) {
 				const text = event.target.result;
-				console.log(text);
+				// console.log(text);
+				setTextAreaValue(text);
 				document.getElementById("textarea").value = text;
 			};
 
@@ -64,19 +65,14 @@ const NewContacts = () => {
 	};
 
 	useEffect(() => {
-		console.log(textAreaValue);
-		const csvHeader = textAreaValue.slice(0, textAreaValue.indexOf("\r\n")).split(":");
-		const csvRows = textAreaValue.slice(textAreaValue.indexOf("\n") + 1).split("\r\n");
-		const CSVArray = csvRows?.map((i) => {
-			const values = i.split(",");
-			const obj = csvHeader.reduce((object, header, index) => {
-				object[header] = values[index];
-				return object;
-			}, {});
-
-			return obj;
+		const allTextArray = textAreaValue?.split("\n");
+		const singleText = [];
+		allTextArray.map(text => {
+			return singleText.push({
+				name: text.split(":")[0],
+				mobile: text.slice(0, text.indexOf("\r")).split(":")[1],
+			});
 		});
-		console.log(CSVArray);
 	}
 		, [textAreaValue]);
 
