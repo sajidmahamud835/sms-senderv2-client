@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { Outlet } from 'react-router-dom';
 import Sidebar from '../../components/Sidebar/Sidebar.jsx';
-import TopBar from '../../components/topbar/Topbar';
+import TopBar from '../../components/Topbar/Topbar';
 import useWindowDimensions from '../../Hooks/useWindowDimensions';
 import "./Main.css";
 
