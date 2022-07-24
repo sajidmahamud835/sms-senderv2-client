@@ -1,6 +1,6 @@
 import React from "react";
 import { Navigate, useLocation } from "react-router-dom";
-import LoadingSpinner from "../../components/loadingSpinner/LoadingSpinner";
+import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 import UseFirebase from "../../Hooks/UseFirebase";
 
 const PrivateRoute = ({ children, ...rest }) => {

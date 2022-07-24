@@ -2,7 +2,7 @@ import { Grid } from '@material-ui/core';
 import { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { Outlet } from 'react-router-dom';
-import Sidebar from '../../components/sidebar/Sidebar';
+import Sidebar from '../../components/Sidebar/Sidebar.jsx';
 import TopBar from '../../components/topbar/Topbar';
 import useWindowDimensions from '../../Hooks/useWindowDimensions';
 import "./Main.css";

@@ -6,7 +6,7 @@ import UseFirebase from "../../Hooks/UseFirebase";
 
 const TemplateList = (props) => {
 	const [templateData, setTemplateData] = useState([]);
-	const { changedData, setChangedData } = props;
+	const { changedData, setChangedData, isLoading, setIsLoading } = props;
 	const navigate = useNavigate();
 	const { user, loading, admin } = UseFirebase();
 
@@ -15,13 +15,13 @@ const TemplateList = (props) => {
 			const url = `${process.env.REACT_APP_SERVER_URL}/templates/${user.email}`;
 			fetch(url, {
 				headers: {
-					authorization: `Bearer ${localStorage.getItem('accessToken')}`
-				}
+					authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+				},
 			})
 				.then((res) => {
 					// console.log(res.status);
 					if (res.status === 403 || res.status === 401) {
-						navigate('/login');
+						navigate("/login");
 					} else {
 						return res.json();
 					}
@@ -29,8 +29,9 @@ const TemplateList = (props) => {
 				.then((data) => {
 					if (data) {
 						setTemplateData(data.templates);
+						setIsLoading(false);
 					} else {
-						navigate('/login');
+						navigate("/login");
 					}
 				});
 		}
@@ -69,31 +70,37 @@ const TemplateList = (props) => {
 	};
 	return (
 		<>
-			<table className="table table-hover">
-				<thead>
-					<tr>
-						<th scope="col">Template</th>
-						<th scope="col" className="text-end">
-							Actions
-						</th>
-					</tr>
-				</thead>
-				<tbody>
-					{templateData?.map((data) => (
-						<ManageTemplate
-							key={data._id + data.number}
-							templateData={data}
-							handleDeleteData={handleDeleteData}
-							allTemplateData={templateData}
-							setMobileNumberData={setTemplateData}
-							changedData={changedData}
-							setChangedData={setChangedData}
-							admin={admin}
-
-						/>
-					))}
-				</tbody>
-			</table>
+			{isLoading && (
+				<div className="d-flex justify-content-center align-items-center h-25">
+					<span className="text-success">Loading...</span>
+				</div>
+			)}
+			{!isLoading && (
+				<table className="table table-hover">
+					<thead>
+						<tr>
+							<th scope="col">Template</th>
+							<th scope="col" className="text-end">
+								Actions
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+						{templateData?.map((data) => (
+							<ManageTemplate
+								key={data._id + data.number}
+								templateData={data}
+								handleDeleteData={handleDeleteData}
+								allTemplateData={templateData}
+								setMobileNumberData={setTemplateData}
+								changedData={changedData}
+								setChangedData={setChangedData}
+								admin={admin}
+							/>
+						))}
+					</tbody>
+				</table>
+			)}
 		</>
 	);
 };

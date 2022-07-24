@@ -16,7 +16,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import UseFirebase from "../../Hooks/UseFirebase";
-import LoadingSpinner from "../loadingSpinner/LoadingSpinner";
+import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
 
 const PricingTable = () => {
   const [subscriptions, setSubscriptions] = useState([]);

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import "./topbar.css";
 import { NotificationsNone, Settings } from "@material-ui/icons";
 import { Link, useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
@@ -10,7 +9,7 @@ import UseFirebase from "../../Hooks/UseFirebase";
 import { IconButton } from "@material-ui/core";
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
-import './topbar.css';
+import './Topbar.css';
 const Topbar = ({ small, setClose, close }) => {
 	const { admin, user, logOut, loading } = UseFirebase();
 	const [anchorEl, setAnchorEl] = useState(null);

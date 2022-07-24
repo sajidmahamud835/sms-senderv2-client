@@ -1,5 +1,5 @@
 import React from 'react';
-import "./featuredInfo.css";
+import "./FeaturedInfo.css";
 import { Grid } from '@material-ui/core';
 const FeaturedInfo = (props) => {
   const [data, setData] = React.useState(props.data);
