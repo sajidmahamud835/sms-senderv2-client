@@ -9,6 +9,7 @@ import WidgetLg from "../../components/widgetLg/WidgetLg";
 import { Grid } from "@material-ui/core";
 import { useNavigate } from "react-router-dom";
 import UseFirebase from '../../Hooks/UseFirebase';
+import PieChartComponent from '../../components/PieChartComponent/PieChartComponent';
 const Home = () => {
   const [campaignsCount, setCampaignsCount] = useState({});
   const [userCampaignsCount, setUserCampaignsCount] = useState({});
@@ -116,7 +117,12 @@ const Home = () => {
     }
   }, [admin, isAdminLoading, userCampaignsCount]);
 
-
+  const data = [
+    { name: "Group A", value: 50 },
+    { name: "Group B", value: 20 },
+    { name: "Group C", value: 20 },
+    { name: "Group D", value: 10 }
+  ];
   return (
     <div className="home">
       {admin &&
@@ -198,6 +204,9 @@ const Home = () => {
           }
           <Grid item style={{ width: "100%" }} sm={12} md={6}>
             <WidgetLg />
+          </Grid>
+          <Grid item style={{ width: "100%" }} sm={12} md={6}>
+            <PieChartComponent data={data} />
           </Grid>
 
         </Grid>
