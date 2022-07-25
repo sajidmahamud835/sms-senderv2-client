@@ -1,6 +1,6 @@
 import React from 'react';
 import useSidebarToggles from '../../Hooks/useSidebarToggles';
-import Topbar from '../topbar/Topbar';
+import Topbar from '../Topbar/Topbar';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
