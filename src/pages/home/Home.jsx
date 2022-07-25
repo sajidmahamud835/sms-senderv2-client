@@ -205,9 +205,12 @@ const Home = () => {
           <Grid item style={{ width: "100%" }} sm={12} md={6}>
             <WidgetLg />
           </Grid>
-          <Grid item style={{ width: "100%" }} sm={12} md={6}>
-            <PieChartComponent data={data} />
-          </Grid>
+          {
+            !admin && <Grid item style={{ width: "100%" }} sm={12} md={6}>
+              <PieChartComponent userCampaignsCount={userCampaignsCount} />
+            </Grid>
+          }
+
 
         </Grid>
       </div>

@@ -18,7 +18,7 @@ const SingleCampaign = () => {
 		const statusValue = e.target.value;
 		const newStatus = { status: statusValue };
 		console.log(newStatus);
-		const url = `${process.env.REACT_APP_SERVER_URL}/campaigns-update/${Id}`;
+		const url = `${process.env.REACT_APP_SERVER_URL}/campaigns/${Id}`;
 		fetch(url, {
 			method: "PUT",
 			headers: {
