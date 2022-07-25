@@ -14,6 +14,7 @@ const ContactLists = () => {
 	const { user, loading } = UseFirebase();
 	const navigate = useNavigate();
 
+	console.log(rowDatas);
 	const handleDelete = (id) => {
 		if (id) {
 			swal({

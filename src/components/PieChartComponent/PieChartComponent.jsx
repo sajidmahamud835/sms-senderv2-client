@@ -5,8 +5,6 @@ import { PieChart, Pie, Cell } from "recharts";
 const data2 = [
     { name: "Group A", value: 50 },
     { name: "Group B", value: 20 },
-    { name: "Group C", value: 20 },
-    { name: "Group D", value: 10 }
 ];
 const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
 const RADIAN = Math.PI / 180;

@@ -43,8 +43,9 @@ const NewContacts = () => {
 				const sheetName = workbook.SheetNames[0];
 				const worksheet = workbook.Sheets[sheetName];
 				const json = xlsx.utils.sheet_to_json(worksheet);
-				// json.forEach(function (v) { delete v.number });
-				console.log(json);
+				// json.forEach(function (v) { delete v.number }); 
+				setArray(json);
+
 			};
 			reader.readAsArrayBuffer(e.target.files[0]);
 		}
@@ -70,9 +71,12 @@ const NewContacts = () => {
 		allTextArray.map(text => {
 			return singleText.push({
 				name: text.split(":")[0],
-				mobile: text.slice(0, text.indexOf("\r")).split(":")[1],
+				number: text.slice(0, text.indexOf("\r")).split(":")[1],
 			});
 		});
+		// console.log(singleText)
+		setArray(singleText);
+
 	}
 		, [textAreaValue]);
 
