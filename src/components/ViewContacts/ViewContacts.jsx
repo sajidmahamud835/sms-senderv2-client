@@ -9,7 +9,7 @@ const ViewContacts = () => {
 	const [listData, setListData] = useState({});
 	const [rowData, setRowData] = useState([]);
 	const navigate = useNavigate();
-
+	console.log("rowData", rowData);
 	const [isEdit, setIsEdit] = useState("");
 	const [updatedContact, setUpdatedContact] = useState({});
 
